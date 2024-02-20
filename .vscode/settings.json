@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "uchat.h": "c",
+        "gtk.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
