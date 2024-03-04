@@ -17,16 +17,24 @@ void mx_get_users_arr(char **data, int sockfd) {
     while (sqlite3_step(res) != SQLITE_DONE) {
         unsigned int addresser = (unsigned int)sqlite3_column_int64(res, 0);
         unsigned int destination = (unsigned int)sqlite3_column_int64(res, 1);
-        if (addresser != (unsigned int)user_id && !mx_uint_arr_check_value(uid_arr, addresser, uid_arr_len))
-            uid_arr_len = mx_uint_array_insert(&uid_arr, addresser, uid_arr_len);
-        if (destination != (unsigned int)user_id && !mx_uint_arr_check_value(uid_arr, destination, uid_arr_len))
-            uid_arr_len = mx_uint_array_insert(&uid_arr, destination, uid_arr_len);
+        if (addresser != (unsigned int)user_id && !mx_is_in_array(uid_arr, addresser)) {
+            mx_insert_value(&uid_arr, addresser);
+            uid_arr_len++;
+        }
+        if (destination != (unsigned int)user_id && !mx_is_in_array(uid_arr, destination)) {
+            mx_insert_value(&uid_arr, destination);
+            uid_arr_len++;
+        }
+            
     }
     sqlite3_finalize(res);
     sqlite3_close(db);
 
-    if (!mx_uint_arr_check_value(uid_arr, 0, uid_arr_len))
-        uid_arr_len = mx_uint_array_insert(&uid_arr, 0, uid_arr_len);
+    if (!mx_is_in_array(uid_arr, 0)) {
+        mx_insert_value(&uid_arr, 0);
+        uid_arr_len++;
+    }
+        
 
     send(sockfd, &uid_arr_len, sizeof(int), 0);
     for (int i = 0; i < uid_arr_len; i++) {

@@ -22,8 +22,7 @@ void mx_update_avatar(char **data, int sockfd) {
     
     int rc = sqlite3_prepare(db, sql, -1, &pStmt, 0);
     
-    if (rc != 0)
-        fprintf(stderr, "Cannot prepare statement: %s\n", sqlite3_errmsg(db));
+    if (rc != 0) fprintf(stderr, "Cannot prepare statement: %s\n", sqlite3_errmsg(db));
     sqlite3_bind_blob(pStmt, 1, decoded, flen, SQLITE_STATIC);
     rc = sqlite3_step(pStmt);
     if (rc != SQLITE_DONE)

@@ -23,6 +23,8 @@ typedef struct s_list {
     struct s_list *next;
 } t_list;
 
+void mx_insert_value(unsigned int **arr, unsigned int insert_value);
+bool mx_is_in_array(unsigned int *arr, unsigned int value);
 unsigned int b64_decodef(char *InFile, char *OutFile);
 unsigned int b64_encodef(char *InFile, char *OutFile);
 unsigned int b64_decode(const unsigned char* in, unsigned int in_len, unsigned char* out);

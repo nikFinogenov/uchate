@@ -26,7 +26,7 @@
 #define ST_OK "OK"
 #define ST_NEOK "FAILED"
 
-int mx_listening_socket(int port);
+int socket_init(int port);
 void logger(char *proccess, char* status);
 
 void mx_get_user(int sockfd);
@@ -52,18 +52,17 @@ void mx_update_language(char **data);
 void mx_get_language(char **data, int sockfd);
 void mx_delete_message(char **data);
 void mx_edit_message(char **data);
-void mx_add_image_message(char **data, int sockfd);
+void message_img(char **data, int sockfd);
 void mx_check_last_room(char **data, int sockfd);
 void mx_get_image_message(char **data, int sockfd);
 void mx_get_theme(char **data, int sockfd);
 void mx_update_theme(char **data);
 
 sqlite3 *open_db(void);
-char *mx_encryption(char *str);
+char *encrypt_pass(char *str);
 void db_init(void);
 void mx_write_photo_to_bd(char *path, int id);
-bool mx_uint_arr_check_value(unsigned int *arr, unsigned int value, int len);
-int mx_uint_array_insert(unsigned int **arr, unsigned int insert_value, int len);
+// int mx_insert_value(unsigned int **arr, unsigned int insert_value, int len);
 
 void mx_recv_all(int *socket, unsigned char **buffer, size_t length);
 void mx_send_all(int *socket, void *buffer, size_t length);

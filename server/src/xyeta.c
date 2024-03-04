@@ -1,4 +1,4 @@
-#include "../inc/server.h"
+#include "server.h"
 
 void mx_check_last_room(char **data, int sockfd) {
     int uid = mx_atoi(data[1]);

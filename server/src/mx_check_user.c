@@ -1,7 +1,7 @@
 #include "../inc/server.h"
 
 bool mx_check_user(char **data) {
-    char *encrypted_pass = mx_encryption(mx_strdup(data[2]));
+    char *encrypted_pass = encrypt_pass(mx_strdup(data[2]));
 
     sqlite3 *db = open_db();
     sqlite3_stmt *res;

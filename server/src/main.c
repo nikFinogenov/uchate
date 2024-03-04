@@ -1,14 +1,13 @@
 #include "server.h"
 
 static void handle_request(char* request, char** data, int new_socket) {
-    // int id = 1;
     if (!mx_strcmp(request, "SearchInit")) mx_search_init(data, new_socket);
     else if (!mx_strcmp(request, "CheckMessages")) mx_check_messages(data, new_socket);
     else if (!mx_strcmp(request, "CheckLastRoom")) mx_check_last_room(data, new_socket);
     else if (!mx_strcmp(request, "LoadMessages")) mx_load_messages(data, new_socket);
     else if (!mx_strcmp(request, "Authorization")) mx_authorization(data, new_socket);
     else if (!mx_strcmp(request, "InsertMessage")) mx_insert_message(data, new_socket);
-    else if (!mx_strcmp(request, "AddImageMessage")) mx_add_image_message(data, new_socket);
+    else if (!mx_strcmp(request, "AddImageMessage")) message_img(data, new_socket);
     else if (!mx_strcmp(request, "GetMessageImage")) mx_get_image_message(data, new_socket);
     else if (!mx_strcmp(request, "LoadRoom")) mx_load_room(data, new_socket);
     else if (!mx_strcmp(request, "FindUser")) mx_find_user(data, new_socket);
@@ -71,7 +70,7 @@ int main(int argc, char **argv) {
         close(3);    
         setsid();   
     }
-    int listening_socket = mx_listening_socket(port);
+    int listening_socket = socket_init(port);
     listen(listening_socket, SOMAXCONN);
 
     while(true) {

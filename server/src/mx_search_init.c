@@ -1,26 +1,5 @@
 #include "../inc/server.h"
 
-static void search_by_pseudo(char *text, char **data, int sockfd);
-static void search_by_name(char *text, char **data, int sockfd);
-
-void mx_search_init(char **data, int sockfd) {
-    char *search_text = mx_strdup(data[1]);
-
-    if (search_text[0] == '@') {
-        if (mx_strlen(search_text) == 1) {
-            int users_len = 0;
-            send(sockfd, &users_len, sizeof(int), 0);
-            free(search_text);
-            return;
-        }
-        search_by_pseudo(search_text, data, sockfd);
-    }
-    else
-        search_by_name(search_text, data, sockfd);
-
-    free(search_text);
-}
-
 static void search_by_pseudo(char *text, char **data, int sockfd) {
     char **search_split = mx_strsplit(text, ' ');
     int users_len = 0;
@@ -35,8 +14,11 @@ static void search_by_pseudo(char *text, char **data, int sockfd) {
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) != SQLITE_DONE) {
         int uid = (int)sqlite3_column_int(res, 0);
-        if (uid != mx_atoi(data[2]) && !mx_uint_arr_check_value(users_arr, uid, users_len))
-            users_len = mx_uint_array_insert(&users_arr, uid, users_len);
+        if (uid != mx_atoi(data[2]) && !mx_is_in_array(users_arr, uid)) {
+            mx_insert_value(&users_arr, uid);
+            users_len++;
+        }
+            
     }
     sqlite3_finalize(res);
     sqlite3_close(db);
@@ -68,8 +50,10 @@ static void search_by_name(char *text, char **data, int sockfd) {
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) != SQLITE_DONE) {
         int uid = (int)sqlite3_column_int(res, 0);
-        if (uid != mx_atoi(data[2]) && !mx_uint_arr_check_value(users_arr, uid, users_len))
-            users_len = mx_uint_array_insert(&users_arr, uid, users_len);
+        if (uid != mx_atoi(data[2]) && !mx_is_in_array(users_arr, uid)) {
+            mx_insert_value(&users_arr, uid);
+            users_len++;
+        }
     }
     sqlite3_finalize(res);
     sqlite3_close(db);
@@ -84,4 +68,22 @@ static void search_by_name(char *text, char **data, int sockfd) {
     }
 
     mx_del_strarr(&search_split);
+}
+
+void mx_search_init(char **data, int sockfd) {
+    char *search_text = mx_strdup(data[1]);
+
+    if (search_text[0] == '@') {
+        if (mx_strlen(search_text) == 1) {
+            int users_len = 0;
+            send(sockfd, &users_len, sizeof(int), 0);
+            free(search_text);
+            return;
+        }
+        search_by_pseudo(search_text, data, sockfd);
+    }
+    else
+        search_by_name(search_text, data, sockfd);
+
+    free(search_text);
 }
