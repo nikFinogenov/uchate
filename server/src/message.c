@@ -1,5 +1,15 @@
 #include "server.h"
 
+/*
+    data - recv data from client
+    data[0] - Operation
+    data[1] - addresser
+    data[2] - destination
+    data[3] - time
+    data[4...n-1] - text
+    data[n] - NULL
+*/
+
 void mx_edit_message(char **data) {
     int uid = mx_atoi(data[1]);
     int dst = mx_atoi(data[2]);
@@ -53,16 +63,6 @@ void mx_delete_message(char **data) {
     sqlite3_close(db);
 }
 
-/*
-    data - recv data from client
-    data[0] - Operation
-    data[1] - addresser
-    data[2] - destination
-    data[3] - time
-    data[4...n-1] - text
-    data[n] - NULL
-*/
-
 void mx_insert_message(char **data, int sockfd) {
     char *text = NULL;
     for (int i = 4; data[i] != NULL; i++)
@@ -105,6 +105,7 @@ void mx_insert_message(char **data, int sockfd) {
 
     free(text);
 }
+
 void mx_check_messages(char **data, int sockfd) {
     int uid = mx_atoi(data[1]);
     int dst = mx_atoi(data[2]);

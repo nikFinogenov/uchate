@@ -18,5 +18,6 @@ uchat
 uchat_server
 test.c
 link
-temp.c
+# temp.c
+XYI.db
 

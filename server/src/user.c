@@ -1,11 +1,11 @@
-#include "../inc/server.h"
+#include "server.h"
 
 /*
     data - recv data from client
     data[0] - Operation
     data[1] - NAME
     data[2] - SURNAME
-    data[3] - PSEUDONIM
+    data[3] - USERNAME
     data[4] - PASSWORD
     data[5] - NULL
 */
@@ -18,23 +18,21 @@ void mx_add_user(char **data) {
     char sql[500];
     bzero(sql, 500);
     char *errmsg;
-    sprintf(sql, "SELECT MAX(ID) FROM USERS;");
+    // sprintf(sql, "SELECT MAX(ID) FROM USERS;");
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     sqlite3_step(res);
-    int id = (int)sqlite3_column_int(res, 0);
+    // int id = (int)sqlite3_column_int(res, 0);
     sqlite3_finalize(res);
-    id++;
-    char *description = " ";
+    // id++;
     sprintf(sql, 
-            "INSERT INTO USERS (ID, NAME, SURENAME, PSEUDONIM, \
-            DESCRIPTION, PASSWORD, LANGUAGE, THEME) VALUES('%d',\
+            "INSERT INTO USERS (username, password, name, surname, description, status, date, token) VALUES('%d',\
             '%s','%s','%s','%s','%s','%d','%d');", 
-            id, data[1], data[2], data[3], description, encrypted_pass, 0, 0);   
+            data[1], encrypted_pass, data[2], data[3], " ", , 0, 0);   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Add user", st);
     sqlite3_close(db);
-    mx_write_photo_to_bd("server/data/standard_avatar.jpg", id);
+    mx_write_photo_to_bd("server/source/standard_avatar.jpg", id);
 
     free(encrypted_pass);
 }
@@ -89,8 +87,8 @@ void mx_update_user_data(char **data) {
     bzero(sql, 500);
     char *errmsg;
     sprintf(sql, "UPDATE USERS SET NAME='%s',"
-            "SURENAME='%s',"
-            "PSEUDONIM='%s',"
+            "SURNAME='%s',"
+            "USERNAME='%s',"
             "DESCRIPTION='%s' WHERE ID=%d;",
             data[1], data[2], data[3], data[4], mx_atoi(data[5]));   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
@@ -106,7 +104,7 @@ void mx_find_user(char **data, int sockfd) {
     sqlite3_stmt *res;
     char sql[500];
     bzero(sql, 500);
-    sprintf(sql, "SELECT ID FROM USERS WHERE PSEUDONIM='%s';", data[1]);
+    sprintf(sql, "SELECT ID FROM USERS WHERE USERNAME='%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (sqlite3_step(res) != SQLITE_DONE) sendBuff = mx_strjoin(sendBuff, "SUCCESS");
     else sendBuff = mx_strjoin(sendBuff, "FAIL");
@@ -123,7 +121,7 @@ bool mx_check_user(char **data) {
     sqlite3_stmt *res;
     char sql[500];
     bzero(sql, 500);
-    sprintf(sql, "SELECT PASSWORD FROM USERS WHERE PSEUDONIM='%s';", data[1]);
+    sprintf(sql, "SELECT PASSWORD FROM USERS WHERE USERNAME='%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (sqlite3_step(res) != SQLITE_DONE) {
         char *check_password = mx_strdup((char *)sqlite3_column_text(res, 0));
