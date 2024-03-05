@@ -16,7 +16,7 @@ void mx_add_user(char **data) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     char *errmsg;
     sprintf(sql, "SELECT MAX(ID) FROM USERS;");
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
@@ -54,9 +54,9 @@ void mx_get_user(int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
             char temp_buff[1024];
-        bzero(temp_buff, 1024);
+        memset(temp_buff, 0, 1024);
     // char *errmsg;
     sprintf(sql, "SELECT * FROM USERS WHERE ID = %d;", id); 
     // const char *query = "SELECT * FROM Users WHERE id = ?";
@@ -86,7 +86,7 @@ void mx_get_user(int sockfd) {
 void mx_update_user_data(char **data) {
     sqlite3 *db = open_db();
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     char *errmsg;
     sprintf(sql, "UPDATE USERS SET NAME='%s',"
             "SURENAME='%s',"
@@ -105,7 +105,7 @@ void mx_find_user(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     sprintf(sql, "SELECT ID FROM USERS WHERE PSEUDONIM='%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (sqlite3_step(res) != SQLITE_DONE) sendBuff = mx_strjoin(sendBuff, "SUCCESS");
@@ -122,7 +122,7 @@ bool mx_check_user(char **data) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     sprintf(sql, "SELECT PASSWORD FROM USERS WHERE PSEUDONIM='%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (sqlite3_step(res) != SQLITE_DONE) {

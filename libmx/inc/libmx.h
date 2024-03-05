@@ -1,5 +1,7 @@
 #ifndef LIBMX_H
 #define LIBMX_H
+#define _XOPEN_SOURCE 700
+#define _DEFAULT_SOURCE
 
 #include <unistd.h>
 #include <wchar.h>

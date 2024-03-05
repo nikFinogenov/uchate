@@ -31,7 +31,7 @@ static void *handle_client(void *data) {
 
     while(1) {
         char recv_buff[6000];
-        bzero(recv_buff, sizeof(recv_buff));
+        memset(recv_buff, 0, sizeof(recv_buff));
 
         int bytesRead = recv(client_socket, recv_buff, sizeof(recv_buff), 0);
         if (bytesRead > 0) {

@@ -26,7 +26,7 @@ void mx_check_last_room(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT addresser, destination FROM Messages\
             WHERE addresser=%d OR destination=%d ORDER BY rowid DESC LIMIT 1;",
             uid, uid);
@@ -54,7 +54,7 @@ void mx_check_last_room(char **data, int sockfd) {
 void mx_update_theme(char **data) {
     sqlite3 *db = open_db();
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     char *err_msg;
     sprintf(sql, "UPDATE USERS SET THEME=%d WHERE ID=%d;", mx_atoi(data[1]), mx_atoi(data[2]));
     sqlite3_exec(db, sql, NULL, 0, &err_msg);
@@ -64,7 +64,7 @@ void mx_update_theme(char **data) {
 void mx_update_language(char **data) {
     sqlite3 *db = open_db();
     char sql[256];
-    bzero(sql, 256);
+    memset(sql, 0, 256);
     char *errmsg;
     sprintf(sql, "UPDATE USERS SET LANGUAGE=%d WHERE ID=%d;", mx_atoi(data[1]), mx_atoi(data[2]));   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
@@ -90,7 +90,7 @@ void mx_update_avatar(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *pStmt;
     char *sql = malloc(flen + 40);
-    bzero(sql, flen + 40);
+    memset(sql, 0, flen + 40);
     sprintf(sql, "UPDATE USERS SET PHOTO = ? WHERE ID=%d;", mx_atoi(data[1]));
     
     int rc = sqlite3_prepare(db, sql, -1, &pStmt, 0);
@@ -112,7 +112,7 @@ void mx_send_room_data(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT NAME, SURENAME, PSEUDONIM FROM USERS\
             WHERE id=%u;", mx_atoi(data[1]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
@@ -142,7 +142,7 @@ void mx_load_room(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT MAX(ID) FROM Messages\
             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
             uid, dst, uid, dst);
@@ -158,7 +158,7 @@ void mx_load_room(char **data, int sockfd) {
         return;
     }
     sqlite3_finalize(res);
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT id, addresser, Text, time FROM Messages\
             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d)\
             ORDER BY id;",
@@ -170,7 +170,7 @@ void mx_load_room(char **data, int sockfd) {
         int cur_m_id = (int)sqlite3_column_int64(res, 0);
 
         char sendBuff[1024];
-        bzero(sendBuff, 1024);
+        memset(sendBuff, 0, 1024);
         sprintf(sendBuff, "%d\n%d\n%s\n%d", cur_m_id, 
             (int)sqlite3_column_int64(res, 1), message_text, (int)sqlite3_column_int64(res, 3));
         send(sockfd, sendBuff, 1024, 0);
@@ -184,7 +184,7 @@ void mx_get_language(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[256];
-    bzero(sql, 256);
+    memset(sql, 0, 256);
     sprintf(sql, "SELECT LANGUAGE FROM USERS WHERE ID=%d;", mx_atoi(data[1]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     sqlite3_step(res);
@@ -197,7 +197,7 @@ void mx_get_theme(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     sprintf(sql, "SELECT THEME FROM USERS WHERE ID=%d;", mx_atoi(data[1]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     sqlite3_step(res);
@@ -211,7 +211,7 @@ void mx_get_theme(char **data, int sockfd) {
 void mx_get_avatar(char **data, int sockfd) {
     sqlite3 *db = open_db();
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     sprintf(sql, "SELECT PHOTO FROM USERS WHERE ID=%d;", mx_atoi(data[1]));
     sqlite3_stmt *pStmt;
 
@@ -258,7 +258,7 @@ void mx_get_users_arr(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT addresser, destination FROM Messages\
             WHERE addresser=%u OR destination=%u ORDER BY time DESC;",
             user_id, user_id);
@@ -302,7 +302,7 @@ void mx_get_image_message(char **data, int sockfd) {
 
     sqlite3 *db = open_db();
     char sql[200];
-    bzero(sql, 200);
+    memset(sql, 0, 200);
     sprintf(sql, "SELECT Image FROM Messages WHERE id=%d AND\
             ((addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d));",
             m_id, dst, uid, dst, uid);
@@ -375,7 +375,7 @@ void message_img(char **data, int sockfd) {
     sqlite3_stmt *pStmt;
 
     char *sql = malloc(flen + 250);
-    bzero(sql, flen + 250);
+    memset(sql, 0, flen + 250);
     sprintf(sql, "UPDATE Messages SET Image = ? WHERE id=%d AND\
             ((addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d));",
             m_id, uid, dst, uid, dst);
