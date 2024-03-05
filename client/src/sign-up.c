@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "uchat-client.h"
 
 static GtkWidget *signup_window;
 

@@ -1,4 +1,4 @@
-#include "uchat.h"
+#include "uchat-client.h"
 
 static GtkWidget *login_window;
 
@@ -71,3 +71,5 @@ void draw_login(GtkWidget *window) {
     gtk_box_pack_start(GTK_BOX(login_vbox), login_button, FALSE, FALSE, 0);
 }
 
+
+// static void send_request() { void }
