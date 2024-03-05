@@ -1,49 +1,5 @@
 #include "server.h"
 
-void message_img(char **data, int sockfd) {
-    int uid = mx_atoi(data[1]);
-    int dst = mx_atoi(data[2]);
-    int m_id = mx_atoi(data[3]);
-
-    char *eptr;
-    unsigned int out_size = (unsigned)strtol(data[4], &eptr, 10);
-
-    int len_encoded = mx_atoi(data[5]);
-    
-    unsigned char *encoded = malloc( (sizeof(char) * out_size) );
-    memset(encoded, 0, out_size);
-    mx_recv_all(&sockfd, &encoded, len_encoded);
-
-    unsigned int flen = b64d_size(len_encoded);
-    unsigned char *decoded = malloc( (sizeof(char) * flen) );
-    memset(decoded, 0, flen);
-    flen = b64_decode(encoded, len_encoded, decoded);
-    free(encoded);
-    
-    sqlite3 *db = open_db();
-    sqlite3_stmt *pStmt;
-
-    char *sql = malloc(flen + 250);
-    bzero(sql, flen + 250);
-    sprintf(sql, "UPDATE Messages SET Image = ? WHERE id=%d AND\
-            ((addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d));",
-            m_id, uid, dst, uid, dst);
-    
-    int rc = sqlite3_prepare(db, sql, -1, &pStmt, 0);
-    if (rc != 0)
-        fprintf(stderr, "Cannot prepare statement: %s\n", sqlite3_errmsg(db));
-
-    sqlite3_bind_blob(pStmt, 1, decoded, flen, SQLITE_STATIC);
-    rc = sqlite3_step(pStmt);
-    if (rc != SQLITE_DONE)
-        printf("execution failed: %s", sqlite3_errmsg(db));
-
-    sqlite3_finalize(pStmt);  
-    sqlite3_close(db);
-    free(sql);
-    free(decoded);
-}
-
 void mx_edit_message(char **data) {
     int uid = mx_atoi(data[1]);
     int dst = mx_atoi(data[2]);
@@ -92,6 +48,86 @@ void mx_delete_message(char **data) {
         exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
         st = (exit == 0) ? ST_OK : ST_NEOK;
         logger("Delete recipient message", st);
+    }
+    sqlite3_finalize(res);
+    sqlite3_close(db);
+}
+
+/*
+    data - recv data from client
+    data[0] - Operation
+    data[1] - addresser
+    data[2] - destination
+    data[3] - time
+    data[4...n-1] - text
+    data[n] - NULL
+*/
+
+void mx_insert_message(char **data, int sockfd) {
+    char *text = NULL;
+    for (int i = 4; data[i] != NULL; i++)
+        text = mx_strjoin(text, data[i]);
+
+    int addresser = mx_atoi(data[1]);
+    int destination = mx_atoi(data[2]);
+
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[2056];
+    bzero(sql, 2056);
+    sprintf(sql, "SELECT MAX(ID) FROM Messages WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
+        addresser, destination, addresser, destination);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    sqlite3_step(res);
+    int id = (int)sqlite3_column_int(res, 0);
+    sqlite3_finalize(res);
+    id++;
+
+    send(sockfd, &id, sizeof(int), 0);
+
+    char *err_msg;
+    bzero(sql, 2056);
+    if (mx_strcmp(text, "(null)"))
+        sprintf(sql,
+                "INSERT INTO Messages (id, addresser, destination, Text, time)\
+                VALUES('%d','%d','%d','%s','%d');",
+                id, addresser, destination, text, mx_atoi(data[3]));
+    else
+        sprintf(sql,
+                "INSERT INTO Messages (id, addresser, destination, time)\
+                VALUES('%d','%d','%d','%d');",
+                id, addresser, destination, mx_atoi(data[3]));
+
+    int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
+    char* st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Insert message", st);
+    sqlite3_close(db);
+
+    free(text);
+}
+void mx_check_messages(char **data, int sockfd) {
+    int uid = mx_atoi(data[1]);
+    int dst = mx_atoi(data[2]);
+
+    int latest = 0;
+
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res = NULL;
+    char sql[250];
+    bzero(sql, 250);
+    sprintf(sql, "SELECT MAX(id) FROM Messages\
+            WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
+            uid, dst, uid, dst);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    if (sqlite3_step(res) != SQLITE_DONE) {
+        latest = (int)sqlite3_column_int(res, 0);
+        send(sockfd, &latest, sizeof(int), 0);
+    }
+    else {
+        sqlite3_finalize(res);
+        sqlite3_close(db);
+        send(sockfd, &latest, sizeof(int), 0);
+        return;
     }
     sqlite3_finalize(res);
     sqlite3_close(db);

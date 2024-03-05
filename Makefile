@@ -1,6 +1,8 @@
+.PHONY: server client
+
 all: install
 
-server:
+server: 
 	@$(MAKE) -C server/
 
 client:
