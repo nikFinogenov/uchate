@@ -18,7 +18,7 @@ void mx_edit_message(char **data) {
     sqlite3 *db = open_db();
     char *err_msg = 0;
     char sql[300];
-    bzero(sql, 300);
+    memset(sql, 0, 300);
     sprintf(sql, "UPDATE Messages SET Text='%s' WHERE id=%d AND\
             ((addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d));", 
             data[4], id, dst, uid, dst, uid);
@@ -36,7 +36,7 @@ void mx_delete_message(char **data) {
     sqlite3 *db = open_db();
     char *err_msg = 0;
     char sql[300];
-    bzero(sql, 300);
+    memset(sql, 0, 300);
     sprintf(sql, "DELETE FROM Messages WHERE id=%u AND\
             ((addresser=%u OR addresser=%u) AND (destination=%u OR destination=%u));", 
             id, dst, uid, dst, uid);
@@ -45,7 +45,7 @@ void mx_delete_message(char **data) {
     logger("Delete sender message", st, "");
 
     sqlite3_stmt *res;
-    bzero(sql, 300);
+    memset(sql, 0, 300);
     sprintf(sql, "SELECT id FROM Messages WHERE id > %u AND\
             ((addresser=%u OR addresser=%u) AND (destination=%u OR destination=%u));", 
             id, dst, uid, dst, uid);
@@ -74,7 +74,7 @@ void mx_insert_message(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[2056];
-    bzero(sql, 2056);
+    memset(sql, 0, 2056);
     sprintf(sql, "SELECT MAX(ID) FROM Messages WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
         addresser, destination, addresser, destination);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
@@ -86,7 +86,7 @@ void mx_insert_message(char **data, int sockfd) {
     send(sockfd, &id, sizeof(int), 0);
 
     char *err_msg;
-    bzero(sql, 2056);
+    memset(sql, 0, 2056);
     if (mx_strcmp(text, "(null)"))
         sprintf(sql,
                 "INSERT INTO Messages (id, addresser, destination, Text, time)\
@@ -115,7 +115,7 @@ void mx_check_messages(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT MAX(id) FROM Messages\
             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
             uid, dst, uid, dst);

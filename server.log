@@ -193,3 +193,9 @@
 2024-03-06 16:32:26: Init table "Messages" -> OK
 2024-03-06 16:32:28: Open database -> OK
 2024-03-06 16:32:28: Delete user -> OK
+2024-03-05 10:00:17: Open database -> OK
+2024-03-05 10:00:17: Create table "Users" -> OK
+2024-03-05 10:00:17: Create table "Messages" -> OK
+2024-03-05 10:00:24: Open database -> OK
+2024-03-05 10:00:24: Create table "Users" -> OK
+2024-03-05 10:00:24: Create table "Messages" -> OK

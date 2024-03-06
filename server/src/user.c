@@ -6,7 +6,7 @@ void mx_add_user(char **data) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     char *errmsg;
     sprintf(sql, "SELECT id FROM USERS ORDER BY id DESC LIMIT 1;");
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
@@ -30,13 +30,13 @@ void mx_get_user(char** data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+
+    memset(sql, 0, 500);
     char temp_buff[1024];
-    bzero(temp_buff, 1024);
+    memset(temp_buff, 0, 1024);
 
     sprintf(sql, "SELECT * FROM USERS WHERE ID = %d;", mx_atoi(data[1])); 
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
-
     while (sqlite3_step(res) == SQLITE_ROW) {
         const unsigned char *username = sqlite3_column_text(res, 1);
         const unsigned char *password = sqlite3_column_text(res, 2);
@@ -54,7 +54,7 @@ void mx_get_user(char** data, int sockfd) {
 void mx_update_user(char **data) {
     sqlite3 *db = open_db();
     char sql[500];
-    bzero(sql, 500);
+    memset(sql, 0, 500);
     char *errmsg;
     char* enc_pass = encrypt_pass(data[1]);
     sprintf(sql, "UPDATE USERS SET password='%s', name='%s', \
@@ -70,7 +70,8 @@ void mx_update_user(char **data) {
 void mx_delete_user(char **data) {
     sqlite3 *db = open_db();
     char sql[500];
-    bzero(sql, 500);
+
+    memset(sql, 0, 500);
     char *errmsg;
     sprintf(sql, "DELETE FROM USERS WHERE id=%d;", mx_atoi(data[1]));   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
@@ -86,7 +87,8 @@ bool mx_check_user(char **data) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
-    bzero(sql, 500);
+
+    memset(sql, 0, 500);
     sprintf(sql, "SELECT PASSWORD FROM USERS WHERE USERNAME='%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (sqlite3_step(res) != SQLITE_DONE) {

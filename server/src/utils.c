@@ -16,7 +16,7 @@ int socket_init(int port) {
         exit(1);
     }
     struct sockaddr_in serv_addr;
-    bzero((char *)&serv_addr, sizeof(serv_addr));
+    memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); 
     serv_addr.sin_port = htons(port);    
@@ -169,8 +169,8 @@ void mx_write_photo_to_bd(char *path, int id) {
     }
     sqlite3_stmt *pStmt;
     char *sql = malloc((unsigned)flen + 500);
-    bzero(sql, (unsigned)flen + 500);
-    sprintf(sql, "UPDATE USERS SET profile_img = ? WHERE id = '%d' ;", id);
+    memset(sql, 0, (unsigned)flen + 500);
+    sprintf(sql, "UPDATE USERS SET profile_img = ? WHERE ID = '%d' ;", id);
     
     rc = sqlite3_prepare(db, sql, -1, &pStmt, 0);
     
@@ -196,7 +196,7 @@ static void search_by_pseudo(char *text, char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT ID FROM USERS\
             WHERE INSTR(USERNAME, '%s') != 0 AND ID != %d;", search_split[0] + 1, mx_atoi(data[2]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
@@ -231,9 +231,11 @@ static void search_by_name(char *text, char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
-    bzero(sql, 250);
+
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT id FROM USERS\
             WHERE (INSTR(NAME, '%s') OR INSTR(SURNAME, '%s')) AND id != %u;",
+
             search_split[0], search_split[1], mx_atoi(data[2]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) != SQLITE_DONE) {
@@ -289,13 +291,15 @@ void mx_authorization(char **data, int sockfd) {
         sendBuff = mx_strjoin(sendBuff, "SUCCESS\n");
 
         char temp_buff[1024];
-        bzero(temp_buff, 1024);
+        memset(temp_buff, 0, 1024);
 
         sqlite3 *db = open_db();
         sqlite3_stmt *res;
         char sql[500];
-        bzero(sql, 500);
+
+        memset(sql, 0, 500);
         sprintf(sql, "SELECT id, name, surname, username, description FROM USERS WHERE username='%s';", data[1]);
+
         sqlite3_prepare_v2(db, sql, -1, &res, 0);
         sqlite3_step(res);
         sprintf(temp_buff, "%d\n%s\n%s\n%s\n%s\n",
@@ -327,7 +331,7 @@ void mx_load_messages(char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[250];
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT MAX(ID) FROM Messages\
             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
             uid, dst, uid, dst);
@@ -344,7 +348,7 @@ void mx_load_messages(char **data, int sockfd) {
     }
     sqlite3_finalize(res);
 
-    bzero(sql, 250);
+    memset(sql, 0, 250);
     sprintf(sql, "SELECT id, addresser, Text, time FROM Messages\
             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d) AND id > %d\
             ORDER BY id;",
@@ -356,7 +360,7 @@ void mx_load_messages(char **data, int sockfd) {
         int m_id = (int)sqlite3_column_int64(res, 0);
 
         char sendBuff[1024];
-        bzero(sendBuff, 1024);
+        memset(sendBuff, 0, 1024);
         sprintf(sendBuff, "%d\n%d\n%s\n%d", m_id, 
             (int)sqlite3_column_int64(res, 1), message_text, (int)sqlite3_column_int64(res, 3));
         send(sockfd, sendBuff, 1024, 0);
