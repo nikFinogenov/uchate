@@ -1,10 +1,11 @@
 #include "server.h"
 
+
 sqlite3 *open_db(void) {
     sqlite3 *db;
     int status = sqlite3_open("server/source/McOk.db", &db);
     char* st = (status == 0) ? ST_OK : ST_NEOK;
-    logger("Open database", st);
+    logger("Open database", st, "");
     return db;
 }
 
@@ -31,6 +32,32 @@ int socket_init(int port) {
     return socketfd;
 }
 
+// static int table_exists(sqlite3 *db, const char *tableName) {
+//     sqlite3_stmt *stmt;
+//     const char *sql = "SELECT name FROM sqlite_master WHERE type='table' AND name=?;";
+//     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+
+//     if (rc != SQLITE_OK) {
+//         fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
+
+//     sqlite3_bind_text(stmt, 1, tableName, -1, SQLITE_STATIC);
+
+//     rc = sqlite3_step(stmt);
+
+//     if (rc == SQLITE_ROW) return 1;
+//     else if (rc == SQLITE_DONE) return 0;
+//     else {
+//         fprintf(stderr, "SQL execution error: %s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
+
+//     sqlite3_finalize(stmt);
+
+//     return 0;
+// }
+
 void db_init(void) {
     sqlite3 *db = open_db();
     char *err_msg;
@@ -40,23 +67,23 @@ void db_init(void) {
 
     int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Create table \"Users\"", st);
+    logger("Init table \"Users\"", st, err_msg);
 
     sql = "CREATE TABLE IF NOT EXISTS CHATS(id INTEGER PRIMARY KEY AUTOINCREMENT, \
         user1_id INTEGER NOT NULL, user2_id INTEGER NOT NULL, creation_date TEXT NOT NULL);";
     exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Create table \"Chats\"", st);
+    logger("Init table \"Chats\"", st, err_msg);
 
     sql = "CREATE TABLE IF NOT EXISTS MESSAGES(id INTEGER PRIMARY KEY AUTOINCREMENT, \
         chat_id INTEGER NOT NULL, text TEXT NOT NULL, type TEXT, status TEXT);";
     exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Create table \"Messages\"", st);
+    logger("Init table \"Messages\"", st, err_msg);
     sqlite3_close(db);
 }
 
-void logger(char *proccess, char* status) {
+void logger(char *proccess, char* status, char* errmsg) {
     FILE *fd = fopen("server.log", "a+t");
     if (fd == NULL) {
         perror("Error opening log file");
@@ -67,8 +94,8 @@ void logger(char *proccess, char* status) {
     char current_time_str[20];
     strftime(current_time_str, sizeof(current_time_str), "%Y-%m-%d %H:%M:%S", localtime(&current_time));
 
-    // char* input_color = (!mx_strcmp(status, ST_OK)) ? GREEN : RED;
-    fprintf(fd, "%s: %s -> %s\n", current_time_str, proccess, status);
+    char* err = (!mx_strcmp(status, ST_NEOK)) ? mx_strjoin(" -> ", errmsg) : "";
+    fprintf(fd, "%s: %s -> %s%s\n", current_time_str, proccess, status, err);
 
     if (fclose(fd) != 0) {
         perror("Error closing log file");
@@ -290,52 +317,52 @@ void mx_authorization(char **data, int sockfd) {
     }
     free(sendBuff);
 }
-// void mx_load_messages(char **data, int sockfd) {
-//     int uid = mx_atoi(data[1]);
-//     int dst = mx_atoi(data[2]);
-//     int max_msg_id = mx_atoi(data[3]);
-//     int id = 0;
+void mx_load_messages(char **data, int sockfd) {
+    int uid = mx_atoi(data[1]);
+    int dst = mx_atoi(data[2]);
+    int max_msg_id = mx_atoi(data[3]);
+    int id = 0;
 
 
-//     sqlite3 *db = open_db();
-//     sqlite3_stmt *res;
-//     char sql[250];
-//     bzero(sql, 250);
-//     sprintf(sql, "SELECT MAX(ID) FROM Messages\
-//             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
-//             uid, dst, uid, dst);
-//     sqlite3_prepare_v2(db, sql, -1, &res, 0);
-//     if (sqlite3_step(res) != SQLITE_DONE) {
-//         id = (int)sqlite3_column_int(res, 0);
-//         send(sockfd, &id, sizeof(int), 0);
-//     }
-//     else {
-//         sqlite3_finalize(res);
-//         sqlite3_close(db);
-//         send(sockfd, &id, sizeof(int), 0);
-//         return;
-//     }
-//     sqlite3_finalize(res);
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[250];
+    bzero(sql, 250);
+    sprintf(sql, "SELECT MAX(ID) FROM Messages\
+            WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d);",
+            uid, dst, uid, dst);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    if (sqlite3_step(res) != SQLITE_DONE) {
+        id = (int)sqlite3_column_int(res, 0);
+        send(sockfd, &id, sizeof(int), 0);
+    }
+    else {
+        sqlite3_finalize(res);
+        sqlite3_close(db);
+        send(sockfd, &id, sizeof(int), 0);
+        return;
+    }
+    sqlite3_finalize(res);
 
-//     bzero(sql, 250);
-//     sprintf(sql, "SELECT id, addresser, Text, time FROM Messages\
-//             WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d) AND id > %d\
-//             ORDER BY id;",
-//             uid, dst, uid, dst, max_msg_id);
-//     sqlite3_prepare_v2(db, sql, -1, &res, 0);
-//     while (sqlite3_step(res) != SQLITE_DONE) {
-//         char *message_text = (char *)sqlite3_column_text(res, 2);
+    bzero(sql, 250);
+    sprintf(sql, "SELECT id, addresser, Text, time FROM Messages\
+            WHERE (addresser=%d OR addresser=%d) AND (destination=%d OR destination=%d) AND id > %d\
+            ORDER BY id;",
+            uid, dst, uid, dst, max_msg_id);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    while (sqlite3_step(res) != SQLITE_DONE) {
+        char *message_text = (char *)sqlite3_column_text(res, 2);
 
-//         int m_id = (int)sqlite3_column_int64(res, 0);
+        int m_id = (int)sqlite3_column_int64(res, 0);
 
-//         char sendBuff[1024];
-//         bzero(sendBuff, 1024);
-//         sprintf(sendBuff, "%d\n%d\n%s\n%d", m_id, 
-//             (int)sqlite3_column_int64(res, 1), message_text, (int)sqlite3_column_int64(res, 3));
-//         send(sockfd, sendBuff, 1024, 0);
+        char sendBuff[1024];
+        bzero(sendBuff, 1024);
+        sprintf(sendBuff, "%d\n%d\n%s\n%d", m_id, 
+            (int)sqlite3_column_int64(res, 1), message_text, (int)sqlite3_column_int64(res, 3));
+        send(sockfd, sendBuff, 1024, 0);
 
-//         send(sockfd, &m_id, sizeof(int), 0);
-//     }
-//     sqlite3_finalize(res);
-//     sqlite3_close(db);
-// }
+        send(sockfd, &m_id, sizeof(int), 0);
+    }
+    sqlite3_finalize(res);
+    sqlite3_close(db);
+}

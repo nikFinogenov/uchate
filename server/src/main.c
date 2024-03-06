@@ -6,10 +6,10 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "LoadMessages")) mx_load_messages(data, new_socket);
     else if (!mx_strcmp(request, "Authorization")) mx_authorization(data, new_socket);
     //user-endpoints
-    else if (!mx_strcmp(request, "FindUser")) mx_find_user(data, new_socket);
-    else if (!mx_strcmp(request, "AddUser")) mx_add_user(data);
-    else if (!mx_strcmp(request, "GetUser")) mx_get_user(new_socket);
-    else if (!mx_strcmp(request, "UpdateUserData")) mx_update_user_data(data);
+    else if (!mx_strcmp(request, "/user/add")) mx_add_user(data);
+    else if (!mx_strcmp(request, "/user/get")) mx_get_user(data, new_socket);
+    else if (!mx_strcmp(request, "/user/update")) mx_update_user(data);
+    else if (!mx_strcmp(request, "/user/delete")) mx_delete_user(data);
     //message-endpoints
     else if (!mx_strcmp(request, "InsertMessage")) mx_insert_message(data, new_socket);
     else if (!mx_strcmp(request, "CheckMessages")) mx_check_messages(data, new_socket);
@@ -20,7 +20,7 @@ static void handle_request(char* request, char** data, int new_socket) {
     // else if (!mx_strcmp(request, "AddImageMessage")) message_img(data, new_socket);
     // else if (!mx_strcmp(request, "GetMessageImage")) mx_get_image_message(data, new_socket);
     // else if (!mx_strcmp(request, "LoadRoom")) mx_load_room(data, new_socket);
-    // else if (!mx_strcmp(request, "GetUsersArr")) mx_get_users_arr(data, new_socket);
+    // else if (!mx_strcmp(request, "/user/getsArr")) mx_get_users_arr(data, new_socket);
     // else if (!mx_strcmp(request, "SendRoomData")) mx_send_room_data(data, new_socket);
     // else if (!mx_strcmp(request, "GetAvatar")) mx_get_avatar(data, new_socket);
     // else if (!mx_strcmp(request, "UpdateAvatar")) mx_update_avatar(data, new_socket);

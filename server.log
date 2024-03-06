@@ -1,0 +1,195 @@
+2024-03-06 11:35:45: Open database -> OK
+2024-03-06 11:35:45: Create table "Users" -> OK
+2024-03-06 11:35:45: Create table "Chats" -> OK
+2024-03-06 11:35:45: Create table "Messages" -> OK
+2024-03-06 11:35:55: Open database -> OK
+2024-03-06 11:35:55: Add user -> OK
+2024-03-06 11:42:23: Open database -> OK
+2024-03-06 11:42:23: Create table "Users" -> OK
+2024-03-06 11:42:23: Create table "Chats" -> OK
+2024-03-06 11:42:23: Create table "Messages" -> OK
+2024-03-06 11:42:25: Open database -> OK
+2024-03-06 11:42:25: Add user -> OK
+2024-03-06 11:44:40: Open database -> OK
+2024-03-06 11:44:40: Create table "Users" -> OK
+2024-03-06 11:44:40: Create table "Chats" -> OK
+2024-03-06 11:44:40: Create table "Messages" -> OK
+2024-03-06 11:44:43: Open database -> OK
+2024-03-06 11:44:43: Add user -> OK
+2024-03-06 11:45:47: Open database -> OK
+2024-03-06 11:45:47: Add user -> OK
+2024-03-06 12:01:29: Open database -> OK
+2024-03-06 12:01:29: Create table "Users" -> OK
+2024-03-06 12:01:29: Create table "Chats" -> OK
+2024-03-06 12:01:29: Create table "Messages" -> OK
+2024-03-06 12:01:32: Open database -> OK
+2024-03-06 12:01:32: Add user -> OK
+2024-03-06 12:15:16: Open database -> OK
+2024-03-06 12:15:16: Create table "Users" -> OK
+2024-03-06 12:15:16: Create table "Chats" -> OK
+2024-03-06 12:15:16: Create table "Messages" -> OK
+2024-03-06 12:15:19: Open database -> OK
+2024-03-06 12:51:33: Open database -> OK
+2024-03-06 12:51:33: Create table "Users" -> OK
+2024-03-06 12:51:33: Create table "Chats" -> OK
+2024-03-06 12:51:33: Create table "Messages" -> OK
+2024-03-06 12:51:36: Open database -> OK
+2024-03-06 13:27:45: Open database -> OK
+2024-03-06 13:27:45: Create table "Users" -> OK
+2024-03-06 13:27:45: Create table "Chats" -> OK
+2024-03-06 13:27:45: Create table "Messages" -> OK
+2024-03-06 13:27:48: Open database -> OK
+2024-03-06 13:27:48: Update user -> FAILED
+2024-03-06 13:29:03: Open database -> OK
+2024-03-06 13:29:03: Update user -> FAILED
+2024-03-06 13:34:06: Open database -> OK
+2024-03-06 13:34:06: Create table "Users" -> OK
+2024-03-06 13:34:06: Create table "Chats" -> OK
+2024-03-06 13:34:06: Create table "Messages" -> OK
+2024-03-06 13:34:10: Open database -> OK
+2024-03-06 13:34:10: Update user -> FAILED
+2024-03-06 13:45:29: Open database -> OK
+2024-03-06 13:45:31: Open database -> OK
+2024-03-06 13:45:31: Update user -> FAILED
+2024-03-06 13:47:18: Open database -> OK
+2024-03-06 13:47:20: Open database -> OK
+2024-03-06 13:47:20: Update user -> FAILED
+2024-03-06 13:47:41: Open database -> OK
+2024-03-06 13:47:43: Open database -> OK
+2024-03-06 13:47:43: Update user -> FAILED
+2024-03-06 13:48:14: Open database -> OK
+2024-03-06 13:48:14: Update user -> FAILED
+2024-03-06 13:48:48: Open database -> OK
+2024-03-06 13:48:51: Open database -> OK
+2024-03-06 13:48:51: near "name": syntax error -> FAILED
+2024-03-06 13:50:04: Open database -> OK
+2024-03-06 13:50:07: Open database -> OK
+2024-03-06 13:50:07: Update user -> FAILED
+2024-03-06 13:50:41: Open database -> OK
+2024-03-06 13:50:41: Update user -> FAILED
+2024-03-06 13:50:50: Open database -> OK
+2024-03-06 13:50:50: Update user -> FAILED
+2024-03-06 13:51:06: Open database -> OK
+2024-03-06 13:51:09: Open database -> OK
+2024-03-06 13:51:09: database is locked -> FAILED
+2024-03-06 13:59:38: Open database -> OK
+2024-03-06 13:59:41: Open database -> OK
+2024-03-06 13:59:41: database is locked -> FAILED
+2024-03-06 14:00:22: Open database -> OK
+2024-03-06 14:00:30: Open database -> OK
+2024-03-06 14:00:30: Update user -> FAILED -> database is locked
+2024-03-06 14:26:27: Open database -> OK
+2024-03-06 14:26:29: Open database -> OK
+2024-03-06 14:26:29: Update user -> FAILED -> database is locked
+2024-03-06 14:26:39: Open database -> OK
+2024-03-06 14:26:39: Update user -> FAILED -> database is locked
+2024-03-06 14:46:19: Open database -> OK
+2024-03-06 14:46:20: Open database -> OK
+2024-03-06 14:46:20: Edit user -> OK
+2024-03-06 15:17:41: Open database -> OK
+2024-03-06 15:17:47: Open database -> OK
+2024-03-06 15:17:47: Update user -> FAILED -> database is locked
+2024-03-06 15:22:20: Open database -> OK
+2024-03-06 15:22:22: Open database -> OK
+2024-03-06 15:22:22: Update user -> FAILED -> database is locked
+2024-03-06 15:24:36: Open database -> OK
+2024-03-06 15:24:37: Open database -> OK
+2024-03-06 15:29:13: Open database -> OK
+2024-03-06 15:29:15: Open database -> OK
+2024-03-06 15:29:15: Add user -> FAILED -> database is locked
+2024-03-06 15:33:26: Open database -> OK
+2024-03-06 15:33:26: Create table "Users" -> OK
+2024-03-06 15:33:26: Create table "Chats" -> OK
+2024-03-06 15:33:26: Create table "Messages" -> OK
+2024-03-06 15:33:27: Open database -> OK
+2024-03-06 15:34:45: Open database -> OK
+2024-03-06 15:34:45: Create table "Users" -> OK
+2024-03-06 15:34:45: Create table "Chats" -> OK
+2024-03-06 15:34:45: Create table "Messages" -> OK
+2024-03-06 15:34:52: Open database -> OK
+2024-03-06 15:34:52: Update user -> OK
+2024-03-06 15:54:35: Open database -> OK
+2024-03-06 15:54:35: Init table "Users" -> OK
+2024-03-06 15:54:35: Init table "Chats" -> OK
+2024-03-06 15:54:35: Init table "Messages" -> OK
+2024-03-06 15:54:39: Open database -> OK
+2024-03-06 15:54:39: Add user -> OK
+2024-03-06 15:55:27: Open database -> OK
+2024-03-06 15:55:27: Init table "Users" -> OK
+2024-03-06 15:55:27: Init table "Chats" -> OK
+2024-03-06 15:55:27: Init table "Messages" -> OK
+2024-03-06 15:55:29: Open database -> OK
+2024-03-06 15:55:29: Add user -> OK
+2024-03-06 15:55:37: Open database -> OK
+2024-03-06 15:55:37: Add user -> OK
+2024-03-06 15:56:01: Open database -> OK
+2024-03-06 15:56:01: Add user -> OK
+2024-03-06 15:56:31: Open database -> OK
+2024-03-06 15:56:31: Add user -> OK
+2024-03-06 15:56:50: Open database -> OK
+2024-03-06 15:56:50: Add user -> OK
+2024-03-06 15:58:36: Open database -> OK
+2024-03-06 15:58:36: Add user -> FAILED -> database is locked
+2024-03-06 15:59:01: Open database -> OK
+2024-03-06 15:59:01: Init table "Users" -> OK
+2024-03-06 15:59:01: Init table "Chats" -> OK
+2024-03-06 15:59:01: Init table "Messages" -> OK
+2024-03-06 15:59:04: Open database -> OK
+2024-03-06 15:59:04: Add user -> FAILED -> database is locked
+2024-03-06 15:59:32: Open database -> OK
+2024-03-06 15:59:32: Add user -> OK
+2024-03-06 16:00:15: Open database -> OK
+2024-03-06 16:00:15: Get user -> OK
+2024-03-06 16:00:24: Open database -> OK
+2024-03-06 16:00:25: Update user -> OK
+2024-03-06 16:04:33: Open database -> OK
+2024-03-06 16:04:33: Init table "Users" -> OK
+2024-03-06 16:04:33: Init table "Chats" -> OK
+2024-03-06 16:04:33: Init table "Messages" -> OK
+2024-03-06 16:04:37: Open database -> OK
+2024-03-06 16:04:37: Update user -> OK
+2024-03-06 16:05:01: Open database -> OK
+2024-03-06 16:05:01: Open database -> OK
+2024-03-06 16:05:01: Update user -> OK
+2024-03-06 16:05:01: Get user -> OK
+2024-03-06 16:23:38: Open database -> OK
+2024-03-06 16:23:38: Init table "Users" -> OK
+2024-03-06 16:23:38: Init table "Chats" -> OK
+2024-03-06 16:23:38: Init table "Messages" -> OK
+2024-03-06 16:23:41: Open database -> OK
+2024-03-06 16:23:41: Open database -> OK
+2024-03-06 16:23:41: Get user -> OK
+2024-03-06 16:23:41: Update user -> OK
+2024-03-06 16:23:41: Open database -> OK
+2024-03-06 16:24:15: Open database -> OK
+2024-03-06 16:24:15: Init table "Users" -> OK
+2024-03-06 16:24:15: Init table "Chats" -> OK
+2024-03-06 16:24:15: Init table "Messages" -> OK
+2024-03-06 16:24:16: Open database -> OK
+2024-03-06 16:24:16: Open database -> OK
+2024-03-06 16:24:16: Update user -> OK
+2024-03-06 16:24:16: Get user -> OK
+2024-03-06 16:24:16: Open database -> OK
+2024-03-06 16:29:51: Open database -> OK
+2024-03-06 16:29:51: Init table "Users" -> OK
+2024-03-06 16:29:51: Init table "Chats" -> OK
+2024-03-06 16:29:51: Init table "Messages" -> OK
+2024-03-06 16:29:53: Open database -> OK
+2024-03-06 16:29:53: Get user -> OK
+2024-03-06 16:29:53: Open database -> OK
+2024-03-06 16:31:34: Open database -> OK
+2024-03-06 16:31:34: Init table "Users" -> OK
+2024-03-06 16:31:34: Init table "Chats" -> OK
+2024-03-06 16:31:34: Init table "Messages" -> OK
+2024-03-06 16:31:35: Open database -> OK
+2024-03-06 16:32:11: Open database -> OK
+2024-03-06 16:32:11: Init table "Users" -> OK
+2024-03-06 16:32:11: Init table "Chats" -> OK
+2024-03-06 16:32:11: Init table "Messages" -> OK
+2024-03-06 16:32:12: Open database -> OK
+2024-03-06 16:32:26: Open database -> OK
+2024-03-06 16:32:26: Init table "Users" -> OK
+2024-03-06 16:32:26: Init table "Chats" -> OK
+2024-03-06 16:32:26: Init table "Messages" -> OK
+2024-03-06 16:32:28: Open database -> OK
+2024-03-06 16:32:28: Delete user -> OK

@@ -27,19 +27,18 @@
 #define ST_NEOK "FAILED"
 
 int socket_init(int port);
-void logger(char *proccess, char* status);
-
-void mx_get_user(int sockfd);
-void mx_get_user2(char **data, int sockfd);
+void logger(char *proccess, char* status, char* errmsg);
+void mx_add_user(char **data);
+void mx_get_user(char **data, int sockfd);
+void mx_update_user(char **data);
+// void mx_get_user2(char **data, int sockfd);
 
 
 bool mx_check_user(char **data);
 void mx_check_room(char **data, int sockfd);
 void mx_check_messages(char **data, int sockfd);
 void mx_load_messages(char **data, int sockfd);
-void mx_find_user(char **data, int sockfd);
-void mx_add_user(char **data);
-void mx_update_user_data(char **data);
+void mx_delete_user(char **data);
 void mx_get_users_arr(char **data, int sockfd);
 void mx_send_room_data(char **data, int sockfd);
 void mx_authorization(char **data, int sockfd);

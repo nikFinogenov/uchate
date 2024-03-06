@@ -24,7 +24,7 @@ void mx_edit_message(char **data) {
             data[4], id, dst, uid, dst, uid);
     int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Edit message", st);
+    logger("Edit message", st, err_msg);
     sqlite3_close(db);
 }
 
@@ -42,7 +42,7 @@ void mx_delete_message(char **data) {
             id, dst, uid, dst, uid);
     int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Delete sender message", st);
+    logger("Delete sender message", st, "");
 
     sqlite3_stmt *res;
     bzero(sql, 300);
@@ -57,7 +57,7 @@ void mx_delete_message(char **data) {
             value - 1, value, dst, uid, dst, uid);
         exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
         st = (exit == 0) ? ST_OK : ST_NEOK;
-        logger("Delete recipient message", st);
+        logger("Delete recipient message", st, err_msg);
     }
     sqlite3_finalize(res);
     sqlite3_close(db);
@@ -100,7 +100,7 @@ void mx_insert_message(char **data, int sockfd) {
 
     int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Insert message", st);
+    logger("Insert message", st, err_msg);
     sqlite3_close(db);
 
     free(text);

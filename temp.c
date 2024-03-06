@@ -1,166 +1,246 @@
-#include "server/inc/server.h"
-
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <fcntl.h>
+#include <stdbool.h>
+#include <string.h>
+#include <netinet/in.h>
 #include <sqlite3.h>
+#include <pthread.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <signal.h> 
+#include <time.h>
+#include <limits.h>
+#include <dirent.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <locale.h>
+#include <stdio.h>
+#include <math.h>
+#include <pthread.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <errno.h>
+#include <arpa/inet.h>
 
-int init() {
-    sqlite3 *db;
-    char *errMsg = 0;
+// void pass_encrypt(char *password, char *key, char *encrypted) {
+//     int i, keyLen, passLen;
+//     keyLen = strlen(key);
+//     passLen = strlen(password);
 
-    // Open or create the database
-    int rc = sqlite3_open("XYI.db", &db);
-
-    if (rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        return rc;
-    } else {
-        fprintf(stdout, "Opened database successfully\n");
+//     for (i = 0; i < passLen; i++) {
+//         encrypted[i] = password[i] ^ key[i % keyLen];
+//     }
+//     encrypted[i] = '\0';
+// }
+void *mx_run_error_pop_up(void *vargp) {}
+char **argv_ptr;
+int sockfd = -1;
+int mx_connect_to_server(int *sock) {
+    int portno;
+    struct sockaddr_in serv_addr;
+    struct hostent *server;
+    
+    portno = atoi(argv_ptr[2]);
+    *sock = socket(AF_INET, SOCK_STREAM, 0);
+    
+    if (*sock < 0) {
+        perror("ERROR opening socket");
     }
-
-    // SQL statement to create the Users table
-    const char *createUsersTableSQL = "CREATE TABLE Users ("
-                                      "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                      "username TEXT NOT NULL,"
-                                      "password TEXT NOT NULL,"
-                                      "name TEXT NOT NULL,"
-                                      "description TEXT,"
-                                      "status TEXT,"
-                                      "date TEXT,"
-                                      "token TEXT,"
-                                      "profile_img BLOB"
-                                      ");";
-
-    // Execute the SQL statement for creating Users table
-    rc = sqlite3_exec(db, createUsersTableSQL, 0, 0, &errMsg);
-
-    if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error (Users table): %s\n", errMsg);
-        sqlite3_free(errMsg);
-        return rc;
-    } else {
-        fprintf(stdout, "Users table created successfully\n");
+    
+    server = gethostbyname(argv_ptr[1]);
+    
+    if (server == NULL) {
+        fprintf(stderr,"ERROR, no such host\n");
+        close(*sock);
+        exit(0);
     }
-
-    // SQL statement to create the Chat table
-    const char *createChatTableSQL = "CREATE TABLE Chat ("
-                                     "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                     "user1_id INTEGER NOT NULL,"
-                                     "user2_id INTEGER NOT NULL,"
-                                     "creation_date TEXT NOT NULL"
-                                     ");";
-
-    // Execute the SQL statement for creating Chat table
-    rc = sqlite3_exec(db, createChatTableSQL, 0, 0, &errMsg);
-
-    if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error (Chat table): %s\n", errMsg);
-        sqlite3_free(errMsg);
-        return rc;
-    } else {
-        fprintf(stdout, "Chat table created successfully\n");
+    
+    bzero((char *) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
+    serv_addr.sin_port = htons(portno);
+    
+    if (connect(*sock,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) {
+        perror("ERROR connecting");
+        close(*sock);
+        pthread_t thread_id;
+        char *err_msg = "Connection lost\nTry again later";
+        char*  error_revealer = NULL;
+        if (error_revealer == NULL)
+            pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        return -1;
     }
-
-    // SQL statement to create the Messages table
-    const char *createMessagesTableSQL = "CREATE TABLE Messages ("
-                                         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                         "chat_id INTEGER NOT NULL,"
-                                         "text TEXT NOT NULL,"
-                                         "type TEXT,"
-                                         "status TEXT"
-                                         ");";
-
-    // Execute the SQL statement for creating Messages table
-    rc = sqlite3_exec(db, createMessagesTableSQL, 0, 0, &errMsg);
-
-    if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error (Messages table): %s\n", errMsg);
-        sqlite3_free(errMsg);
-        return rc;
-    } else {
-        fprintf(stdout, "Messages table created successfully\n");
-    }
-
-    // Close the database
-    sqlite3_close(db);
-
     return 0;
 }
 
-int addUser(sqlite3 *db, const char *username, const char *password, const char *name,
-            const char *description, const char *status, const char *date,
-            const char *token, const char *profile_img) {
-    char *errMsg = 0;
+void send_xyinya(void) {
+    char* name = "Pidoras";
+    char* surname = "Pidorovich";
+    char* username = "p1d0r";
+    char* password = "qwerty";
 
-    // SQL statement to insert a user into the Users table
-    const char *sql = "INSERT INTO Users (username, password, name, description, status, date, token, profile_img) "
-                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-
-    // SQLite prepared statement
-    sqlite3_stmt *stmt;
-
-    int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
-
-    if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
-        return rc;
+    if (sockfd == -1) mx_connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    sprintf(sendBuffer, "/user/add\n%s\n%s\n%s\n%s", username, password, name, surname);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+        return;
+    }
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+         return;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        sockfd = -1;
+        return;
+    }
+}
+int recive_xyinya(int id) {
+if (sockfd == -1)  mx_connect_to_server(&sockfd);
+    char sendBuffer[1025];
+    bzero(sendBuffer, 1025);
+    sprintf(sendBuffer, "/user/get\n%d", id);
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+        return 1;
+    }
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+        return 1;
     }
 
-    // Bind parameters
-    sqlite3_bind_text(stmt, 1, username, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, password, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 3, name, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 4, description, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 5, status, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 6, date, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 7, token, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 8, profile_img, -1, SQLITE_STATIC);
-
-    // Execute the statement
-    rc = sqlite3_step(stmt);
-
-    if (rc != SQLITE_DONE) {
-        fprintf(stderr, "SQL execution error: %s\n", sqlite3_errmsg(db));
-        return rc;
-    } else {
-        fprintf(stdout, "User added successfully\n");
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) == -1) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        char *err_msg = "Connection lost\nTry again later";
+        // if(error_revealer == NULL)
+            // pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        sockfd = -1;
+        return 1;
     }
 
-    // Finalize the prepared statement
-    sqlite3_finalize(stmt);
+    char recvBuffer[6000];
+    bzero(recvBuffer, 6000);
+    if (recv(sockfd, recvBuffer, 6000, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        char *err_msg = "Connection lost\nTry again later";
+        // if(error_revealer == NULL)
+            // pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+         sockfd = -1;
+         return 1;
+    }
 
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    write(1, recvBuffer, strlen(recvBuffer));
     return 0;
 }
+void update_xyunya(int id) {
+    char* name = "Sidor";
+    char* surname = "Pidor";
+    char* desc = "qwerty";
+    char* pass = "xyas";
 
-int main() {
-    init();
-    sqlite3 *db;
-    char *errMsg = 0;
-
-    // Open or create the database
-    int rc = sqlite3_open("XYI.db", &db);
-
-    if (rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-        return rc;
-    } else {
-        fprintf(stdout, "Opened database successfully\n");
+    if (sockfd == -1) mx_connect_to_server(&sockfd);
+    char sendBuffer[1025];
+    bzero(sendBuffer, 1025);
+    sprintf(sendBuffer, "/user/update\n%s\n%s\n%s\n%s\n%d", pass, name, surname, desc, id);
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+    
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+        // return 1;
+    }
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+        // return 1;
     }
 
-    // Example user data
-    const char *username = "john_doe";
-    const char *password = "password123";
-    const char *name = "John Doe";
-    const char *description = "A sample user";
-    const char *status = "active";
-    const char *date = "2024-03-05";
-    const char *token = "abcd1234";
-    const char *profile_img = "path/to/profile_img.jpg";
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) == -1) {
+        pthread_t thread_id;
+        char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        sockfd = -1;
+        // return;
+    }
+}
+void delete_xyinya(int id) {
+if (sockfd == -1) mx_connect_to_server(&sockfd);
+    char sendBuffer[1025];
+    bzero(sendBuffer, 1025);
+    sprintf(sendBuffer, "/user/delete\n%d",id);
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+    
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+        // return 1;
+    }
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+        // return 1;
+    }
 
-    // Add user to the database
-    rc = addUser(db, username, password, name, description, status, date, token, profile_img);
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) == -1) {
+        pthread_t thread_id;
+        char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        sockfd = -1;
+        // return;
+    }
+}
 
-    // Close the database
-    sqlite3_close(db);
-
-    return 0;
+int main(int argc, char *argv[]) {
+    argv_ptr = argv;
+    // send_xyinya();
+    // update_xyunya(4);
+    // close(sockfd);
+    // if (mx_connect_to_server(&sockfd) != 0) {
+    //     // Handle connection error
+    //     return 1;
+    // }
+    // recive_xyinya(4);
+    // close(sockfd);
+    // if (mx_connect_to_server(&sockfd) != 0) {
+    //     // Handle connection error
+    //     return 1;
+    // }
+    delete_xyinya(4);
+    // close(sockfd);
+    // char *id = "1";
 }
