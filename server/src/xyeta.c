@@ -69,7 +69,7 @@ void mx_update_language(char **data) {
     sprintf(sql, "UPDATE USERS SET LANGUAGE=%d WHERE ID=%d;", mx_atoi(data[1]), mx_atoi(data[2]));   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Update language", st);
+    logger("Update language", st, errmsg);
     sqlite3_close(db);
 }
 

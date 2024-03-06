@@ -227,20 +227,38 @@ if (sockfd == -1) mx_connect_to_server(&sockfd);
 
 int main(int argc, char *argv[]) {
     argv_ptr = argv;
-    // send_xyinya();
-    // update_xyunya(4);
+
+    send_xyinya();
+
     // close(sockfd);
     // if (mx_connect_to_server(&sockfd) != 0) {
     //     // Handle connection error
     //     return 1;
     // }
-    // recive_xyinya(4);
-    // close(sockfd);
-    // if (mx_connect_to_server(&sockfd) != 0) {
-    //     // Handle connection error
-    //     return 1;
-    // }
-    delete_xyinya(4);
+
+
+    //     sleep(2);
+        update_xyunya(4);
+        
+    //     close(sockfd);
+    //     if (mx_connect_to_server(&sockfd) != 0) {
+    //         // Handle connection error
+    //         return 1;
+    //     }
+
+
+    // sleep(2);
+    //     recive_xyinya(4);
+    //     close(sockfd);
+    //     if (mx_connect_to_server(&sockfd) != 0) {
+    //         // Handle connection error
+    //         return 1;
+    //     }
+
+
+    // sleep(2);
+    // delete_xyinya(4);
+
     // close(sockfd);
     // char *id = "1";
 }
