@@ -28,6 +28,10 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // Print the username and password (you can replace this with whatever you want to do with the data)
     g_print("Username: %s\n", username);
     g_print("Password: %s\n", password);
+    gtk_widget_destroy(login_window);
+    // gtk_widget_hide(login_window);
+    draw_user_window();
+    show_user_window();
 }
 
 void draw_login(GtkWidget *window) {
@@ -37,7 +41,7 @@ void draw_login(GtkWidget *window) {
     gtk_window_set_default_size(GTK_WINDOW(login_window), 400, 300);
     gtk_window_set_position(GTK_WINDOW(login_window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(login_window), 20);
-    g_signal_connect(login_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    // g_signal_connect(login_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     GtkWidget *login_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_container_add(GTK_CONTAINER(login_window), login_vbox);

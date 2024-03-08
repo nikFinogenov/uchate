@@ -14,7 +14,7 @@ OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBS)
+	$(CC) $(CFLAGS) -o ../$(NAME) $^ $(LIBS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
@@ -23,7 +23,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 clean:
-	rm -rf $(OBJDIR) $(NAME)
+	rm -rf $(OBJDIR) ../$(NAME)
 
 .PHONY: all clean
 

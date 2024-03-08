@@ -10,9 +10,9 @@ int main(int argc, char *argv[]) {
 
 
     // Draw windows
-    // draw_login();
-    // draw_singup();
-    draw_user_window();
+    draw_login();
+    draw_singup();
+    
 
     // // Set background color for both windows
     // GdkRGBA color;
@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
     // gtk_widget_override_background_color(login_window, GTK_STATE_FLAG_NORMAL, &color);
     // gtk_widget_override_background_color(signup_window, GTK_STATE_FLAG_NORMAL, &color);
 
-    // show_login();
-    show_user_window();
+    show_login();
+    // 
 
     gtk_main();
 
