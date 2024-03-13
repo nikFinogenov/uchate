@@ -34,7 +34,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     show_user_window();
 }
 
-void draw_login(GtkWidget *window) {
+void draw_login(void) {
     // Login window
     login_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(login_window), "McOk Chat - Login");
@@ -51,7 +51,7 @@ void draw_login(GtkWidget *window) {
     gtk_box_pack_start(GTK_BOX(login_vbox), login_label, FALSE, FALSE, 0);
 
     GtkWidget *signup_link = gtk_label_new("Don't have an account? Sign up");
-    gtk_label_set_markup(GTK_LABEL(signup_link), "Don't have an account? <a href=\"#\">Sign up</a>");
+    gtk_label_set_markup(GTK_LABEL(signup_link), "Don't have an account? <a href=\"#\">Sign up</a>"); //href=\"#\"
     gtk_widget_set_halign(signup_link, GTK_ALIGN_CENTER);
     g_signal_connect(signup_link, "activate-link", G_CALLBACK(go_to_signup), NULL);
     gtk_box_pack_start(GTK_BOX(login_vbox), signup_link, FALSE, FALSE, 0);

@@ -1,6 +1,11 @@
 #include "uchat-client.h"
 
 int main(int argc, char *argv[]) {
+    // GtkCssProvider *cssProvider = gtk_css_provider_new();
+    // gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);
+    // gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+    // GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+
     gtk_init(&argc, &argv);
 
     // Get screen width and height
