@@ -1,0 +1,12 @@
+2024-03-15 00:32:10: Open database -> OK
+2024-03-15 00:32:10: Init table "Users" -> OK
+2024-03-15 00:32:10: Init table "Chats" -> OK
+2024-03-15 00:32:10: Init table "Messages" -> OK
+2024-03-15 00:34:49: Open database -> OK
+2024-03-15 00:34:49: Init table "Users" -> OK
+2024-03-15 00:34:49: Init table "Chats" -> OK
+2024-03-15 00:34:49: Init table "Messages" -> OK
+2024-03-15 00:34:59: Open database -> OK
+2024-03-15 00:34:59: Add user -> OK
+2024-03-15 00:35:19: Open database -> OK
+2024-03-15 00:35:19: Add user -> OK

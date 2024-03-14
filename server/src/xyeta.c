@@ -81,10 +81,10 @@ void mx_update_avatar(char **data, int sockfd) {
     mx_memset(encoded, 0, len_encoded);
     mx_recv_all(&sockfd, &encoded, len_encoded);
 
-    unsigned int flen = b64d_size(len_encoded);
+    unsigned int flen = mx_b64d_size(len_encoded);
     unsigned char *decoded = malloc( (sizeof(char) * flen) );
     memset(decoded, 0, flen);
-    flen = b64_decode(encoded, len_encoded, decoded);
+    flen = mx_b64_decode(encoded, len_encoded, decoded);
     free(encoded);
 
     sqlite3 *db = open_db();
@@ -239,9 +239,9 @@ void mx_get_avatar(char **data, int sockfd) {
     memcpy(write_data, blob_data, bytes);
     write_data[bytes] = '\0';
 
-    unsigned int out_size = b64e_size(bytes) + 1;
+    unsigned int out_size = mx_b64e_size(bytes) + 1;
     unsigned char *out_b64 = malloc( (sizeof(char) * out_size) );
-    b64_encode(write_data, bytes, out_b64);
+    mx_b64_encode(write_data, bytes, out_b64);
     free(write_data);
 
     int len_encoded = strlen((char *)out_b64);
@@ -337,9 +337,9 @@ void mx_get_image_message(char **data, int sockfd) {
         memcpy(write_data, blob_data, bytes);
         write_data[bytes] = '\0';
 
-        unsigned int out_size = b64e_size(bytes) + 1;
+        unsigned int out_size = mx_b64e_size(bytes) + 1;
         unsigned char *out_b64 = malloc( (sizeof(char) * out_size) );
-        b64_encode(write_data, bytes, out_b64);
+        mx_b64_encode(write_data, bytes, out_b64);
         free(write_data);
 
         int len_encoded = strlen((char *)out_b64);
@@ -366,10 +366,10 @@ void message_img(char **data, int sockfd) {
 
     mx_recv_all(&sockfd, &encoded, len_encoded);
 
-    unsigned int flen = b64d_size(len_encoded);
+    unsigned int flen = mx_b64d_size(len_encoded);
     unsigned char *decoded = malloc( (sizeof(char) * flen) );
     memset(decoded, 0, flen);
-    flen = b64_decode(encoded, len_encoded, decoded);
+    flen = mx_b64_decode(encoded, len_encoded, decoded);
     free(encoded);
     
     sqlite3 *db = open_db();

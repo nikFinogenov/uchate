@@ -27,13 +27,13 @@ typedef struct s_list {
 
 void mx_insert_value(unsigned int **arr, unsigned int insert_value);
 bool mx_is_in_array(unsigned int *arr, unsigned int value);
-unsigned int b64_decodef(char *InFile, char *OutFile);
-unsigned int b64_encodef(char *InFile, char *OutFile);
-unsigned int b64_decode(const unsigned char* in, unsigned int in_len, unsigned char* out);
-unsigned int b64_encode(const unsigned char* in, unsigned int in_len, unsigned char* out);
-unsigned int b64d_size(unsigned int in_size);
-unsigned int b64e_size(unsigned int in_size);
-unsigned int b64_int(unsigned int ch);
+unsigned int mx_b64_decodef(char *InFile, char *OutFile);
+unsigned int mx_b64_encodef(char *InFile, char *OutFile);
+unsigned int mx_b64_decode(const unsigned char* in, unsigned int in_len, unsigned char* out);
+unsigned int mx_b64_encode(const unsigned char* in, unsigned int in_len, unsigned char* out);
+unsigned int mx_b64d_size(unsigned int in_size);
+unsigned int mx_b64e_size(unsigned int in_size);
+unsigned int mx_b64_int(unsigned int ch);
 void mx_remove_symbol(char *str, char symbol);
 int mx_str_contains(const char *str, char target_letter);
 char* mx_replace_sub_string(char* original, const char* substring, const char* replacement);

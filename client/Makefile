@@ -7,6 +7,9 @@ LIBS = -lsqlite3 `pkg-config --libs gtk+-3.0`
 INC = inc
 SRCDIR = src
 OBJDIR = obj
+LMXA = ../libmx/libmx.a
+LMXI = ../libmx/inc
+
 
 SRCS = $(wildcard $(SRCDIR)/*.c)
 OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
@@ -14,10 +17,10 @@ OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o ../$(NAME) $^ $(LIBS)
+	$(CC) $(CFLAGS) $(LMXA) -o ../$(NAME) $^ $(LIBS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC) -I$(LMXI)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)

@@ -9,8 +9,10 @@
 #define MAIN_WINDOW_WIDTH 1500
 
 #include <gtk/gtk.h>
+// #include <gdk-pixbuf-core.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <../../libmx/inc/libmx.h>
 
 // Login side
 // void draw_login(GtkWidget *window);
