@@ -1,0 +1,35 @@
+#settings {
+    background-image: url("img/settings-2.png");
+}
+#user {
+    background-image: url("img/user.png");
+}
+#logout {
+    background-image: url("img/logout.png");
+}
+#settings,
+#user,
+#logout {
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    /* border: 0; */
+    /* outline: none;*/
+    border-radius: 0;
+}
+
+#settings:hover,
+#user:hover,
+#logout:hover {
+    opacity: 0.3;
+    box-shadow: none;
+}
+
+#message-text{
+    color: #333;
+    background-color: #DCF8C6;
+    padding: 10px;
+    border-radius: 10px;
+    /* max-width: 50%; */
+}
