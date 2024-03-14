@@ -69,7 +69,7 @@ void mx_update_language(char **data) {
     sprintf(sql, "UPDATE USERS SET LANGUAGE=%d WHERE ID=%d;", mx_atoi(data[1]), mx_atoi(data[2]));   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Update language", st);
+    logger("Update language", st, errmsg);
     sqlite3_close(db);
 }
 
@@ -91,7 +91,7 @@ void mx_update_avatar(char **data, int sockfd) {
     sqlite3_stmt *pStmt;
     char *sql = malloc(flen + 40);
     memset(sql, 0, flen + 40);
-    sprintf(sql, "UPDATE USERS SET PHOTO = ? WHERE ID=%d;", mx_atoi(data[1]));
+    sprintf(sql, "UPDATE USERS SET profile_img = ? WHERE ID=%d;", mx_atoi(data[1]));
     
     int rc = sqlite3_prepare(db, sql, -1, &pStmt, 0);
     
@@ -113,7 +113,7 @@ void mx_send_room_data(char **data, int sockfd) {
     sqlite3_stmt *res = NULL;
     char sql[250];
     memset(sql, 0, 250);
-    sprintf(sql, "SELECT NAME, SURENAME, PSEUDONIM FROM USERS\
+    sprintf(sql, "SELECT NAME, SURNAME, USERNAME FROM USERS\
             WHERE id=%u;", mx_atoi(data[1]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     sqlite3_step(res);
@@ -211,8 +211,9 @@ void mx_get_theme(char **data, int sockfd) {
 void mx_get_avatar(char **data, int sockfd) {
     sqlite3 *db = open_db();
     char sql[500];
+
     memset(sql, 0, 500);
-    sprintf(sql, "SELECT PHOTO FROM USERS WHERE ID=%d;", mx_atoi(data[1]));
+    sprintf(sql, "SELECT profile_img FROM USERS WHERE ID=%d;", mx_atoi(data[1]));
     sqlite3_stmt *pStmt;
 
     int rc = sqlite3_prepare_v2(db, sql, -1, &pStmt, 0);

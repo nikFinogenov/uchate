@@ -1,10 +1,11 @@
 #include "server.h"
 
+
 sqlite3 *open_db(void) {
     sqlite3 *db;
-    int status = sqlite3_open("server/data/McOk.db", &db);
+    int status = sqlite3_open("server/source/McOk.db", &db);
     char* st = (status == 0) ? ST_OK : ST_NEOK;
-    logger("Open database", st);
+    logger("Open database", st, "");
     return db;
 }
 
@@ -31,33 +32,58 @@ int socket_init(int port) {
     return socketfd;
 }
 
+// static int table_exists(sqlite3 *db, const char *tableName) {
+//     sqlite3_stmt *stmt;
+//     const char *sql = "SELECT name FROM sqlite_master WHERE type='table' AND name=?;";
+//     int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
+
+//     if (rc != SQLITE_OK) {
+//         fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
+
+//     sqlite3_bind_text(stmt, 1, tableName, -1, SQLITE_STATIC);
+
+//     rc = sqlite3_step(stmt);
+
+//     if (rc == SQLITE_ROW) return 1;
+//     else if (rc == SQLITE_DONE) return 0;
+//     else {
+//         fprintf(stderr, "SQL execution error: %s\n", sqlite3_errmsg(db));
+//         return rc;
+//     }
+
+//     sqlite3_finalize(stmt);
+
+//     return 0;
+// }
+
 void db_init(void) {
     sqlite3 *db = open_db();
     char *err_msg;
-    char *sql = "CREATE TABLE IF NOT EXISTS USERS("
-        "ID          INTEGER,"
-        "NAME        TEXT NOT NULL, "
-        "SURENAME    TEXT NOT NULL, "
-        "PSEUDONIM   TEXT NOT NULL, "
-        "DESCRIPTION TEXT NOT NULL, "
-        "PASSWORD    TEXT NOT NULL, "
-        "LANGUAGE    INTEGER, "
-        "THEME       INTEGER, "
-        "PHOTO       BLOB);";
+    char *sql = "CREATE TABLE IF NOT EXISTS USERS(id INTEGER PRIMARY KEY AUTOINCREMENT,\
+        username TEXT NOT NULL, password TEXT NOT NULL, name TEXT NOT NULL, surname TEXT NOT NULL, \
+        description TEXT, status TEXT, date TEXT, token TEXT, profile_img BLOB);";
+
     int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Create table \"Users\"", st);
-    
-    sql = "CREATE TABLE IF NOT EXISTS Messages(id BIGINT, \
-           addresser BIGINT, destination BIGINT, Text TEXT, \
-           Image BLOB, time BIGINT);";
+    logger("Init table \"Users\"", st, err_msg);
+
+    sql = "CREATE TABLE IF NOT EXISTS CHATS(id INTEGER PRIMARY KEY AUTOINCREMENT, \
+        user1_id INTEGER NOT NULL, user2_id INTEGER NOT NULL, creation_date TEXT NOT NULL);";
     exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Create table \"Messages\"", st);
+    logger("Init table \"Chats\"", st, err_msg);
+
+    sql = "CREATE TABLE IF NOT EXISTS MESSAGES(id INTEGER PRIMARY KEY AUTOINCREMENT, \
+        chat_id INTEGER NOT NULL, text TEXT NOT NULL, type TEXT, status TEXT);";
+    exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
+    st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Init table \"Messages\"", st, err_msg);
     sqlite3_close(db);
 }
 
-void logger(char *proccess, char* status) {
+void logger(char *proccess, char* status, char* errmsg) {
     FILE *fd = fopen("server.log", "a+t");
     if (fd == NULL) {
         perror("Error opening log file");
@@ -68,8 +94,8 @@ void logger(char *proccess, char* status) {
     char current_time_str[20];
     strftime(current_time_str, sizeof(current_time_str), "%Y-%m-%d %H:%M:%S", localtime(&current_time));
 
-    // char* input_color = (!mx_strcmp(status, ST_OK)) ? GREEN : RED;
-    fprintf(fd, "%s: %s -> %s\n", current_time_str, proccess, status);
+    char* err = (!mx_strcmp(status, ST_NEOK)) ? mx_strjoin(" -> ", errmsg) : "";
+    fprintf(fd, "%s: %s -> %s%s\n", current_time_str, proccess, status, err);
 
     if (fclose(fd) != 0) {
         perror("Error closing log file");
@@ -135,7 +161,7 @@ void mx_write_photo_to_bd(char *path, int id) {
         fprintf(stderr, "Cannot close file handler\n");
     }    
     sqlite3 *db;
-    int rc = sqlite3_open("server/data/McOk.db", &db);
+    int rc = sqlite3_open("server/source/McOk.db", &db);
     if (rc != 0) {
         
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
@@ -144,7 +170,7 @@ void mx_write_photo_to_bd(char *path, int id) {
     sqlite3_stmt *pStmt;
     char *sql = malloc((unsigned)flen + 500);
     memset(sql, 0, (unsigned)flen + 500);
-    sprintf(sql, "UPDATE USERS SET PHOTO = ? WHERE ID = '%d' ;", id);
+    sprintf(sql, "UPDATE USERS SET profile_img = ? WHERE ID = '%d' ;", id);
     
     rc = sqlite3_prepare(db, sql, -1, &pStmt, 0);
     
@@ -172,7 +198,7 @@ static void search_by_pseudo(char *text, char **data, int sockfd) {
     char sql[250];
     memset(sql, 0, 250);
     sprintf(sql, "SELECT ID FROM USERS\
-            WHERE INSTR(PSEUDONIM, '%s') != 0 AND ID != %d;", search_split[0] + 1, mx_atoi(data[2]));
+            WHERE INSTR(USERNAME, '%s') != 0 AND ID != %d;", search_split[0] + 1, mx_atoi(data[2]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) != SQLITE_DONE) {
         int uid = (int)sqlite3_column_int(res, 0);
@@ -205,9 +231,11 @@ static void search_by_name(char *text, char **data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[250];
+
     memset(sql, 0, 250);
-    sprintf(sql, "SELECT ID FROM USERS\
-            WHERE (INSTR(NAME, '%s') OR INSTR(SURENAME, '%s')) AND ID != %u;",
+    sprintf(sql, "SELECT id FROM USERS\
+            WHERE (INSTR(NAME, '%s') OR INSTR(SURNAME, '%s')) AND id != %u;",
+
             search_split[0], search_split[1], mx_atoi(data[2]));
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) != SQLITE_DONE) {
@@ -253,7 +281,7 @@ void mx_search_init(char **data, int sockfd) {
 /*
     data - recv data from client
     data[0] - Operation
-    data[1] - Pseudonim/Username
+    data[1] - USERNAME/Username
     data[2] - Password
     data[3] - NULL
 */
@@ -268,8 +296,10 @@ void mx_authorization(char **data, int sockfd) {
         sqlite3 *db = open_db();
         sqlite3_stmt *res;
         char sql[500];
+
         memset(sql, 0, 500);
-        sprintf(sql, "SELECT ID, NAME, SURENAME, PSEUDONIM, DESCRIPTION FROM USERS WHERE PSEUDONIM='%s';", data[1]);
+        sprintf(sql, "SELECT id, name, surname, username, description FROM USERS WHERE username='%s';", data[1]);
+
         sqlite3_prepare_v2(db, sql, -1, &res, 0);
         sqlite3_step(res);
         sprintf(temp_buff, "%d\n%s\n%s\n%s\n%s\n",
