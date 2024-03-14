@@ -1,5 +1,41 @@
 #include "uchat-client.h"
 
+
+const gchar *image_base64 = "YOUR_BASE64_ENCODED_IMAGE_DATA_HERE";
+
+gboolean draw_ava(GtkWidget *widget, cairo_t *cr, gpointer data) {
+    guint width, height;
+    GdkPixbuf *pixbuf;
+    GdkPixbuf *scaled_pixbuf;
+
+    width = gtk_widget_get_allocated_width(widget);
+    height = gtk_widget_get_allocated_height(widget);
+
+    // Load the base64 encoded image
+    GError *error = NULL;
+    gsize length;
+    guchar *data = g_base64_decode(image_base64, &length);
+    pixbuf = gdk_pixbuf_new_from_data(data, GDK_COLORSPACE_RGB, TRUE, 8, 100, 100, 400, NULL, NULL);
+
+    // Scale the image to fit into the circle
+    scaled_pixbuf = gdk_pixbuf_scale_simple(pixbuf, 100, 100, GDK_INTERP_BILINEAR);
+
+    // Draw a circle
+    cairo_set_source_rgb(cr, 0, 0, 0);
+    cairo_arc(cr, width / 2, height / 2, MIN(width, height) / 2 - 2, 0, 2 * G_PI);
+    cairo_fill_preserve(cr);
+
+    // Paint the image inside the circle
+    gdk_cairo_set_source_pixbuf(cr, scaled_pixbuf, (width - 100) / 2, (height - 100) / 2);
+    cairo_paint(cr);
+
+    g_object_unref(pixbuf);
+    g_object_unref(scaled_pixbuf);
+    g_free(data);
+
+    return FALSE;
+}
+
 GtkWidget *create_user_box(char* name, char* surname, char* tag) {
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_widget_set_margin_start(box, 10);
@@ -62,6 +98,7 @@ GtkWidget *create_message_box(char* text, bool is_user) {
     GtkWidget *text_label = gtk_label_new(text);
     gtk_widget_set_name(text_label, "message-text");
     gtk_box_pack_start(GTK_BOX(message_box), text_label, FALSE, FALSE, 0);
+
     if(is_user) {
         gtk_box_pack_end(GTK_BOX(box), message_box, FALSE, TRUE, 0);
     }

@@ -1,5 +1,7 @@
 # Ignore compiled binaries and object files
 *.o
+*.a
+*.out
 *.so
 *.dll
 *.exe
@@ -22,7 +24,7 @@
 
 # Ignore any generated files or directories
 /.DS_Store
-/.vscode/
+/._.DS_Store
 /.cache/
 /.config/
 /.local/
@@ -39,3 +41,16 @@
 # Ignore any backup files
 *~
 
+#Ignore prikol files
+video*
+obj
+test*
+temp*
+file*
+ln*
+link
+tests.sh
+uchat.txt
+uchat
+uchat_server
+XYI.db

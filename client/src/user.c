@@ -111,16 +111,15 @@ void draw_user_window() {
     // gtk_box_pack_start(GTK_BOX(chat_box), pn, FALSE, FALSE, 0);
 
 
+    // GtkWidget *user_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+
 
     GtkWidget *scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window2),
                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     message_populate_scrollable_window(scrollable_window2);
     gtk_box_pack_start(GTK_BOX(chat_box), scrollable_window2, TRUE, TRUE, 0);
-    GtkWidget *scrolled_window1 = gtk_scrolled_window_new(NULL, NULL);
-    GtkWidget *text_view1 = gtk_text_view_new();
-    gtk_container_add(GTK_CONTAINER(scrolled_window1), text_view1);
-    gtk_box_pack_start(GTK_BOX(chat_box),scrolled_window1, FALSE, FALSE, 0);
 
 
     GtkWidget *text_entry = gtk_entry_new();
@@ -135,9 +134,6 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(text_box), send_button, FALSE, FALSE, 0);
 
     gtk_box_pack_end(GTK_BOX(chat_box),text_box, FALSE, FALSE, 0);
-
-
-
 
 
 
