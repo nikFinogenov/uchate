@@ -42,9 +42,12 @@
 //     }
 //     encrypted[i] = '\0';
 // }
-void *mx_run_error_pop_up(void *vargp) {}
+
+// void *mx_run_error_pop_up(void *vargp) {}
+
 char **argv_ptr;
 int sockfd = -1;
+
 int mx_connect_to_server(int *sock) {
     int portno;
     struct sockaddr_in serv_addr;
@@ -77,23 +80,34 @@ int mx_connect_to_server(int *sock) {
         char *err_msg = "Connection lost\nTry again later";
         char*  error_revealer = NULL;
         if (error_revealer == NULL)
-            pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+            // pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         return -1;
     }
     return 0;
 }
 
 void send_xyinya(void) {
-    char* name = "Pidoras";
-    char* surname = "Pidorovich";
-    char* username = "p1d0r";
+    char* name = "Pidoras123";
+    char* surname = "Pidorovichurka";
+    char* username = "p1d0ridlo";
     char* password = "qwerty";
+
+    char* chat_id = "1";
+    char* text = "yapidoras2";
+    char* type = "text";
+    char* status = "sent";
+
+    char* id1 = "1";
+    char* id2 = "2";
+    char* date = "1710433474";
 
     if (sockfd == -1) mx_connect_to_server(&sockfd);
     
     char sendBuffer[1024];
     bzero(sendBuffer, 1024);
-    sprintf(sendBuffer, "/user/add\n%s\n%s\n%s\n%s", username, password, name, surname);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/user/add\n%s\n%s\n%s\n%s\n", username, password, name, surname);
     
     int error = 0;
     socklen_t len = sizeof (error);
@@ -113,7 +127,7 @@ void send_xyinya(void) {
         perror("ERROR writing to socket");
         pthread_t thread_id;
         char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        //pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
         return;
     }
@@ -172,7 +186,7 @@ void update_xyunya(int id) {
     if (sockfd == -1) mx_connect_to_server(&sockfd);
     char sendBuffer[1025];
     bzero(sendBuffer, 1025);
-    sprintf(sendBuffer, "/user/update\n%s\n%s\n%s\n%s\n%d", pass, name, surname, desc, id);
+    sprintf(sendBuffer, "/user/update\n%s\n%s\n%s\n%s\n%d\n", pass, name, surname, desc, id);
     int error = 0;
     socklen_t len = sizeof (error);
     int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
@@ -191,7 +205,7 @@ void update_xyunya(int id) {
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) == -1) {
         pthread_t thread_id;
         char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        //pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
         // return;
     }
@@ -219,7 +233,7 @@ if (sockfd == -1) mx_connect_to_server(&sockfd);
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) == -1) {
         pthread_t thread_id;
         char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
+        //pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
         // return;
     }
@@ -229,7 +243,8 @@ int main(int argc, char *argv[]) {
     argv_ptr = argv;
 
     send_xyinya();
-
+    //update_xyunya(3);
+    //delete_xyinya(8);
     // close(sockfd);
     // if (mx_connect_to_server(&sockfd) != 0) {
     //     // Handle connection error
@@ -238,7 +253,7 @@ int main(int argc, char *argv[]) {
 
 
     //     sleep(2);
-        update_xyunya(4);
+        //update_xyunya(4);
         
     //     close(sockfd);
     //     if (mx_connect_to_server(&sockfd) != 0) {
