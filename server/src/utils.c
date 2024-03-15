@@ -1,6 +1,5 @@
 #include "server.h"
 
-
 sqlite3 *open_db(void) {
     sqlite3 *db;
     int status = sqlite3_open("server/source/McOk.db", &db);
@@ -103,19 +102,28 @@ void logger(char *proccess, char* status, char* errmsg) {
 }
 
 char *encrypt_pass(char *str) {
-    int len = mx_strlen(str);
-    for (int i = 0; str[i]; i++) {
-        if (str[i] == str[0])
-            str[i] = str[i] + 1;
-        else if (str[i] == str[len - 1])
-            str[i] = str[i] + 3;
-        else if (i % 2 == 0) 
-            str[i] = str[i] + 2;
-        else {
-            str[i] = str[i] - 2;
-        }
+    const EVP_MD *md = EVP_sha256();
+    EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    char *hashed_password = (char*)malloc((SHA256_DIGEST_LENGTH * 2 + 1) * sizeof(char));
+
+    if (!hashed_password || !mdctx) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
     }
-    return str;
+
+    EVP_DigestInit_ex(mdctx, md, NULL);
+    EVP_DigestUpdate(mdctx, str, strlen(str));
+    EVP_DigestFinal_ex(mdctx, hash, NULL);
+    EVP_MD_CTX_free(mdctx);
+
+    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        sprintf(&hashed_password[i*2], "%02x", hash[i]);
+    }
+    hashed_password[SHA256_DIGEST_LENGTH * 2] = '\0';
+
+    return hashed_password;
+    // return crypt_sha512(str, "$6$SomeSalt$");
 }
 
 void mx_write_photo_to_bd(char *path, int id) {
