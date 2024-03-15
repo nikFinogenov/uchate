@@ -1,5 +1,4 @@
 #include "server.h"
-#include <crypt.h>
 
 sqlite3 *open_db(void) {
     sqlite3 *db;
@@ -103,8 +102,28 @@ void logger(char *proccess, char* status, char* errmsg) {
 }
 
 char *encrypt_pass(char *str) {
-    char* encrypted_pass = crypt(str, "$1$salt");
-    return encrypted_pass;
+    const EVP_MD *md = EVP_sha256();
+    EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    char *hashed_password = (char*)malloc((SHA256_DIGEST_LENGTH * 2 + 1) * sizeof(char));
+
+    if (!hashed_password || !mdctx) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    EVP_DigestInit_ex(mdctx, md, NULL);
+    EVP_DigestUpdate(mdctx, str, strlen(str));
+    EVP_DigestFinal_ex(mdctx, hash, NULL);
+    EVP_MD_CTX_free(mdctx);
+
+    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        sprintf(&hashed_password[i*2], "%02x", hash[i]);
+    }
+    hashed_password[SHA256_DIGEST_LENGTH * 2] = '\0';
+
+    return hashed_password;
+    // return crypt_sha512(str, "$6$SomeSalt$");
 }
 
 void mx_write_photo_to_bd(char *path, int id) {

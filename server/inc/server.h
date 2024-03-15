@@ -18,7 +18,8 @@
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>
-#include <crypt.h>
+#include <openssl/sha.h>
+#include <openssl/evp.h>
 
 #define RED "\x1B[31m"
 #define GREEN "\x1B[32m"

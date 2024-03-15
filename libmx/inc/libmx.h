@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdbool.h>
-#include <crypt.h>
 #if defined(__APPLE__)
     #include <malloc/malloc.h>
     #define malloc_size malloc_size
