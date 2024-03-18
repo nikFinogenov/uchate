@@ -7,6 +7,7 @@ int main(int argc, char *argv[]) {
     // GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     gtk_init(&argc, &argv);
+    fill_data();
 
     // Get screen width and height
     GdkScreen *screen = gdk_screen_get_default();
