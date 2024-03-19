@@ -27,10 +27,32 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
     const gchar *repeat_password = gtk_entry_get_text(GTK_ENTRY(entries->repeat_password_entry));
 
+    // Parsing const gchar* to char*
+    char *parsed_username = (char*)username;
+    char *parsed_password = (char*)password;
+    char *parsed_repeat_password = (char*)repeat_password;
+
+    if (strcmp(parsed_password, parsed_repeat_password) != 0) {
+        // TODO: display error message on the sign up page
+        printf("The passwords do not match. Please try again!\n");
+        return;
+    }
+
     // Print the username and password (you can replace this with whatever you want to do with the data)
     g_print("Username: %s\n", username);
     g_print("Password: %s\n", password);
     g_print("Password: %s\n", repeat_password);
+
+    char *response = send_sign_up_data(username, password);
+
+    g_print("%s\n", response);
+
+
+    // If login data is correct
+    gtk_widget_destroy(signup_window);
+    // gtk_widget_hide(login_window);
+    draw_user_window();
+    show_user_window();
 }
 
 void draw_singup() {

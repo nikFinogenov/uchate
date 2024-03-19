@@ -25,9 +25,21 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     const gchar *username = gtk_entry_get_text(GTK_ENTRY(entries->username_entry));
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
 
+    // Parsing const gchar* to char*
+    char *parsed_username = (char*)username;
+    char *parsed_password = (char*)password;
+
     // Print the username and password (you can replace this with whatever you want to do with the data)
-    g_print("Username: %s\n", username);
-    g_print("Password: %s\n", password);
+    g_print("Username: %s\n", parsed_username);
+    g_print("Password: %s\n", parsed_password);
+    
+
+    char *repsponse = check_login_data(parsed_username, parsed_password);
+
+    g_print("%s\n", repsponse);
+
+
+    // If login data is correct
     gtk_widget_destroy(login_window);
     // gtk_widget_hide(login_window);
     draw_user_window();

@@ -16,7 +16,7 @@ void mx_add_user(char **data) {
     sprintf(sql, 
             "INSERT INTO USERS (username, password, name, surname, description, status, date, token) \
             VALUES( '%s','%s','%s','%s','%s','%s','%s','%s');", 
-            data[1], encrypted_pass, data[3], data[4], " ", " ", " ", " ");   
+            data[1], encrypted_pass, "NAME", "SURNAME", " ", " ", " ", " ");   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Add user", st, errmsg);
@@ -114,4 +114,36 @@ bool mx_check_user(char **data) {
         free(encrypted_pass);
         return false; 
     }
+}
+
+void check_login_data(char **data, int sockfd) {
+    char *encrypted_pass = encrypt_pass(mx_strdup(data[2]));
+
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+
+    char *response = "0";
+
+    memset(sql, 0, 500);
+    sprintf(sql, "SELECT PASSWORD FROM USERS WHERE USERNAME='%s';", data[1]);
+
+    // Execute the SQL query
+    if (sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK) {
+        if (sqlite3_step(res) == SQLITE_ROW) {
+            const unsigned char *password = sqlite3_column_text(res, 0);
+
+            printf("%s\n", password);
+            
+            response = "1";
+        }
+        // Finalize the statement
+        sqlite3_finalize(res);
+    }
+
+    sqlite3_finalize(res);
+    sqlite3_close(db);
+    free(encrypted_pass);
+
+    send(sockfd, response, strlen(response), 0);
 }

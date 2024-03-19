@@ -200,3 +200,480 @@
 2024-03-15 01:58:36: Add user -> OK
 2024-03-15 01:58:37: Open database -> OK
 2024-03-15 01:58:37: Add user -> OK
+2024-03-16 13:13:52: Open database -> OK
+2024-03-16 13:13:52: Init table "Users" -> OK
+2024-03-16 13:13:52: Init table "Chats" -> OK
+2024-03-16 13:13:52: Init table "Messages" -> OK
+2024-03-16 13:13:56: Open database -> OK
+2024-03-16 13:13:56: Init table "Users" -> OK
+2024-03-16 13:13:56: Init table "Chats" -> OK
+2024-03-16 13:13:56: Init table "Messages" -> OK
+2024-03-16 13:19:13: Open database -> OK
+2024-03-16 13:19:13: Init table "Users" -> OK
+2024-03-16 13:19:13: Init table "Chats" -> OK
+2024-03-16 13:19:13: Init table "Messages" -> OK
+2024-03-16 13:19:16: Open database -> OK
+2024-03-16 13:19:16: Init table "Users" -> OK
+2024-03-16 13:19:16: Init table "Chats" -> OK
+2024-03-16 13:19:16: Init table "Messages" -> OK
+2024-03-16 13:26:51: Open database -> OK
+2024-03-16 13:26:51: Init table "Users" -> OK
+2024-03-16 13:26:51: Init table "Chats" -> OK
+2024-03-16 13:26:51: Init table "Messages" -> OK
+2024-03-16 13:26:53: Open database -> OK
+2024-03-16 13:26:53: Init table "Users" -> OK
+2024-03-16 13:26:53: Init table "Chats" -> OK
+2024-03-16 13:26:53: Init table "Messages" -> OK
+2024-03-16 13:31:19: Open database -> OK
+2024-03-16 13:31:19: Init table "Users" -> OK
+2024-03-16 13:31:19: Init table "Chats" -> OK
+2024-03-16 13:31:19: Init table "Messages" -> OK
+2024-03-16 13:31:23: Open database -> OK
+2024-03-16 13:31:23: Init table "Users" -> OK
+2024-03-16 13:31:23: Init table "Chats" -> OK
+2024-03-16 13:31:23: Init table "Messages" -> OK
+2024-03-16 13:32:20: Open database -> OK
+2024-03-16 13:32:20: Init table "Users" -> OK
+2024-03-16 13:32:20: Init table "Chats" -> OK
+2024-03-16 13:32:20: Init table "Messages" -> OK
+2024-03-16 13:40:21: Open database -> OK
+2024-03-16 13:40:21: Init table "Users" -> OK
+2024-03-16 13:40:21: Init table "Chats" -> OK
+2024-03-16 13:40:21: Init table "Messages" -> OK
+2024-03-16 13:40:25: Open database -> OK
+2024-03-16 13:40:25: Init table "Users" -> OK
+2024-03-16 13:40:25: Init table "Chats" -> OK
+2024-03-16 13:40:25: Init table "Messages" -> OK
+2024-03-16 13:40:26: Open database -> OK
+2024-03-16 13:40:26: Init table "Users" -> OK
+2024-03-16 13:40:26: Init table "Chats" -> OK
+2024-03-16 13:40:26: Init table "Messages" -> OK
+2024-03-16 13:40:29: Open database -> OK
+2024-03-16 13:40:29: Init table "Users" -> OK
+2024-03-16 13:40:29: Init table "Chats" -> OK
+2024-03-16 13:40:29: Init table "Messages" -> OK
+2024-03-16 13:40:39: Open database -> OK
+2024-03-16 13:40:39: Init table "Users" -> OK
+2024-03-16 13:40:39: Init table "Chats" -> OK
+2024-03-16 13:40:39: Init table "Messages" -> OK
+2024-03-16 13:40:42: Open database -> OK
+2024-03-16 13:40:42: Init table "Users" -> OK
+2024-03-16 13:40:42: Init table "Chats" -> OK
+2024-03-16 13:40:42: Init table "Messages" -> OK
+2024-03-16 13:40:43: Open database -> OK
+2024-03-16 13:40:43: Init table "Users" -> OK
+2024-03-16 13:40:43: Init table "Chats" -> OK
+2024-03-16 13:40:43: Init table "Messages" -> OK
+2024-03-16 13:40:45: Open database -> OK
+2024-03-16 13:40:45: Init table "Users" -> OK
+2024-03-16 13:40:45: Init table "Chats" -> OK
+2024-03-16 13:40:45: Init table "Messages" -> OK
+2024-03-16 13:40:46: Open database -> OK
+2024-03-16 13:40:46: Init table "Users" -> OK
+2024-03-16 13:40:46: Init table "Chats" -> OK
+2024-03-16 13:40:46: Init table "Messages" -> OK
+2024-03-16 13:40:51: Open database -> OK
+2024-03-16 13:40:51: Init table "Users" -> OK
+2024-03-16 13:40:51: Init table "Chats" -> OK
+2024-03-16 13:40:51: Init table "Messages" -> OK
+2024-03-16 13:40:58: Open database -> OK
+2024-03-16 13:40:58: Init table "Users" -> OK
+2024-03-16 13:40:58: Init table "Chats" -> OK
+2024-03-16 13:40:58: Init table "Messages" -> OK
+2024-03-16 13:55:15: Open database -> OK
+2024-03-16 13:55:15: Init table "Users" -> OK
+2024-03-16 13:55:15: Init table "Chats" -> OK
+2024-03-16 13:55:15: Init table "Messages" -> OK
+2024-03-16 13:55:27: Open database -> OK
+2024-03-16 13:58:14: Open database -> OK
+2024-03-16 13:59:27: Open database -> OK
+2024-03-16 13:59:27: Init table "Users" -> OK
+2024-03-16 13:59:27: Init table "Chats" -> OK
+2024-03-16 13:59:27: Init table "Messages" -> OK
+2024-03-16 13:59:29: Open database -> OK
+2024-03-16 13:59:29: Init table "Users" -> OK
+2024-03-16 13:59:29: Init table "Chats" -> OK
+2024-03-16 13:59:29: Init table "Messages" -> OK
+2024-03-19 11:09:49: Open database -> OK
+2024-03-19 11:09:49: Init table "Users" -> OK
+2024-03-19 11:09:49: Init table "Chats" -> OK
+2024-03-19 11:09:49: Init table "Messages" -> OK
+2024-03-19 11:09:52: Open database -> OK
+2024-03-19 11:09:52: Init table "Users" -> OK
+2024-03-19 11:09:52: Init table "Chats" -> OK
+2024-03-19 11:09:52: Init table "Messages" -> OK
+2024-03-19 11:10:04: Open database -> OK
+2024-03-19 11:10:04: Init table "Users" -> OK
+2024-03-19 11:10:04: Init table "Chats" -> OK
+2024-03-19 11:10:04: Init table "Messages" -> OK
+2024-03-19 11:10:06: Open database -> OK
+2024-03-19 11:10:06: Init table "Users" -> OK
+2024-03-19 11:10:06: Init table "Chats" -> OK
+2024-03-19 11:10:06: Init table "Messages" -> OK
+2024-03-19 11:11:26: Open database -> OK
+2024-03-19 11:11:26: Init table "Users" -> OK
+2024-03-19 11:11:26: Init table "Chats" -> OK
+2024-03-19 11:11:26: Init table "Messages" -> OK
+2024-03-19 11:11:28: Open database -> OK
+2024-03-19 11:11:28: Init table "Users" -> OK
+2024-03-19 11:11:28: Init table "Chats" -> OK
+2024-03-19 11:11:28: Init table "Messages" -> OK
+2024-03-19 11:11:36: Open database -> OK
+2024-03-19 11:11:36: Init table "Users" -> OK
+2024-03-19 11:11:36: Init table "Chats" -> OK
+2024-03-19 11:11:36: Init table "Messages" -> OK
+2024-03-19 11:11:37: Open database -> OK
+2024-03-19 11:11:37: Init table "Users" -> OK
+2024-03-19 11:11:37: Init table "Chats" -> OK
+2024-03-19 11:11:37: Init table "Messages" -> OK
+2024-03-19 11:11:37: Open database -> OK
+2024-03-19 11:11:37: Init table "Users" -> OK
+2024-03-19 11:11:37: Init table "Chats" -> OK
+2024-03-19 11:11:37: Init table "Messages" -> OK
+2024-03-19 11:11:38: Open database -> OK
+2024-03-19 11:11:38: Init table "Users" -> OK
+2024-03-19 11:11:38: Init table "Chats" -> OK
+2024-03-19 11:11:38: Init table "Messages" -> OK
+2024-03-19 11:18:47: Open database -> OK
+2024-03-19 11:18:47: Init table "Users" -> OK
+2024-03-19 11:18:47: Init table "Chats" -> OK
+2024-03-19 11:18:47: Init table "Messages" -> OK
+2024-03-19 11:18:50: Open database -> OK
+2024-03-19 11:18:50: Init table "Users" -> OK
+2024-03-19 11:18:50: Init table "Chats" -> OK
+2024-03-19 11:18:50: Init table "Messages" -> OK
+2024-03-19 11:18:51: Open database -> OK
+2024-03-19 11:18:51: Init table "Users" -> OK
+2024-03-19 11:18:51: Init table "Chats" -> OK
+2024-03-19 11:18:51: Init table "Messages" -> OK
+2024-03-19 11:18:52: Open database -> OK
+2024-03-19 11:18:52: Init table "Users" -> OK
+2024-03-19 11:18:52: Init table "Chats" -> OK
+2024-03-19 11:18:52: Init table "Messages" -> OK
+2024-03-19 11:18:53: Open database -> OK
+2024-03-19 11:18:53: Init table "Users" -> OK
+2024-03-19 11:18:53: Init table "Chats" -> OK
+2024-03-19 11:18:53: Init table "Messages" -> OK
+2024-03-19 11:18:53: Open database -> OK
+2024-03-19 11:18:53: Init table "Users" -> OK
+2024-03-19 11:18:53: Init table "Chats" -> OK
+2024-03-19 11:18:53: Init table "Messages" -> OK
+2024-03-19 11:19:06: Open database -> OK
+2024-03-19 11:19:06: Init table "Users" -> OK
+2024-03-19 11:19:06: Init table "Chats" -> OK
+2024-03-19 11:19:06: Init table "Messages" -> OK
+2024-03-19 11:19:08: Open database -> OK
+2024-03-19 11:19:08: Init table "Users" -> OK
+2024-03-19 11:19:08: Init table "Chats" -> OK
+2024-03-19 11:19:08: Init table "Messages" -> OK
+2024-03-19 11:19:09: Open database -> OK
+2024-03-19 11:19:09: Init table "Users" -> OK
+2024-03-19 11:19:09: Init table "Chats" -> OK
+2024-03-19 11:19:09: Init table "Messages" -> OK
+2024-03-19 11:19:10: Open database -> OK
+2024-03-19 11:19:10: Init table "Users" -> OK
+2024-03-19 11:19:10: Init table "Chats" -> OK
+2024-03-19 11:19:10: Init table "Messages" -> OK
+2024-03-19 11:19:10: Open database -> OK
+2024-03-19 11:19:10: Init table "Users" -> OK
+2024-03-19 11:19:10: Init table "Chats" -> OK
+2024-03-19 11:19:10: Init table "Messages" -> OK
+2024-03-19 11:19:10: Open database -> OK
+2024-03-19 11:19:10: Init table "Users" -> OK
+2024-03-19 11:19:10: Init table "Chats" -> OK
+2024-03-19 11:19:10: Init table "Messages" -> OK
+2024-03-19 11:19:11: Open database -> OK
+2024-03-19 11:19:11: Init table "Users" -> OK
+2024-03-19 11:19:11: Init table "Chats" -> OK
+2024-03-19 11:19:11: Init table "Messages" -> OK
+2024-03-19 11:19:11: Open database -> OK
+2024-03-19 11:19:11: Init table "Users" -> OK
+2024-03-19 11:19:11: Init table "Chats" -> OK
+2024-03-19 11:19:11: Init table "Messages" -> OK
+2024-03-19 11:19:23: Open database -> OK
+2024-03-19 11:24:49: Open database -> OK
+2024-03-19 11:24:49: Init table "Users" -> OK
+2024-03-19 11:24:49: Init table "Chats" -> OK
+2024-03-19 11:24:49: Init table "Messages" -> OK
+2024-03-19 11:24:52: Open database -> OK
+2024-03-19 11:24:52: Init table "Users" -> OK
+2024-03-19 11:24:52: Init table "Chats" -> OK
+2024-03-19 11:24:52: Init table "Messages" -> OK
+2024-03-19 11:25:05: Open database -> OK
+2024-03-19 11:31:34: Open database -> OK
+2024-03-19 11:31:34: Init table "Users" -> OK
+2024-03-19 11:31:34: Init table "Chats" -> OK
+2024-03-19 11:31:34: Init table "Messages" -> OK
+2024-03-19 11:31:36: Open database -> OK
+2024-03-19 11:31:36: Init table "Users" -> OK
+2024-03-19 11:31:36: Init table "Chats" -> OK
+2024-03-19 11:31:36: Init table "Messages" -> OK
+2024-03-19 11:31:48: Open database -> OK
+2024-03-19 11:40:53: Open database -> OK
+2024-03-19 11:40:53: Init table "Users" -> OK
+2024-03-19 11:40:53: Init table "Chats" -> OK
+2024-03-19 11:40:53: Init table "Messages" -> OK
+2024-03-19 11:40:58: Open database -> OK
+2024-03-19 11:40:58: Init table "Users" -> OK
+2024-03-19 11:40:58: Init table "Chats" -> OK
+2024-03-19 11:40:58: Init table "Messages" -> OK
+2024-03-19 11:40:59: Open database -> OK
+2024-03-19 11:40:59: Init table "Users" -> OK
+2024-03-19 11:40:59: Init table "Chats" -> OK
+2024-03-19 11:40:59: Init table "Messages" -> OK
+2024-03-19 11:41:10: Open database -> OK
+2024-03-19 11:44:07: Open database -> OK
+2024-03-19 11:44:07: Init table "Users" -> OK
+2024-03-19 11:44:07: Init table "Chats" -> OK
+2024-03-19 11:44:07: Init table "Messages" -> OK
+2024-03-19 11:44:09: Open database -> OK
+2024-03-19 11:44:09: Init table "Users" -> OK
+2024-03-19 11:44:09: Init table "Chats" -> OK
+2024-03-19 11:44:09: Init table "Messages" -> OK
+2024-03-19 11:44:09: Open database -> OK
+2024-03-19 11:44:09: Init table "Users" -> OK
+2024-03-19 11:44:09: Init table "Chats" -> OK
+2024-03-19 11:44:09: Init table "Messages" -> OK
+2024-03-19 11:44:10: Open database -> OK
+2024-03-19 11:44:10: Init table "Users" -> OK
+2024-03-19 11:44:10: Init table "Chats" -> OK
+2024-03-19 11:44:10: Init table "Messages" -> OK
+2024-03-19 11:44:10: Open database -> OK
+2024-03-19 11:44:10: Init table "Users" -> OK
+2024-03-19 11:44:10: Init table "Chats" -> OK
+2024-03-19 11:44:10: Init table "Messages" -> OK
+2024-03-19 11:44:11: Open database -> OK
+2024-03-19 11:44:11: Init table "Users" -> OK
+2024-03-19 11:44:11: Init table "Chats" -> OK
+2024-03-19 11:44:11: Init table "Messages" -> OK
+2024-03-19 11:44:13: Open database -> OK
+2024-03-19 11:44:13: Init table "Users" -> OK
+2024-03-19 11:44:13: Init table "Chats" -> OK
+2024-03-19 11:44:13: Init table "Messages" -> OK
+2024-03-19 11:44:23: Open database -> OK
+2024-03-19 11:45:19: Open database -> OK
+2024-03-19 11:45:19: Init table "Users" -> OK
+2024-03-19 11:45:19: Init table "Chats" -> OK
+2024-03-19 11:45:19: Init table "Messages" -> OK
+2024-03-19 11:45:27: Open database -> OK
+2024-03-19 11:45:42: Open database -> OK
+2024-03-19 11:46:02: Open database -> OK
+2024-03-19 11:47:30: Open database -> OK
+2024-03-19 11:48:11: Open database -> OK
+2024-03-19 11:48:11: Init table "Users" -> OK
+2024-03-19 11:48:11: Init table "Chats" -> OK
+2024-03-19 11:48:11: Init table "Messages" -> OK
+2024-03-19 11:48:12: Open database -> OK
+2024-03-19 11:48:12: Init table "Users" -> OK
+2024-03-19 11:48:12: Init table "Chats" -> OK
+2024-03-19 11:48:12: Init table "Messages" -> OK
+2024-03-19 11:48:13: Open database -> OK
+2024-03-19 11:48:13: Init table "Users" -> OK
+2024-03-19 11:48:13: Init table "Chats" -> OK
+2024-03-19 11:48:13: Init table "Messages" -> OK
+2024-03-19 11:48:13: Open database -> OK
+2024-03-19 11:48:13: Init table "Users" -> OK
+2024-03-19 11:48:13: Init table "Chats" -> OK
+2024-03-19 11:48:13: Init table "Messages" -> OK
+2024-03-19 11:48:16: Open database -> OK
+2024-03-19 11:48:16: Init table "Users" -> OK
+2024-03-19 11:48:16: Init table "Chats" -> OK
+2024-03-19 11:48:16: Init table "Messages" -> OK
+2024-03-19 11:48:17: Open database -> OK
+2024-03-19 11:48:17: Init table "Users" -> OK
+2024-03-19 11:48:17: Init table "Chats" -> OK
+2024-03-19 11:48:17: Init table "Messages" -> OK
+2024-03-19 11:48:17: Open database -> OK
+2024-03-19 11:48:17: Init table "Users" -> OK
+2024-03-19 11:48:17: Init table "Chats" -> OK
+2024-03-19 11:48:17: Init table "Messages" -> OK
+2024-03-19 11:48:18: Open database -> OK
+2024-03-19 11:48:18: Init table "Users" -> OK
+2024-03-19 11:48:18: Init table "Chats" -> OK
+2024-03-19 11:48:18: Init table "Messages" -> OK
+2024-03-19 11:48:18: Open database -> OK
+2024-03-19 11:48:18: Init table "Users" -> OK
+2024-03-19 11:48:18: Init table "Chats" -> OK
+2024-03-19 11:48:18: Init table "Messages" -> OK
+2024-03-19 11:48:19: Open database -> OK
+2024-03-19 11:48:19: Init table "Users" -> OK
+2024-03-19 11:48:19: Init table "Chats" -> OK
+2024-03-19 11:48:19: Init table "Messages" -> OK
+2024-03-19 11:48:19: Open database -> OK
+2024-03-19 11:48:19: Init table "Users" -> OK
+2024-03-19 11:48:19: Init table "Chats" -> OK
+2024-03-19 11:48:19: Init table "Messages" -> OK
+2024-03-19 11:48:19: Open database -> OK
+2024-03-19 11:48:19: Init table "Users" -> OK
+2024-03-19 11:48:19: Init table "Chats" -> OK
+2024-03-19 11:48:19: Init table "Messages" -> OK
+2024-03-19 11:48:19: Open database -> OK
+2024-03-19 11:48:19: Init table "Users" -> OK
+2024-03-19 11:48:19: Init table "Chats" -> OK
+2024-03-19 11:48:19: Init table "Messages" -> OK
+2024-03-19 11:48:20: Open database -> OK
+2024-03-19 11:48:20: Init table "Users" -> OK
+2024-03-19 11:48:20: Init table "Chats" -> OK
+2024-03-19 11:48:20: Init table "Messages" -> OK
+2024-03-19 11:48:20: Open database -> OK
+2024-03-19 11:48:20: Init table "Users" -> OK
+2024-03-19 11:48:20: Init table "Chats" -> OK
+2024-03-19 11:48:20: Init table "Messages" -> OK
+2024-03-19 11:48:25: Open database -> OK
+2024-03-19 11:48:25: Init table "Users" -> OK
+2024-03-19 11:48:25: Init table "Chats" -> OK
+2024-03-19 11:48:25: Init table "Messages" -> OK
+2024-03-19 11:48:26: Open database -> OK
+2024-03-19 11:48:26: Init table "Users" -> OK
+2024-03-19 11:48:26: Init table "Chats" -> OK
+2024-03-19 11:48:26: Init table "Messages" -> OK
+2024-03-19 11:48:27: Open database -> OK
+2024-03-19 11:48:27: Init table "Users" -> OK
+2024-03-19 11:48:27: Init table "Chats" -> OK
+2024-03-19 11:48:27: Init table "Messages" -> OK
+2024-03-19 11:48:28: Open database -> OK
+2024-03-19 11:48:28: Init table "Users" -> OK
+2024-03-19 11:48:28: Init table "Chats" -> OK
+2024-03-19 11:48:28: Init table "Messages" -> OK
+2024-03-19 11:53:00: Open database -> OK
+2024-03-19 11:53:00: Init table "Users" -> OK
+2024-03-19 11:53:00: Init table "Chats" -> OK
+2024-03-19 11:53:00: Init table "Messages" -> OK
+2024-03-19 11:53:10: Open database -> OK
+2024-03-19 11:54:19: Open database -> OK
+2024-03-19 11:54:19: Init table "Users" -> OK
+2024-03-19 11:54:19: Init table "Chats" -> OK
+2024-03-19 11:54:19: Init table "Messages" -> OK
+2024-03-19 11:55:42: Open database -> OK
+2024-03-19 11:55:42: Init table "Users" -> OK
+2024-03-19 11:55:42: Init table "Chats" -> OK
+2024-03-19 11:55:42: Init table "Messages" -> OK
+2024-03-19 11:55:43: Open database -> OK
+2024-03-19 11:55:43: Init table "Users" -> OK
+2024-03-19 11:55:43: Init table "Chats" -> OK
+2024-03-19 11:55:43: Init table "Messages" -> OK
+2024-03-19 11:55:45: Open database -> OK
+2024-03-19 11:55:45: Init table "Users" -> OK
+2024-03-19 11:55:45: Init table "Chats" -> OK
+2024-03-19 11:55:45: Init table "Messages" -> OK
+2024-03-19 11:55:52: Open database -> OK
+2024-03-19 11:55:52: Init table "Users" -> OK
+2024-03-19 11:55:52: Init table "Chats" -> OK
+2024-03-19 11:55:52: Init table "Messages" -> OK
+2024-03-19 11:55:53: Open database -> OK
+2024-03-19 11:55:53: Init table "Users" -> OK
+2024-03-19 11:55:53: Init table "Chats" -> OK
+2024-03-19 11:55:53: Init table "Messages" -> OK
+2024-03-19 11:55:54: Open database -> OK
+2024-03-19 11:55:54: Init table "Users" -> OK
+2024-03-19 11:55:54: Init table "Chats" -> OK
+2024-03-19 11:55:54: Init table "Messages" -> OK
+2024-03-19 11:55:55: Open database -> OK
+2024-03-19 11:55:55: Init table "Users" -> OK
+2024-03-19 11:55:55: Init table "Chats" -> OK
+2024-03-19 11:55:55: Init table "Messages" -> OK
+2024-03-19 11:56:01: Open database -> OK
+2024-03-19 12:23:47: Open database -> OK
+2024-03-19 12:23:47: Init table "Users" -> OK
+2024-03-19 12:23:47: Init table "Chats" -> OK
+2024-03-19 12:23:47: Init table "Messages" -> OK
+2024-03-19 12:23:57: Open database -> OK
+2024-03-19 12:25:57: Open database -> OK
+2024-03-19 12:25:57: Init table "Users" -> OK
+2024-03-19 12:25:57: Init table "Chats" -> OK
+2024-03-19 12:25:57: Init table "Messages" -> OK
+2024-03-19 12:26:00: Open database -> OK
+2024-03-19 12:26:00: Init table "Users" -> OK
+2024-03-19 12:26:00: Init table "Chats" -> OK
+2024-03-19 12:26:00: Init table "Messages" -> OK
+2024-03-19 12:26:01: Open database -> OK
+2024-03-19 12:26:01: Init table "Users" -> OK
+2024-03-19 12:26:01: Init table "Chats" -> OK
+2024-03-19 12:26:01: Init table "Messages" -> OK
+2024-03-19 12:26:13: Open database -> OK
+2024-03-19 12:27:39: Open database -> OK
+2024-03-19 12:27:39: Init table "Users" -> OK
+2024-03-19 12:27:39: Init table "Chats" -> OK
+2024-03-19 12:27:39: Init table "Messages" -> OK
+2024-03-19 12:27:41: Open database -> OK
+2024-03-19 12:27:41: Init table "Users" -> OK
+2024-03-19 12:27:41: Init table "Chats" -> OK
+2024-03-19 12:27:41: Init table "Messages" -> OK
+2024-03-19 12:45:59: Open database -> OK
+2024-03-19 12:45:59: Init table "Users" -> OK
+2024-03-19 12:45:59: Init table "Chats" -> OK
+2024-03-19 12:45:59: Init table "Messages" -> OK
+2024-03-19 12:46:01: Open database -> OK
+2024-03-19 12:46:01: Init table "Users" -> OK
+2024-03-19 12:46:01: Init table "Chats" -> OK
+2024-03-19 12:46:01: Init table "Messages" -> OK
+2024-03-19 12:46:01: Open database -> OK
+2024-03-19 12:46:01: Init table "Users" -> OK
+2024-03-19 12:46:01: Init table "Chats" -> OK
+2024-03-19 12:46:01: Init table "Messages" -> OK
+2024-03-19 12:46:02: Open database -> OK
+2024-03-19 12:46:02: Init table "Users" -> OK
+2024-03-19 12:46:02: Init table "Chats" -> OK
+2024-03-19 12:46:02: Init table "Messages" -> OK
+2024-03-19 12:46:04: Open database -> OK
+2024-03-19 12:46:04: Init table "Users" -> OK
+2024-03-19 12:46:04: Init table "Chats" -> OK
+2024-03-19 12:46:04: Init table "Messages" -> OK
+2024-03-19 12:46:05: Open database -> OK
+2024-03-19 12:46:05: Init table "Users" -> OK
+2024-03-19 12:46:05: Init table "Chats" -> OK
+2024-03-19 12:46:05: Init table "Messages" -> OK
+2024-03-19 12:46:07: Open database -> OK
+2024-03-19 12:46:07: Init table "Users" -> OK
+2024-03-19 12:46:07: Init table "Chats" -> OK
+2024-03-19 12:46:07: Init table "Messages" -> OK
+2024-03-19 12:46:08: Open database -> OK
+2024-03-19 12:46:08: Init table "Users" -> OK
+2024-03-19 12:46:08: Init table "Chats" -> OK
+2024-03-19 12:46:08: Init table "Messages" -> OK
+2024-03-19 12:46:08: Open database -> OK
+2024-03-19 12:46:08: Init table "Users" -> OK
+2024-03-19 12:46:08: Init table "Chats" -> OK
+2024-03-19 12:46:08: Init table "Messages" -> OK
+2024-03-19 12:47:12: Open database -> OK
+2024-03-19 12:47:12: Add user -> OK
+2024-03-19 12:49:57: Open database -> OK
+2024-03-19 12:49:57: Init table "Users" -> OK
+2024-03-19 12:49:57: Init table "Chats" -> OK
+2024-03-19 12:49:57: Init table "Messages" -> OK
+2024-03-19 12:50:20: Open database -> OK
+2024-03-19 12:50:20: Add user -> OK
+2024-03-19 12:52:59: Open database -> OK
+2024-03-19 12:53:40: Open database -> OK
+2024-03-19 12:53:40: Init table "Users" -> OK
+2024-03-19 12:53:40: Init table "Chats" -> OK
+2024-03-19 12:53:40: Init table "Messages" -> OK
+2024-03-19 12:53:41: Open database -> OK
+2024-03-19 12:53:41: Init table "Users" -> OK
+2024-03-19 12:53:41: Init table "Chats" -> OK
+2024-03-19 12:53:41: Init table "Messages" -> OK
+2024-03-19 12:53:41: Open database -> OK
+2024-03-19 12:53:41: Init table "Users" -> OK
+2024-03-19 12:53:41: Init table "Chats" -> OK
+2024-03-19 12:53:41: Init table "Messages" -> OK
+2024-03-19 12:54:31: Open database -> OK
+2024-03-19 12:54:31: Init table "Users" -> OK
+2024-03-19 12:54:31: Init table "Chats" -> OK
+2024-03-19 12:54:31: Init table "Messages" -> OK
+2024-03-19 12:55:25: Open database -> OK
+2024-03-19 12:55:25: Init table "Users" -> OK
+2024-03-19 12:55:25: Init table "Chats" -> OK
+2024-03-19 12:55:25: Init table "Messages" -> OK
+2024-03-19 12:55:27: Open database -> OK
+2024-03-19 12:55:27: Init table "Users" -> OK
+2024-03-19 12:55:27: Init table "Chats" -> OK
+2024-03-19 12:55:27: Init table "Messages" -> OK
+2024-03-19 12:55:27: Open database -> OK
+2024-03-19 12:55:28: Init table "Users" -> OK
+2024-03-19 12:55:28: Init table "Chats" -> OK
+2024-03-19 12:55:28: Init table "Messages" -> OK
+2024-03-19 12:55:28: Open database -> OK
+2024-03-19 12:55:28: Init table "Users" -> OK
+2024-03-19 12:55:28: Init table "Chats" -> OK
+2024-03-19 12:55:28: Init table "Messages" -> OK
+2024-03-19 12:55:48: Open database -> OK
