@@ -18,26 +18,13 @@ void show_user_window() {
     gtk_widget_show_all(user_window);   
 }
 
-static gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *sidebar) {
-    gint x, y;
-    x = event->x;
-    y = event->y;
-
-    GdkRectangle sidebar_rect;
-    gtk_widget_get_allocation(sidebar, &sidebar_rect);
-
-    GdkRectangle click_rect = {x, y, 1, 1};
-
-    if (!gdk_rectangle_intersect(&click_rect, &sidebar_rect, NULL)) {
-        gtk_widget_set_visible(sidebar, TRUE);
-    }
-
-    return FALSE;
+static void toggle(GtkWidget *widget, GtkWidget *element) {
+    gboolean visible = gtk_widget_get_visible(element);
+    gtk_widget_set_visible(element, !visible);
 }
 
-static void toggle(GtkWidget *widget, GtkWidget *sidebar) {
-    gboolean visible = gtk_widget_get_visible(sidebar);
-    gtk_widget_set_visible(sidebar, !visible);
+static void show_side(GtkWidget *widget, gpointer data){
+    g_print("User clicked\n");
 }
 
 void draw_user_window() {
@@ -91,11 +78,7 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(settings_img), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(settings_img), "settings");
     g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(settings_button_clicked), NULL);
-    //g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle_sidebar), sidebar);
-    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), chats_box);
-    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), side_box);
-    g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), side_box);
-    g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), chats_box);
+    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(show_side), NULL);
 
     // GtkWidget* user_img = gtk_button_new();
     // gtk_widget_set_valign(GTK_WIDGET(user_img), GTK_ALIGN_CENTER);
