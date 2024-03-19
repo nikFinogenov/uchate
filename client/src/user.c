@@ -11,7 +11,8 @@ void on_window_realize(GtkWidget *widget, gpointer data) {
 
     // Устанавливаем его на максимальное значение, чтобы прокрутить вниз
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
-    gtk_widget_hide(scrollable_window);
+    gtk_widget_hide(chat_box);
+    // gtk_widget_hide(scrollable_window);
     // g_print("%d\n", selected_user.index);
     // Проверяем, выбран ли пользователь
 }
@@ -51,7 +52,7 @@ void draw_user_window() {
     // Create three box containers
     GtkWidget *settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     GtkWidget *chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    GtkWidget *chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
     // Set the background colors for each box container
     gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
@@ -174,19 +175,13 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(chat_box), user_info_box, FALSE, FALSE, 0);
 
 
-    scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
+    GtkWidget *scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window2),
                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     message_populate_scrollable_window(scrollable_window2);
     g_signal_connect(G_OBJECT(user_window), "realize", G_CALLBACK(on_window_realize), scrollable_window2);
     // gtk_widget_hide(scrollable_window2);
-    // g_signal_connect(G_OBJECT(scrollable_window2), "button-press-event", G_CALLBACK(on_scrollable_window_clicked), NULL);
     gtk_box_pack_start(GTK_BOX(chat_box), scrollable_window2, TRUE, TRUE, 0);
-
-    empty_chat = gtk_label_new("[ Select chat to start chatting ]");
-    gtk_widget_set_name(GTK_WIDGET(empty_chat), "empty-chat");
-    gtk_widget_set_halign(empty_chat, GTK_ALIGN_CENTER);
-    gtk_box_pack_start(GTK_BOX(chat_box), empty_chat, TRUE, TRUE, 0);
 
     GtkWidget *text_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(text_entry), "Write a message...");
@@ -201,7 +196,12 @@ void draw_user_window() {
 
     gtk_box_pack_end(GTK_BOX(chat_box),text_box, FALSE, FALSE, 0);
 
-
+    empty_chat = gtk_label_new("[ Select a chat to start chatting ]");
+    gtk_widget_set_name(GTK_WIDGET(empty_chat), "empty-chat");
+    // gtk_widget_set_halign(empty_chat, GTK_ALIGN_CENTER);
+    // gtk_widget_set_valign(empty_chat, GTK_ALIGN_CENTER);
+    gtk_widget_override_background_color(empty_chat, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
+    gtk_box_pack_end(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0);
 
     // Pack the box containers into the main horizontal box container
     gtk_box_pack_start(GTK_BOX(hbox_main), settings_box, FALSE, FALSE, 0);

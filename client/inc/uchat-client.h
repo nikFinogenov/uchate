@@ -52,7 +52,8 @@ extern t_message_s* messages;
 extern t_chatter_s* chatters;
 extern t_user_s user;
 extern t_selected_s selected_user;
-extern GtkWidget *scrollable_window2;
+// extern GtkWidget *scrollable_window2;
+extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
 
 // typedef struct {

@@ -8,23 +8,6 @@ t_selected_s selected_user = {
 };
 // GtkWidget *selected_user = NULL;
 
-void on_scrollable_window_clicked(GtkWidget *widget, GdkEvent *event, gpointer data) {
-    // g_print("xyia");
-    if (selected_user.index == -1) {
-        // Если пользователь не выбран, скрываем окно с сообщениями и показываем пустой чат
-        gtk_widget_hide(widget);
-        // GtkWidget *empty_chat = gtk_label_new("[ Select chat to start chatting ]");
-        // gtk_widget_set_name(GTK_WIDGET(empty_chat), "empty-chat");
-        // gtk_widget_set_halign(empty_chat, GTK_ALIGN_CENTER);
-        // gtk_container_add(GTK_CONTAINER(scrollable_window), empty_chat);
-        gtk_widget_show_all(empty_chat);
-    } else {
-        // Если пользователь выбран, скрываем пустой чат и показываем окно с сообщениями
-        gtk_widget_hide(empty_chat); // Предполагается, что empty_chat доступен в этой области видимости
-        gtk_widget_show_all(widget);
-    }
-}
-
 int count_messages(void) {
     int count = 0;
     // Count messages until a sentinel value is encountered
@@ -56,7 +39,8 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
     selected_user.index = index;
 
     gtk_widget_hide(empty_chat);
-    gtk_widget_show_all(scrollable_window2);
+    // gtk_widget_show_all(scrollable_window2);
+    gtk_widget_show_all(chat_box);
     
     g_print("%d\n", selected_user.index);
 

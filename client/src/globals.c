@@ -1,7 +1,8 @@
 #include "uchat-client.h"
 
-GtkWidget *scrollable_window2 =NULL;
+// GtkWidget *scrollable_window2 =NULL;
 GtkWidget *empty_chat = NULL;
+GtkWidget *chat_box = NULL;
 
 char* default_img = "client/img/simple.png";
 
