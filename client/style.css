@@ -1,9 +1,13 @@
 #settings {
     background-image: url("img/side_bar_arrow2v.png");
 }
+#message-search-img {
+    background-image: url("img/lupa.png");
+}
 #settings,
 #user,
-#logout {
+#logout,
+#message-search-img{
     background-size: 50px;
     background-repeat: no-repeat;
     background-position: center;
@@ -12,10 +16,15 @@
     /* outline: none;*/
     border-radius: 0;
 }
+#message-search-img{ 
+    background-size: 20px;
+}
+
 
 #settings:hover,
 #user:hover,
-#logout:hover {
+#logout:hover,
+#message-search-img:hover {
     opacity: 0.3;
     box-shadow: none;
 }
@@ -26,4 +35,24 @@
     padding: 10px;
     border-radius: 10px;
     /* max-width: 50%; */
+}
+
+#user-tag{
+    font-size: 18px;
+}
+#user-box{
+    border: 1px solid black;
+}
+#user-box:hover{
+    opacity: 0.3;
+}
+
+#chatter-name,
+#chatter-surname {
+    font-size: 25px;
+}
+
+#empty-chat{
+    font-size: 50px;
+    color: red;
 }
