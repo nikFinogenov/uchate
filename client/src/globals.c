@@ -1,5 +1,5 @@
 #include "uchat-client.h"
-
+#include "../../libmx/inc/libmx.h"
 // GtkWidget *scrollable_window2 =NULL;
 GtkWidget *empty_chat = NULL;
 GtkWidget *chat_box = NULL;
@@ -29,9 +29,11 @@ void fill_data(void) {
     }
     // Initialize or populate messages with temporary data here
     for (int i = 0; i < MAX_MESSAGES; i++) {
-        char buffer[50];
-        sprintf(buffer, "%d) This is a message.", i);
-        messages[i].text = strdup(buffer);
+        //messages[i].text = ") This is a message.";
+        //char buffer[50];
+        // sprintf(buffer, "%d) This is a message.", i);
+        // messages[i].text = strdup(buffer);
+        messages[i].text = mx_strjoin(mx_itoa(i), ") This is a message.");
         messages[i].is_user = (i % 2 == 0) ? true : false;
     }
 

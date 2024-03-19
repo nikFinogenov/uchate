@@ -1,35 +1,46 @@
-export DISPLAY=:0
-
-NAME = uchat
-CC = clang
-CFLAGS = -pthread `pkg-config --cflags gtk+-3.0` -Wno-deprecated-declarations# -rdynamic -lm
-LIBS = -lsqlite3 `pkg-config --libs gtk+-3.0`
-INC = inc
-SRCDIR = src
-OBJDIR = obj
+NAME  = uchat_client
+FLAGS = -std=c99 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0`
+DFLAGS= #-Wno-unused-command-line-argument -Wno-unused-variable \
+    -Wno-unused-function -Wno-unused-parameter \
+    -fno-omit-frame-pointer
+SRCD = src
+INCD = inc
+OBJD = obj
 LMXA = ../libmx/libmx.a
 LMXI = ../libmx/inc
 
+SRCS = $(wildcard $(SRCD)/*.c)
+INCS = $(addprefix $(INCD)/, $(INC))
+OBJS = $(patsubst $(SRCD)/%.c, $(OBJD)/%.o, $(SRCS))
 
-SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+CLEAR = \r\33[2K
+GREENB = \033[32;1m
+YELLOWB = \033[33;1m
+REDB = \033[31;1m
+NORMAL = \033[0m
 
-all: $(NAME)
+all: install
+
+install: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LMXA) -o ../$(NAME) $^ $(LIBS)
+	@clang -lsqlite3 -lpthread `pkg-config --libs gtk+-3.0` $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
+	@printf "${CLEAR}$@\t   ${GREENB}created${NORMAL}\n"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC) -I$(LMXI)
+$(OBJD)/%.o: $(SRCD)/%.c $(INCS)
+	@clang $(FLAGS) $(DFLAGS) -c $< -o $@ -I$(INCD) -I$(LMXI)
+	@printf "${CLEAR}$(NAME)\t   ${YELLOWB}compile ${NORMAL}$(<:$(SRCD)/%.c=%) "
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(OBJS): | $(OBJD)
+
+$(OBJD):
+	@mkdir -p $@
 
 clean:
-	rm -rf $(OBJDIR) ../$(NAME)
+	@rm -rf $(OBJD)
 
-.PHONY: all clean
+uninstall: clean
+	@rm -rf ../$(NAME)
+	@printf "$(NAME)\t   ${REDB}uninstalled${NORMAL}\n"
 
-reinstall:
-	make clean
-	make
+reinstall: uninstall install
