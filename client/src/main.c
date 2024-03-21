@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     // gtk_widget_override_background_color(signup_window, GTK_STATE_FLAG_NORMAL, &color);
 
     show_login();
-    // 
+    //
 
     gtk_main();
 

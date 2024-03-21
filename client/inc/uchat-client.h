@@ -55,6 +55,8 @@ extern t_selected_s selected_user;
 // extern GtkWidget *scrollable_window2;
 extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
+extern GtkWidget *chats_box;
+extern GtkWidget *settings_box;
 
 // typedef struct {
 //     char* name;

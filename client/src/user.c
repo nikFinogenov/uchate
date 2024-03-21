@@ -16,8 +16,46 @@ void on_window_realize(GtkWidget *widget, gpointer data) {
     // g_print("%d\n", selected_user.index);
     // Проверяем, выбран ли пользователь
 }
+
 static void logout_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Logout clicked\n");
+}
+
+static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
+    g_print("Add chatter clicked\n");
+    
+    // Check if chatters array is initialized
+    if (chatters == NULL) {
+        g_print("Chatters array is not initialized\n");
+        return;
+    }
+    
+    // Создаем новый элемент структуры t_chatter_s
+    t_chatter_s new_chatter = {
+        .name = "New Name",
+        .surname = "New Surname",
+        .username = "new_username",
+        .lastmsg = "No messages yet",
+        .avatar = NULL
+    };
+    
+    // Find the first available slot in the chatters array
+    int i;
+    for (i = 0; i < MAX_CHATTERS; i++) {
+        if (chatters[i].name == NULL) {
+            chatters[i] = new_chatter;
+            g_print("New chatter added at index %d\n", i);
+            while (gtk_events_pending()) gtk_main_iteration_do(FALSE);
+            // gtk_widget_show_all(widget);
+            // draw_user_window();
+            // show_user_window();
+            gtk_widget_show_all(chats_box);
+            return;
+        }
+    }
+    
+    // If no available slot is found
+    g_print("Chatter limit reached\n");
 }
 
 static void settings_button_clicked(GtkWidget *widget, gpointer data) {
@@ -50,8 +88,8 @@ void draw_user_window() {
     gtk_container_add(GTK_CONTAINER(user_window), hbox_main);
 
     // Create three box containers
-    GtkWidget *settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    GtkWidget *chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
     // Set the background colors for each box container
@@ -117,26 +155,29 @@ void draw_user_window() {
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window),
                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     user_populate_scrollable_window(scrollable_window);
+    
+    GtkWidget* add_new_chat_when_no_chats = gtk_button_new();
+    gtk_widget_set_valign(GTK_WIDGET(add_new_chat_when_no_chats), GTK_ALIGN_CENTER);
+    gtk_button_set_relief(GTK_BUTTON(add_new_chat_when_no_chats), GTK_RELIEF_NONE);
+    gtk_container_set_border_width(GTK_CONTAINER(add_new_chat_when_no_chats), 0);
+    gtk_widget_set_size_request(GTK_WIDGET(add_new_chat_when_no_chats), 64, 64);
+    gtk_widget_set_name(GTK_WIDGET(add_new_chat_when_no_chats), "add_new_chat_when_no_chats");
+    g_signal_connect(G_OBJECT(add_new_chat_when_no_chats), "clicked", G_CALLBACK(add_chatter_button_clicked), NULL);
+    gtk_box_pack_end(GTK_BOX(chats_box), add_new_chat_when_no_chats, TRUE, TRUE, 0);
+    
     gtk_box_pack_start(GTK_BOX(chats_box), scrollable_window, TRUE, TRUE, 0);
-    // gtk_container_add(GTK_CONTAINER(window), scrollable_window);
-    // int users_count = 0;
-    // for(int i = 0; i < users_count; i++) {
-        // show_user();
-    // }
-
-    // GtkWidget *pn = create_penis();
-    // gtk_box_pack_start(GTK_BOX(chat_box), pn, FALSE, FALSE, 0);
-
-
-    // GtkWidget *user_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    if (chatters == NULL) {
+        gtk_widget_show(add_new_chat_when_no_chats);
+        gtk_widget_hide(scrollable_window);
+    } else {
+        // Иначе, показываем прокручиваемое окно для сообщений
+        gtk_widget_show(scrollable_window);
+        gtk_widget_hide(add_new_chat_when_no_chats);
+    }
 
     GtkWidget *user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
     set_widget_height(user_info_box, 70);
-    //avatar
-    // const char *input_image_file = "client/img/simple.png";
-    // const char* name = "Nik";
-    // const char* surname = "Fin";
     GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
     // prev_pixbuf = resize_img(prev_pixbuf, 150, 150);
@@ -147,9 +188,9 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
     gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
 
-    GtkWidget *name_label = gtk_label_new(user.name);
+    GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
     gtk_widget_set_name(name_label, "chatter-name");
-    GtkWidget *surname_label = gtk_label_new(user.surname);
+    GtkWidget *surname_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].surname);
     gtk_widget_set_name(surname_label, "chatter-surname");
     gtk_box_pack_start(GTK_BOX(user_info_box), name_label, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(user_info_box), surname_label, FALSE, FALSE, 5);
@@ -196,10 +237,8 @@ void draw_user_window() {
 
     gtk_box_pack_end(GTK_BOX(chat_box),text_box, FALSE, FALSE, 0);
 
-    empty_chat = gtk_label_new("[ Select a chat to start chatting ]");
+    empty_chat = (chatters != NULL) ? gtk_label_new("[ Select a chat to start chatting ]") : gtk_label_new("[ Add your first chat! ]");
     gtk_widget_set_name(GTK_WIDGET(empty_chat), "empty-chat");
-    // gtk_widget_set_halign(empty_chat, GTK_ALIGN_CENTER);
-    // gtk_widget_set_valign(empty_chat, GTK_ALIGN_CENTER);
     gtk_widget_override_background_color(empty_chat, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
     gtk_box_pack_end(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0);
 

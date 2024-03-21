@@ -9,6 +9,9 @@ t_selected_s selected_user = {
 // GtkWidget *selected_user = NULL;
 
 int count_messages(void) {
+    if (messages == NULL) {
+        return 0;
+    }
     int count = 0;
     // Count messages until a sentinel value is encountered
     while (messages[count].text != NULL) {
@@ -18,6 +21,10 @@ int count_messages(void) {
 }
 
 int count_chatters(void) {
+    if (chatters == NULL) {
+        return 0;
+    }
+
     int count = 0;
     // Count messages until a sentinel value is encountered
     while (chatters[count].username != NULL) {
@@ -173,31 +180,18 @@ GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_file) {
 }
 
 void user_populate_scrollable_window(GtkWidget *scrollable_window) {
+
     GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
-
-    // GtkWidget *user_box1 = create_user_box("John", "Doe", "@john_doe");
-    // GtkWidget *user_box2 = create_user_box("Jane", "Smith", "@jane_smith");
-    // gtk_box_pack_start(GTK_BOX(user_list), user_box1, FALSE, FALSE, 0);
-    // gtk_box_pack_start(GTK_BOX(user_list), user_box2, FALSE, FALSE, 0);
-
-    for(int i = 0; i < count_chatters(); i++) {
-        GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
-        gtk_widget_set_name(user_box, "user-box");
-        g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
-        gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+    
+    if (chatters != NULL) {
+        for (int i = 0; i < count_chatters(); i++) {
+            GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+            gtk_widget_set_name(user_box, "user-box");
+            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
+            gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+        }
     }
-
-    // for (int i = 0; i < 15; ++i) {
-    //     char username[20];
-    //     sprintf(username, "User%d", i+1);
-
-    //     GtkWidget *user_box = create_user_box(username, "Xyi", default_img);
-    //     gtk_widget_set_name(user_box, "user-box");
-    //     g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), NULL);
-
-    //     gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
-    // }
 }
 
 GtkWidget *create_message_box(char* text, bool is_user) {
@@ -222,8 +216,10 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
     gtk_container_add(GTK_CONTAINER(scrollable_window), mess_list);
 
     // for(mes)
-    for(int i = 0; i < count_messages(); i++) {
-        GtkWidget *mess_box = create_message_box(messages[i].text, messages[i].is_user);
-        gtk_box_pack_start(GTK_BOX(mess_list), mess_box, FALSE, FALSE, 0);
+    if (messages != NULL) {
+        for (int i = 0; messages[i].text != NULL; i++) {
+            GtkWidget *mess_box = create_message_box(messages[i].text, messages[i].is_user);
+            gtk_box_pack_start(GTK_BOX(mess_list), mess_box, FALSE, FALSE, 0);
+        }
     }
 }

@@ -3,6 +3,9 @@
 // GtkWidget *scrollable_window2 =NULL;
 GtkWidget *empty_chat = NULL;
 GtkWidget *chat_box = NULL;
+GtkWidget *chats_box = NULL;
+// GtkWidget *chats_box = NULL;
+GtkWidget *settings_box = NULL;
 
 char* default_img = "client/img/simple.png";
 
@@ -21,41 +24,45 @@ t_user_s user = {
 };
 
 void fill_data(void) {
-    // Example initialization of messages
-    messages = malloc(MAX_MESSAGES * sizeof(t_message_s));
-    if (messages == NULL) {
-        fprintf(stderr, "Error: Memory allocation failed for messages.\n");
-        exit(EXIT_FAILURE);
-    }
-    // Initialize or populate messages with temporary data here
-    for (int i = 0; i < MAX_MESSAGES; i++) {
-        // messages[i].text = ") This is a message.";
-        messages[i].text = mx_strjoin(mx_itoa(i), ") This is a message.");
-        messages[i].is_user = (i % 2 == 0) ? true : false;
-    }
+//     // Example initialization of messages
+//     messages = malloc(MAX_MESSAGES * sizeof(t_message_s));
+//     if (messages == NULL) {
+//         fprintf(stderr, "Error: Memory allocation failed for messages.\n");
+//         exit(EXIT_FAILURE);
+//     }
+//     // Initialize or populate messages with temporary data here
+//     for (int i = 0; i < MAX_MESSAGES; i++) {
+//         // messages[i].text = ") This is a message.";
+//         messages[i].text = mx_strjoin(mx_itoa(i), ") This is a message.");
+//         messages[i].is_user = (i % 2 == 0) ? true : false;
+//     }
 
-    // Example initialization of chatters
+//     // Example initialization of chatters
     chatters = malloc(MAX_CHATTERS * sizeof(t_chatter_s));
     if (chatters == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for chatters.\n");
-        free(messages); // Free previously allocated memory
+        // free(messages); // Free previously allocated memory
         exit(EXIT_FAILURE);
     }
-    // Initialize or populate chatters with temporary data here
-    for (int i = 0; i < MAX_CHATTERS; i++) {
-        chatters[i].name = "Chatter";
-        chatters[i].surname = "Surname";
-        chatters[i].username = "chatter_username";
-        chatters[i].lastmsg = "Last message from chatter.";
-        chatters[i].avatar = NULL; // You can initialize the avatar if needed
-    }
+//     // Initialize or populate chatters with temporary data here
+//     for (int i = 0; i < MAX_CHATTERS; i++) {
+//         chatters[i].name = "Chatter";
+//         chatters[i].surname = "Surname";
+//         chatters[i].username = "chatter_username";
+//         chatters[i].lastmsg = "Last message from chatter.";
+//         chatters[i].avatar = NULL; // You can initialize the avatar if needed
+//     }
 
-    // Example initialization of user
-    user.username = "Sidor";
-    user.name = "Sidor";
-    user.surname = "Pidorovich";
-    user.desc = " ";
-    user.avatar = NULL;
+//     // Example initialization of user
+//     user.username = "Sidor";
+//     user.name = "Sidor";
+//     user.surname = "Pidorovich";
+//     user.desc = " ";
+//     user.avatar = NULL;
+}
+void free_chatters() {
+    free(chatters);
+    chatters = NULL;
 }
 // struct User: name, surname, desc, img
 // struct Chatter: name, surname, img -> get from chatters by username
