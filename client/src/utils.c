@@ -7,32 +7,14 @@ t_selected_s selected_user = {
     .box = NULL
 };
 // GtkWidget *selected_user = NULL;
+void refresh_user_box() {
+    // Clear the current contents of the chat_box
+    gtk_container_foreach(GTK_CONTAINER(user_info_box), (GtkCallback)gtk_widget_destroy, NULL);
 
-int count_messages(void) {
-    if (messages == NULL) {
-        return 0;
-    }
-    int count = 0;
-    // Count messages until a sentinel value is encountered
-    while (messages[count].text != NULL) {
-        count++;
-    }
-    return count;
+    // Refreshed content has been added to the chat_box, so show it
+    draw_user_info_box(user_info_box);
+    gtk_widget_show_all(user_info_box);
 }
-
-int count_chatters(void) {
-    if (chatters == NULL) {
-        return 0;
-    }
-
-    int count = 0;
-    // Count messages until a sentinel value is encountered
-    while (chatters[count].username != NULL) {
-        count++;
-    }
-    return count;
-}
-
 gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
     g_print("clicked -> ");
     if (selected_user.box != NULL) {
@@ -46,7 +28,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
     selected_user.index = index;
 
     gtk_widget_hide(empty_chat);
-    // gtk_widget_show_all(scrollable_window2);
+    refresh_user_box();
     gtk_widget_show_all(chat_box);
     
     g_print("%d\n", selected_user.index);
@@ -185,7 +167,8 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
     
     if (chatters != NULL) {
-        for (int i = 0; i < count_chatters(); i++) {
+        // g_print("%d\n", chatters_count);s
+        for (int i = 0; i < chatters_count; i++) {
             GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
             gtk_widget_set_name(user_box, "user-box");
             g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
@@ -217,8 +200,9 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
 
     // for(mes)
     if (messages != NULL) {
-        for (int i = 0; messages[i].text != NULL; i++) {
-            GtkWidget *mess_box = create_message_box(messages[i].text, messages[i].is_user);
+        // for (int i = 0; messages[s].text != NULL; i++) {
+        for (int i = 0; i < messages_count[selected_user.index]; i++) {
+            GtkWidget *mess_box = create_message_box(messages[selected_user.index][i].text, messages[selected_user.index][i].is_user);
             gtk_box_pack_start(GTK_BOX(mess_list), mess_box, FALSE, FALSE, 0);
         }
     }

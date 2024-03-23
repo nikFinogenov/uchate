@@ -48,7 +48,7 @@ typedef struct {
 } t_selected_s;
 
 extern char* default_img;
-extern t_message_s* messages;
+extern t_message_s** messages;
 extern t_chatter_s* chatters;
 extern t_user_s user;
 extern t_selected_s selected_user;
@@ -57,6 +57,10 @@ extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
 extern GtkWidget *chats_box;
 extern GtkWidget *settings_box;
+extern GtkWidget *user_info_box;
+
+extern int chatters_count;
+extern int messages_count[MAX_CHATTERS];
 
 // typedef struct {
 //     char* name;
@@ -78,6 +82,7 @@ void go_to_login(void);
 // User window
 void draw_user_window(void);
 void show_user_window(void);
+void draw_user_info_box(GtkWidget *user_info_box);
 
 void user_populate_scrollable_window(GtkWidget *scrollable_window);
 void message_populate_scrollable_window(GtkWidget *scrollable_window);
@@ -90,8 +95,8 @@ void set_widget_height(GtkWidget *widget, int height);
 // Xyeta widgets
 GtkWidget *create_penis(void);
 void fill_data(void);
-int count_messages(void);
-int count_chatters(void);
+bool is_chatters_empty(void);
+bool is_messages_empty(void);
 
 
 #endif

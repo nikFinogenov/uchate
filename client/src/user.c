@@ -1,6 +1,9 @@
 #include "uchat-client.h"
 
 static GtkWidget *user_window;
+static GtkWidget* add_new_chat_when_no_chats;
+static GtkWidget *scrollable_window;
+// static GtkWidget *user_info_box;
 
 void on_window_realize(GtkWidget *widget, gpointer data) {
     // Получаем пролистываемое окно
@@ -12,11 +15,18 @@ void on_window_realize(GtkWidget *widget, gpointer data) {
     // Устанавливаем его на максимальное значение, чтобы прокрутить вниз
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
     gtk_widget_hide(chat_box);
-    // gtk_widget_hide(scrollable_window);
-    // g_print("%d\n", selected_user.index);
-    // Проверяем, выбран ли пользователь
 }
+void refresh_scrollable_window(GtkWidget *scrollable_window) {
+    // Очищаем содержимое скроллабельного окна
+    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    
+    // Перерисовываем содержимое скроллабельного окна
+    user_populate_scrollable_window(scrollable_window);
 
+    
+    // Перерисовываем окно
+    gtk_widget_show_all(scrollable_window);
+}
 static void logout_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Logout clicked\n");
 }
@@ -40,19 +50,30 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     };
     
     // Find the first available slot in the chatters array
-    int i;
-    for (i = 0; i < MAX_CHATTERS; i++) {
-        if (chatters[i].name == NULL) {
-            chatters[i] = new_chatter;
-            g_print("New chatter added at index %d\n", i);
-            while (gtk_events_pending()) gtk_main_iteration_do(FALSE);
-            // gtk_widget_show_all(widget);
-            // draw_user_window();
-            // show_user_window();
-            gtk_widget_show_all(chats_box);
-            return;
+
+    if(chatters_count + 1 < MAX_CHATTERS) {
+        chatters[chatters_count] = new_chatter;
+        chatters_count++;
+        refresh_scrollable_window(scrollable_window);
+            gtk_widget_show(scrollable_window);
+            gtk_widget_hide(add_new_chat_when_no_chats);
+
+        if (!is_chatters_empty()) {
+            // Если массив больше не пуст, обновляем текст метки empty_chat
+            gtk_label_set_text(GTK_LABEL(empty_chat), "[ Select a chat to start chatting ]");
         }
+        return;
     }
+    // int i;
+    // for (i = 0; i < MAX_CHATTERS; i++) {
+    //     if (chatters[i].name == NULL) {
+    //         chatters[i] = new_chatter;
+    //         chatters_count++;
+    //         refresh_scrollable_window(scrollable_window);
+    //                 // Иначе, показываем прокручиваемое окно для сообщений
+    //         return;
+    //     }
+    // }
     
     // If no available slot is found
     g_print("Chatter limit reached\n");
@@ -65,12 +86,54 @@ static void settings_button_clicked(GtkWidget *widget, gpointer data) {
 static void user_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("User clicked\n");
 }
+
 static void message_search_clicked(GtkWidget *widget, gpointer data) {
     g_print("Message search clicked\n");
 }
 
 void show_user_window() {
     gtk_widget_show_all(user_window);   
+}
+
+void draw_user_info_box(GtkWidget *user_info_box) {
+    // user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    // gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+    // set_widget_height(user_info_box, 70);
+    GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
+    GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
+    // prev_pixbuf = resize_img(prev_pixbuf, 150, 150);
+
+    GtkWidget *image = gtk_drawing_area_new();
+    gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
+    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
+    gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
+
+    GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
+    gtk_widget_set_name(name_label, "chatter-name");
+    GtkWidget *surname_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].surname);
+    gtk_widget_set_name(surname_label, "chatter-surname");
+    gtk_box_pack_start(GTK_BOX(user_info_box), name_label, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(user_info_box), surname_label, FALSE, FALSE, 5);
+
+    GtkWidget *message_search_entry_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+    set_widget_height(message_search_entry_box, 20);
+    GtkWidget *message_search_entry = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(message_search_entry), "Search message...");
+    gtk_widget_set_valign(GTK_WIDGET(message_search_entry_box), GTK_ALIGN_CENTER);
+    gtk_box_pack_start(GTK_BOX(message_search_entry_box), message_search_entry, FALSE, FALSE, 5);
+
+    GtkWidget* message_search_img = gtk_button_new();
+    gtk_widget_set_valign(GTK_WIDGET(message_search_img), GTK_ALIGN_CENTER);
+    gtk_button_set_relief(GTK_BUTTON(message_search_img), GTK_RELIEF_NONE);
+    gtk_container_set_border_width(GTK_CONTAINER(message_search_img), 0);
+    gtk_widget_set_size_request(GTK_WIDGET(message_search_img), 64, 64);
+    gtk_widget_set_name(GTK_WIDGET(message_search_img), "message-search-img");
+    g_signal_connect(G_OBJECT(message_search_img), "clicked", G_CALLBACK(message_search_clicked), NULL);
+
+    gtk_box_pack_end(GTK_BOX(user_info_box), message_search_img, FALSE, FALSE,0);
+    gtk_box_pack_end(GTK_BOX(user_info_box), message_search_entry_box, FALSE, FALSE, 5);
 }
 
 void draw_user_window() {
@@ -151,21 +214,21 @@ void draw_user_window() {
 
     // Pack the search box into the chats_box
     gtk_box_pack_start(GTK_BOX(chats_box), search_box, FALSE, FALSE, 0);
-    GtkWidget *scrollable_window = gtk_scrolled_window_new(NULL, NULL);
+    scrollable_window = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window),
                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     user_populate_scrollable_window(scrollable_window);
-    
-    GtkWidget* add_new_chat_when_no_chats = gtk_button_new();
+    gtk_box_pack_start(GTK_BOX(chats_box), scrollable_window, TRUE, TRUE, 0);
+
+    add_new_chat_when_no_chats = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(add_new_chat_when_no_chats), GTK_ALIGN_CENTER);
     gtk_button_set_relief(GTK_BUTTON(add_new_chat_when_no_chats), GTK_RELIEF_NONE);
     gtk_container_set_border_width(GTK_CONTAINER(add_new_chat_when_no_chats), 0);
     gtk_widget_set_size_request(GTK_WIDGET(add_new_chat_when_no_chats), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(add_new_chat_when_no_chats), "add_new_chat_when_no_chats");
     g_signal_connect(G_OBJECT(add_new_chat_when_no_chats), "clicked", G_CALLBACK(add_chatter_button_clicked), NULL);
-    gtk_box_pack_end(GTK_BOX(chats_box), add_new_chat_when_no_chats, TRUE, TRUE, 0);
+    gtk_box_pack_end(GTK_BOX(chats_box), add_new_chat_when_no_chats, FALSE, FALSE, 5);
     
-    gtk_box_pack_start(GTK_BOX(chats_box), scrollable_window, TRUE, TRUE, 0);
     if (chatters == NULL) {
         gtk_widget_show(add_new_chat_when_no_chats);
         gtk_widget_hide(scrollable_window);
@@ -174,54 +237,17 @@ void draw_user_window() {
         gtk_widget_show(scrollable_window);
         gtk_widget_hide(add_new_chat_when_no_chats);
     }
-
-    GtkWidget *user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
     set_widget_height(user_info_box, 70);
-    GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
-    GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
-    // prev_pixbuf = resize_img(prev_pixbuf, 150, 150);
-
-    GtkWidget *image = gtk_drawing_area_new();
-    gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
-    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
-    gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
-
-    GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
-    gtk_widget_set_name(name_label, "chatter-name");
-    GtkWidget *surname_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].surname);
-    gtk_widget_set_name(surname_label, "chatter-surname");
-    gtk_box_pack_start(GTK_BOX(user_info_box), name_label, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(user_info_box), surname_label, FALSE, FALSE, 5);
-
-    GtkWidget *message_search_entry_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-
-    set_widget_height(message_search_entry_box, 20);
-    GtkWidget *message_search_entry = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(message_search_entry), "Search message...");
-    gtk_widget_set_valign(GTK_WIDGET(message_search_entry_box), GTK_ALIGN_CENTER);
-    gtk_box_pack_start(GTK_BOX(message_search_entry_box), message_search_entry, FALSE, FALSE, 5);
-
-    GtkWidget* message_search_img = gtk_button_new();
-    gtk_widget_set_valign(GTK_WIDGET(message_search_img), GTK_ALIGN_CENTER);
-    gtk_button_set_relief(GTK_BUTTON(message_search_img), GTK_RELIEF_NONE);
-    gtk_container_set_border_width(GTK_CONTAINER(message_search_img), 0);
-    gtk_widget_set_size_request(GTK_WIDGET(message_search_img), 64, 64);
-    gtk_widget_set_name(GTK_WIDGET(message_search_img), "message-search-img");
-    g_signal_connect(G_OBJECT(message_search_img), "clicked", G_CALLBACK(message_search_clicked), NULL);
-
-    gtk_box_pack_end(GTK_BOX(user_info_box), message_search_img, FALSE, FALSE,0);
-    gtk_box_pack_end(GTK_BOX(user_info_box), message_search_entry_box, FALSE, FALSE, 5);
+    draw_user_info_box(user_info_box);
     gtk_box_pack_start(GTK_BOX(chat_box), user_info_box, FALSE, FALSE, 0);
-
 
     GtkWidget *scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window2),
                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     message_populate_scrollable_window(scrollable_window2);
     g_signal_connect(G_OBJECT(user_window), "realize", G_CALLBACK(on_window_realize), scrollable_window2);
-    // gtk_widget_hide(scrollable_window2);
     gtk_box_pack_start(GTK_BOX(chat_box), scrollable_window2, TRUE, TRUE, 0);
 
     GtkWidget *text_entry = gtk_entry_new();
@@ -237,14 +263,22 @@ void draw_user_window() {
 
     gtk_box_pack_end(GTK_BOX(chat_box),text_box, FALSE, FALSE, 0);
 
-    empty_chat = (chatters != NULL) ? gtk_label_new("[ Select a chat to start chatting ]") : gtk_label_new("[ Add your first chat! ]");
+    empty_chat = (!is_chatters_empty()) ? gtk_label_new("[ Select a chat to start chatting ]") : gtk_label_new("[ Add your first chat! ]");
     gtk_widget_set_name(GTK_WIDGET(empty_chat), "empty-chat");
     gtk_widget_override_background_color(empty_chat, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
-    gtk_box_pack_end(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0);
+    // if (selected_user.index == -1) {
+        // gtk_widget_show(empty_chat);
+    gtk_widget_hide(chat_box);
+    // } else {
+    //     Иначе, показываем прокручиваемое окно для сообщений
+    //     gtk_widget_show(chat_box);
+    //     gtk_widget_hide(empty_chat);
+    // }
 
     // Pack the box containers into the main horizontal box container
     gtk_box_pack_start(GTK_BOX(hbox_main), settings_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
+    gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
 }
 
