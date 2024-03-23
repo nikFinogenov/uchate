@@ -63,13 +63,13 @@ void fill_data(void) {
     }
     for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
     // Initialize or populate messages with temporary data here
-    for(int i = 0; i < MAX_CHATTERS; i++) {
-        for(int j = 0; j < MAX_MESSAGES; j++) {
-            messages[i][j].text = mx_strjoin(mx_itoa(i), ") This is a message.");
-            messages[i][j].is_user = (i % 2 == 0) ? true : false;
-            messages_count[i]++;
-        }
-    }
+    // for(int i = 0; i < 2; i++) {
+    //     for(int j = 0; j < 10; j++) {
+    //         messages[i][j].text = mx_strjoin(mx_itoa(i), ") This is a message.");
+    //         messages[i][j].is_user = (i % 2 == 0) ? true : false;
+    //         messages_count[i]++;
+    //     }
+    // }
 
     // Example initialization of chatters
     chatters = malloc(MAX_CHATTERS * sizeof(t_chatter_s));

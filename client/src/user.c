@@ -3,6 +3,7 @@
 static GtkWidget *user_window;
 static GtkWidget* add_new_chat_when_no_chats;
 static GtkWidget *scrollable_window;
+static GtkWidget *scrollable_window2;
 // static GtkWidget *user_info_box;
 
 void on_window_realize(GtkWidget *widget, gpointer data) {
@@ -22,6 +23,17 @@ void refresh_scrollable_window(GtkWidget *scrollable_window) {
     
     // Перерисовываем содержимое скроллабельного окна
     user_populate_scrollable_window(scrollable_window);
+
+    
+    // Перерисовываем окно
+    gtk_widget_show_all(scrollable_window);
+}
+void refresh_scrollable_window2(GtkWidget *scrollable_window) {
+    // Очищаем содержимое скроллабельного окна
+    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    
+    // Перерисовываем содержимое скроллабельного окна
+    message_populate_scrollable_window(scrollable_window);
 
     
     // Перерисовываем окно
@@ -77,6 +89,38 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     
     // If no available slot is found
     g_print("Chatter limit reached\n");
+}
+
+static void add_message_button_clicked(GtkWidget *widget, gpointer data) {
+    g_print("Add message clicked\n");
+    
+    // Check if chatters array is initialized
+    if (messages == NULL) {
+        g_print("Messages array is not initialized\n");
+        return;
+    }
+    
+    // Создаем новый элемент структуры
+    t_message_s new_mes = {
+        .text = "Some text",
+        .is_user = FALSE
+    };
+    g_print("%d\n", messages_count[selected_user.index]);
+    // Find the first available slot in the chatters array
+    if(messages_count[selected_user.index] + 1 < MAX_MESSAGES) {
+        messages[selected_user.index][messages_count[selected_user.index]] = new_mes;
+        messages_count[selected_user.index]++;
+        refresh_scrollable_window2(scrollable_window2);
+        gtk_widget_show(scrollable_window2);
+            // gtk_widget_hide(add_new_chat_when_no_chats);
+
+        // if (!is_message_empty()) {
+        //     // Если массив больше не пуст, обновляем текст метки empty_chat
+        //     // gtk_label_set_text(GTK_LABEL(empty_chat), "[ Select a chat to start chatting ]");
+        // }
+        return;
+    }
+    g_print("Messages limit reached\n");
 }
 
 static void settings_button_clicked(GtkWidget *widget, gpointer data) {
@@ -243,7 +287,7 @@ void draw_user_window() {
     draw_user_info_box(user_info_box);
     gtk_box_pack_start(GTK_BOX(chat_box), user_info_box, FALSE, FALSE, 0);
 
-    GtkWidget *scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
+    scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window2),
                                 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     message_populate_scrollable_window(scrollable_window2);
@@ -258,6 +302,7 @@ void draw_user_window() {
 
     GtkWidget *send_button = gtk_button_new_with_label("[ Send ]");
     gtk_widget_set_size_request(send_button, 25, 25);
+    g_signal_connect(G_OBJECT(send_button), "clicked", G_CALLBACK(add_message_button_clicked), NULL);
 
     gtk_box_pack_start(GTK_BOX(text_box), send_button, FALSE, FALSE, 0);
 
