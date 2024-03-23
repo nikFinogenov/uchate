@@ -5,7 +5,10 @@ static GtkWidget* add_new_chat_when_no_chats;
 static GtkWidget *scrollable_window;
 static GtkWidget *scrollable_window2;
 // static GtkWidget *user_info_box;
-
+typedef struct {
+    GtkWidget *entry;
+    // Add any other data needed by the callback function
+} CallbackData;
 void on_window_realize(GtkWidget *widget, gpointer data) {
     // Получаем пролистываемое окно
     GtkWidget *scrollable_window = GTK_WIDGET(data);
@@ -91,9 +94,12 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Chatter limit reached\n");
 }
 
-static void add_message_button_clicked(GtkWidget *widget, gpointer data) {
+static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     g_print("Add message clicked\n");
-    
+    CallbackData *data = (CallbackData *)user_data;
+    const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
+    if(mx_strcmp(text, "") == 0) return;
+    // const gchar *text = gtk_entry_get_text(GTK_ENTRY(wi));
     // Check if chatters array is initialized
     if (messages == NULL) {
         g_print("Messages array is not initialized\n");
@@ -102,8 +108,8 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer data) {
     
     // Создаем новый элемент структуры
     t_message_s new_mes = {
-        .text = "Some text",
-        .is_user = FALSE
+        .text = mx_strdup(text),
+        .is_user = TRUE
     };
     g_print("%d\n", messages_count[selected_user.index]);
     // Find the first available slot in the chatters array
@@ -112,6 +118,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer data) {
         messages_count[selected_user.index]++;
         refresh_scrollable_window2(scrollable_window2);
         gtk_widget_show(scrollable_window2);
+        gtk_entry_set_text(GTK_ENTRY(data->entry), "");
             // gtk_widget_hide(add_new_chat_when_no_chats);
 
         // if (!is_message_empty()) {
@@ -302,7 +309,9 @@ void draw_user_window() {
 
     GtkWidget *send_button = gtk_button_new_with_label("[ Send ]");
     gtk_widget_set_size_request(send_button, 25, 25);
-    g_signal_connect(G_OBJECT(send_button), "clicked", G_CALLBACK(add_message_button_clicked), NULL);
+    CallbackData *callback_data = g_slice_new(CallbackData);
+    callback_data->entry = text_entry;
+    g_signal_connect(G_OBJECT(send_button), "clicked", G_CALLBACK(add_message_button_clicked), callback_data);
 
     gtk_box_pack_start(GTK_BOX(text_box), send_button, FALSE, FALSE, 0);
 
