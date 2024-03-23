@@ -327,10 +327,10 @@ void draw_user_window() {
     // }
 
     // Pack the box containers into the main horizontal box container
-    gtk_widget_hide(chat_box);
     gtk_box_pack_start(GTK_BOX(hbox_main), settings_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
+        gtk_widget_hide(chat_box);
 }
 
