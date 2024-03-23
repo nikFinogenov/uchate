@@ -18,7 +18,7 @@ void on_window_realize(GtkWidget *widget, gpointer data) {
 
     // Устанавливаем его на максимальное значение, чтобы прокрутить вниз
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
-    gtk_widget_hide(chat_box);
+    gtk_widget_hide(chat_box);   
 }
 void refresh_scrollable_window(GtkWidget *scrollable_window) {
     // Очищаем содержимое скроллабельного окна
@@ -26,8 +26,7 @@ void refresh_scrollable_window(GtkWidget *scrollable_window) {
     
     // Перерисовываем содержимое скроллабельного окна
     user_populate_scrollable_window(scrollable_window);
-
-    
+ 
     // Перерисовываем окно
     gtk_widget_show_all(scrollable_window);
 }
@@ -37,8 +36,7 @@ void refresh_scrollable_window2(GtkWidget *scrollable_window) {
     
     // Перерисовываем содержимое скроллабельного окна
     message_populate_scrollable_window(scrollable_window);
-
-    
+ 
     // Перерисовываем окно
     gtk_widget_show_all(scrollable_window);
 }
@@ -143,7 +141,7 @@ static void message_search_clicked(GtkWidget *widget, gpointer data) {
 }
 
 void show_user_window() {
-    gtk_widget_show_all(user_window);   
+    gtk_widget_show_all(user_window);
 }
 
 void draw_user_info_box(GtkWidget *user_info_box) {
@@ -210,7 +208,6 @@ void draw_user_window() {
     gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
     gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0});
     gtk_widget_override_background_color(chat_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0});
-
     // Set the widths of the box containers
     gtk_widget_set_size_request(settings_box, 75, -1); // 75 pixels width
     gtk_widget_set_size_request(chats_box, 350, -1); // 350 pixels width
@@ -322,7 +319,7 @@ void draw_user_window() {
     gtk_widget_override_background_color(empty_chat, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
     // if (selected_user.index == -1) {
         // gtk_widget_show(empty_chat);
-    gtk_widget_hide(chat_box);
+    // gtk_widget_hide(chat_box);
     // } else {
     //     Иначе, показываем прокручиваемое окно для сообщений
     //     gtk_widget_show(chat_box);
@@ -330,6 +327,7 @@ void draw_user_window() {
     // }
 
     // Pack the box containers into the main horizontal box container
+    gtk_widget_hide(chat_box);
     gtk_box_pack_start(GTK_BOX(hbox_main), settings_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
