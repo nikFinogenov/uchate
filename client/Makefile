@@ -1,5 +1,5 @@
 NAME  = uchat_client
-FLAGS = -std=c99 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0`
+FLAGS = `pkg-config --cflags gtk+-3.0`
 DFLAGS= #-Wno-unused-command-line-argument -Wno-unused-variable \
     -Wno-unused-function -Wno-unused-parameter \
     -fno-omit-frame-pointer
