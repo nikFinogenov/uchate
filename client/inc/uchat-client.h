@@ -16,7 +16,7 @@
 // #include <gdk-pixbuf-core.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <../../libmx/inc/libmx.h>
+#include "../../libmx/inc/libmx.h"
 
 typedef struct {
     char* username;

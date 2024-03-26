@@ -72,6 +72,57 @@ static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     g_object_unref(pixbuf);
     return result;
 }
+static void create_tools_menu(GdkEvent *event) {
+    GtkWidget *menu;
+    GtkWidget *menu_item;
+    
+    // Create a new menu
+    menu = gtk_menu_new();
+
+    // Create menu items (buttons)
+    menu_item = gtk_menu_item_new_with_label("Edit");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+
+    menu_item = gtk_menu_item_new_with_label("Delete");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+
+    // menu_item = gtk_menu_item_new_with_label("Button 3");
+    // gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+
+    menu_item = gtk_menu_item_new_with_label("React");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+
+    // Show the menu
+    gtk_widget_show_all(menu);
+
+    // Popup the menu at the event coordinates
+    gtk_menu_popup_at_pointer(GTK_MENU(menu), event);
+}
+
+static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpointer data) {
+    g_print("xyi\n");
+    if (event->type == GDK_BUTTON_PRESS && event->button == GDK_BUTTON_SECONDARY) {
+        g_print("double xyi\n\n");
+        GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(widget)));
+        if (parent_window != NULL) {
+            gint x, y;
+            gtk_window_get_position(parent_window, &x, &y);
+            GtkAllocation allocation;
+            gtk_widget_get_allocation(GTK_WIDGET(data), &allocation);
+            //ебаная проверка всё ломает, как же похуй на неё
+    //             g_print("Event coordinates: (%f, %f)\n", event->x_root, event->y_root);
+    //             g_print("Widget position: (%d, %d)\n", x, y);
+    //             g_print("Widget size: (%d, %d)\n", allocation.width, allocation.height);
+    //         if (event->x_root >= allocation.x && event->x_root <= allocation.x + allocation.width &&
+    // event->y_root >= allocation.y && event->y_root <= allocation.y + allocation.height) {
+    //             g_print("triple xui\n\n\n");
+                create_tools_menu((GdkEvent *)event);
+                return TRUE; // Prevent further processing of the event
+            // }
+        }
+    }
+    return FALSE;
+}
 
 GdkPixbuf *file_to_pixbuf(const gchar *filename) {
     GdkPixbuf *pixbuf;
@@ -202,8 +253,11 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
     if (messages != NULL) {
         // for (int i = 0; messages[s].text != NULL; i++) {
         for (int i = 0; i < messages_count[selected_user.index]; i++) {
+            GtkWidget *event_box = gtk_event_box_new();
+            gtk_container_add(GTK_CONTAINER(mess_list), event_box); // Здесь добавляется event_box в mess_list
             GtkWidget *mess_box = create_message_box(messages[selected_user.index][i].text, messages[selected_user.index][i].is_user);
-            gtk_box_pack_start(GTK_BOX(mess_list), mess_box, FALSE, FALSE, 0);
+            gtk_container_add(GTK_CONTAINER(event_box), mess_box);
+            g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
         }
     }
 }

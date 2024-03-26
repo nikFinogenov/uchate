@@ -9,7 +9,7 @@ typedef struct {
     GtkWidget *entry;
     // Add any other data needed by the callback function
 } CallbackData;
-void on_window_realize(GtkWidget *widget, gpointer data) {
+static void on_window_realize(GtkWidget *widget, gpointer data) {
     // Получаем пролистываемое окно
     GtkWidget *scrollable_window = GTK_WIDGET(data);
 
@@ -20,7 +20,7 @@ void on_window_realize(GtkWidget *widget, gpointer data) {
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
     gtk_widget_hide(chat_box);   
 }
-void refresh_scrollable_window(GtkWidget *scrollable_window) {
+static void refresh_scrollable_window(GtkWidget *scrollable_window) {
     // Очищаем содержимое скроллабельного окна
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
     
@@ -30,7 +30,7 @@ void refresh_scrollable_window(GtkWidget *scrollable_window) {
     // Перерисовываем окно
     gtk_widget_show_all(scrollable_window);
 }
-void refresh_scrollable_window2(GtkWidget *scrollable_window) {
+static void refresh_scrollable_window2(GtkWidget *scrollable_window) {
     // Очищаем содержимое скроллабельного окна
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
     
@@ -91,7 +91,6 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     // If no available slot is found
     g_print("Chatter limit reached\n");
 }
-
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     g_print("Add message clicked\n");
     CallbackData *data = (CallbackData *)user_data;
@@ -127,19 +126,15 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     }
     g_print("Messages limit reached\n");
 }
-
 static void settings_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Settings clicked\n");
 }
-
 static void user_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("User clicked\n");
 }
-
 static void message_search_clicked(GtkWidget *widget, gpointer data) {
     g_print("Message search clicked\n");
 }
-
 void show_user_window() {
     gtk_widget_show_all(user_window);
 }
@@ -331,6 +326,6 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
-        gtk_widget_hide(chat_box);
+    gtk_widget_hide(chat_box);
 }
 
