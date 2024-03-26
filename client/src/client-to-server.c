@@ -47,7 +47,7 @@ int connect_to_server(int *sock) {
     return 0;
 }
 
-char *send_sign_up_data(char *username, char *password) {
+char **send_sign_up_data(char *username, char *password) {
     // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);
     
@@ -83,6 +83,7 @@ char *send_sign_up_data(char *username, char *password) {
 
     char recvBuffer[DEFAULT_MESSAGE_SIZE];
     bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
         pthread_t thread_id;
@@ -111,6 +112,7 @@ char *check_login_data(char *username, char* password) {
     socklen_t len = sizeof (error);
     int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
 
+
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
         sockfd = -1;
@@ -133,6 +135,7 @@ char *check_login_data(char *username, char* password) {
 
     char recvBuffer[DEFAULT_MESSAGE_SIZE];
     bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
         pthread_t thread_id;
@@ -142,6 +145,7 @@ char *check_login_data(char *username, char* password) {
         sockfd = -1;
         return "Go fuck yourself fierce!";
     }
+
 
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;

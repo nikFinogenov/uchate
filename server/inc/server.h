@@ -33,7 +33,7 @@
 
 int socket_init(int port);
 void logger(char *proccess, char* status, char* errmsg);
-void mx_add_user(char **data);
+void mx_add_user(char **data, int sockfd);
 void mx_get_user(char **data, int sockfd);
 void mx_update_user(char **data);
 void check_login_data(char **data, int sockfd);

@@ -29,11 +29,6 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     char *parsed_username = (char*)username;
     char *parsed_password = (char*)password;
 
-    // Print the username and password (you can replace this with whatever you want to do with the data)
-    g_print("Username: %s\n", parsed_username);
-    g_print("Password: %s\n", parsed_password);
-    
-
     char *repsponse = check_login_data(parsed_username, parsed_password);
 
     g_print("%s\n", repsponse);

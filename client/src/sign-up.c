@@ -1,6 +1,8 @@
 #include "uchat-client.h"
 
+
 static GtkWidget *signup_window;
+GtkWidget *error_label = NULL;
 
 // Define a structure to hold the necessary data
 typedef struct {
@@ -22,6 +24,10 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
 
+    GdkRGBA color_red;
+    gdk_rgba_parse(&color_red, "#de34eb");
+
+
     // Get the username and password from the entry widgets
     const gchar *username = gtk_entry_get_text(GTK_ENTRY(entries->username_entry));
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
@@ -32,27 +38,42 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     char *parsed_password = (char*)password;
     char *parsed_repeat_password = (char*)repeat_password;
 
+    if (error_label != NULL) {
+        gtk_widget_destroy(error_label);
+        error_label = NULL;
+    }
+
+    // Password mismatch
     if (strcmp(parsed_password, parsed_repeat_password) != 0) {
-        // TODO: display error message on the sign up page
-        printf("The passwords do not match. Please try again!\n");
+        error_label = gtk_label_new("The passwords do not match");
+        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(signup_window);
         return;
     }
 
-    // Print the username and password (you can replace this with whatever you want to do with the data)
-    g_print("Username: %s\n", username);
-    g_print("Password: %s\n", password);
-    g_print("Password: %s\n", repeat_password);
+    // Short password
+    if (strlen(parsed_password) < 8) {
+        error_label = gtk_label_new("Password cannot be less than 8 characters");
+        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(signup_window);
+        return;
+    }
 
-    char *response = send_sign_up_data(username, password);
+    char **response = send_sign_up_data(parsed_username, parsed_password);
 
-    g_print("%s\n", response);
-
-
-    // If login data is correct
-    gtk_widget_destroy(signup_window);
-    // gtk_widget_hide(login_window);
-    draw_user_window();
-    show_user_window();
+    // User existence
+    if (strcmp(response, "1") == 0) {
+        error_label = gtk_label_new("Username already exists");
+        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(signup_window);
+    } else {
+        gtk_widget_destroy(signup_window);
+        draw_user_window();
+        show_user_window();
+    }
 }
 
 void draw_singup() {

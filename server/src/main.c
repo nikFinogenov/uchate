@@ -6,7 +6,7 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "LoadMessages")) mx_load_messages(data, new_socket);
     else if (!mx_strcmp(request, "Authorization")) mx_authorization(data, new_socket);
     //user-endpoints
-    else if (!mx_strcmp(request, "/user/add")) mx_add_user(data);
+    else if (!mx_strcmp(request, "/user/add")) mx_add_user(data, new_socket);
     else if (!mx_strcmp(request, "/user/get")) mx_get_user(data, new_socket);
     else if (!mx_strcmp(request, "/user/update")) mx_update_user(data);
     else if (!mx_strcmp(request, "/user/delete")) mx_delete_user(data);
