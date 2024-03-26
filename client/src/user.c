@@ -126,6 +126,22 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     }
     g_print("Messages limit reached\n");
 }
+static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
+    // Проверяем, нажата ли клавиша Enter
+    if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
+        // Получаем указатель на данные, переданные при подключении сигнала
+        CallbackData *callback_data = (CallbackData *)user_data;
+        
+        // Вызываем функцию-обработчик, которая вызывается при нажатии кнопки отправки сообщения
+        add_message_button_clicked(GTK_WIDGET(callback_data->entry), callback_data);
+        
+        // Возвращаем TRUE, чтобы предотвратить дальнейшую обработку события
+        return TRUE;
+    }
+
+    // Возвращаем FALSE, чтобы разрешить дальнейшую обработку события
+    return FALSE;
+}
 static void settings_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Settings clicked\n");
 }
@@ -135,6 +151,7 @@ static void user_button_clicked(GtkWidget *widget, gpointer data) {
 static void message_search_clicked(GtkWidget *widget, gpointer data) {
     g_print("Message search clicked\n");
 }
+
 void show_user_window() {
     gtk_widget_show_all(user_window);
 }
@@ -304,7 +321,8 @@ void draw_user_window() {
     CallbackData *callback_data = g_slice_new(CallbackData);
     callback_data->entry = text_entry;
     g_signal_connect(G_OBJECT(send_button), "clicked", G_CALLBACK(add_message_button_clicked), callback_data);
-
+    g_signal_connect(G_OBJECT(text_entry), "key-press-event", G_CALLBACK(on_entry_key_press), callback_data);
+    
     gtk_box_pack_start(GTK_BOX(text_box), send_button, FALSE, FALSE, 0);
 
     gtk_box_pack_end(GTK_BOX(chat_box),text_box, FALSE, FALSE, 0);
