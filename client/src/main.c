@@ -1,4 +1,15 @@
 #include "uchat-client.h"
+#include <glib.h>
+// void log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data) {
+//     // Check if the log level indicates a critical warning
+//     if (log_level & (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING)) {
+//         // Output the log message
+//         g_log_default_handler(log_domain, log_level, message, user_data);
+
+//         // If you want to break on the critical warning, you can use abort() here
+//         // abort();
+//     }
+// }
 
 int main(int argc, char *argv[]) {
     // GtkCssProvider *cssProvider = gtk_css_provider_new();
@@ -7,6 +18,8 @@ int main(int argc, char *argv[]) {
     // GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     gtk_init(&argc, &argv);
+    // g_log_set_handler(NULL, G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, log_handler, NULL);
+
     fill_data();
 
     // Get screen width and height

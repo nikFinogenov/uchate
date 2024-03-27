@@ -2,8 +2,8 @@
 
 static GtkWidget *user_window;
 static GtkWidget* add_new_chat_when_no_chats;
-static GtkWidget *scrollable_window;
-static GtkWidget *scrollable_window2;
+GtkWidget *scrollable_window = NULL;
+GtkWidget *scrollable_window2 = NULL;
 // static GtkWidget *user_info_box;
 typedef struct {
     GtkWidget *entry;
@@ -19,26 +19,6 @@ static void on_window_realize(GtkWidget *widget, gpointer data) {
     // Устанавливаем его на максимальное значение, чтобы прокрутить вниз
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
     gtk_widget_hide(chat_box);   
-}
-static void refresh_scrollable_window(GtkWidget *scrollable_window) {
-    // Очищаем содержимое скроллабельного окна
-    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
-    
-    // Перерисовываем содержимое скроллабельного окна
-    user_populate_scrollable_window(scrollable_window);
- 
-    // Перерисовываем окно
-    gtk_widget_show_all(scrollable_window);
-}
-static void refresh_scrollable_window2(GtkWidget *scrollable_window) {
-    // Очищаем содержимое скроллабельного окна
-    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
-    
-    // Перерисовываем содержимое скроллабельного окна
-    message_populate_scrollable_window(scrollable_window);
- 
-    // Перерисовываем окно
-    gtk_widget_show_all(scrollable_window);
 }
 static void logout_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Logout clicked\n");
@@ -69,7 +49,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
         chatters_count++;
         refresh_scrollable_window(scrollable_window);
             gtk_widget_show(scrollable_window);
-            gtk_widget_hide(add_new_chat_when_no_chats);
+            // gtk_widget_hide(add_new_chat_when_no_chats);
 
         if (!is_chatters_empty()) {
             // Если массив больше не пуст, обновляем текст метки empty_chat
@@ -115,8 +95,14 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
         messages_count[selected_user.index]++;
         refresh_scrollable_window2(scrollable_window2);
         gtk_widget_show(scrollable_window2);
+        chatters[selected_user.index].lastmsg = format_last_msg((char *)text);//strdup(text);
+        refresh_scrollable_window(scrollable_window);
+        gtk_widget_show(scrollable_window); 
+        // selected_user.box = 
+        // gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+        // user_box_clicked(selected_user.box, NULL, selected_user.index);
         gtk_entry_set_text(GTK_ENTRY(data->entry), "");
-            // gtk_widget_hide(add_new_chat_when_no_chats);
+        // user_box_clicked()
 
         // if (!is_message_empty()) {
         //     // Если массив больше не пуст, обновляем текст метки empty_chat
@@ -150,6 +136,26 @@ static void user_button_clicked(GtkWidget *widget, gpointer data) {
 }
 static void message_search_clicked(GtkWidget *widget, gpointer data) {
     g_print("Message search clicked\n");
+}
+void refresh_scrollable_window(GtkWidget *scrollable_window) {
+    // Очищаем содержимое скроллабельного окна
+    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    
+    // Перерисовываем содержимое скроллабельного окна
+    user_populate_scrollable_window(scrollable_window);
+ 
+    // Перерисовываем окно
+    gtk_widget_show_all(scrollable_window);
+}
+void refresh_scrollable_window2(GtkWidget *scrollable_window) {
+    // Очищаем содержимое скроллабельного окна
+    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    
+    // Перерисовываем содержимое скроллабельного окна
+    message_populate_scrollable_window(scrollable_window);
+ 
+    // Перерисовываем окно
+    gtk_widget_show_all(scrollable_window);
 }
 
 void show_user_window() {
@@ -295,7 +301,7 @@ void draw_user_window() {
     } else {
         // Иначе, показываем прокручиваемое окно для сообщений
         gtk_widget_show(scrollable_window);
-        gtk_widget_hide(add_new_chat_when_no_chats);
+        // gtk_widget_hide(add_new_chat_when_no_chats);
     }
     user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
@@ -344,6 +350,7 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
-    gtk_widget_hide(chat_box);
+    // gtk_widget_hide(chat_box);
+    // g_signal_connect(G_OBJECT(chat_box), "realize", G_CALLBACK(on_chat_box_realize), NULL);
 }
 

@@ -58,6 +58,8 @@ extern GtkWidget *empty_chat;
 extern GtkWidget *chats_box;
 extern GtkWidget *settings_box;
 extern GtkWidget *user_info_box;
+extern GtkWidget *scrollable_window;
+extern GtkWidget *scrollable_window2;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
@@ -97,6 +99,9 @@ GtkWidget *create_penis(void);
 void fill_data(void);
 bool is_chatters_empty(void);
 bool is_messages_empty(void);
-
+gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index);
+void refresh_scrollable_window(GtkWidget *scrollable_window);
+void refresh_scrollable_window2(GtkWidget *scrollable_window);
+char* format_last_msg(char* text);
 
 #endif

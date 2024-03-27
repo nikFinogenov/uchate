@@ -17,7 +17,7 @@ void refresh_user_box() {
 }
 gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
     g_print("clicked -> ");
-    if (selected_user.box != NULL) {
+    if (selected_user.box != NULL && selected_user.index != index) {
         gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
     }
 
@@ -29,6 +29,10 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
 
     gtk_widget_hide(empty_chat);
     refresh_user_box();
+    refresh_scrollable_window2(scrollable_window2);
+    gtk_widget_show(scrollable_window2);
+
+    // refresh_
     gtk_widget_show_all(chat_box);
     
     g_print("%d\n", selected_user.index);
@@ -222,7 +226,11 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
         for (int i = 0; i < chatters_count; i++) {
             GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
             gtk_widget_set_name(user_box, "user-box");
-            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
+            if(i == selected_user.index) {
+                selected_user.box = user_box;
+                gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+            }
+            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));  
             gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
         }
     }
@@ -260,4 +268,29 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
             g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
         }
     }
+}
+
+char* format_last_msg(char* text) {
+        int len = strlen(text);
+    int max_length = 25; // Maximum length of the returned string (excluding "...")
+
+    // Allocate memory for the formatted string
+    char* formatted_text = (char*)malloc((max_length + 4) * sizeof(char)); // 4 extra chars for "..." and null terminator
+    if (formatted_text == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    // Copy the first 25 characters of the input text
+    strncpy(formatted_text, text, max_length);
+
+    // Null-terminate the string
+    formatted_text[max_length] = '\0';
+
+    // Add "..." to indicate truncated text if the original text is longer than 25 characters
+    if (len > max_length) {
+        strcat(formatted_text, "...");
+    }
+
+    return formatted_text;
 }
