@@ -40,6 +40,7 @@ typedef struct {
 typedef struct {
     char* text;
     bool is_user;
+    //reaction
 } t_message_s;
 
 typedef struct {
