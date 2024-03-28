@@ -9,19 +9,48 @@
 #define MAIN_WINDOW_HEIGHT 900
 #define MAIN_WINDOW_WIDTH 1500
 
-<<<<<<< HEAD
 #define MAX_MESSAGES 1000 // Maximum number of messages
 #define MAX_CHATTERS 50 // Maximum number of chatters
-=======
 #define DEFAULT_MESSAGE_SIZE 1024
->>>>>>> client/login-signup
 
 #include <gtk/gtk.h>
 // #include <gdk-pixbuf-core.h>
 #include <stdio.h>
 #include <stdbool.h>
-<<<<<<< HEAD
 #include "../../libmx/inc/libmx.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <fcntl.h>
+#include <stdbool.h>
+#include <string.h>
+#include <netinet/in.h>
+#include <sqlite3.h>
+#include <pthread.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <signal.h> 
+#include <time.h>
+#include <limits.h>
+#include <dirent.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <locale.h>
+#include <stdio.h>
+#include <math.h>
+#include <pthread.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <errno.h>
+#include <arpa/inet.h>
 
 typedef struct {
     char* username;
@@ -75,41 +104,7 @@ extern int messages_count[MAX_CHATTERS];
 //     char* surname;
 //     GdkPixbuf *avatar;
 // } t_chatter_s;
-=======
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include <string.h>
-#include <netinet/in.h>
-#include <sqlite3.h>
-#include <pthread.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <signal.h> 
-#include <time.h>
-#include <limits.h>
-#include <dirent.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <locale.h>
-#include <stdio.h>
-#include <math.h>
-#include <pthread.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <errno.h>
-#include <arpa/inet.h>
->>>>>>> client/login-signup
+
 
 // Login side
 // void draw_login(GtkWidget *window);
