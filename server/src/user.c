@@ -137,37 +137,13 @@ bool mx_check_user(char **data) {
 }
 
 void check_login_data(char **data, int sockfd) {
-    char *encrypted_pass = encrypt_pass(mx_strdup(data[2]));
-
-    sqlite3 *db = open_db();
-    sqlite3_stmt *res;
-    char sql[500];
-
     char response[DEFAULT_MESSAGE_SIZE];
 
-    memset(sql, 0, 500);
-    sprintf(sql, "SELECT PASSWORD FROM USERS WHERE USERNAME='%s';", data[1]);
-
-    // Execute the SQL query
-    if (sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK) {
-        if (sqlite3_step(res) == SQLITE_ROW) {
-            const unsigned char *password = sqlite3_column_text(res, 0);
-
-            if (strcmp(encrypted_pass, (char*)password) == 0) {
-                sprintf(response, "%s\n", "passwords are the same!");
-            } else {
-                sprintf(response, "%s\n", "passwords are different!");
-            }
-        }
-        // Finalize the statement
-        sqlite3_finalize(res);
+    if (mx_check_user(data)) {
+        sprintf(response, "0");
+    } else {
+        sprintf(response, "1");
     }
-
-    sprintf(response, "%s\n", "passwords are different!");
-
-    sqlite3_finalize(res);
-    sqlite3_close(db);
-    free(encrypted_pass);
 
     send(sockfd, response, strlen(response), 0);
 }

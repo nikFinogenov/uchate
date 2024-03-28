@@ -2,7 +2,7 @@
 
 
 static GtkWidget *signup_window;
-GtkWidget *error_label = NULL;
+static GtkWidget *error_label = NULL;
 
 // Define a structure to hold the necessary data
 typedef struct {
@@ -24,6 +24,7 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
 
+    // Set the color of the error messages
     GdkRGBA color_red;
     gdk_rgba_parse(&color_red, "#de34eb");
 
@@ -69,8 +70,9 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
         gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
         gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
         gtk_widget_show_all(signup_window);
-    } else {
-        gtk_widget_destroy(signup_window);
+    } else if (strcmp(response, "0") == 0) {
+        // gtk_widget_destroy(signup_window);
+        gtk_widget_hide(signup_window);
         draw_user_window();
         show_user_window();
     }

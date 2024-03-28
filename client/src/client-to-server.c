@@ -98,7 +98,7 @@ char **send_sign_up_data(char *username, char *password) {
     return recvBuffer;
 }
 
-char *check_login_data(char *username, char* password) {
+char **check_login_data(char *username, char* password) {
     // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);
     

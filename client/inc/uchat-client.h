@@ -69,7 +69,7 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window);
 // Server stuff
 int connect_to_server(int *sock);
 char **send_sign_up_data(char *username, char *password);
-char *check_login_data(char *username, char* password);
+char **check_login_data(char *username, char* password);
 
 
 
