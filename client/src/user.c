@@ -49,7 +49,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
         chatters_count++;
         refresh_scrollable_window(scrollable_window);
             gtk_widget_show(scrollable_window);
-            // gtk_widget_hide(add_new_chat_when_no_chats);
+            gtk_widget_hide(add_new_chat_when_no_chats);
 
         if (!is_chatters_empty()) {
             // Если массив больше не пуст, обновляем текст метки empty_chat
@@ -300,7 +300,7 @@ void draw_user_window() {
     } else {
         // Иначе, показываем прокручиваемое окно для сообщений
         gtk_widget_show(scrollable_window);
-        // gtk_widget_hide(add_new_chat_when_no_chats);
+        gtk_widget_hide(add_new_chat_when_no_chats);
     }
     user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
