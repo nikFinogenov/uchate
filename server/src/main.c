@@ -6,15 +6,21 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "LoadMessages")) mx_load_messages(data, new_socket);
     else if (!mx_strcmp(request, "Authorization")) mx_authorization(data, new_socket);
     //user-endpoints
-    else if (!mx_strcmp(request, "/user/add")) mx_add_user(data);
+    else if (!mx_strcmp(request, "/user/add")) mx_add_user(data, new_socket);
     else if (!mx_strcmp(request, "/user/get")) mx_get_user(data, new_socket);
     else if (!mx_strcmp(request, "/user/update")) mx_update_user(data);
     else if (!mx_strcmp(request, "/user/delete")) mx_delete_user(data);
+    else if (!mx_strcmp(request, "/user/check-login-data")) check_login_data(data, new_socket);
     //message-endpoints
-    else if (!mx_strcmp(request, "InsertMessage")) mx_insert_message(data, new_socket);
-    else if (!mx_strcmp(request, "CheckMessages")) mx_check_messages(data, new_socket);
-    else if (!mx_strcmp(request, "DeleteMessage")) mx_delete_message(data);
-    else if (!mx_strcmp(request, "EditMessage")) mx_edit_message(data);
+    else if (!mx_strcmp(request, "/messages/add")) mx_add_message(data);
+    else if (!mx_strcmp(request, "/messages/get")) mx_get_message(data, new_socket);
+    else if (!mx_strcmp(request, "/messages/update")) mx_update_message(data);
+    else if (!mx_strcmp(request, "/messages/delete")) mx_delete_message(data);
+    //chat-endpoints
+    else if (!mx_strcmp(request, "/chat/add")) mx_create_chat(data);
+    else if (!mx_strcmp(request, "/chat/get")) mx_get_chat(data, new_socket);
+    else if (!mx_strcmp(request, "/chat/update")) mx_update_chat(data);
+    else if (!mx_strcmp(request, "/chat/delete")) mx_delete_chat(data);
     //xyeta-endpoints
     // else if (!mx_strcmp(request, "CheckLastRoom")) mx_check_last_room(data, new_socket);
     // else if (!mx_strcmp(request, "AddImageMessage")) message_img(data, new_socket);

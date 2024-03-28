@@ -1,6 +1,7 @@
 #include "uchat-client.h"
 
 static GtkWidget *login_window;
+static GtkWidget *error_label = NULL;
 
 // Define a structure to hold the necessary data
 typedef struct {
@@ -21,17 +22,36 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
 
+    // Set the color of the error messages
+    GdkRGBA color_red;
+    gdk_rgba_parse(&color_red, "#de34eb");
+
     // Get the username and password from the entry widgets
     const gchar *username = gtk_entry_get_text(GTK_ENTRY(entries->username_entry));
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
 
-    // Print the username and password (you can replace this with whatever you want to do with the data)
-    g_print("Username: %s\n", username);
-    g_print("Password: %s\n", password);
-    gtk_widget_destroy(login_window);
-    // gtk_widget_hide(login_window);
-    draw_user_window();
-    show_user_window();
+    // Parsing const gchar* to char*
+    char *parsed_username = (char*)username;
+    char *parsed_password = (char*)password;
+
+    char **response = check_login_data(parsed_username, parsed_password);
+
+    if (error_label != NULL) {
+        gtk_widget_destroy(error_label);
+        error_label = NULL;
+    }
+
+    if (strcmp(response, "1") == 0) {
+        error_label = gtk_label_new("Username or password is incorrect");
+        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(login_window))), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(login_window);
+    } else if (strcmp(response, "0") == 0) {
+        // gtk_widget_destroy(login_window);
+        gtk_widget_hide(login_window);
+        draw_user_window();
+        show_user_window();
+    }
 }
 
 void draw_login(void) {
