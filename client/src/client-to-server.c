@@ -47,7 +47,7 @@ int connect_to_server(int *sock) {
     return 0;
 }
 
-char **send_sign_up_data(char *username, char *password) {
+char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password) {
     // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);
     
@@ -55,7 +55,7 @@ char **send_sign_up_data(char *username, char *password) {
     bzero(sendBuffer, 1024);
     //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
     //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
-    sprintf(sendBuffer, "/user/add\n%s\n%s\n", username, password);
+    sprintf(sendBuffer, "/user/add\n%s\n%s\n%s\n%s\n", username, password, first_name, last_name);
     
     int error = 0;
     socklen_t len = sizeof (error);
@@ -64,12 +64,10 @@ char **send_sign_up_data(char *username, char *password) {
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
         sockfd = -1;
-        return "Go fuck yourself once!";
     }
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
         sockfd = -1;
-         return "Go fuck yourself twice!";
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
@@ -78,7 +76,6 @@ char **send_sign_up_data(char *username, char *password) {
         char *err_msg = "Connection lost\nTry again later";
         //pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
-        return "Go fuck yourself drice!";
     }
 
     char recvBuffer[DEFAULT_MESSAGE_SIZE];
@@ -91,7 +88,6 @@ char **send_sign_up_data(char *username, char *password) {
         // if(error_revealer == NULL)
         // pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
-        return "Go fuck yourself fierce!";
     }
 
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
@@ -116,12 +112,11 @@ char **check_login_data(char *username, char* password) {
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
         sockfd = -1;
-        return "Go fuck yourself once!";
     }
+
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
         sockfd = -1;
-         return "Go fuck yourself twice!";
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
@@ -130,7 +125,6 @@ char **check_login_data(char *username, char* password) {
         char *err_msg = "Connection lost\nTry again later";
         //pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
-        return "Go fuck yourself drice!";
     }
 
     char recvBuffer[DEFAULT_MESSAGE_SIZE];
@@ -143,9 +137,7 @@ char **check_login_data(char *username, char* password) {
         // if(error_revealer == NULL)
         // pthread_create(&thread_id, NULL, mx_run_error_pop_up, (void *)err_msg); 
         sockfd = -1;
-        return "Go fuck yourself fierce!";
     }
-
 
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;

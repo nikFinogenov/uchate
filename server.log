@@ -1110,3 +1110,21 @@
 2024-03-28 11:00:10: Open database -> OK
 2024-03-28 11:00:10: Add user -> OK
 2024-03-28 11:00:25: Open database -> OK
+2024-03-28 11:17:21: Open database -> OK
+2024-03-28 11:17:21: Init table "Users" -> OK
+2024-03-28 11:17:21: Init table "Chats" -> OK
+2024-03-28 11:17:21: Init table "Messages" -> OK
+2024-03-28 11:17:39: Open database -> OK
+2024-03-28 11:17:39: Init table "Users" -> OK
+2024-03-28 11:17:39: Init table "Chats" -> OK
+2024-03-28 11:17:39: Init table "Messages" -> OK
+2024-03-28 11:17:50: Open database -> OK
+2024-03-28 11:17:51: Open database -> OK
+2024-03-28 11:17:51: Open database -> OK
+2024-03-28 11:17:51: Open database -> OK
+2024-03-28 11:17:52: Open database -> OK
+2024-03-28 11:17:52: Open database -> OK
+2024-03-28 11:17:52: Open database -> OK
+2024-03-28 11:17:52: Open database -> OK
+2024-03-28 11:18:39: Open database -> OK
+2024-03-28 11:18:39: Add user -> OK

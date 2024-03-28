@@ -30,7 +30,7 @@ void mx_add_user(char **data, int sockfd) {
         sprintf(sql, 
                 "INSERT INTO USERS (username, password, name, surname, description, status, date, token) \
                 VALUES( '%s','%s','%s','%s','%s','%s','%s','%s');", 
-                data[1], encrypted_pass, "NAME", "SURNAME", " ", " ", " ", " ");   
+                data[1], encrypted_pass, data[3], data[4], " ", " ", " ", " ");   
         int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
         char* st = (exit == 0) ? ST_OK : ST_NEOK;
         logger("Add user", st, errmsg);
