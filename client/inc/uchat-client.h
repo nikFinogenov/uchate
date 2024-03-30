@@ -98,6 +98,8 @@ extern GtkWidget *scrollable_window2;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
+char **argv_ptr;
+int sockfd;
 
 // typedef struct {
 //     char* name;
