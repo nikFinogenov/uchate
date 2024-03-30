@@ -1143,3 +1143,43 @@
 2024-03-28 11:18:39: Open database -> OK
 2024-03-28 11:18:39: Add user -> OK
 >>>>>>> client/login-signup
+2024-03-30 13:16:09: Open database -> OK
+2024-03-30 13:16:09: Init table "Users" -> OK
+2024-03-30 13:16:09: Init table "Chats" -> OK
+2024-03-30 13:16:09: Init table "Messages" -> OK
+2024-03-30 13:17:01: Open database -> OK
+2024-03-30 13:17:01: Add user -> OK
+2024-03-30 13:22:41: Open database -> OK
+2024-03-30 13:22:41: Init table "Users" -> OK
+2024-03-30 13:22:41: Init table "Chats" -> OK
+2024-03-30 13:22:41: Init table "Messages" -> OK
+2024-03-30 13:22:58: Open database -> OK
+2024-03-30 13:22:58: Init table "Users" -> OK
+2024-03-30 13:22:58: Init table "Chats" -> OK
+2024-03-30 13:22:58: Init table "Messages" -> OK
+2024-03-30 13:23:05: Open database -> OK
+2024-03-30 13:23:06: Open database -> OK
+2024-03-30 13:23:06: Open database -> OK
+2024-03-30 13:23:14: Open database -> OK
+2024-03-30 13:23:16: Open database -> OK
+2024-03-30 13:23:19: Open database -> OK
+2024-03-30 13:23:19: Open database -> OK
+2024-03-30 13:23:19: Open database -> OK
+2024-03-30 13:23:23: Open database -> OK
+2024-03-30 13:23:30: Open database -> OK
+2024-03-30 13:23:31: Open database -> OK
+2024-03-30 13:23:36: Open database -> OK
+2024-03-30 13:23:37: Open database -> OK
+2024-03-30 13:31:23: Open database -> OK
+2024-03-30 13:31:23: Init table "Users" -> OK
+2024-03-30 13:31:23: Init table "Chats" -> OK
+2024-03-30 13:31:23: Init table "Messages" -> OK
+2024-03-30 13:31:33: Open database -> OK
+2024-03-30 13:41:39: Open database -> OK
+2024-03-30 13:41:39: Init table "Users" -> OK
+2024-03-30 13:41:39: Init table "Chats" -> OK
+2024-03-30 13:41:39: Init table "Messages" -> OK
+2024-03-30 13:41:58: Open database -> OK
+2024-03-30 13:42:04: Open database -> OK
+2024-03-30 13:42:06: Open database -> OK
+2024-03-30 13:42:09: Open database -> OK
