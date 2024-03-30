@@ -53,6 +53,7 @@ tests.sh
 uchat.txt
 uchat
 uchat_server
+uchat_client
 XYI.db
 language.ui
 server.log

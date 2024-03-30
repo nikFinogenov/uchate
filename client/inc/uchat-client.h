@@ -5,6 +5,7 @@
 #define DARK_GRAY 0.23
 #define LIGHT_GRAY 0.39
 #define LIGHTER_GRAY 0.75
+#define NORM_CVET &(GdkRGBA){255 / 255.0,  182 / 255.0, 193 / 255.0, 1.0}
 
 #define MAIN_WINDOW_HEIGHT 900
 #define MAIN_WINDOW_WIDTH 1500
@@ -15,7 +16,14 @@
 
 #include <gtk/gtk.h>
 // #include <gdk-pixbuf-core.h>
+
+#include "../../libmx/inc/libmx.h"
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <fcntl.h>
 #include <stdbool.h>
 #include "../../libmx/inc/libmx.h"
 #include <stdio.h>

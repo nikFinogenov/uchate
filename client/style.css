@@ -1,11 +1,17 @@
+#sidebar {
+    background-image: url("img/side_bar_arrow2v.png");
+}
 #settings {
     background-image: url("img/settings-2.png");
 }
-#user {
-    background-image: url("img/user.png");
+#logout{
+    background-image: url("img/exit.png");
 }
-#logout {
-    background-image: url("img/logout.png");
+#anekdot{
+    background-image: url("img/anekdot.png");
+}
+#account{
+    background-image: url("img/account.png");
 }
 #message-search-img {
     background-image: url("img/lupa.png");
@@ -13,10 +19,20 @@
 #add_new_chat_when_no_chats{
     background-image: url("img/add.png");
 }
+#add{
+    background-image: url("img/more.png");
+}
+#delete{
+    background-image: url("img/minus.png");
+}
+#sidebar,
 #settings,
-#user,
 #logout,
 #add_new_chat_when_no_chats,
+#account,
+#anekdot,
+#add,
+#delete,
 #message-search-img{
     background-size: 50px;
     background-repeat: no-repeat;
@@ -70,4 +86,12 @@
 #empty-chat{
     font-size: 50px;
     color: red;
+}
+
+#search_button{
+    background-color: red;
+    background-size: 0%;
+}
+#search_button:hover{
+    opacity: 0.3;
 }
