@@ -152,7 +152,7 @@ GtkWidget *create_penis(void);
 void fill_data(void);
 bool is_chatters_empty(void);
 bool is_messages_empty(void);
-gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index);
+gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data);
 void refresh_scrollable_window(GtkWidget *scrollable_window);
 void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);

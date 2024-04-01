@@ -1,10 +1,12 @@
 #sidebar {
     background-image: url("img/side_bar_arrow2v.png");
     transition: background-image 0.1s ease;
+    box-shadow: none;
 }
 #sidebar-rotated {
     background-image: url("img/side_bar_arrow2v_rotated.png");
     transition: background-image 0.1s ease;
+    box-shadow: none;
 }
 #settings {
     background-image: url("img/settings-2.png");

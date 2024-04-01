@@ -223,7 +223,6 @@ static void clicked_settings(GtkWidget *widget, gpointer data){
     g_print("settings clicked\n");
 }
 
-
 void draw_user_window() {
     GtkCssProvider *cssProvider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);

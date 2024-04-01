@@ -15,31 +15,6 @@ void refresh_user_box() {
     draw_user_info_box(user_info_box);
     gtk_widget_show_all(user_info_box);
 }
-gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
-    g_print("clicked -> ");
-    if (selected_user.box != NULL && selected_user.index != index) {
-        gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
-    }
-
-    // Change background color of the clicked user box to indicate selection
-    gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
-    // Update the reference to the currently selected user box
-    selected_user.box = widget;
-    selected_user.index = index;
-
-    gtk_widget_hide(empty_chat);
-    refresh_user_box();
-    refresh_scrollable_window2(scrollable_window2);
-    gtk_widget_show(scrollable_window2);
-
-    // refresh_
-    gtk_widget_show_all(chat_box);
-    
-    g_print("%d\n", selected_user.index);
-
-    // Returning FALSE allows the event to propagate further
-    return FALSE;
-}
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     int width = gdk_pixbuf_get_width(GDK_PIXBUF(pixbuf));
@@ -102,11 +77,61 @@ static void create_tools_menu(GdkEvent *event) {
     // Popup the menu at the event coordinates
     gtk_menu_popup_at_pointer(GTK_MENU(menu), event);
 }
+static void create_chatter_menu(GdkEvent *event) {
+    GtkWidget *menu;
+    GtkWidget *menu_item;
+    
+    // Create a new menu
+    menu = gtk_menu_new();
 
+    // Create menu items (buttons)
+    menu_item = gtk_menu_item_new_with_label("Delete");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+
+    // Show the menu
+    gtk_widget_show_all(menu);
+
+    // Popup the menu at the event coordinates
+    gtk_menu_popup_at_pointer(GTK_MENU(menu), event);
+}
+gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data) {
+    int index = GPOINTER_TO_INT(user_data);
+    g_print("clicked -> ");
+
+    if (event->type == GDK_BUTTON_PRESS) {
+        if (event->button == GDK_BUTTON_SECONDARY) {
+            // Right-click event handling
+            create_chatter_menu(event);
+            return TRUE; // Prevent further processing of the event
+        } else if (event->button == GDK_BUTTON_PRIMARY) {
+            // Left-click event handling
+            if (selected_user.box != NULL && selected_user.index != index) {
+                gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
+            }
+            // Change background color of the clicked user box to indicate selection
+            gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+            // Update the reference to the currently selected user box
+            selected_user.box = widget;
+            selected_user.index = index;
+
+            gtk_widget_hide(empty_chat);
+            refresh_user_box();
+            refresh_scrollable_window2(scrollable_window2);
+            gtk_widget_show(scrollable_window2);
+
+            // refresh_
+            gtk_widget_show_all(chat_box);
+            
+            g_print("%d\n", selected_user.index);
+
+            // Returning FALSE allows the event to propagate further
+            return FALSE;
+        }
+    }
+    return FALSE;
+}
 static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpointer data) {
-    g_print("xyi\n");
     if (event->type == GDK_BUTTON_PRESS && event->button == GDK_BUTTON_SECONDARY) {
-        g_print("double xyi\n\n");
         GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(widget)));
         if (parent_window != NULL) {
             gint x, y;
@@ -230,7 +255,8 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
                 selected_user.box = user_box;
                 gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
             }
-            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));  
+            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
+
             gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
         }
     }
