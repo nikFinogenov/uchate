@@ -42,6 +42,7 @@
 *~
 
 #Ignore prikol files
+.DS_Store
 video*
 obj
 test*
@@ -53,6 +54,7 @@ tests.sh
 uchat.txt
 uchat
 uchat_server
+uchat_client
 XYI.db
 language.ui
 server.log

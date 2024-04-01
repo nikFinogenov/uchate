@@ -1,5 +1,5 @@
 #include "uchat-client.h"
-
+#include "../../libmx/inc/libmx.h"
 // GtkWidget *scrollable_window2 =NULL;
 GtkWidget *empty_chat = NULL;
 GtkWidget *chat_box = NULL;
