@@ -22,6 +22,16 @@ void go_to_login() {
     show_login();
 }
 
+static void display_error_message(char *message) {
+    GdkRGBA color_red;
+    gdk_rgba_parse(&color_red, "#de34eb");
+
+    error_label = gtk_label_new(message);
+    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
+    gtk_widget_show_all(signup_window);
+}
+
 static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
@@ -51,36 +61,29 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     }
 
     if (strcmp(parsed_first_name, "") == 0) {
-        error_label = gtk_label_new("First name cannot be empty");
-        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(signup_window);
+        display_error_message("First name cannot be empty");
         return;
     }
 
     if (strcmp(parsed_last_name, "") == 0) {
-        error_label = gtk_label_new("Last name cannot be empty");
-        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(signup_window);
+        display_error_message("Last name cannot be empty");
+        return;
+    }
+
+    if (strcmp(parsed_username, "") == 0) {
+        display_error_message("Username cannot be empty");
         return;
     }
 
     // Password mismatch
     if (strcmp(parsed_password, parsed_repeat_password) != 0) {
-        error_label = gtk_label_new("The passwords do not match");
-        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(signup_window);
+        display_error_message("Passwords don't match");
         return;
     }
 
     // Short password
     if (strlen(parsed_password) < 8) {
-        error_label = gtk_label_new("Password cannot be less than 8 characters");
-        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(signup_window);
+        display_error_message("Password is less than 8 characters");
         return;
     }
 
@@ -88,11 +91,11 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
 
     // User existence
     if (strcmp(response, "1") == 0) {
-        error_label = gtk_label_new("Username already exists");
-        gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(signup_window);
-    } else if (strcmp(response, "0") == 0) {
+        display_error_message("Username already exists");
+        return;
+    } 
+    
+    if (strcmp(response, "0") == 0) {
         // gtk_widget_destroy(signup_window);
         gtk_widget_hide(signup_window);
         draw_user_window();

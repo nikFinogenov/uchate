@@ -9,6 +9,27 @@ typedef struct {
     GtkWidget *entry;
     // Add any other data needed by the callback function
 } CallbackData;
+
+static void wrap_text(char *text) {
+    int len = strlen(text);
+    int i, line_length = 0;
+
+    for (i = 0; i < len; i++) {
+        // Check if adding the current character will exceed the maximum line length
+        if (line_length >= MAX_LINE_LENGTH) {
+            // Insert a newline character
+            memmove(&text[i + 1], &text[i], len - i);
+            text[i] = '\n';
+            // Reset the line length counter
+            line_length = 0;
+            // Increment the length of the text
+            len++;
+        }
+        // Increment the line length
+        line_length++;
+    }
+}
+
 static void on_window_realize(GtkWidget *widget, gpointer data) {
     // Получаем пролистываемое окно
     GtkWidget *scrollable_window = GTK_WIDGET(data);
@@ -72,10 +93,19 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     // If no available slot is found
     g_print("Chatter limit reached\n");
 }
+
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     g_print("Add message clicked\n");
     CallbackData *data = (CallbackData *)user_data;
-    const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
+    char *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
+
+    int i = 0, j = 0;
+
+    // Delete spaces from the beginning
+    while (mx_isspace(text[i])) i++;
+    while (text[i]) text[j++] = text[i++];
+    text[j] = '\0';
+
     if(mx_strcmp(text, "") == 0) return;
     // const gchar *text = gtk_entry_get_text(GTK_ENTRY(wi));
     // Check if chatters array is initialized
@@ -83,12 +113,15 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
         g_print("Messages array is not initialized\n");
         return;
     }
+
+    wrap_text(text);
     
     // Создаем новый элемент структуры
     t_message_s new_mes = {
         .text = mx_strdup(text),
         .is_user = TRUE
     };
+
     g_print("%d\n", messages_count[selected_user.index]);
     // Find the first available slot in the chatters array
     if(messages_count[selected_user.index] + 1 < MAX_MESSAGES) {
@@ -113,6 +146,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     }
     g_print("Messages limit reached\n");
 }
+
 static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
     // Проверяем, нажата ли клавиша Enter
     if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
@@ -129,15 +163,19 @@ static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpoint
     // Возвращаем FALSE, чтобы разрешить дальнейшую обработку события
     return FALSE;
 }
+
 static void settings_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Settings clicked\n");
 }
+
 static void user_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("User clicked\n");
 }
+
 static void message_search_clicked(GtkWidget *widget, gpointer data) {
     g_print("Message search clicked\n");
 }
+
 void refresh_scrollable_window(GtkWidget *scrollable_window) {
     // Очищаем содержимое скроллабельного окна
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
@@ -148,6 +186,7 @@ void refresh_scrollable_window(GtkWidget *scrollable_window) {
     // Перерисовываем окно
     gtk_widget_show_all(scrollable_window);
 }
+
 void refresh_scrollable_window2(GtkWidget *scrollable_window) {
     // Очищаем содержимое скроллабельного окна
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
@@ -383,7 +422,7 @@ void draw_user_window() {
 
     scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window2),
-                                GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     message_populate_scrollable_window(scrollable_window2);
     g_signal_connect(G_OBJECT(user_window), "realize", G_CALLBACK(on_window_realize), scrollable_window2);
     gtk_box_pack_start(GTK_BOX(chat_box), scrollable_window2, TRUE, TRUE, 0);
