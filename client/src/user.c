@@ -10,6 +10,7 @@ typedef struct {
     // Add any other data needed by the callback function
 } CallbackData;
 
+// Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
 static void wrap_text(char *text) {
     int len = strlen(text);
     int i, line_length = 0;

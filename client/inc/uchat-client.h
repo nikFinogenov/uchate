@@ -13,7 +13,7 @@
 #define MAX_MESSAGES 1000 // Maximum number of messages
 #define MAX_CHATTERS 50 // Maximum number of chatters
 #define DEFAULT_MESSAGE_SIZE 1024
-#define MAX_LINE_LENGTH 50
+#define MAX_LINE_LENGTH 70
 
 #include <gtk/gtk.h>
 // #include <gdk-pixbuf-core.h>
