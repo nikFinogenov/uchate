@@ -277,13 +277,15 @@ void draw_user_window() {
     chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
     // Set the background colors for each box container
-    //gtk_widget_override_background_color(side_bar_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
+    //gtk_widget_override_background_color(side_bar_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0});
+    gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
     gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0});
     gtk_widget_override_background_color(chat_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0});
     // Set the widths of the box containers
     //gtk_widget_set_size_request(side_bar_box, 75, -1); // 75 pixels width
+    gtk_widget_set_size_request(settings_box, 500, -1);
     gtk_widget_set_size_request(chats_box, 350, -1); // 350 pixels width
-    // Third box will take the remaining width
+    g_signal_connect(G_OBJECT(settings_box), "realize", G_CALLBACK(on_window_realize_2), NULL);
 
     //sidebar
     // GtkWidget *sidebar = gtk_event_box_new();
@@ -295,16 +297,15 @@ void draw_user_window() {
     gtk_widget_set_size_request(side_box, 75, -1);
     //gtk_widget_set_visible(sidebar, FALSE);
     
-    //endsidebar
 
-    // GtkWidget* add = gtk_button_new();
-    // gtk_widget_set_valign(GTK_WIDGET(add), GTK_ALIGN_CENTER);
-    // gtk_button_set_relief(GTK_BUTTON(add), GTK_RELIEF_NONE);
-    // gtk_container_set_border_width(GTK_CONTAINER(add), 0);
-    // // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
-    // gtk_widget_set_size_request(GTK_WIDGET(add), 64, 64);
-    // gtk_widget_set_name(GTK_WIDGET(add), "add");
-    // g_signal_connect(G_OBJECT(add), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    GtkWidget* add = gtk_button_new();
+    gtk_widget_set_valign(GTK_WIDGET(add), GTK_ALIGN_CENTER);
+    gtk_button_set_relief(GTK_BUTTON(add), GTK_RELIEF_NONE);
+    gtk_container_set_border_width(GTK_CONTAINER(add), 0);
+    // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(GTK_WIDGET(add), 64, 64);
+    gtk_widget_set_name(GTK_WIDGET(add), "add");
+    g_signal_connect(G_OBJECT(add), "realize", G_CALLBACK(on_window_realize_2), NULL);
 
     // GtkWidget* delete = gtk_button_new();
     // gtk_widget_set_valign(GTK_WIDGET(delete), GTK_ALIGN_CENTER);
@@ -339,8 +340,9 @@ void draw_user_window() {
     gtk_container_set_border_width(GTK_CONTAINER(settings_img), 0);
     gtk_widget_set_size_request(GTK_WIDGET(settings_img), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(settings_img), "settings");
-    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(clicked_settings), NULL);
     g_signal_connect(G_OBJECT(settings_img), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), chats_box);
+    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), settings_box);
 
     GtkWidget* side_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
@@ -352,7 +354,7 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), settings_img);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), anekdot);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), account);
-    // g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), add);
+    g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), add);
     // g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), delete);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(clicked_side), NULL);
 
@@ -369,7 +371,7 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(side_box), side_img, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(side_box), settings_img, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(side_box), account, FALSE, FALSE, 0);
-    // gtk_box_pack_start(GTK_BOX(side_box), add, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(side_box), add, FALSE, FALSE, 0);
     // gtk_box_pack_start(GTK_BOX(side_box), delete, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(side_box), anekdot, FALSE, FALSE, 0);
     gtk_box_pack_end(GTK_BOX(side_box), logout_img, FALSE, FALSE, 0);
@@ -461,6 +463,7 @@ void draw_user_window() {
     //gtk_box_pack_start(GTK_BOX(hbox_main), side_bar_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), side_box, FALSE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(hbox_main), settings_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
     // gtk_widget_hide(chat_box);

@@ -1263,3 +1263,10 @@
 2024-04-01 12:04:56: Init table "Chats" -> OK
 2024-04-01 12:04:56: Init table "Messages" -> OK
 2024-04-01 12:05:03: Open database -> OK
+2024-04-01 06:41:12: Open database -> OK
+2024-04-01 06:41:12: Init table "Users" -> OK
+2024-04-01 06:41:12: Init table "Chats" -> OK
+2024-04-01 06:41:12: Init table "Messages" -> OK
+2024-04-01 06:42:32: Open database -> OK
+2024-04-01 06:42:32: Add user -> OK
+2024-04-01 06:47:19: Open database -> OK
