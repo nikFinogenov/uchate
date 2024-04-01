@@ -307,6 +307,15 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(clicked_settings), NULL);
     g_signal_connect(G_OBJECT(settings_img), "realize", G_CALLBACK(on_window_realize_2), NULL);
 
+    GtkWidget* add_chatter_img = gtk_button_new();
+    gtk_widget_set_valign(GTK_WIDGET(add_chatter_img), GTK_ALIGN_CENTER);
+    gtk_button_set_relief(GTK_BUTTON(add_chatter_img), GTK_RELIEF_NONE);
+    gtk_container_set_border_width(GTK_CONTAINER(add_chatter_img), 0);
+    gtk_widget_set_size_request(GTK_WIDGET(add_chatter_img), 64, 64);
+    gtk_widget_set_name(GTK_WIDGET(add_chatter_img), "add-chatter");
+    g_signal_connect(G_OBJECT(add_chatter_img), "clicked", G_CALLBACK(add_chatter_button_clicked), NULL);
+    g_signal_connect(G_OBJECT(add_chatter_img), "realize", G_CALLBACK(on_window_realize_2), NULL);
+
     GtkWidget* side_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_button_set_relief(GTK_BUTTON(side_img), GTK_RELIEF_NONE);
@@ -317,6 +326,7 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), settings_img);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), anekdot);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), account);
+    g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), add_chatter_img);
     // g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), add);
     // g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), delete);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(clicked_side), NULL);
@@ -338,6 +348,7 @@ void draw_user_window() {
     // gtk_box_pack_start(GTK_BOX(side_box), add, FALSE, FALSE, 0);
     // gtk_box_pack_start(GTK_BOX(side_box), delete, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(side_box), anekdot, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(side_box), add_chatter_img, FALSE, FALSE, 0);
     gtk_box_pack_end(GTK_BOX(side_box), logout_img, FALSE, FALSE, 0);
 
     // Create a search bar

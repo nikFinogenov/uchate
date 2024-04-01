@@ -23,7 +23,8 @@
 #message-search-img {
     background-image: url("img/lupa.png");
 }
-#add_new_chat_when_no_chats{
+#add_new_chat_when_no_chats, 
+#add-chatter{
     background-image: url("img/add.png");
 }
 #add{
@@ -41,6 +42,7 @@
 #anekdot,
 #add,
 #delete,
+#add-chatter,
 #message-search-img{
     background-size: 50px;
     background-repeat: no-repeat;
@@ -68,6 +70,7 @@
 #add_new_chat_when_no_chats:hover,
 #anekdot:hover,
 #account:hover,
+#add-chatter:hover,
 #message-search-img:hover {
     opacity: 0.3;
     box-shadow: none;
