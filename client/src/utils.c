@@ -236,22 +236,36 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
     }
 }
 
-GtkWidget *create_message_box(char* text, bool is_user) {
+GtkWidget *create_message_box(t_message_s *message) {
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_widget_set_margin_start(box, 10);
 
     // Create user info box
-    GtkWidget *message_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-    GtkWidget *text_label = gtk_label_new(text);
-    gtk_widget_set_name(text_label, "message-text");
-    gtk_box_pack_start(GTK_BOX(message_box), text_label, FALSE, FALSE, 0);
+    GtkWidget *message_box = gtk_grid_new(); // Use GtkGrid for more control over positioning
+    gtk_grid_set_row_homogeneous(GTK_GRID(message_box), FALSE); // Allow rows to have different heights
+    gtk_grid_set_column_homogeneous(GTK_GRID(message_box), FALSE); // Allow columns to have different widths
+    gtk_widget_set_name(message_box, "message-text");
 
-    if(is_user) {
+    // Add text label
+    GtkWidget *text_label = gtk_label_new(message->text);
+    gtk_grid_attach(GTK_GRID(message_box), text_label, 0, 0, 1, 1); // Attach text label to grid
+
+    // Add time label
+    GtkWidget *time_label = gtk_label_new(message->time);
+    gtk_widget_set_name(time_label, "message-time");
+    gtk_widget_set_halign(time_label, GTK_ALIGN_END); // Align time label to the end (right)
+    gtk_widget_set_valign(time_label, GTK_ALIGN_END); // Align time label to the end (bottom)
+    gtk_grid_attach(GTK_GRID(message_box), time_label, 1, 1, 1, 1); // Attach time label to grid
+
+    // Add message box to main box
+    if(message->is_user) {
         gtk_box_pack_end(GTK_BOX(box), message_box, FALSE, TRUE, 0);
     }
     else gtk_box_pack_start(GTK_BOX(box), message_box, FALSE, TRUE, 0);
+    
     return box;
 }
+
 
 void message_populate_scrollable_window(GtkWidget *scrollable_window) {
     GtkWidget *mess_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
@@ -263,7 +277,7 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
         for (int i = 0; i < messages_count[selected_user.index]; i++) {
             GtkWidget *event_box = gtk_event_box_new();
             gtk_container_add(GTK_CONTAINER(mess_list), event_box); // Здесь добавляется event_box в mess_list
-            GtkWidget *mess_box = create_message_box(messages[selected_user.index][i].text, messages[selected_user.index][i].is_user);
+            GtkWidget *mess_box = create_message_box(&messages[selected_user.index][i]);
             gtk_container_add(GTK_CONTAINER(event_box), mess_box);
             g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
         }

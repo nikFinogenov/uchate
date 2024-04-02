@@ -60,12 +60,17 @@
 }
 
 #message-text{
-    color: #333;
-    background-color: #DCF8C6;
+    color: #fff;
+    background: rgb(103,73,153);
+    background: linear-gradient(148deg, rgba(103,73,153,1) 0%, rgba(78,92,164,1) 100%);
     padding: 10px;
     border-radius: 10px;
-    max-width: 300px;
     /* max-width: 50%; */
+}
+
+#message-time{
+    opacity: 0.5;
+    font-size: 13px;
 }
 
 #user-tag{

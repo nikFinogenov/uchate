@@ -82,6 +82,7 @@ typedef struct {
 
 typedef struct {
     char* text;
+    char* time;
     bool is_user;
     //reaction
 } t_message_s;

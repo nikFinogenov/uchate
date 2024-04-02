@@ -116,10 +116,19 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     }
 
     wrap_text(text);
+
+    // Get the current time
+    time_t rawtime;
+    struct tm *timeinfo;
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    char time_str[6]; // HH:MM format
+    strftime(time_str, sizeof(time_str), "%H:%M", timeinfo);
     
     // Создаем новый элемент структуры
     t_message_s new_mes = {
         .text = mx_strdup(text),
+        .time = mx_strdup(time_str),
         .is_user = TRUE
     };
 
