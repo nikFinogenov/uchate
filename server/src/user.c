@@ -1,30 +1,50 @@
 #include "server.h"
 
-void mx_add_user(char **data) {
+void mx_add_user(char **data, int sockfd) {
     char *encrypted_pass = encrypt_pass(mx_strdup(data[2]));
 
+    char response[DEFAULT_MESSAGE_SIZE];
     sqlite3 *db = open_db();
     sqlite3_stmt *res;
     char sql[500];
     memset(sql, 0, 500);
     char *errmsg;
-    sprintf(sql, "SELECT id FROM USERS ORDER BY id DESC LIMIT 1;");
-    sqlite3_prepare_v2(db, sql, -1, &res, 0);
-    sqlite3_step(res);
-    int id = sqlite3_column_int(res, 0) + 1;
-    sqlite3_finalize(res);
-    sprintf(sql, 
-            "INSERT INTO USERS (username, password, name, surname, description, status, date, token) \
-            VALUES( '%s','%s','%s','%s','%s','%s','%s','%s');", 
-            data[1], encrypted_pass, data[3], data[4], " ", " ", " ", " ");   
-    int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
-    char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Add user", st, errmsg);
-    sqlite3_close(db);
-    mx_write_photo_to_bd("server/source/standard_avatar.png", id);
 
+    // Check if user with given username already exists
+    sprintf(sql, "SELECT id FROM USERS WHERE username = '%s';", data[1]);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    int result = sqlite3_step(res);
+    sqlite3_finalize(res);
+
+    if (result == SQLITE_ROW) {
+        // User with the given username already exists
+        sprintf(response, "1");
+    } else {
+        // User does not exist, add new user
+        sprintf(sql, "SELECT id FROM USERS ORDER BY id DESC LIMIT 1;");
+        sqlite3_prepare_v2(db, sql, -1, &res, 0);
+        sqlite3_step(res);
+        int id = sqlite3_column_int(res, 0) + 1;
+        sqlite3_finalize(res);
+        
+        sprintf(sql, 
+                "INSERT INTO USERS (username, password, name, surname, description, status, date, token) \
+                VALUES( '%s','%s','%s','%s','%s','%s','%s','%s');", 
+                data[1], encrypted_pass, data[3], data[4], " ", " ", " ", " ");   
+        int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
+        char* st = (exit == 0) ? ST_OK : ST_NEOK;
+        logger("Add user", st, errmsg);
+
+        mx_write_photo_to_bd("server/source/standard_avatar.png", id);
+        sprintf(response, "0");
+    }
+
+    sqlite3_close(db);
     free(encrypted_pass);
+
+    send(sockfd, response, strlen(response), 0);
 }
+
 
 void mx_get_user(char** data, int sockfd) {
     sqlite3 *db = open_db();
@@ -32,8 +52,8 @@ void mx_get_user(char** data, int sockfd) {
     char sql[500];
 
     memset(sql, 0, 500);
-    char temp_buff[1024];
-    memset(temp_buff, 0, 1024);
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+    memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
 
     sprintf(sql, "SELECT * FROM USERS WHERE ID = %d;", mx_atoi(data[1])); 
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
@@ -114,4 +134,16 @@ bool mx_check_user(char **data) {
         free(encrypted_pass);
         return false; 
     }
+}
+
+void check_login_data(char **data, int sockfd) {
+    char response[DEFAULT_MESSAGE_SIZE];
+
+    if (mx_check_user(data)) {
+        sprintf(response, "0");
+    } else {
+        sprintf(response, "1");
+    }
+
+    send(sockfd, response, strlen(response), 0);
 }

@@ -1,4 +1,4 @@
-.PHONY: server client
+.PHONY: server client libmx
 
 all: install
 
@@ -7,6 +7,9 @@ server:
 
 client:
 	@$(MAKE) -C client/
+
+libmx:
+	@$(MAKE) -C libmx/
 
 install:
 	@$(MAKE) -C libmx/

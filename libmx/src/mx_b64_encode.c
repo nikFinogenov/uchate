@@ -1,7 +1,7 @@
 #include "../inc/libmx.h"
 
 const unsigned char b64_chr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-unsigned int b64_encode(const unsigned char* in, unsigned int in_len, unsigned char* out) {
+unsigned int mx_b64_encode(const unsigned char* in, unsigned int in_len, unsigned char* out) {
 	unsigned int i=0, j=0, k=0, s[3];
 	
 	for (i=0;i<in_len;i++) {

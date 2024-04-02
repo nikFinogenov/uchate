@@ -1,7 +1,7 @@
 #include "../inc/libmx.h"
 
 const unsigned char b64_chr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-unsigned int b64_encodef(char *InFile, char *OutFile) {
+unsigned int mx_b64_encodef(char *InFile, char *OutFile) {
 
 	FILE *pInFile = fopen(InFile,"rb");
 	FILE *pOutFile = fopen(OutFile,"wb");

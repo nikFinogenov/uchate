@@ -1,6 +1,6 @@
 #include "../inc/libmx.h"
 
-unsigned int b64_int(unsigned int ch) {
+unsigned int mx_b64_int(unsigned int ch) {
 	if (ch==43)
 	return 62;
 	if (ch==47)

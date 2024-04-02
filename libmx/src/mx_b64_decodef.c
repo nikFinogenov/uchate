@@ -1,6 +1,6 @@
 #include "../inc/libmx.h"
 
-unsigned int b64_decodef(char *InFile, char *OutFile) {
+unsigned int mx_b64_decodef(char *InFile, char *OutFile) {
 
 	FILE *pInFile = fopen(InFile,"rb");
 	FILE *pOutFile = fopen(OutFile,"wb");
@@ -20,7 +20,7 @@ unsigned int b64_decodef(char *InFile, char *OutFile) {
 		c=fgetc(pInFile);
 		if ((int)c==EOF)
 		break;
-		s[j++]=b64_int(c);
+		s[j++]=mx_b64_int(c);
 		if (j==4) {
 			fputc(((s[0]&255)<<2)+((s[1]&0x30)>>4),pOutFile);
 			if (s[2]!=64) {
