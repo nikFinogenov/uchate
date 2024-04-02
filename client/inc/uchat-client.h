@@ -133,8 +133,9 @@ void show_user_window(void);
 void draw_user_info_box(GtkWidget *user_info_box);
 
 void user_populate_scrollable_window(GtkWidget *scrollable_window);
+void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter);
 void message_populate_scrollable_window(GtkWidget *scrollable_window);
-
+void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter);
 //utils
 GdkPixbuf *file_to_pixbuf(const gchar *filename);
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
@@ -156,5 +157,5 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
 void refresh_scrollable_window(GtkWidget *scrollable_window);
 void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);
-
+gboolean is_in_format(char* text, char* format);
 #endif

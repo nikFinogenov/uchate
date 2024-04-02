@@ -261,7 +261,28 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
         }
     }
 }
+void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
 
+    GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
+    
+    if (chatters != NULL) {
+        // g_print("%d\n", chatters_count);s
+        for (int i = 0; i < chatters_count; i++) {
+            if(is_in_format(chatters[i].username, filter) || is_in_format(chatters[i].name, filter)) {
+                GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+                gtk_widget_set_name(user_box, "user-box");
+                if(i == selected_user.index) {
+                    selected_user.box = user_box;
+                    gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+                }
+                g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
+
+                gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+            }
+        }
+    }
+}
 GtkWidget *create_message_box(char* text, bool is_user) {
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_widget_set_margin_start(box, 10);
@@ -295,6 +316,24 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
         }
     }
 }
+void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
+    GtkWidget *mess_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    gtk_container_add(GTK_CONTAINER(scrollable_window), mess_list);
+
+    // for(mes)
+    if (messages != NULL) {
+        // for (int i = 0; messages[s].text != NULL; i++) {
+        for (int i = 0; i < messages_count[selected_user.index]; i++) {
+            if(is_in_format(messages[selected_user.index][i].text, filter)){
+                GtkWidget *event_box = gtk_event_box_new();
+                gtk_container_add(GTK_CONTAINER(mess_list), event_box); // Здесь добавляется event_box в mess_list
+                GtkWidget *mess_box = create_message_box(messages[selected_user.index][i].text, messages[selected_user.index][i].is_user);
+                gtk_container_add(GTK_CONTAINER(event_box), mess_box);
+                g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
+            }
+        }
+    }
+}
 
 char* format_last_msg(char* text) {
         int len = strlen(text);
@@ -319,4 +358,22 @@ char* format_last_msg(char* text) {
     }
 
     return formatted_text;
+}
+
+gboolean is_in_format(char* text, char* format) {
+    size_t text_len = strlen(text);
+    size_t format_len = strlen(format);
+    
+    if (format_len > text_len) {
+        return FALSE; // Format is longer than text, so text can't match format
+    }
+    
+    // Iterate through the text to find the first character of the format
+    for (size_t i = 0; i <= text_len - format_len; ++i) {
+        if (strncmp(text + i, format, format_len) == 0) {
+            return TRUE; // Found the format in the text
+        }
+    }
+    
+    return FALSE; // Format not found in text
 }
