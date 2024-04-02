@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-2024-03-15 00:32:10: Open database -> OK
-2024-03-15 00:32:10: Init table "Users" -> OK
-2024-03-15 00:32:10: Init table "Chats" -> OK
-2024-03-15 00:32:10: Init table "Messages" -> OK
-2024-03-15 00:34:49: Open database -> OK
-2024-03-15 00:34:49: Init table "Users" -> OK
-2024-03-15 00:34:49: Init table "Chats" -> OK
-2024-03-15 00:34:49: Init table "Messages" -> OK
-2024-03-15 00:34:59: Open database -> OK
-2024-03-15 00:34:59: Add user -> OK
-2024-03-15 00:35:19: Open database -> OK
-2024-03-15 00:35:19: Add user -> OK
-=======
 2024-03-08 03:54:58: Open database -> OK
 2024-03-08 03:54:58: Init table "Users" -> OK
 2024-03-08 03:54:58: Init table "Chats" -> OK
@@ -1142,7 +1128,6 @@
 2024-03-28 11:17:52: Open database -> OK
 2024-03-28 11:18:39: Open database -> OK
 2024-03-28 11:18:39: Add user -> OK
->>>>>>> client/login-signup
 2024-03-30 13:16:09: Open database -> OK
 2024-03-30 13:16:09: Init table "Users" -> OK
 2024-03-30 13:16:09: Init table "Chats" -> OK
@@ -1263,6 +1248,7 @@
 2024-04-01 12:04:56: Init table "Chats" -> OK
 2024-04-01 12:04:56: Init table "Messages" -> OK
 2024-04-01 12:05:03: Open database -> OK
+<<<<<<< HEAD
 2024-04-02 10:01:09: Open database -> OK
 2024-04-02 10:01:09: Init table "Users" -> OK
 2024-04-02 10:01:09: Init table "Chats" -> OK
@@ -1320,3 +1306,12 @@
 2024-04-02 19:37:51: Open database -> OK
 2024-04-02 20:07:37: Open database -> OK
 2024-04-02 20:10:17: Open database -> OK
+=======
+2024-04-01 06:41:12: Open database -> OK
+2024-04-01 06:41:12: Init table "Users" -> OK
+2024-04-01 06:41:12: Init table "Chats" -> OK
+2024-04-01 06:41:12: Init table "Messages" -> OK
+2024-04-01 06:42:32: Open database -> OK
+2024-04-01 06:42:32: Add user -> OK
+2024-04-01 06:47:19: Open database -> OK
+>>>>>>> client/settings
