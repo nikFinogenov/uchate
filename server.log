@@ -1302,3 +1302,21 @@
 2024-04-02 11:18:51: Open database -> OK
 2024-04-02 11:23:24: Open database -> OK
 2024-04-02 11:24:20: Open database -> OK
+2024-04-02 11:56:31: Open database -> OK
+2024-04-02 11:56:31: Init table "Users" -> OK
+2024-04-02 11:56:31: Init table "Chats" -> OK
+2024-04-02 11:56:31: Init table "Messages" -> OK
+2024-04-02 11:56:44: Open database -> OK
+2024-04-02 11:56:48: Open database -> OK
+2024-04-02 19:30:30: Open database -> OK
+2024-04-02 19:30:30: Init table "Users" -> OK
+2024-04-02 19:30:30: Init table "Chats" -> OK
+2024-04-02 19:30:30: Init table "Messages" -> OK
+2024-04-02 19:30:47: Open database -> OK
+2024-04-02 19:35:20: Open database -> OK
+2024-04-02 19:35:23: Open database -> OK
+2024-04-02 19:36:50: Open database -> OK
+2024-04-02 19:36:54: Open database -> OK
+2024-04-02 19:37:51: Open database -> OK
+2024-04-02 20:07:37: Open database -> OK
+2024-04-02 20:10:17: Open database -> OK
