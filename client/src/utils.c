@@ -15,31 +15,6 @@ void refresh_user_box() {
     draw_user_info_box(user_info_box);
     gtk_widget_show_all(user_info_box);
 }
-gboolean user_box_clicked(GtkWidget *widget, GdkEvent *event, int index) {
-    g_print("clicked -> ");
-    if (selected_user.box != NULL && selected_user.index != index) {
-        gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
-    }
-
-    // Change background color of the clicked user box to indicate selection
-    gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
-    // Update the reference to the currently selected user box
-    selected_user.box = widget;
-    selected_user.index = index;
-
-    gtk_widget_hide(empty_chat);
-    refresh_user_box();
-    refresh_scrollable_window2(scrollable_window2);
-    gtk_widget_show(scrollable_window2);
-
-    // refresh_
-    gtk_widget_show_all(chat_box);
-    
-    g_print("%d\n", selected_user.index);
-
-    // Returning FALSE allows the event to propagate further
-    return FALSE;
-}
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     int width = gdk_pixbuf_get_width(GDK_PIXBUF(pixbuf));
@@ -102,11 +77,61 @@ static void create_tools_menu(GdkEvent *event) {
     // Popup the menu at the event coordinates
     gtk_menu_popup_at_pointer(GTK_MENU(menu), event);
 }
+static void create_chatter_menu(GdkEvent *event) {
+    GtkWidget *menu;
+    GtkWidget *menu_item;
+    
+    // Create a new menu
+    menu = gtk_menu_new();
 
+    // Create menu items (buttons)
+    menu_item = gtk_menu_item_new_with_label("Delete");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+
+    // Show the menu
+    gtk_widget_show_all(menu);
+
+    // Popup the menu at the event coordinates
+    gtk_menu_popup_at_pointer(GTK_MENU(menu), event);
+}
+gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data) {
+    int index = GPOINTER_TO_INT(user_data);
+    g_print("clicked -> ");
+
+    if (event->type == GDK_BUTTON_PRESS) {
+        if (event->button == GDK_BUTTON_SECONDARY) {
+            // Right-click event handling
+            create_chatter_menu(event);
+            return TRUE; // Prevent further processing of the event
+        } else if (event->button == GDK_BUTTON_PRIMARY) {
+            // Left-click event handling
+            if (selected_user.box != NULL && selected_user.index != index) {
+                gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
+            }
+            // Change background color of the clicked user box to indicate selection
+            gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+            // Update the reference to the currently selected user box
+            selected_user.box = widget;
+            selected_user.index = index;
+
+            gtk_widget_hide(empty_chat);
+            refresh_user_box();
+            refresh_scrollable_window2(scrollable_window2);
+            gtk_widget_show(scrollable_window2);
+
+            // refresh_
+            gtk_widget_show_all(chat_box);
+            
+            g_print("%d\n", selected_user.index);
+
+            // Returning FALSE allows the event to propagate further
+            return FALSE;
+        }
+    }
+    return FALSE;
+}
 static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpointer data) {
-    g_print("xyi\n");
     if (event->type == GDK_BUTTON_PRESS && event->button == GDK_BUTTON_SECONDARY) {
-        g_print("double xyi\n\n");
         GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(widget)));
         if (parent_window != NULL) {
             gint x, y;
@@ -230,8 +255,30 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
                 selected_user.box = user_box;
                 gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
             }
-            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));  
+            g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
+
             gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+        }
+    }
+}
+void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
+    GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
+    
+    if (chatters != NULL) {
+        // g_print("%d\n", chatters_count);s
+        for (int i = 0; i < chatters_count; i++) {
+            if(is_in_format(chatters[i].username, filter) || is_in_format(chatters[i].name, filter)) {
+                GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+                gtk_widget_set_name(user_box, "user-box");
+                if(i == selected_user.index) {
+                    selected_user.box = user_box;
+                    gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+                }
+                g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
+
+                gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+            }
         }
     }
 }
@@ -283,6 +330,24 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
         }
     }
 }
+void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
+    GtkWidget *mess_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    gtk_container_add(GTK_CONTAINER(scrollable_window), mess_list);
+
+    // for(mes)
+    if (messages != NULL) {
+        // for (int i = 0; messages[s].text != NULL; i++) {
+        for (int i = 0; i < messages_count[selected_user.index]; i++) {
+            if(is_in_format(messages[selected_user.index][i].text, filter)){
+                GtkWidget *event_box = gtk_event_box_new();
+                gtk_container_add(GTK_CONTAINER(mess_list), event_box); // Здесь добавляется event_box в mess_list
+                GtkWidget *mess_box = create_message_box(&messages[selected_user.index][i]);
+                gtk_container_add(GTK_CONTAINER(event_box), mess_box);
+                g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
+            }
+        }
+    }
+}
 
 char* format_last_msg(char* text) {
         int len = strlen(text);
@@ -307,4 +372,22 @@ char* format_last_msg(char* text) {
     }
 
     return formatted_text;
+}
+
+gboolean is_in_format(char* text, char* format) {
+    size_t text_len = strlen(text);
+    size_t format_len = strlen(format);
+    
+    if (format_len > text_len) {
+        return FALSE; // Format is longer than text, so text can't match format
+    }
+    
+    // Iterate through the text to find the first character of the format
+    for (size_t i = 0; i <= text_len - format_len; ++i) {
+        if (strncmp(text + i, format, format_len) == 0) {
+            return TRUE; // Found the format in the text
+        }
+    }
+    
+    return FALSE; // Format not found in text
 }

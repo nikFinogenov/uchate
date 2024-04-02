@@ -2,24 +2,24 @@
 
 // TODO
 // static char **argv_ptr = {"127.0.0.1", "8888"};
-char *host_name = "127.0.0.1";
-int port = 7777;
+// char *host_name = "127.0.0.1";
+// int port = 7777;
 
-static int sockfd = -1;
+// static int sockfd = -1;
 
 int connect_to_server(int *sock) {
     int portno;
     struct sockaddr_in serv_addr;
     struct hostent *server;
 
-    portno = port;
+    portno = atoi(argv_ptr[2]);
     *sock = socket(AF_INET, SOCK_STREAM, 0);
 
     if (*sock < 0) {
         perror("ERROR opening socket");
     }
 
-    server = gethostbyname(host_name);
+    server = gethostbyname(argv_ptr[1]);
     
     if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");

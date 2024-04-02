@@ -12,6 +12,12 @@
 // }
 
 int main(int argc, char *argv[]) {
+    if (argc != 3) {
+       fprintf(stderr,"usage %s hostname port\n", argv[0]);
+       exit(0);
+    }
+    sockfd = -1;
+    argv_ptr = argv;
     // GtkCssProvider *cssProvider = gtk_css_provider_new();
     // gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);
     // gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),

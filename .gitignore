@@ -42,6 +42,7 @@
 *~
 
 #Ignore prikol files
+.DS_Store
 video*
 obj
 test*
