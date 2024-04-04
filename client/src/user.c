@@ -46,7 +46,7 @@ static void on_window_realize(GtkWidget *widget, gpointer data) {
     gtk_widget_hide(chat_box);   
 }
 
-void on_window_realize_2(GtkWidget *widget, gpointer data) {
+void realize_side_bar(GtkWidget *widget, gpointer data) {
     gtk_widget_hide(widget);
 }
 
@@ -237,6 +237,27 @@ void show_user_window() {
     gtk_widget_show_all(user_window);
 }
 
+gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *settings_box) {
+    // Получаем координаты клика
+    gint x = event->x;
+    gint y = event->y;
+
+    // Получаем геометрию settings_box
+    GtkAllocation allocation;
+    gtk_widget_get_allocation(settings_box, &allocation);
+
+    // Проверяем, находятся ли координаты клика в пределах settings_box
+    if (x < allocation.x || x > allocation.x + allocation.width ||
+        y < allocation.y || y > allocation.y + allocation.height) {
+        // Если клик был за пределами settings_box, скрываем его
+        gtk_widget_set_visible(settings_box, FALSE);
+        gtk_widget_set_visible(chats_box, TRUE);
+    }
+
+    // Пропускаем событие дальше
+    return FALSE;
+}
+
 void draw_user_info_box(GtkWidget *user_info_box) {
     // user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     // gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
@@ -325,8 +346,101 @@ void draw_user_window() {
     //gtk_widget_set_size_request(side_bar_box, 75, -1); // 75 pixels width
     gtk_widget_set_size_request(settings_box, 500, -1);
     gtk_widget_set_size_request(chats_box, 350, -1); // 350 pixels width
-    g_signal_connect(G_OBJECT(settings_box), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(settings_box), "realize", G_CALLBACK(realize_side_bar), NULL);
+    //settings
+    GtkStyleContext *context;
+    context = gtk_widget_get_style_context(GTK_WIDGET(settings_box));
+    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    GtkWidget *ebox1, *ebox2, *ebox3;
+    GtkWidget *nbox1, *nbox2, *nbox3;
 
+    nbox1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    nbox2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    nbox3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    
+    ebox1 = gtk_event_box_new();
+    ebox2 = gtk_event_box_new();
+    ebox3 = gtk_event_box_new();
+
+    gtk_widget_override_background_color(ebox1, GTK_STATE_FLAG_NORMAL, NORM_CVET);
+    gtk_widget_override_background_color(ebox2, GTK_STATE_FLAG_NORMAL, NORM_CVET);
+    gtk_widget_override_background_color(ebox3, GTK_STATE_FLAG_NORMAL, NORM_CVET);
+
+    GtkWidget *fimage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_size_request(fimage, 40, 40);
+    GtkWidget *simage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_size_request(simage, 40, 40);
+    GtkWidget *timage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_size_request(timage, 40, 40);
+    GtkWidget *ftext = gtk_label_new("Devs(bedolagy)");
+    GtkWidget *stext = gtk_label_new("Пожертвовать в семью бедолаг");
+    GtkWidget *ttext = gtk_label_new("McOk Gold | Silver | Bronze");
+
+    gtk_widget_set_name(fimage, "fimg_in_settings");
+    gtk_widget_set_name(simage, "simg_in_settings");
+    gtk_widget_set_name(timage, "timg_in_settings");
+    gtk_widget_set_name(ftext, "settings_text");
+    gtk_widget_set_name(ebox1, "settings_button");
+    gtk_widget_set_name(ebox2, "settings_button");
+    gtk_widget_set_name(ebox3, "settings_button");
+
+    set_widget_height(ebox1, 50);
+    set_widget_height(ebox2, 50);
+    set_widget_height(ebox3, 50);
+
+    GtkWidget *falign = gtk_alignment_new(0, 0, 1, 0);
+    GtkWidget *salign = gtk_alignment_new(0, 0, 1, 0);
+    GtkWidget *talign = gtk_alignment_new(0, 0, 1, 0);
+    GtkWidget *ffalign = gtk_alignment_new(0, 0, 0, 0);
+    GtkWidget *sfalign = gtk_alignment_new(0, 0, 0, 0);
+    GtkWidget *fsalign = gtk_alignment_new(0, 0, 0, 0);
+    GtkWidget *ssalign = gtk_alignment_new(0, 0, 0, 0);
+    GtkWidget *ftalign = gtk_alignment_new(0, 0, 0, 0);
+    GtkWidget *stalign = gtk_alignment_new(0, 0, 0, 0);
+
+    gtk_container_add(GTK_CONTAINER(ffalign), fimage);
+    gtk_container_add(GTK_CONTAINER(sfalign), ftext);
+    gtk_container_add(GTK_CONTAINER(nbox1), ffalign);
+    gtk_container_add(GTK_CONTAINER(nbox1), sfalign);
+
+    gtk_container_add(GTK_CONTAINER(fsalign), simage);
+    gtk_container_add(GTK_CONTAINER(ssalign), stext);
+    gtk_container_add(GTK_CONTAINER(nbox2), fsalign);
+    gtk_container_add(GTK_CONTAINER(nbox2), ssalign);
+
+    gtk_container_add(GTK_CONTAINER(ftalign), timage);
+    gtk_container_add(GTK_CONTAINER(stalign), ttext);
+    gtk_container_add(GTK_CONTAINER(nbox3), ftalign);
+    gtk_container_add(GTK_CONTAINER(nbox3), stalign);
+
+    gtk_container_add(GTK_CONTAINER(ebox1), nbox1);
+    gtk_container_add(GTK_CONTAINER(ebox2), nbox2);
+    gtk_container_add(GTK_CONTAINER(ebox3), nbox3);
+
+    gtk_container_add(GTK_CONTAINER(falign), ebox1);
+    gtk_container_add(GTK_CONTAINER(salign), ebox2);
+    gtk_container_add(GTK_CONTAINER(talign), ebox3);
+
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ffalign), 5, 0, 50, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(sfalign), 5, 0, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(fsalign), 5, 0, 50, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ssalign), 5, 0, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ftalign), 5, 0, 50, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(stalign), 5, 0, 0, 0);
+
+    gtk_alignment_set_padding(GTK_ALIGNMENT(falign), 20, 20, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(salign), 0, 20, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(talign), 0, 20, 0, 0);
+
+    g_signal_connect(G_OBJECT(falign), "button-press-event", G_CALLBACK(clicked_settings), NULL);
+    g_signal_connect(G_OBJECT(salign), "button-press-event", G_CALLBACK(clicked_settings), NULL);
+    g_signal_connect(G_OBJECT(talign), "button-press-event", G_CALLBACK(clicked_settings), NULL);
+
+    gtk_box_pack_start(GTK_BOX(settings_box), falign, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), salign, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), talign, FALSE, FALSE, 0);
+    g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), settings_box);
+    //endsettings
     //sidebar
     // GtkWidget *sidebar = gtk_event_box_new();
     // gtk_widget_set_size_request(sidebar, 200, -1);
@@ -345,7 +459,7 @@ void draw_user_window() {
     // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(add), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(add), "add");
-    g_signal_connect(G_OBJECT(add), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(add), "realize", G_CALLBACK(realize_side_bar), NULL);
 
     // GtkWidget* delete = gtk_button_new();
     // gtk_widget_set_valign(GTK_WIDGET(delete), GTK_ALIGN_CENTER);
@@ -354,7 +468,7 @@ void draw_user_window() {
     // // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     // gtk_widget_set_size_request(GTK_WIDGET(delete), 64, 64);
     // gtk_widget_set_name(GTK_WIDGET(delete), "delete");
-    // g_signal_connect(G_OBJECT(delete), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    // g_signal_connect(G_OBJECT(delete), "realize", G_CALLBACK(realize_side_bar), NULL);
 
     GtkWidget* anekdot = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(anekdot), GTK_ALIGN_CENTER);
@@ -363,7 +477,7 @@ void draw_user_window() {
     // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(anekdot), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(anekdot), "anekdot");
-    g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(realize_side_bar), NULL);
 
     GtkWidget* account = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(account), GTK_ALIGN_CENTER);
@@ -372,7 +486,7 @@ void draw_user_window() {
     // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(account), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(account), "account");
-    g_signal_connect(G_OBJECT(account), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(account), "realize", G_CALLBACK(realize_side_bar), NULL);
 
     GtkWidget* settings_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(settings_img), GTK_ALIGN_CENTER);
@@ -380,7 +494,7 @@ void draw_user_window() {
     gtk_container_set_border_width(GTK_CONTAINER(settings_img), 0);
     gtk_widget_set_size_request(GTK_WIDGET(settings_img), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(settings_img), "settings");
-    g_signal_connect(G_OBJECT(settings_img), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(settings_img), "realize", G_CALLBACK(realize_side_bar), NULL);
     g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), chats_box);
     g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), settings_box);
 
@@ -391,7 +505,7 @@ void draw_user_window() {
     // gtk_widget_set_size_request(GTK_WIDGET(add_chatter_img), 64, 64);
     // gtk_widget_set_name(GTK_WIDGET(add_chatter_img), "add-chatter");
     // g_signal_connect(G_OBJECT(add_chatter_img), "clicked", G_CALLBACK(add_chatter_button_clicked), NULL);
-    // g_signal_connect(G_OBJECT(add_chatter_img), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    // g_signal_connect(G_OBJECT(add_chatter_img), "realize", G_CALLBACK(realize_side_bar), NULL);
 
     GtkWidget* side_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
