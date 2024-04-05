@@ -11,8 +11,6 @@ typedef struct {
     // Add any other data needed by the callback function
 } CallbackData;
 
-
-
 // Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
 static void wrap_text(char *text) {
     int len = strlen(text);
@@ -32,6 +30,31 @@ static void wrap_text(char *text) {
         // Increment the line length
         line_length++;
     }
+}
+
+static void display_joke(GtkWidget *widget, gpointer data) {
+    // Create a pop-up dialog
+    GtkWidget *dialog = gtk_dialog_new_with_buttons("Settings", GTK_WINDOW(data),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+    
+    // Set the size of the dialog
+    gtk_window_set_default_size(GTK_WINDOW(dialog), 600, 400);
+
+    // Add some content to the dialog
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(content_area), grid);
+    
+    // Username field
+    g_print("The joke - %s\n", get_random_joke());
+    GtkWidget *username_label = gtk_label_new(get_random_joke());
+    gtk_grid_attach(GTK_GRID(grid), username_label, 0, 0, 1, 1);
+
+    gtk_widget_show_all(dialog);
+    
+    // Connect signal handler to close the dialog when the close button is clicked
+    g_signal_connect_swapped(dialog, "response", G_CALLBACK(gtk_widget_destroy), dialog);
 }
 
 static void on_window_realize(GtkWidget *widget, gpointer data) {
@@ -364,6 +387,7 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(anekdot), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(anekdot), "anekdot");
     g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(anekdot), "clicked", G_CALLBACK(display_joke), user_window);
 
     GtkWidget* account = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(account), GTK_ALIGN_CENTER);

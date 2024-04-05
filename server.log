@@ -1412,3 +1412,35 @@
 2024-04-02 21:34:36: Open database -> OK
 2024-04-02 21:35:28: Open database -> OK
 2024-04-02 21:37:32: Open database -> OK
+2024-04-05 09:52:40: Open database -> OK
+2024-04-05 09:52:40: Init table "Users" -> OK
+2024-04-05 09:52:40: Init table "Chats" -> OK
+2024-04-05 09:52:40: Init table "Messages" -> OK
+2024-04-05 09:53:06: Open database -> OK
+2024-04-05 10:17:36: Open database -> OK
+2024-04-05 10:17:36: Init table "Users" -> OK
+2024-04-05 10:17:36: Init table "Chats" -> OK
+2024-04-05 10:17:36: Init table "Messages" -> OK
+2024-04-05 10:17:50: Open database -> OK
+2024-04-05 10:27:59: Open database -> OK
+2024-04-05 10:28:39: Open database -> OK
+2024-04-05 10:31:47: Open database -> OK
+2024-04-05 10:34:09: Open database -> OK
+2024-04-05 10:39:28: Open database -> OK
+2024-04-05 10:43:37: Open database -> OK
+2024-04-05 10:48:10: Open database -> OK
+2024-04-05 10:49:04: Open database -> OK
+2024-04-05 10:51:00: Open database -> OK
+2024-04-05 11:19:53: Open database -> OK
+2024-04-05 11:21:19: Open database -> OK
+2024-04-05 11:21:19: Init table "Users" -> OK
+2024-04-05 11:21:19: Init table "Chats" -> OK
+2024-04-05 11:21:19: Init table "Messages" -> OK
+2024-04-05 11:21:26: Open database -> OK
+2024-04-05 11:21:26: Init table "Users" -> OK
+2024-04-05 11:21:26: Init table "Chats" -> OK
+2024-04-05 11:21:26: Init table "Messages" -> OK
+2024-04-05 11:21:38: Open database -> OK
+2024-04-05 11:21:41: Open database -> OK
+2024-04-05 11:24:58: Open database -> OK
+2024-04-05 11:30:41: Open database -> OK

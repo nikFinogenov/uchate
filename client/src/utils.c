@@ -1,11 +1,20 @@
 #include "uchat-client.h"
-#include <math.h>
 
 // const char *input_image_file = "client/img/simple.png"; // Input image file path
 t_selected_s selected_user = {
     .index = -1,
     .box = NULL
 };
+
+char* get_random_joke() {
+    // Generate a random index between 0 and NUM_JOKES - 1
+    srand(time(NULL));
+    int random_index = rand() % 30;
+
+    // Return the joke at the random index
+    return strdup(jokes[random_index]); // strdup creates a duplicate of the string
+}
+
 // GtkWidget *selected_user = NULL;
 void refresh_user_box() {
     // Clear the current contents of the chat_box

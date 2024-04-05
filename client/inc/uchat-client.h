@@ -15,6 +15,8 @@
 #define DEFAULT_MESSAGE_SIZE 1024
 #define MAX_LINE_LENGTH 70
 
+#define MAX_JOKE_LENGTH 200
+
 #include <gtk/gtk.h>
 // #include <gdk-pixbuf-core.h>
 
@@ -60,6 +62,8 @@
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+
+extern const char *jokes[];
 
 typedef struct {
     char* username;
@@ -160,4 +164,8 @@ void refresh_scrollable_window(GtkWidget *scrollable_window);
 void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);
 gboolean is_in_format(char* text, char* format);
+
+// Dad jokes
+char* get_random_joke();
+
 #endif
