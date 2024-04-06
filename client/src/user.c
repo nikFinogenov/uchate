@@ -15,22 +15,33 @@ typedef struct {
 static void wrap_text(char *text) {
     int len = strlen(text);
     int i, line_length = 0;
-
+    int j = MAX_LINE_LENGTH;
     for (i = 0; i < len; i++) {
+        // Check where was the last space symbol before MAX_LINE_LENGTH
+        if (mx_isspace(text [i])){
+                j = i;
+            }
         // Check if adding the current character will exceed the maximum line length
         if (line_length >= MAX_LINE_LENGTH) {
             // Insert a newline character
-            memmove(&text[i + 1], &text[i], len - i);
-            text[i] = '\n';
+            if (j == MAX_LINE_LENGTH) {
+                j = i;
+                memmove(&text[j + 1], &text[j], len - j);
+                // Increment the length of the text
+                len++;
+            }
+            
+            text[j] = '\n';
             // Reset the line length counter
             line_length = 0;
-            // Increment the length of the text
-            len++;
+            j = MAX_LINE_LENGTH;
+            
         }
         // Increment the line length
         line_length++;
     }
 }
+
 
 static void display_joke(GtkWidget *widget, gpointer data) {
     // Create a pop-up dialog
