@@ -63,6 +63,14 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     } 
     
     if (strcmp(response, "0") == 0) {
+        char **response2 = get_user_data(parsed_username);
+        // g_print("%s",mx_strsplit(response2, '\n')[0]);
+        user.name = response2[1];
+        // user.password = parsed_password;
+        user.name = response2[3];
+        user.surname = response2[4];
+        user.desc = response2[5];
+
         // gtk_widget_destroy(login_window);
         gtk_widget_hide(login_window);
         draw_user_window();
