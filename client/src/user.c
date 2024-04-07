@@ -11,7 +11,6 @@ typedef struct {
     // Add any other data needed by the callback function
 } CallbackData;
 
-
 static void on_clear_search_clicked(GtkButton *button, GtkEntry *entry) {
     // Clear the text in the entry
     gtk_entry_set_text(entry, "");
@@ -236,28 +235,14 @@ void refresh_scrollable_window2(GtkWidget *scrollable) {
     
     gtk_widget_show_all(scrollable);
 }
-// void refresh_chatters_with_filter_window(GtkWidget *scrollable_window) {
-//     // Очищаем содержимое скроллабельного окна
-//     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
-    
-//     // Перерисовываем содержимое скроллабельного окна
-//     user_populate_scrollable_window(scrollable_window);
- 
-//     // Перерисовываем окно
-//     gtk_widget_show_all(scrollable_window);
-// }
 
 void show_user_window() {
     gtk_widget_show_all(user_window);
 }
 
 void draw_user_info_box(GtkWidget *user_info_box) {
-    // user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    // gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
-    // set_widget_height(user_info_box, 70);
     GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
-    // prev_pixbuf = resize_img(prev_pixbuf, 150, 150);
 
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
@@ -291,7 +276,6 @@ void draw_user_info_box(GtkWidget *user_info_box) {
     gtk_box_pack_start(GTK_BOX(message_search_entry_box), message_clear_search_button, FALSE, FALSE, 0);
 
 
-
     GtkWidget* message_search_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(message_search_img), GTK_ALIGN_CENTER);
     gtk_button_set_relief(GTK_BUTTON(message_search_img), GTK_RELIEF_NONE);
@@ -323,7 +307,12 @@ static void clicked_side(GtkWidget *widget, gpointer data){
 static void clicked_settings(GtkWidget *widget, gpointer data){
     g_print("settings clicked\n");
 }
-
+static void logout_clicked(GtkWidget *widget, gpointer data){
+    gtk_widget_hide(user_window);
+    // clear_all();
+    // go_to_login();
+    show_login();
+}
 void draw_user_window() {
     GtkCssProvider *cssProvider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);
@@ -441,7 +430,7 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(logout_img), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(logout_img), "logout");
     // g_signal_connect(G_OBJECT(logout_img), "clicked", G_CALLBACK(clicked_side), NULL);
-    g_signal_connect(G_OBJECT(logout_img), "clicked", G_CALLBACK(settings_button_clicked), NULL);
+    g_signal_connect(G_OBJECT(logout_img), "clicked", G_CALLBACK(logout_clicked), NULL);
 
     
     gtk_box_pack_start(GTK_BOX(side_box), side_img, FALSE, FALSE, 0);

@@ -160,4 +160,6 @@ void refresh_scrollable_window(GtkWidget *scrollable_window);
 void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);
 gboolean is_in_format(char* text, char* format);
+void clear_all(void);
+
 #endif

@@ -1,6 +1,10 @@
 #include "uchat-client.h"
 #include <math.h>
 
+typedef struct {
+    int index;
+    GtkWidget *mess_box;
+} ButtonPressEventUserData;
 // const char *input_image_file = "client/img/simple.png"; // Input image file path
 t_selected_s selected_user = {
     .index = -1,
@@ -15,6 +19,36 @@ void refresh_user_box() {
     draw_user_info_box(user_info_box);
     gtk_widget_show_all(user_info_box);
 }
+
+static void delete_message(GtkWidget *widget, gpointer data) {
+    int index = GPOINTER_TO_INT(data);
+    g_print("total gays: %d\n", messages_count[selected_user.index]);
+    g_print("gay3 is here-> %d\n", index);
+    if (index < 0 || index >= messages_count[selected_user.index]) {
+        // Некорректный индекс
+        return;
+    }
+
+    // Освобождаем память для удаляемого элемента
+    free(messages[selected_user.index][index].text);
+    free(messages[selected_user.index][index].time);
+    // free(messages[index]); // Не нужно освобождать сам указатель на сообщение
+
+    // Сдвигаем элементы влево для замены удаленного элемента
+    for (int i = index; i < messages_count[selected_user.index] - 1; ++i) {
+        messages[selected_user.index][i] = messages[selected_user.index][i + 1];
+    }
+
+    // Уменьшаем количество сообщений
+    messages_count[selected_user.index]--;
+
+    // После удаления сообщения, последний элемент массива должен быть обнулен
+    // Это важно, чтобы не возникло повторного освобождения памяти в будущем
+    memset(&messages[selected_user.index][messages_count[selected_user.index]], 0, sizeof(t_message_s));
+
+    refresh_scrollable_window2(scrollable_window2);
+}
+
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     int width = gdk_pixbuf_get_width(GDK_PIXBUF(pixbuf));
@@ -51,7 +85,8 @@ static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     g_object_unref(pixbuf);
     return result;
 }
-static void create_tools_menu(GdkEvent *event) {
+static void create_tools_menu(GdkEvent *event, int index) {
+    g_print("gay2 is here-> %d\n", index);
     GtkWidget *menu;
     GtkWidget *menu_item;
     
@@ -63,6 +98,7 @@ static void create_tools_menu(GdkEvent *event) {
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
     menu_item = gtk_menu_item_new_with_label("Delete");
+    g_signal_connect(menu_item, "activate", G_CALLBACK(delete_message), GINT_TO_POINTER(index));
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
     // menu_item = gtk_menu_item_new_with_label("Button 3");
@@ -131,13 +167,18 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
     return FALSE;
 }
 static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpointer data) {
+    // int index = GPOINTER_TO_INT(((gpointer*)data)[0]);
+    int index = GPOINTER_TO_INT(data);
+    g_print("gay is here-> %d\n", index);
+    GtkWidget *event_box = GTK_WIDGET(widget);
+    GtkWidget *mess_box = gtk_bin_get_child(GTK_BIN(event_box));
     if (event->type == GDK_BUTTON_PRESS && event->button == GDK_BUTTON_SECONDARY) {
         GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(widget)));
         if (parent_window != NULL) {
             gint x, y;
             gtk_window_get_position(parent_window, &x, &y);
             GtkAllocation allocation;
-            gtk_widget_get_allocation(GTK_WIDGET(data), &allocation);
+            gtk_widget_get_allocation(GTK_WIDGET(mess_box), &allocation);
             //ебаная проверка всё ломает, как же похуй на неё
     //             g_print("Event coordinates: (%f, %f)\n", event->x_root, event->y_root);
     //             g_print("Widget position: (%d, %d)\n", x, y);
@@ -145,8 +186,8 @@ static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpoint
     //         if (event->x_root >= allocation.x && event->x_root <= allocation.x + allocation.width &&
     // event->y_root >= allocation.y && event->y_root <= allocation.y + allocation.height) {
     //             g_print("triple xui\n\n\n");
-                create_tools_menu((GdkEvent *)event);
-                return TRUE; // Prevent further processing of the event
+            create_tools_menu((GdkEvent *)event, index);
+            return TRUE; // Prevent further processing of the event
             // }
         }
     }
@@ -293,9 +334,25 @@ GtkWidget *create_message_box(t_message_s *message) {
     gtk_grid_set_column_homogeneous(GTK_GRID(message_box), FALSE); // Allow columns to have different widths
     gtk_widget_set_name(message_box, "message-text");
 
-    // Add text label
-    GtkWidget *text_label = gtk_label_new(message->text);
-    gtk_grid_attach(GTK_GRID(message_box), text_label, 0, 0, 1, 1); // Attach text label to grid
+    if(mx_strcmp(message->text, ":ucode") == 0) {
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/ucode.png", NULL);
+        if (ucode_pixbuf != NULL) {
+            // Create an image widget
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(resize_img(ucode_pixbuf, 128, 128));
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); // Attach image to grid
+            g_object_unref(ucode_pixbuf); // Unreference the pixbuf
+        } else {
+            // Failed to load the image, display an error message
+            GtkWidget *error_label = gtk_label_new("Error: Failed to load image");
+            gtk_grid_attach(GTK_GRID(message_box), error_label, 0, 0, 1, 1); // Attach error label to grid
+        }
+    }
+    else {
+        // Add text label
+        GtkWidget *text_label = gtk_label_new(message->text);
+        gtk_grid_attach(GTK_GRID(message_box), text_label, 0, 0, 1, 1); // Attach text label to grid        
+    }
+
 
     // Add time label
     GtkWidget *time_label = gtk_label_new(message->time);
@@ -326,7 +383,12 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
             gtk_container_add(GTK_CONTAINER(mess_list), event_box); // Здесь добавляется event_box в mess_list
             GtkWidget *mess_box = create_message_box(&messages[selected_user.index][i]);
             gtk_container_add(GTK_CONTAINER(event_box), mess_box);
-            g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
+
+            // gpointer user_data[] = {GINT_TO_POINTER(i)};
+            // ButtonPressEventUserData *user_data = g_new(ButtonPressEventUserData, 1);
+            int i_copy = i;
+            // user_data->mess_box = mess_box;
+            g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), GINT_TO_POINTER(i_copy));
         }
     }
 }

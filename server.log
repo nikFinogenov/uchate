@@ -145,3 +145,163 @@
 2024-04-06 12:49:53: Open database -> OK
 2024-04-06 12:49:53: Open database -> OK
 2024-04-06 12:49:53: Get user -> OK
+2024-04-06 13:08:56: Open database -> OK
+2024-04-06 13:08:56: Init table "Users" -> OK
+2024-04-06 13:08:56: Init table "Chats" -> OK
+2024-04-06 13:08:56: Init table "Messages" -> OK
+2024-04-06 13:09:04: Open database -> OK
+2024-04-06 13:09:04: Open database -> OK
+2024-04-06 13:09:04: Get user -> OK
+2024-04-06 13:10:20: Open database -> OK
+2024-04-06 13:10:20: Open database -> OK
+2024-04-06 13:10:20: Get user -> OK
+2024-04-06 13:11:23: Open database -> OK
+2024-04-06 13:11:23: Open database -> OK
+2024-04-06 13:11:23: Get user -> OK
+2024-04-06 13:12:00: Open database -> OK
+2024-04-06 13:12:00: Open database -> OK
+2024-04-06 13:12:00: Get user -> OK
+2024-04-06 13:21:11: Open database -> OK
+2024-04-06 13:21:11: Init table "Users" -> OK
+2024-04-06 13:21:11: Init table "Chats" -> OK
+2024-04-06 13:21:11: Init table "Messages" -> OK
+2024-04-06 13:21:14: Open database -> OK
+2024-04-06 13:21:14: Open database -> OK
+2024-04-06 13:21:14: Get user -> OK
+2024-04-06 13:22:28: Open database -> OK
+2024-04-06 13:22:28: Init table "Users" -> OK
+2024-04-06 13:22:28: Init table "Chats" -> OK
+2024-04-06 13:22:28: Init table "Messages" -> OK
+2024-04-06 13:22:45: Open database -> OK
+2024-04-06 13:22:45: Open database -> OK
+2024-04-06 13:22:45: Get user -> OK
+2024-04-06 13:23:06: Open database -> OK
+2024-04-06 13:23:11: Open database -> OK
+2024-04-06 13:23:11: Open database -> OK
+2024-04-06 13:23:11: Get user -> OK
+2024-04-06 13:23:22: Open database -> OK
+2024-04-06 13:23:22: Open database -> OK
+2024-04-06 13:23:22: Get user -> OK
+2024-04-06 13:23:48: Open database -> OK
+2024-04-06 13:23:52: Open database -> OK
+2024-04-06 13:24:07: Open database -> OK
+2024-04-06 13:24:07: Add user -> OK
+2024-04-06 14:05:05: Open database -> OK
+2024-04-06 14:05:05: Init table "Users" -> OK
+2024-04-06 14:05:05: Init table "Chats" -> OK
+2024-04-06 14:05:05: Init table "Messages" -> OK
+2024-04-06 14:05:11: Open database -> OK
+2024-04-06 14:05:11: Open database -> OK
+2024-04-06 14:05:11: Get user -> OK
+2024-04-06 14:05:35: Open database -> OK
+2024-04-06 14:05:35: Open database -> OK
+2024-04-06 14:05:35: Get user -> OK
+2024-04-07 17:48:00: Open database -> OK
+2024-04-07 17:48:00: Init table "Users" -> OK
+2024-04-07 17:48:00: Init table "Chats" -> OK
+2024-04-07 17:48:00: Init table "Messages" -> OK
+2024-04-07 17:49:07: Open database -> OK
+2024-04-07 17:49:07: Open database -> OK
+2024-04-07 17:49:07: Get user -> OK
+2024-04-07 17:51:13: Open database -> OK
+2024-04-07 17:51:13: Open database -> OK
+2024-04-07 17:51:13: Get user -> OK
+2024-04-07 17:52:33: Open database -> OK
+2024-04-07 17:52:33: Open database -> OK
+2024-04-07 17:52:33: Get user -> OK
+2024-04-07 18:04:40: Open database -> OK
+2024-04-07 18:04:40: Init table "Users" -> OK
+2024-04-07 18:04:40: Init table "Chats" -> OK
+2024-04-07 18:04:40: Init table "Messages" -> OK
+2024-04-07 18:04:49: Open database -> OK
+2024-04-07 18:04:49: Open database -> OK
+2024-04-07 18:04:49: Get user -> OK
+2024-04-07 23:59:58: Open database -> OK
+2024-04-07 23:59:58: Init table "Users" -> OK
+2024-04-07 23:59:58: Init table "Chats" -> OK
+2024-04-07 23:59:58: Init table "Messages" -> OK
+2024-04-08 00:01:15: Open database -> OK
+2024-04-08 00:01:15: Open database -> OK
+2024-04-08 00:01:15: Get user -> OK
+2024-04-08 00:05:56: Open database -> OK
+2024-04-08 00:05:56: Open database -> OK
+2024-04-08 00:05:56: Get user -> OK
+2024-04-08 00:11:05: Open database -> OK
+2024-04-08 00:11:05: Open database -> OK
+2024-04-08 00:11:05: Get user -> OK
+2024-04-08 00:11:46: Open database -> OK
+2024-04-08 00:11:46: Open database -> OK
+2024-04-08 00:11:46: Get user -> OK
+2024-04-08 00:18:15: Open database -> OK
+2024-04-08 00:18:15: Open database -> OK
+2024-04-08 00:18:15: Get user -> OK
+2024-04-08 00:20:14: Open database -> OK
+2024-04-08 00:20:14: Open database -> OK
+2024-04-08 00:20:14: Get user -> OK
+2024-04-08 00:22:41: Open database -> OK
+2024-04-08 00:22:41: Open database -> OK
+2024-04-08 00:22:41: Get user -> OK
+2024-04-08 00:26:18: Open database -> OK
+2024-04-08 00:26:18: Open database -> OK
+2024-04-08 00:26:18: Get user -> OK
+2024-04-08 00:27:47: Open database -> OK
+2024-04-08 00:27:47: Open database -> OK
+2024-04-08 00:27:47: Get user -> OK
+2024-04-08 00:29:11: Open database -> OK
+2024-04-08 00:29:11: Open database -> OK
+2024-04-08 00:29:11: Get user -> OK
+2024-04-08 00:46:50: Open database -> OK
+2024-04-08 00:46:50: Open database -> OK
+2024-04-08 00:46:50: Get user -> OK
+2024-04-08 00:48:24: Open database -> OK
+2024-04-08 00:48:24: Open database -> OK
+2024-04-08 00:48:24: Get user -> OK
+2024-04-08 00:51:45: Open database -> OK
+2024-04-08 00:51:45: Open database -> OK
+2024-04-08 00:51:45: Get user -> OK
+2024-04-08 00:52:18: Open database -> OK
+2024-04-08 00:52:18: Open database -> OK
+2024-04-08 00:52:18: Get user -> OK
+2024-04-08 00:54:19: Open database -> OK
+2024-04-08 00:54:19: Open database -> OK
+2024-04-08 00:54:19: Get user -> OK
+2024-04-08 00:54:47: Open database -> OK
+2024-04-08 00:54:47: Open database -> OK
+2024-04-08 00:54:47: Get user -> OK
+2024-04-08 00:55:06: Open database -> OK
+2024-04-08 00:55:06: Open database -> OK
+2024-04-08 00:55:06: Get user -> OK
+2024-04-08 00:56:57: Open database -> OK
+2024-04-08 00:56:57: Open database -> OK
+2024-04-08 00:56:57: Get user -> OK
+2024-04-08 01:11:02: Open database -> OK
+2024-04-08 01:11:02: Open database -> OK
+2024-04-08 01:11:02: Get user -> OK
+2024-04-08 01:15:58: Open database -> OK
+2024-04-08 01:15:58: Open database -> OK
+2024-04-08 01:15:58: Get user -> OK
+2024-04-08 01:26:29: Open database -> OK
+2024-04-08 01:26:29: Init table "Users" -> OK
+2024-04-08 01:26:29: Init table "Chats" -> OK
+2024-04-08 01:26:29: Init table "Messages" -> OK
+2024-04-08 01:26:38: Open database -> OK
+2024-04-08 01:26:38: Open database -> OK
+2024-04-08 01:26:38: Get user -> OK
+2024-04-08 01:31:11: Open database -> OK
+2024-04-08 01:31:11: Open database -> OK
+2024-04-08 01:31:11: Get user -> OK
+2024-04-08 01:31:33: Open database -> OK
+2024-04-08 01:31:33: Open database -> OK
+2024-04-08 01:31:33: Get user -> OK
+2024-04-08 01:32:28: Open database -> OK
+2024-04-08 01:32:28: Open database -> OK
+2024-04-08 01:32:28: Get user -> OK
+2024-04-08 01:33:50: Open database -> OK
+2024-04-08 01:33:50: Open database -> OK
+2024-04-08 01:33:50: Get user -> OK
+2024-04-08 01:36:50: Open database -> OK
+2024-04-08 01:36:50: Open database -> OK
+2024-04-08 01:36:50: Get user -> OK
+2024-04-08 01:37:45: Open database -> OK
+2024-04-08 01:37:45: Open database -> OK
+2024-04-08 01:37:45: Get user -> OK
