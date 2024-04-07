@@ -6,8 +6,8 @@ GtkWidget *chat_box = NULL;
 GtkWidget *chats_box = NULL;
 // GtkWidget *chats_box = NULL;
 GtkWidget *settings_box = NULL;
+GtkWidget *user_settings_box = NULL;
 GtkWidget *user_info_box = NULL;
-
 char* default_img = "client/img/simple.png";
 
 t_message_s** messages = NULL; // Global variable declaration

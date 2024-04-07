@@ -19,6 +19,189 @@ typedef struct {
     GtkWidget *username_entry;
 } EntryWidgets;
 
+static void clicked_settings(GtkWidget *widget, gpointer data){
+    g_print("settings clicked\n");
+}
+
+gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *settings_box) {
+    // Получаем координаты клика
+    gint x = event->x;
+    gint y = event->y;
+
+    // Получаем геометрию settings_box
+    GtkAllocation allocation;
+    gtk_widget_get_allocation(settings_box, &allocation);
+
+    // Проверяем, находятся ли координаты клика в пределах settings_box
+    if (x < allocation.x || x > allocation.x + allocation.width ||
+        y < allocation.y || y > allocation.y + allocation.height) {
+        // Если клик был за пределами settings_box, скрываем его
+        gtk_widget_set_visible(settings_box, FALSE);
+        gtk_widget_set_visible(chats_box, TRUE);
+    }
+
+    // Пропускаем событие дальше
+    return FALSE;
+}
+
+gboolean on_window_clicked_for_sub(GtkWidget *widget, GdkEventButton *event, GtkWidget *settings_box) {
+    // Получаем координаты клика
+    gint x = event->x;
+    gint y = event->y;
+
+    // Получаем геометрию settings_box
+    GtkAllocation allocation;
+    gtk_widget_get_allocation(settings_box, &allocation);
+
+    // Проверяем, находятся ли координаты клика в пределах settings_box
+    if (x < allocation.x || x > allocation.x + allocation.width ||
+        y < allocation.y || y > allocation.y + allocation.height) {
+        // Если клик был за пределами settings_box, скрываем его
+        gtk_widget_set_visible(settings_box, FALSE);
+    }
+
+    // Пропускаем событие дальше
+    return FALSE;
+}
+
+static void toggle(GtkWidget *widget, GtkWidget *element) {
+    gboolean visible = gtk_widget_get_visible(element);
+    gtk_widget_set_visible(element, !visible);
+}
+
+void realize_side_bar(GtkWidget *widget, gpointer data) {
+    gtk_widget_hide(widget);
+}
+
+
+static void minus_dengi(GtkWidget *widget, gpointer data){
+    GtkWidget *settings_t = gtk_dialog_new_with_buttons("Subscriptions", GTK_WINDOW(data),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+    gtk_window_set_default_size(GTK_WINDOW(settings_t), 600, 400);
+    PangoFontDescription *font_desc = pango_font_description_new();
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
+
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+
+    GtkWidget *bbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *sub_bbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *sub_sbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *gbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *sub_gbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    g_signal_connect(G_OBJECT(sub_bbox), "realize", G_CALLBACK(realize_side_bar), NULL);
+    g_signal_connect(G_OBJECT(sub_sbox), "realize", G_CALLBACK(realize_side_bar), NULL);
+    g_signal_connect(G_OBJECT(sub_gbox), "realize", G_CALLBACK(realize_side_bar), NULL);
+    gtk_widget_set_size_request(bbox, -1, 30);
+    gtk_widget_set_size_request(sbox, -1, 30);
+    gtk_widget_set_size_request(gbox, -1, 30);
+    gtk_widget_set_size_request(sub_bbox, -1, 30);
+    gtk_widget_set_size_request(sub_sbox, -1, 30);
+    gtk_widget_set_size_request(sub_gbox, -1, 30);
+
+    GtkWidget *bronze = gtk_button_new_with_label("McOk Bronze");
+    GtkWidget *silver = gtk_button_new_with_label("McOk Silver");
+    GtkWidget *gold = gtk_button_new_with_label("McOk Gold");
+
+    GtkWidget *bronze_title = gtk_label_new("2.50€/month");
+    gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_ALIGN_CENTER);
+    GtkWidget *bronze_text = gtk_label_new("pluses:\n \tplus money for us :)\n minuses:\n \tminus money for you :(");
+    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_ALIGN_END);
+    gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_title);
+    gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_text);
+
+    GtkWidget *silver_title = gtk_label_new("5.00€/month");
+    gtk_label_set_justify(GTK_LABEL(silver_title), GTK_ALIGN_CENTER);
+    GtkWidget *silver_text = gtk_label_new("pluses:\n \tplus money for us :)\n minuses:\n \tminus money for you :(");
+    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_ALIGN_END);
+    gtk_container_add(GTK_CONTAINER(sub_sbox), silver_title);
+    gtk_container_add(GTK_CONTAINER(sub_sbox), silver_text);
+
+    GtkWidget *gold_title = gtk_label_new("10.00€/month");
+    gtk_label_set_justify(GTK_LABEL(gold_title), GTK_ALIGN_CENTER);
+    GtkWidget *gold_text = gtk_label_new("pluses:\n \tplus money for us :)\n minuses:\n \tminus money for you :(");
+    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_ALIGN_END);
+    gtk_container_add(GTK_CONTAINER(sub_gbox), gold_title);
+    gtk_container_add(GTK_CONTAINER(sub_gbox), gold_text);
+
+    gtk_container_add(GTK_CONTAINER(bbox), bronze);
+    gtk_container_add(GTK_CONTAINER(sbox), silver);
+    gtk_container_add(GTK_CONTAINER(gbox), gold);
+
+    g_signal_connect(G_OBJECT(bronze), "clicked", G_CALLBACK(toggle), sub_bbox);
+    g_signal_connect(G_OBJECT(silver), "clicked", G_CALLBACK(toggle), sub_sbox);
+    g_signal_connect(G_OBJECT(gold), "clicked", G_CALLBACK(toggle), sub_gbox);
+
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_t));
+    gtk_container_add(GTK_CONTAINER(content_area), bbox);
+    gtk_container_add(GTK_CONTAINER(content_area), sub_bbox);
+    gtk_container_add(GTK_CONTAINER(content_area), sbox);
+    gtk_container_add(GTK_CONTAINER(content_area), sub_sbox);
+    gtk_container_add(GTK_CONTAINER(content_area), gbox);
+    gtk_container_add(GTK_CONTAINER(content_area), sub_gbox);
+
+    gtk_widget_show_all(settings_t);
+
+    g_signal_connect_swapped(settings_t, "response", G_CALLBACK(gtk_widget_destroy), settings_t);
+    g_signal_connect(settings_t, "button-press-event", G_CALLBACK(on_window_clicked_for_sub), sub_bbox);
+    g_signal_connect(settings_t, "button-press-event", G_CALLBACK(on_window_clicked_for_sub), sub_sbox);
+    g_signal_connect(settings_t, "button-press-event", G_CALLBACK(on_window_clicked_for_sub), sub_gbox);
+}
+
+static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
+    GtkWidget *settings_s = gtk_dialog_new_with_buttons("Donate", GTK_WINDOW(data),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+    gtk_window_set_default_size(GTK_WINDOW(settings_s), 600, 400);
+    PangoFontDescription *font_desc = pango_font_description_new();
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
+    GtkWidget *dengi_goni = gtk_label_new(NULL);
+    gtk_widget_override_font(dengi_goni, font_desc);
+    gtk_label_set_markup(GTK_LABEL(dengi_goni), "<a href=''>Dat' na lapu</a>");
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_s));
+    gtk_container_add(GTK_CONTAINER(content_area), dengi_goni);
+
+    gtk_widget_show_all(settings_s);
+
+    g_signal_connect_swapped(settings_s, "response", G_CALLBACK(gtk_widget_destroy), settings_s);
+}
+
+static void devs_window(GtkWidget *widget, gpointer data){
+    GtkWidget *settings_f = gtk_dialog_new_with_buttons("Developers", GTK_WINDOW(data),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+    gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
+    PangoFontDescription *font_desc = pango_font_description_new();
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
+    GtkWidget *razrab1 = gtk_label_new(NULL);
+    GtkWidget *razrab2 = gtk_label_new(NULL);
+    GtkWidget *razrab3 = gtk_label_new(NULL);
+    GtkWidget *razrab4 = gtk_label_new(NULL);
+    gtk_widget_override_font(razrab1, font_desc);
+    gtk_widget_override_font(razrab2, font_desc);
+    gtk_widget_override_font(razrab3, font_desc);
+    gtk_widget_override_font(razrab4, font_desc);
+    gtk_label_set_markup(GTK_LABEL(razrab1), "<a href='https://github.com/nikFinogenov'>razrab1</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>razrab2</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>razrab3</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab4), "<a href='https://github.com/kitska'>razrab4</a>");
+    gtk_label_set_justify(GTK_LABEL(razrab1), GTK_JUSTIFY_CENTER);
+    gtk_label_set_justify(GTK_LABEL(razrab2), GTK_JUSTIFY_CENTER);
+    gtk_label_set_justify(GTK_LABEL(razrab3), GTK_JUSTIFY_CENTER);
+    gtk_label_set_justify(GTK_LABEL(razrab4), GTK_JUSTIFY_CENTER);
+
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_f));
+    gtk_container_add(GTK_CONTAINER(content_area), razrab1);
+    gtk_container_add(GTK_CONTAINER(content_area), razrab2);
+    gtk_container_add(GTK_CONTAINER(content_area), razrab3);
+    gtk_container_add(GTK_CONTAINER(content_area), razrab4);
+
+    gtk_widget_show_all(settings_f);
+
+    g_signal_connect_swapped(settings_f, "response", G_CALLBACK(gtk_widget_destroy), settings_f);
+}
+
 static void display_error_message(char *message) {
     GdkRGBA color_red;
     gdk_rgba_parse(&color_red, "#de34eb");
@@ -86,10 +269,6 @@ static void on_window_realize(GtkWidget *widget, gpointer data) {
     // Устанавливаем его на максимальное значение, чтобы прокрутить вниз
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
     gtk_widget_hide(chat_box);   
-}
-
-void realize_side_bar(GtkWidget *widget, gpointer data) {
-    gtk_widget_hide(widget);
 }
 
 static void search_user(GtkWidget *widget, gpointer user_data) {
@@ -349,26 +528,6 @@ void show_user_window() {
     gtk_widget_show_all(user_window);
 }
 
-gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *settings_box) {
-    // Получаем координаты клика
-    gint x = event->x;
-    gint y = event->y;
-
-    // Получаем геометрию settings_box
-    GtkAllocation allocation;
-    gtk_widget_get_allocation(settings_box, &allocation);
-
-    // Проверяем, находятся ли координаты клика в пределах settings_box
-    if (x < allocation.x || x > allocation.x + allocation.width ||
-        y < allocation.y || y > allocation.y + allocation.height) {
-        // Если клик был за пределами settings_box, скрываем его
-        gtk_widget_set_visible(settings_box, FALSE);
-        gtk_widget_set_visible(chats_box, TRUE);
-    }
-
-    // Пропускаем событие дальше
-    return FALSE;
-}
 
 void draw_user_info_box(GtkWidget *user_info_box) {
     // user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -413,11 +572,6 @@ void draw_user_info_box(GtkWidget *user_info_box) {
     gtk_box_pack_end(GTK_BOX(user_info_box), message_search_entry_box, FALSE, FALSE, 5);
 }
 
-static void toggle(GtkWidget *widget, GtkWidget *element) {
-    gboolean visible = gtk_widget_get_visible(element);
-    gtk_widget_set_visible(element, !visible);
-}
-
 static void clicked_side(GtkWidget *widget, gpointer data){
     if(toggled)
         gtk_widget_set_name(GTK_WIDGET(widget), "sidebar-rotated");
@@ -425,10 +579,6 @@ static void clicked_side(GtkWidget *widget, gpointer data){
         gtk_widget_set_name(GTK_WIDGET(widget), "sidebar");
     toggled = !toggled;
     // g_print("side clicked\n");
-}
-
-static void clicked_settings(GtkWidget *widget, gpointer data){
-    g_print("settings clicked\n");
 }
 
 void draw_user_window() {
@@ -446,6 +596,7 @@ void draw_user_window() {
 
     // Create three box containers
     settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    user_settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
@@ -484,14 +635,13 @@ void draw_user_window() {
     gtk_widget_set_size_request(simage, 40, 40);
     GtkWidget *timage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(timage, 40, 40);
-    GtkWidget *ftext = gtk_label_new("Devs(bedolagy)");
-    GtkWidget *stext = gtk_label_new("Пожертвовать в семью бедолаг");
-    GtkWidget *ttext = gtk_label_new("McOk Gold | Silver | Bronze");
+    GtkWidget *fbutton = gtk_button_new_with_label("Devs(bedolagy)");
+    GtkWidget *sbutton = gtk_button_new_with_label("Пожертвовать в семью бедолаг");
+    GtkWidget *tbutton = gtk_button_new_with_label("McOk Gold | Silver | Bronze");
 
     gtk_widget_set_name(fimage, "fimg_in_settings");
     gtk_widget_set_name(simage, "simg_in_settings");
     gtk_widget_set_name(timage, "timg_in_settings");
-    gtk_widget_set_name(ftext, "settings_text");
     gtk_widget_set_name(ebox1, "settings_button");
     gtk_widget_set_name(ebox2, "settings_button");
     gtk_widget_set_name(ebox3, "settings_button");
@@ -511,17 +661,17 @@ void draw_user_window() {
     GtkWidget *stalign = gtk_alignment_new(0, 0, 0, 0);
 
     gtk_container_add(GTK_CONTAINER(ffalign), fimage);
-    gtk_container_add(GTK_CONTAINER(sfalign), ftext);
+    gtk_container_add(GTK_CONTAINER(sfalign), fbutton);
     gtk_container_add(GTK_CONTAINER(nbox1), ffalign);
     gtk_container_add(GTK_CONTAINER(nbox1), sfalign);
 
     gtk_container_add(GTK_CONTAINER(fsalign), simage);
-    gtk_container_add(GTK_CONTAINER(ssalign), stext);
+    gtk_container_add(GTK_CONTAINER(ssalign), sbutton);
     gtk_container_add(GTK_CONTAINER(nbox2), fsalign);
     gtk_container_add(GTK_CONTAINER(nbox2), ssalign);
 
     gtk_container_add(GTK_CONTAINER(ftalign), timage);
-    gtk_container_add(GTK_CONTAINER(stalign), ttext);
+    gtk_container_add(GTK_CONTAINER(stalign), tbutton);
     gtk_container_add(GTK_CONTAINER(nbox3), ftalign);
     gtk_container_add(GTK_CONTAINER(nbox3), stalign);
 
@@ -533,20 +683,20 @@ void draw_user_window() {
     gtk_container_add(GTK_CONTAINER(salign), ebox2);
     gtk_container_add(GTK_CONTAINER(talign), ebox3);
 
-    gtk_alignment_set_padding(GTK_ALIGNMENT(ffalign), 5, 0, 50, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(sfalign), 5, 0, 0, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(fsalign), 5, 0, 50, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(ssalign), 5, 0, 0, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(ftalign), 5, 0, 50, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(stalign), 5, 0, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ffalign), 10, 0, 60, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(sfalign), 15, 10, 5, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(fsalign), 10, 0, 60, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ssalign), 15, 10, 5, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ftalign), 10, 0, 60, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(stalign), 15, 10, 5, 0);
 
-    gtk_alignment_set_padding(GTK_ALIGNMENT(falign), 20, 20, 0, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(salign), 0, 20, 0, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(talign), 0, 20, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(falign), 20, 10, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(salign), 0, 10, 0, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(talign), 0, 10, 0, 0);
 
-    g_signal_connect(G_OBJECT(falign), "button-press-event", G_CALLBACK(clicked_settings), NULL);
-    g_signal_connect(G_OBJECT(salign), "button-press-event", G_CALLBACK(clicked_settings), NULL);
-    g_signal_connect(G_OBJECT(talign), "button-press-event", G_CALLBACK(clicked_settings), NULL);
+    g_signal_connect(G_OBJECT(fbutton), "clicked", G_CALLBACK(devs_window), user_window);
+    g_signal_connect(G_OBJECT(sbutton), "clicked", G_CALLBACK(three_hundred_bucks_window), user_window);
+    g_signal_connect(G_OBJECT(tbutton), "clicked", G_CALLBACK(minus_dengi), user_window);
 
     gtk_box_pack_start(GTK_BOX(settings_box), falign, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(settings_box), salign, FALSE, FALSE, 0);
@@ -557,6 +707,10 @@ void draw_user_window() {
     // GtkWidget *sidebar = gtk_event_box_new();
     // gtk_widget_set_size_request(sidebar, 200, -1);
     // gtk_widget_set_visible(sidebar, FALSE);
+
+    //user settings + yatogorot ebal
+
+    //end user setttings
 
     GtkWidget *side_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_override_background_color(side_box, GTK_STATE_FLAG_NORMAL, NORM_CVET);
@@ -589,7 +743,7 @@ void draw_user_window() {
     // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(anekdot), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(anekdot), "anekdot");
-    g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(realize_side_bar), NULL);
     g_signal_connect(G_OBJECT(anekdot), "clicked", G_CALLBACK(display_joke), user_window);
 
     GtkWidget* account = gtk_button_new();
