@@ -4,6 +4,10 @@ static GtkWidget *user_window;
 static GtkWidget* add_new_chat_when_no_chats;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;
+
+GtkWidget *search_pop_up = NULL;
+static GtkWidget *error_label = NULL;
+
 static bool toggled = true;
 // static GtkWidget *user_info_box;
 typedef struct {
@@ -11,7 +15,20 @@ typedef struct {
     // Add any other data needed by the callback function
 } CallbackData;
 
+typedef struct {
+    GtkWidget *username_entry;
+} EntryWidgets;
 
+static void display_error_message(char *message) {
+    GdkRGBA color_red;
+    gdk_rgba_parse(&color_red, "#de34eb");
+
+    error_label = gtk_label_new(message);
+    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_set_margin_top(error_label, 10);
+    gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
+    gtk_widget_show_all(search_pop_up);
+}
 
 // Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
 static void wrap_text(char *text) {
@@ -34,6 +51,31 @@ static void wrap_text(char *text) {
     }
 }
 
+static void display_joke(GtkWidget *widget, gpointer data) {
+    // Create a pop-up dialog
+    GtkWidget *joke = gtk_dialog_new_with_buttons("Settings", GTK_WINDOW(data),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+    
+    // Set the size of the dialog
+    gtk_window_set_default_size(GTK_WINDOW(joke), 600, 400);
+
+    // Add some content to the dialog
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(joke));
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(content_area), grid);
+    
+    // Username field
+    g_print("The joke - %s\n", get_random_joke());
+    GtkWidget *username_label = gtk_label_new(get_random_joke());
+    gtk_grid_attach(GTK_GRID(grid), username_label, 0, 0, 1, 1);
+
+    gtk_widget_show_all(joke);
+    
+    // Connect signal handler to close the dialog when the close button is clicked
+    g_signal_connect_swapped(joke, "response", G_CALLBACK(gtk_widget_destroy), joke);
+}
+
 static void on_window_realize(GtkWidget *widget, gpointer data) {
     // Получаем пролистываемое окно
     GtkWidget *scrollable_window = GTK_WIDGET(data);
@@ -50,23 +92,46 @@ void realize_side_bar(GtkWidget *widget, gpointer data) {
     gtk_widget_hide(widget);
 }
 
-static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
-    g_print("Add chatter clicked\n");
-    
-    // Check if chatters array is initialized
-    if (chatters == NULL) {
-        g_print("Chatters array is not initialized\n");
+static void search_user(GtkWidget *widget, gpointer user_data) {
+    EntryWidgets *data = (EntryWidgets *)user_data;
+    const gchar *data_username = gtk_entry_get_text(GTK_ENTRY(data->username_entry));
+
+    char *parsed_username = (char*)data_username; 
+
+    if (error_label != NULL) {
+        gtk_widget_destroy(error_label);
+        error_label = NULL;
+    }
+
+    if (strcmp(parsed_username, "") == 0) {
+        display_error_message("Username cannot be empty");
+        return;
+    }
+
+    char **response = get_chatter_data(parsed_username);
+
+    if (strcmp(response, "1") == 0) {
+        display_error_message("User couldn't be found");
         return;
     }
     
+    char *token = strtok(response, "\n");
+    char *username = strdup(token);
+    token = strtok(NULL, "\n");
+    char *name = strdup(token);
+    token = strtok(NULL, "\n");
+    char *surname = strdup(token);
+
     // Создаем новый элемент структуры t_chatter_s
     t_chatter_s new_chatter = {
-        .name = "New Name",
-        .surname = "New Surname",
-        .username = "new_username",
+        .name = name,
+        .surname = surname,
+        .username = username,
         .lastmsg = "No messages yet",
         .avatar = NULL
     };
+
+    g_print("\n%s\n%s\n%s", new_chatter.name, new_chatter.surname, new_chatter.username);
     
     // Find the first available slot in the chatters array
 
@@ -77,25 +142,66 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
             gtk_widget_show(scrollable_window);
             gtk_widget_hide(add_new_chat_when_no_chats);
 
+        gtk_widget_destroy(search_pop_up); // Destroy the dialog widget
+
         if (!is_chatters_empty()) {
             // Если массив больше не пуст, обновляем текст метки empty_chat
             gtk_label_set_text(GTK_LABEL(empty_chat), "[ Select a chat to start chatting ]");
         }
         return;
     }
-    // int i;
-    // for (i = 0; i < MAX_CHATTERS; i++) {
-    //     if (chatters[i].name == NULL) {
-    //         chatters[i] = new_chatter;
-    //         chatters_count++;
-    //         refresh_scrollable_window(scrollable_window);
-    //                 // Иначе, показываем прокручиваемое окно для сообщений
-    //         return;
-    //     }
-    // }
-    
-    // If no available slot is found
+
     g_print("Chatter limit reached\n");
+}
+
+static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
+    g_print("Add chatter clicked\n");
+
+    if (chatters == NULL) {
+        g_print("Chatters array is not initialized\n");
+        return;
+    }
+
+    // Create a pop-up dialog
+    search_pop_up = gtk_dialog_new_with_buttons("Search User", GTK_WINDOW(data),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+
+    gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 300, 150);
+
+    // Add some content to the dialog
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(search_pop_up));
+
+    // Username field
+    GtkWidget *search_entry = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(search_entry), "Enter username...");
+    gtk_container_add(GTK_CONTAINER(content_area), search_entry);
+
+    // Search button
+    GtkWidget *search_button = gtk_button_new_with_label("Search");
+    gtk_container_add(GTK_CONTAINER(content_area), search_button);
+
+    EntryWidgets *entry = g_new(EntryWidgets, 1);
+    entry->username_entry = search_entry;
+    g_signal_connect(search_button, "clicked", G_CALLBACK(search_user), entry);
+
+
+    gtk_widget_set_margin_top(search_button, 10);
+
+    // Center the widgets vertically
+    gtk_widget_set_vexpand(search_entry, TRUE);
+    gtk_widget_set_vexpand(search_button, TRUE);
+    gtk_widget_set_valign(search_entry, GTK_ALIGN_FILL);
+    gtk_widget_set_valign(search_button, GTK_ALIGN_CENTER);
+
+    // Center the content area
+    gtk_widget_set_halign(content_area, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(content_area, GTK_ALIGN_CENTER);
+
+    gtk_widget_show_all(search_pop_up);
+    
+    // Connect signal handler to close the dialog when the close button is clicked
+    g_signal_connect_swapped(search_pop_up, "response", G_CALLBACK(gtk_widget_destroy), search_pop_up);
 }
 
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
@@ -184,6 +290,7 @@ static void settings_button_clicked(GtkWidget *widget, gpointer data) {
 static void user_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("User clicked\n");
 }
+
 static void message_search_clicked(GtkWidget *widget, gpointer user_data) {
     // g_print("Message search clicked\n");
     CallbackData *data = (CallbackData *)user_data;
@@ -192,9 +299,14 @@ static void message_search_clicked(GtkWidget *widget, gpointer user_data) {
     message_populate_scrollable_filtred_window(scrollable_window2, text);
     gtk_widget_show_all(scrollable_window2);
 }
+
+// Dispaly window for searching a user
 static void chatter_search_clicled(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
+
+    g_print("\n%s\n", text);
+
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
     user_populate_scrollable_filtred_window(scrollable_window, text);
     gtk_widget_show_all(scrollable_window);
@@ -477,7 +589,8 @@ void draw_user_window() {
     // gtk_widget_set_halign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(anekdot), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(anekdot), "anekdot");
-    g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(realize_side_bar), NULL);
+    g_signal_connect(G_OBJECT(anekdot), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(anekdot), "clicked", G_CALLBACK(display_joke), user_window);
 
     GtkWidget* account = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(account), GTK_ALIGN_CENTER);
@@ -573,7 +686,7 @@ void draw_user_window() {
     gtk_container_set_border_width(GTK_CONTAINER(add_new_chat_when_no_chats), 0);
     gtk_widget_set_size_request(GTK_WIDGET(add_new_chat_when_no_chats), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(add_new_chat_when_no_chats), "add_new_chat_when_no_chats");
-    g_signal_connect(G_OBJECT(add_new_chat_when_no_chats), "clicked", G_CALLBACK(add_chatter_button_clicked), NULL);
+    g_signal_connect(G_OBJECT(add_new_chat_when_no_chats), "clicked", G_CALLBACK(add_chatter_button_clicked), user_window);
     gtk_box_pack_end(GTK_BOX(chats_box), add_new_chat_when_no_chats, FALSE, FALSE, 5);
     
     if (chatters == NULL) {
