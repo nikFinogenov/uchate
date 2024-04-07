@@ -139,6 +139,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
     }
     return FALSE;
 }
+
 static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpointer data) {
     if (event->type == GDK_BUTTON_PRESS && event->button == GDK_BUTTON_SECONDARY) {
         GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(widget)));
@@ -270,6 +271,7 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
         }
     }
 }
+
 void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
     GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);

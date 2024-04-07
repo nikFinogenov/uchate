@@ -171,7 +171,8 @@ void check_login_data(char **data, int sockfd) {
     char response[DEFAULT_MESSAGE_SIZE];
 
     if (mx_check_user(data)) {
-        sprintf(response, "0");
+        mx_get_chatter(data, sockfd);
+        return;
     } else {
         sprintf(response, "1");
     }

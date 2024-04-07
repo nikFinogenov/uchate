@@ -109,6 +109,18 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         return;
     }
 
+    if (strcmp(user.username, parsed_username) == 0) {
+        display_error_message("You cannot open chat with yourself");
+        return;
+    }
+
+    for (int i = 0; i < chatters_count; i++) {
+        if (strcmp(chatters[i].username, parsed_username) == 0){
+            display_error_message("Chat already exists");
+            return;
+        }
+    }
+
     char **response = get_chatter_data(parsed_username);
 
     if (strcmp(response, "1") == 0) {
@@ -166,7 +178,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL);
 
-    gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 300, 150);
+    gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 400, 150);
 
     // Add some content to the dialog
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(search_pop_up));
@@ -457,6 +469,8 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(add), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(add), "add");
     g_signal_connect(G_OBJECT(add), "realize", G_CALLBACK(on_window_realize_2), NULL);
+    g_signal_connect(G_OBJECT(add), "clicked", G_CALLBACK(add_chatter_button_clicked), user_window);
+
 
     // GtkWidget* delete = gtk_button_new();
     // gtk_widget_set_valign(GTK_WIDGET(delete), GTK_ALIGN_CENTER);
