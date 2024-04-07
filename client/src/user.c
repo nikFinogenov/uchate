@@ -25,6 +25,7 @@ static void display_error_message(char *message) {
 
     error_label = gtk_label_new(message);
     gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_set_margin_top(error_label, 10);
     gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
     gtk_widget_show_all(search_pop_up);
 }
@@ -113,17 +114,13 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         display_error_message("User couldn't be found");
         return;
     }
-
-    char username[100], name[100], surname[100];
-
+    
     char *token = strtok(response, "\n");
-    strcpy(username, token);
-
+    char *username = strdup(token);
     token = strtok(NULL, "\n");
-    strcpy(name, token);
-
+    char *name = strdup(token);
     token = strtok(NULL, "\n");
-    strcpy(surname, token);
+    char *surname = strdup(token);
 
     // Создаем новый элемент структуры t_chatter_s
     t_chatter_s new_chatter = {

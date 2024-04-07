@@ -1799,3 +1799,45 @@ SURNAME
 2024-04-07 12:40:05: Open database -> OK
 2024-04-07 12:40:12: Open database -> OK
 2024-04-07 12:40:12: Get user -> 1
+2024-04-07 12:43:22: Open database -> OK
+2024-04-07 12:43:22: Init table "Users" -> OK
+2024-04-07 12:43:22: Init table "Chats" -> OK
+2024-04-07 12:43:22: Init table "Messages" -> OK
+2024-04-07 12:43:28: Open database -> OK
+2024-04-07 12:43:32: Open database -> OK
+2024-04-07 12:43:32: Get user -> 1
+2024-04-07 12:43:35: Open database -> OK
+2024-04-07 12:43:35: Get user -> DMYTRO
+NAME
+SURNAME
+
+2024-04-07 12:46:33: Open database -> OK
+2024-04-07 12:46:40: Open database -> OK
+2024-04-07 12:46:40: Get user -> 1
+2024-04-07 12:46:44: Open database -> OK
+2024-04-07 12:46:44: Get user -> 1
+2024-04-07 12:46:48: Open database -> OK
+2024-04-07 12:46:48: Get user -> DMYTRO
+NAME
+SURNAME
+
+2024-04-07 12:51:12: Open database -> OK
+2024-04-07 12:51:16: Open database -> OK
+2024-04-07 12:51:16: Get user -> DMYTRO
+NAME
+SURNAME
+
+2024-04-07 12:51:32: Open database -> OK
+2024-04-07 12:51:41: Open database -> OK
+2024-04-07 12:51:41: Get user -> 1
+2024-04-07 12:51:43: Open database -> OK
+2024-04-07 12:51:43: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-07 12:51:57: Open database -> OK
+2024-04-07 12:52:04: Open database -> OK
+2024-04-07 12:52:04: Get user -> erter
+Dima
+Avdeev
+
