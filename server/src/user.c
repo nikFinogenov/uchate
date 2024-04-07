@@ -71,6 +71,37 @@ void mx_get_user(char** data, int sockfd) {
     sqlite3_close(db);
 }
 
+void mx_get_chatter(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+
+    memset(sql, 0, sizeof(sql));
+    memset(temp_buff, 0, sizeof(temp_buff));
+
+    sprintf(sql, "SELECT username, name, surname FROM USERS WHERE username = '%s';", data[1]);
+
+    if (sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK) {
+        int step = sqlite3_step(res);
+        if (step == SQLITE_ROW) {
+            const unsigned char *username = sqlite3_column_text(res, 0);
+            const unsigned char *name = sqlite3_column_text(res, 1);
+            const unsigned char *surname = sqlite3_column_text(res, 2);
+            sprintf(temp_buff, "%s\n%s\n%s\n", username, name, surname);
+        } else {
+            strcpy(temp_buff, "1"); // User not found
+        }
+        sqlite3_finalize(res);
+    } else {
+        strcpy(temp_buff, "-1"); // Error in SQL execution
+    }
+
+    logger("Get user", temp_buff, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
+
 void mx_update_user(char **data) {
     sqlite3 *db = open_db();
     char sql[500];
