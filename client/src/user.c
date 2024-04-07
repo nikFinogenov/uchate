@@ -53,23 +53,24 @@ static void wrap_text(char *text) {
 
 static void display_joke(GtkWidget *widget, gpointer data) {
     // Create a pop-up dialog
-    GtkWidget *joke = gtk_dialog_new_with_buttons("Settings", GTK_WINDOW(data),
+    GtkWidget *joke = gtk_dialog_new_with_buttons("Random Joke", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL);
     
     // Set the size of the dialog
-    gtk_window_set_default_size(GTK_WINDOW(joke), 600, 400);
+    gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
 
-    // Add some content to the dialog
-    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(joke));
-    GtkWidget *grid = gtk_grid_new();
-    gtk_container_add(GTK_CONTAINER(content_area), grid);
-    
-    // Username field
-    g_print("The joke - %s\n", get_random_joke());
-    GtkWidget *username_label = gtk_label_new(get_random_joke());
-    gtk_grid_attach(GTK_GRID(grid), username_label, 0, 0, 1, 1);
+    // Create a label to display the joke text
+    GtkWidget *joke_text = gtk_label_new(get_random_joke());
 
+    // Set padding around the text
+    gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); // Center horizontally
+    gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5); // Center vertically
+
+    // Add the label to the dialog
+    gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); // Adjust padding as needed
+
+    // Show the dialog
     gtk_widget_show_all(joke);
     
     // Connect signal handler to close the dialog when the close button is clicked
@@ -114,7 +115,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         display_error_message("User couldn't be found");
         return;
     }
-    
+
     char *token = strtok(response, "\n");
     char *username = strdup(token);
     token = strtok(NULL, "\n");
@@ -130,8 +131,6 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         .lastmsg = "No messages yet",
         .avatar = NULL
     };
-
-    g_print("\n%s\n%s\n%s", new_chatter.name, new_chatter.surname, new_chatter.username);
     
     // Find the first available slot in the chatters array
 

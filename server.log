@@ -1841,3 +1841,25 @@ SURNAME
 Dima
 Avdeev
 
+2024-04-07 13:37:45: Open database -> OK
+2024-04-07 13:37:45: Init table "Users" -> OK
+2024-04-07 13:37:45: Init table "Chats" -> OK
+2024-04-07 13:37:45: Init table "Messages" -> OK
+2024-04-07 13:37:55: Open database -> OK
+2024-04-07 13:39:49: Open database -> OK
+2024-04-07 13:40:27: Open database -> OK
+2024-04-07 13:40:27: Get user -> Iuuda
+Dmytro
+Dolhii
+
+2024-04-07 13:44:53: Open database -> OK
+2024-04-07 13:44:59: Open database -> OK
+2024-04-07 13:44:59: Get user -> 1
+2024-04-07 13:45:03: Open database -> OK
+2024-04-07 13:45:03: Get user -> Iuuda
+Dmytro
+Dolhii
+
+2024-04-07 13:45:37: Open database -> OK
+2024-04-07 13:46:09: Open database -> OK
+2024-04-07 13:46:32: Open database -> OK
