@@ -117,3 +117,19 @@
 #search_button:hover{
     opacity: 0.3;
 }
+/* #img_settings {
+    background-color: aqua;
+} */
+
+#fimg_in_settings {
+    background-image: url("img/anekdot.png");
+    background-size: contain;
+}
+#simg_in_settings {
+    background-image: url("img/anekdot.png");
+    background-size: contain;
+}
+#timg_in_settings {
+    background-image: url("img/anekdot.png");
+    background-size: contain;
+}
