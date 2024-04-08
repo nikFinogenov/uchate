@@ -4,9 +4,12 @@ static GtkWidget *user_window;
 static GtkWidget* add_new_chat_when_no_chats;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;
-
 GtkWidget *search_pop_up = NULL;
 static GtkWidget *error_label = NULL;
+
+static bool settings_visible = FALSE;
+static bool account_visible = FALSE;
+static bool chats_visible = TRUE;
 
 static bool toggled = true;
 // static GtkWidget *user_info_box;
@@ -23,21 +26,28 @@ static void clicked_settings(GtkWidget *widget, gpointer data){
     g_print("settings clicked\n");
 }
 
-gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *settings_box) {
+gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *element) {
     // Получаем координаты клика
     gint x = event->x;
     gint y = event->y;
 
     // Получаем геометрию settings_box
     GtkAllocation allocation;
-    gtk_widget_get_allocation(settings_box, &allocation);
+    gtk_widget_get_allocation(element, &allocation);
 
     // Проверяем, находятся ли координаты клика в пределах settings_box
     if (x < allocation.x || x > allocation.x + allocation.width ||
         y < allocation.y || y > allocation.y + allocation.height) {
         // Если клик был за пределами settings_box, скрываем его
-        gtk_widget_set_visible(settings_box, FALSE);
+        gtk_widget_set_visible(element, FALSE);
+        if(element == settings_box){
+            settings_visible = FALSE;
+        }
+        if (element == account_settings) {
+            account_visible = FALSE;
+        }
         gtk_widget_set_visible(chats_box, TRUE);
+        chats_visible = TRUE;
     }
 
     // Пропускаем событие дальше
@@ -69,7 +79,47 @@ static void toggle(GtkWidget *widget, GtkWidget *element) {
     gtk_widget_set_visible(element, !visible);
 }
 
+// Функция для активации всех дочерних виджетов settings_box
+static void activate_children(GtkWidget *widget) {
+    // Получаем список всех дочерних виджетов settings_box
+    GList *children = gtk_container_get_children(GTK_CONTAINER(widget));
+    // Проходим по списку дочерних виджетов
+    for (GList *iter = children; iter != NULL; iter = g_list_next(iter)) {
+        GtkWidget *child = GTK_WIDGET(iter->data);
+        // Делаем каждый дочерний виджет активным
+        gtk_widget_set_sensitive(child, TRUE);
+    }
+    // Освобождаем список
+    g_list_free(children);
+}
+
+
+static void special_toggle(GtkWidget *widget, GtkWidget *element) {
+    gboolean visible = gtk_widget_get_visible(element);
+    if (element == chats_box && settings_visible == FALSE && account_visible == FALSE) {
+        gtk_widget_set_visible(element, !visible);
+        chats_visible = !visible;
+    }
+    if (element == settings_box && chats_visible == FALSE && account_visible == FALSE) {
+        gtk_widget_set_visible(element, !visible);
+        settings_visible = !visible;
+        activate_children(element);
+    }
+    if (element == account_settings && chats_visible == FALSE && settings_visible == FALSE) {
+        gtk_widget_set_visible(element, !visible);
+        account_visible = !visible;
+        activate_children(element);
+    }
+}
+
+
 void realize_side_bar(GtkWidget *widget, gpointer data) {
+    GList *children = gtk_container_get_children(widget);
+    // Проходим по списку дочерних виджетов и делаем их неактивными
+    for (GList *iter = children; iter != NULL; iter = g_list_next(iter)) {
+        GtkWidget *child = GTK_WIDGET(iter->data);
+        gtk_widget_set_sensitive(child, FALSE);
+    }
     gtk_widget_hide(widget);
 }
 
@@ -596,20 +646,23 @@ void draw_user_window() {
 
     // Create three box containers
     settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    user_settings_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    account_settings = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
     // Set the background colors for each box container
     //gtk_widget_override_background_color(side_bar_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0});
     gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
+    gtk_widget_override_background_color(account_settings, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0});
     gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0});
     gtk_widget_override_background_color(chat_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0});
     // Set the widths of the box containers
     //gtk_widget_set_size_request(side_bar_box, 75, -1); // 75 pixels width
     gtk_widget_set_size_request(settings_box, 500, -1);
+    gtk_widget_set_size_request(account_settings, 500, -1);
     gtk_widget_set_size_request(chats_box, 350, -1); // 350 pixels width
     g_signal_connect(G_OBJECT(settings_box), "realize", G_CALLBACK(realize_side_bar), NULL);
+    g_signal_connect(G_OBJECT(account_settings), "realize", G_CALLBACK(realize_side_bar), NULL);
     //settings
     GtkStyleContext *context;
     context = gtk_widget_get_style_context(GTK_WIDGET(settings_box));
@@ -709,7 +762,7 @@ void draw_user_window() {
     // gtk_widget_set_visible(sidebar, FALSE);
 
     //user settings + yatogorot ebal
-
+    g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), account_settings);
     //end user setttings
 
     GtkWidget *side_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -754,6 +807,9 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(account), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(account), "account");
     g_signal_connect(G_OBJECT(account), "realize", G_CALLBACK(realize_side_bar), NULL);
+    g_signal_connect(G_OBJECT(account), "clicked", G_CALLBACK(special_toggle), chats_box);
+    g_signal_connect(G_OBJECT(account), "clicked", G_CALLBACK(toggle), account_settings);
+    g_signal_connect(G_OBJECT(account), "clicked", G_CALLBACK(special_toggle), settings_box);
 
     GtkWidget* settings_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(settings_img), GTK_ALIGN_CENTER);
@@ -762,8 +818,9 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(settings_img), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(settings_img), "settings");
     g_signal_connect(G_OBJECT(settings_img), "realize", G_CALLBACK(realize_side_bar), NULL);
-    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), chats_box);
-    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(toggle), settings_box);
+    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(special_toggle), chats_box);
+    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(special_toggle), settings_box);
+    g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(special_toggle), account_settings);
 
     // GtkWidget* add_chatter_img = gtk_button_new();
     // gtk_widget_set_valign(GTK_WIDGET(add_chatter_img), GTK_ALIGN_CENTER);
@@ -898,6 +955,7 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(hbox_main), side_box, FALSE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), settings_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(hbox_main), account_settings, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chat_box, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), empty_chat, TRUE, TRUE, 0); // Allow it to expand to fill remaining space
     // gtk_widget_hide(chat_box);

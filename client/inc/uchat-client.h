@@ -106,7 +106,7 @@ extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
 extern GtkWidget *chats_box;
 extern GtkWidget *settings_box;
-extern GtkWidget *user_settings_box;
+extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
