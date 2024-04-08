@@ -60,6 +60,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     if (strcmp(response, "1") == 0) {
         display_error_message("Username or Password is incorrect");
+        return;
     }
 
     char *token = strtok(response, "\n");

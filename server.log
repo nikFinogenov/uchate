@@ -2025,3 +2025,78 @@ SURNAME
 Dmytro
 Dolhii
 
+2024-04-08 19:39:14: Open database -> OK
+2024-04-08 19:39:14: Init table "Users" -> OK
+2024-04-08 19:39:14: Init table "Chats" -> OK
+2024-04-08 19:39:14: Init table "Messages" -> OK
+2024-04-08 19:39:33: Open database -> OK
+2024-04-08 19:39:45: Open database -> OK
+2024-04-08 19:40:01: Open database -> OK
+2024-04-08 19:40:01: Open database -> OK
+2024-04-08 19:40:01: Get user -> erter
+Dima
+Avdeev
+
+2024-04-08 19:41:38: Open database -> OK
+2024-04-08 19:41:38: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-08 19:41:53: Open database -> OK
+2024-04-08 19:41:53: Get user -> chlenbolshoy
+big 
+cockovich
+
+2024-04-08 19:41:59: Open database -> OK
+2024-04-08 19:41:59: Get user -> 1
+2024-04-08 19:42:02: Open database -> OK
+2024-04-08 19:42:02: Get user -> 1
+2024-04-08 19:42:02: Open database -> OK
+2024-04-08 19:42:02: Get user -> 1
+2024-04-08 19:42:02: Open database -> OK
+2024-04-08 19:42:02: Get user -> 1
+2024-04-08 19:42:02: Open database -> OK
+2024-04-08 19:42:02: Get user -> 1
+2024-04-08 19:42:03: Open database -> OK
+2024-04-08 19:42:03: Get user -> 1
+2024-04-08 19:42:03: Open database -> OK
+2024-04-08 19:42:03: Get user -> 1
+2024-04-08 19:42:03: Open database -> OK
+2024-04-08 19:42:03: Get user -> 1
+2024-04-08 19:42:06: Open database -> OK
+2024-04-08 19:42:06: Get user -> 1
+2024-04-08 19:42:13: Open database -> OK
+2024-04-08 19:42:13: Get user -> Iuuda
+Dmytro
+Dolhii
+
+2024-04-08 19:55:50: Open database -> OK
+2024-04-08 19:55:50: Open database -> OK
+2024-04-08 19:55:50: Get user -> erter
+Dima
+Avdeev
+
+2024-04-08 19:56:17: Open database -> OK
+2024-04-08 19:56:17: Open database -> OK
+2024-04-08 19:56:18: Open database -> OK
+2024-04-08 19:56:18: Open database -> OK
+2024-04-08 19:56:19: Open database -> OK
+2024-04-08 19:56:19: Open database -> OK
+2024-04-08 19:56:19: Open database -> OK
+2024-04-08 19:56:20: Open database -> OK
+2024-04-08 19:56:22: Open database -> OK
+2024-04-08 19:56:25: Open database -> OK
+2024-04-08 19:56:30: Open database -> OK
+2024-04-08 19:56:36: Open database -> OK
+2024-04-08 19:56:36: Open database -> OK
+2024-04-08 19:56:36: Get user -> sigen
+Adolf
+Hitler
+
+2024-04-08 19:56:47: Open database -> OK
+2024-04-08 19:56:50: Open database -> OK
+2024-04-08 19:56:50: Open database -> OK
+2024-04-08 19:56:50: Get user -> sigen
+Adolf
+Hitler
+
