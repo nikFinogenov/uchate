@@ -13,11 +13,11 @@ typedef struct {
     GtkWidget *repeat_password_entry;
 } EntryWidgets;
 
-void show_signup() {
+void show_signup(void) {
     gtk_widget_show_all(signup_window);
 }
 
-void go_to_login() {
+void go_to_login(void) {
     gtk_widget_hide(signup_window);
     show_login();
 }

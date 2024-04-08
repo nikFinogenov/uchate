@@ -263,6 +263,16 @@ static void display_error_message(char *message) {
     gtk_widget_show_all(search_pop_up);
 }
 
+static void on_clear_search_clicked(GtkButton *button, GtkEntry *entry) {
+    // Clear the text in the entry
+    gtk_entry_set_text(entry, "");
+    refresh_scrollable_window(scrollable_window);
+}
+static void on_clear_mess_search_clicked(GtkButton *button, GtkEntry *entry) {
+    // Clear the text in the entry
+    gtk_entry_set_text(entry, "");
+    refresh_scrollable_window2(scrollable_window2);
+}
 // Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
 static void wrap_text(char *text) {
     int len = strlen(text);
@@ -552,38 +562,33 @@ static void chatter_search_clicled(GtkWidget *widget, gpointer user_data) {
     gtk_widget_show_all(scrollable_window);
     // gboolean is_in_format(char* text, char* format)
 }
-
-void refresh_scrollable_window(GtkWidget *scrollable_window) {
+void on_adjustment_size_allocate(GtkAdjustment *adjustment, gpointer data) {
+    gtk_adjustment_set_value(adjustment, gtk_adjustment_get_upper(adjustment) - gtk_adjustment_get_page_size(adjustment));
+}
+void refresh_scrollable_window(GtkWidget *scrollable) {
     // Очищаем содержимое скроллабельного окна
-    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    gtk_container_foreach(GTK_CONTAINER(scrollable), (GtkCallback)gtk_widget_destroy, NULL);
     
     // Перерисовываем содержимое скроллабельного окна
-    user_populate_scrollable_window(scrollable_window);
- 
+    user_populate_scrollable_window(scrollable);
+    GtkAdjustment *vadjustment = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrollable));
+    g_signal_connect(vadjustment, "changed", G_CALLBACK(on_adjustment_size_allocate), NULL);
     // Перерисовываем окно
-    gtk_widget_show_all(scrollable_window);
+    gtk_widget_show_all(scrollable);
 }
 
-void refresh_scrollable_window2(GtkWidget *scrollable_window) {
+void refresh_scrollable_window2(GtkWidget *scrollable) {
     // Очищаем содержимое скроллабельного окна
-    gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    gtk_container_foreach(GTK_CONTAINER(scrollable), (GtkCallback)gtk_widget_destroy, NULL);
     
     // Перерисовываем содержимое скроллабельного окна
-    message_populate_scrollable_window(scrollable_window);
- 
-    // Перерисовываем окно
-    gtk_widget_show_all(scrollable_window);
-}
-// void refresh_chatters_with_filter_window(GtkWidget *scrollable_window) {
-//     // Очищаем содержимое скроллабельного окна
-//     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
+    message_populate_scrollable_window(scrollable);
+    GtkAdjustment *vadjustment = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrollable));
+    g_signal_connect(vadjustment, "changed", G_CALLBACK(on_adjustment_size_allocate), NULL);
+
     
-//     // Перерисовываем содержимое скроллабельного окна
-//     user_populate_scrollable_window(scrollable_window);
- 
-//     // Перерисовываем окно
-//     gtk_widget_show_all(scrollable_window);
-// }
+    gtk_widget_show_all(scrollable);
+}
 
 void show_user_window() {
     gtk_widget_show_all(user_window);
@@ -591,12 +596,8 @@ void show_user_window() {
 
 
 void draw_user_info_box(GtkWidget *user_info_box) {
-    // user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    // gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
-    // set_widget_height(user_info_box, 70);
     GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
-    // prev_pixbuf = resize_img(prev_pixbuf, 150, 150);
 
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
@@ -617,7 +618,18 @@ void draw_user_info_box(GtkWidget *user_info_box) {
     GtkWidget *message_search_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(message_search_entry), "Search message...");
     gtk_widget_set_valign(GTK_WIDGET(message_search_entry_box), GTK_ALIGN_CENTER);
+
+    GtkWidget *message_clear_search_button = gtk_button_new();
+    // gtk_button_set_relief(GTK_BUTTON(clear_search_button), GTK_RELIEF_NONE); // Remove button border
+    GtkWidget *mess_clear_label = gtk_label_new("x");
+    gtk_container_add(GTK_CONTAINER(message_clear_search_button), mess_clear_label);
+
+    // Connect the "clicked" signal of the clear button
+    g_signal_connect(message_clear_search_button, "clicked", G_CALLBACK(on_clear_mess_search_clicked), message_search_entry);
+
     gtk_box_pack_start(GTK_BOX(message_search_entry_box), message_search_entry, FALSE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(message_search_entry_box), message_clear_search_button, FALSE, FALSE, 0);
+
 
     GtkWidget* message_search_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(message_search_img), GTK_ALIGN_CENTER);
@@ -642,6 +654,12 @@ static void clicked_side(GtkWidget *widget, gpointer data){
     // g_print("side clicked\n");
 }
 
+static void logout_clicked(GtkWidget *widget, gpointer data){
+    gtk_widget_hide(user_window);
+    // clear_all();
+    // go_to_login();
+    show_login();
+}
 void draw_user_window() {
     GtkCssProvider *cssProvider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);
@@ -835,15 +853,6 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(special_toggle), settings_box);
     g_signal_connect(G_OBJECT(settings_img), "clicked", G_CALLBACK(special_toggle), account_settings);
 
-    // GtkWidget* add_chatter_img = gtk_button_new();
-    // gtk_widget_set_valign(GTK_WIDGET(add_chatter_img), GTK_ALIGN_CENTER);
-    // gtk_button_set_relief(GTK_BUTTON(add_chatter_img), GTK_RELIEF_NONE);
-    // gtk_container_set_border_width(GTK_CONTAINER(add_chatter_img), 0);
-    // gtk_widget_set_size_request(GTK_WIDGET(add_chatter_img), 64, 64);
-    // gtk_widget_set_name(GTK_WIDGET(add_chatter_img), "add-chatter");
-    // g_signal_connect(G_OBJECT(add_chatter_img), "clicked", G_CALLBACK(add_chatter_button_clicked), NULL);
-    // g_signal_connect(G_OBJECT(add_chatter_img), "realize", G_CALLBACK(realize_side_bar), NULL);
-
     GtkWidget* side_img = gtk_button_new();
     gtk_widget_set_valign(GTK_WIDGET(side_img), GTK_ALIGN_CENTER);
     gtk_button_set_relief(GTK_BUTTON(side_img), GTK_RELIEF_NONE);
@@ -855,7 +864,6 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), anekdot);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), account);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), add);
-    // g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(toggle), add_chatter_img);
     g_signal_connect(G_OBJECT(side_img), "clicked", G_CALLBACK(clicked_side), NULL);
 
     GtkWidget* logout_img = gtk_button_new();
@@ -866,7 +874,7 @@ void draw_user_window() {
     gtk_widget_set_size_request(GTK_WIDGET(logout_img), 64, 64);
     gtk_widget_set_name(GTK_WIDGET(logout_img), "logout");
     // g_signal_connect(G_OBJECT(logout_img), "clicked", G_CALLBACK(clicked_side), NULL);
-    g_signal_connect(G_OBJECT(logout_img), "clicked", G_CALLBACK(settings_button_clicked), NULL);
+    g_signal_connect(G_OBJECT(logout_img), "clicked", G_CALLBACK(logout_clicked), NULL);
 
     
     gtk_box_pack_start(GTK_BOX(side_box), side_img, FALSE, FALSE, 0);
@@ -884,17 +892,40 @@ void draw_user_window() {
 
     // Pack the search bar into a vertical box container
     GtkWidget *search_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start(GTK_BOX(search_box), search_entry, FALSE, FALSE, 0);
-
+    // GtkWidget* message_search_img = gtk_button_new();
+    // gtk_widget_set_valign(GTK_WIDGET(message_search_img), GTK_ALIGN_CENTER);
+    // gtk_button_set_relief(GTK_BUTTON(message_search_img), GTK_RELIEF_NONE);
+    // gtk_container_set_border_width(GTK_CONTAINER(message_search_img), 0);
+    // gtk_widget_set_size_request(GTK_WIDGET(message_search_img), 64, 64);
+    // gtk_widget_set_name(GTK_WIDGET(message_search_img), "message-search-img");
+    // CallbackData *find_mess_data = g_slice_new(CallbackData);
+    // find_mess_data->entry = message_search_entry;
+    // g_signal_connect(G_OBJECT(message_search_img), "clicked", G_CALLBACK(message_search_clicked), find_mess_data);
     // Create the button
+
     GtkWidget *search_button = gtk_button_new_with_label("[ Find a user ]");
     gtk_widget_set_size_request(search_button, 25, 35);
     gtk_widget_set_name(GTK_WIDGET(search_button), "search_button");
     CallbackData *find__data = g_slice_new(CallbackData);
     find__data->entry = search_entry;
     g_signal_connect(G_OBJECT(search_button), "clicked", G_CALLBACK(chatter_search_clicled), find__data);
+
+    GtkWidget *clear_search_button = gtk_button_new();
+    // gtk_button_set_relief(GTK_BUTTON(clear_search_button), GTK_RELIEF_NONE); // Remove button border
+    GtkWidget *label = gtk_label_new("x");
+    gtk_container_add(GTK_CONTAINER(clear_search_button), label);
+
+    // Connect the "clicked" signal of the clear button
+    g_signal_connect(clear_search_button, "clicked", G_CALLBACK(on_clear_search_clicked), search_entry);
+
+    GtkWidget *search_entry_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_box_pack_start(GTK_BOX(search_entry_box), search_entry, TRUE, TRUE, 0);
     // Pack the search box and margin into a vertical box container
-    gtk_box_pack_start(GTK_BOX(search_box), search_button, FALSE, FALSE, 0);
+    // gtk_box_pack_start(GTK_BOX(search_button_box), search_button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(search_entry_box), clear_search_button, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(search_box), search_entry_box, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(search_box), search_button, TRUE, TRUE, 0);
+    // gtk_box_pack_start(GTK_BOX(search_button_box), clear_search_button, FALSE, FALSE, 0);
     
     // Pack the search box into the chats_box
     gtk_box_pack_start(GTK_BOX(chats_box), search_box, FALSE, FALSE, 0);
@@ -929,7 +960,7 @@ void draw_user_window() {
 
     scrollable_window2 = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window2),
-                                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+                                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);    
     message_populate_scrollable_window(scrollable_window2);
     g_signal_connect(G_OBJECT(user_window), "realize", G_CALLBACK(on_window_realize), scrollable_window2);
     gtk_box_pack_start(GTK_BOX(chat_box), scrollable_window2, TRUE, TRUE, 0);
