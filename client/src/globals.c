@@ -92,7 +92,7 @@ void fill_data(void) {
 
     // Example initialization of user
     user.username = "Sidor";
-    user.name = "Sidor";
+    user.name = "Pidor";
     user.surname = "Pidorovich";
     user.desc = " ";
     user.avatar = NULL;

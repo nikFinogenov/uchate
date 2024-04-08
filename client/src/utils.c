@@ -48,6 +48,49 @@ static void delete_message(GtkWidget *widget, gpointer data) {
 
     refresh_scrollable_window2(scrollable_window2);
 }
+static void delete_chatter(GtkWidget *widget, gpointer data) {
+    int index = GPOINTER_TO_INT(data);
+    g_print("Nomer - (%d) v okno;\n", index);
+    g_print("total pediks: %d\n", chatters_count);
+    if (index < 0 || index >= chatters_count) {
+        // Некорректный индекс
+        return;
+    }
+    // // Освобождаем память для удаляемого элемента
+    free(chatters[index].name);
+    free(chatters[index].surname);
+    free(chatters[index].username);
+    free(chatters[index].lastmsg);
+    // free(chatters[index].avatar);
+    if (chatters[index].avatar != NULL) {
+        g_object_unref(chatters[index].avatar); // Освобождаем память, если есть GdkPixbuf
+    }
+    for(int i = 0; i < messages_count[index]; i++) {
+        free(messages[i][index].text);
+        free(messages[i][index].time);
+    }
+    messages_count[index] = 0;
+    
+    for (int i = index; i < chatters_count - 1; ++i) {
+        chatters[i] = chatters[i + 1];
+        messages[i] = messages[i + 1];
+        messages_count[i] = messages_count[i + 1];
+    }
+    chatters_count--;
+    memset(&chatters[chatters_count], 0, sizeof(t_chatter_s));
+
+    if (selected_user.index == index) {
+        selected_user.box = NULL;
+        selected_user.index = -1;
+        gtk_widget_hide(chat_box);
+        gtk_widget_show(empty_chat);
+    }
+    else if(selected_user.index > index){
+        selected_user.index--;
+    }
+    
+    refresh_scrollable_window(scrollable_window);
+}
 
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
@@ -113,7 +156,7 @@ static void create_tools_menu(GdkEvent *event, int index) {
     // Popup the menu at the event coordinates
     gtk_menu_popup_at_pointer(GTK_MENU(menu), event);
 }
-static void create_chatter_menu(GdkEvent *event) {
+static void create_chatter_menu(GdkEvent *event, int index) {
     GtkWidget *menu;
     GtkWidget *menu_item;
     
@@ -122,6 +165,7 @@ static void create_chatter_menu(GdkEvent *event) {
 
     // Create menu items (buttons)
     menu_item = gtk_menu_item_new_with_label("Delete");
+    g_signal_connect(menu_item, "activate", G_CALLBACK(delete_chatter), GINT_TO_POINTER(index));
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
     // Show the menu
@@ -137,7 +181,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
     if (event->type == GDK_BUTTON_PRESS) {
         if (event->button == GDK_BUTTON_SECONDARY) {
             // Right-click event handling
-            create_chatter_menu(event);
+            create_chatter_menu(event, index);
             return TRUE; // Prevent further processing of the event
         } else if (event->button == GDK_BUTTON_PRIMARY) {
             // Left-click event handling
@@ -394,9 +438,9 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
 
             // gpointer user_data[] = {GINT_TO_POINTER(i)};
             // ButtonPressEventUserData *user_data = g_new(ButtonPressEventUserData, 1);
-            int i_copy = i;
+            // int i_copy = i;
             // user_data->mess_box = mess_box;
-            g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), GINT_TO_POINTER(i_copy));
+            g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), GINT_TO_POINTER(i));
         }
     }
 }
@@ -413,7 +457,7 @@ void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, ch
                 gtk_container_add(GTK_CONTAINER(mess_list), event_box); // Здесь добавляется event_box в mess_list
                 GtkWidget *mess_box = create_message_box(&messages[selected_user.index][i]);
                 gtk_container_add(GTK_CONTAINER(event_box), mess_box);
-                g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), mess_box);
+                g_signal_connect(event_box, "button-press-event", G_CALLBACK(on_button_press), GINT_TO_POINTER(i));
             }
         }
     }
