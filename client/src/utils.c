@@ -335,12 +335,21 @@ GtkWidget *create_message_box(t_message_s *message) {
     gtk_widget_set_name(message_box, "message-text");
 
     if(mx_strcmp(message->text, ":ucode") == 0) {
+        mx_b64_decodef("code.txt", "server/source/tmp.png");
+        // GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("server/source/tmp.png", NULL);
         GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/ucode.png", NULL);
         if (ucode_pixbuf != NULL) {
             // Create an image widget
-            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(resize_img(ucode_pixbuf, 128, 128));
-            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); // Attach image to grid
+            GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);
+            prev_pixbuf = resize_img(prev_pixbuf, 128, 128);
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(prev_pixbuf);
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); 
+            if(G_IS_OBJECT(ucode_pixbuf)){
+                g_print("valid\n"); // Attach image to grid
+            }
+            else g_print("nihuya)))\n");
             g_object_unref(ucode_pixbuf); // Unreference the pixbuf
+            remove("server/source/tmp.png");
         } else {
             // Failed to load the image, display an error message
             GtkWidget *error_label = gtk_label_new("Error: Failed to load image");
@@ -369,7 +378,6 @@ GtkWidget *create_message_box(t_message_s *message) {
     
     return box;
 }
-
 
 void message_populate_scrollable_window(GtkWidget *scrollable_window) {
     GtkWidget *mess_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);

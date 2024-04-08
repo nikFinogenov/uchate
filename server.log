@@ -305,3 +305,37 @@
 2024-04-08 01:37:45: Open database -> OK
 2024-04-08 01:37:45: Open database -> OK
 2024-04-08 01:37:45: Get user -> OK
+2024-04-08 11:58:33: Open database -> OK
+2024-04-08 11:58:33: Init table "Users" -> OK
+2024-04-08 11:58:33: Init table "Chats" -> OK
+2024-04-08 11:58:33: Init table "Messages" -> OK
+2024-04-08 11:58:44: Open database -> OK
+2024-04-08 11:58:44: Open database -> OK
+2024-04-08 11:58:44: Get user -> OK
+2024-04-08 12:00:07: Open database -> OK
+2024-04-08 12:00:07: Open database -> OK
+2024-04-08 12:00:07: Get user -> OK
+2024-04-08 12:01:08: Open database -> OK
+2024-04-08 12:01:08: Open database -> OK
+2024-04-08 12:01:08: Get user -> OK
+2024-04-08 12:06:06: Open database -> OK
+2024-04-08 12:06:06: Open database -> OK
+2024-04-08 12:06:06: Get user -> OK
+2024-04-08 12:06:59: Open database -> OK
+2024-04-08 12:06:59: Open database -> OK
+2024-04-08 12:06:59: Get user -> OK
+2024-04-08 12:13:37: Open database -> OK
+2024-04-08 12:13:37: Open database -> OK
+2024-04-08 12:13:37: Get user -> OK
+2024-04-08 12:14:43: Open database -> OK
+2024-04-08 12:14:43: Open database -> OK
+2024-04-08 12:14:43: Get user -> OK
+2024-04-08 12:17:03: Open database -> OK
+2024-04-08 12:17:03: Open database -> OK
+2024-04-08 12:17:03: Get user -> OK
+2024-04-08 12:18:11: Open database -> OK
+2024-04-08 12:18:11: Open database -> OK
+2024-04-08 12:18:11: Get user -> OK
+2024-04-08 12:18:38: Open database -> OK
+2024-04-08 12:18:38: Open database -> OK
+2024-04-08 12:18:38: Get user -> OK
