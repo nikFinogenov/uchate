@@ -1,5 +1,7 @@
 #include "uchat-client.h"
 
+GtkWidget *edit_pop_up;
+
 typedef struct {
     int index;
     GtkWidget *mess_box;
@@ -9,6 +11,11 @@ t_selected_s selected_user = {
     .index = -1,
     .box = NULL
 };
+
+typedef struct {
+    GtkWidget *edit_enter;
+    int index_of_msg;
+} InfoWidgets;
 
 char* get_random_joke() {
     // Generate a random index between 0 and NUM_JOKES - 1
@@ -59,7 +66,14 @@ static void delete_message(GtkWidget *widget, gpointer data) {
 }
 
 static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) {
-    
+    InfoWidgets *data = (InfoWidgets *)user_data;
+    const gchar *data_edit = gtk_entry_get_text(GTK_ENTRY(data->edit_enter));
+
+    char *parsed_edit = (char*)data_edit;
+    messages[selected_user.index][data->index_of_msg].text = mx_strdup(parsed_edit);
+    g_print("gay4 is here-> %s\n", parsed_edit);
+    gtk_widget_destroy(edit_pop_up);
+    refresh_scrollable_window2(scrollable_window2);
 }
 
 static void edit_message(GtkWidget *widget, gpointer data) {
@@ -72,14 +86,12 @@ static void edit_message(GtkWidget *widget, gpointer data) {
         return;
     }
 
-    //messages[selected_user.index][index].text
-
     // add widget
     
     g_print("Edit message clicked\n");
 
     // Create a pop-up dialog
-    GtkWidget *edit_pop_up = gtk_dialog_new_with_buttons("Edit Message", GTK_WINDOW(user_window),
+    edit_pop_up = gtk_dialog_new_with_buttons("Edit Message", GTK_WINDOW(user_window),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL);
 
@@ -106,7 +118,11 @@ static void edit_message(GtkWidget *widget, gpointer data) {
     //gtk_container_add(GTK_CONTAINER(content_area), edit_button);
     gtk_box_pack_start(GTK_BOX(box), edit_button, FALSE, FALSE, 0);
 
-    g_signal_connect(edit_button, "clicked", G_CALLBACK(edit_message_button_clicked), edit_entry);
+    InfoWidgets *entry = g_new(InfoWidgets, 1);
+    entry->edit_enter = edit_entry;
+    entry->index_of_msg = index;
+
+    g_signal_connect(edit_button, "clicked", G_CALLBACK(edit_message_button_clicked), entry);
     // No need to connect the edit_message signal here
 
     gtk_widget_set_margin_top(edit_button, 10);
@@ -127,11 +143,11 @@ static void edit_message(GtkWidget *widget, gpointer data) {
     
     // Connect signal handler to close the dialog when the close button is clicked
     g_signal_connect_swapped(edit_pop_up, "response", G_CALLBACK(gtk_widget_destroy), edit_pop_up);
-
+    
 
     //end of widget
 
-    refresh_scrollable_window2(scrollable_window2);
+    
 
 }
 
