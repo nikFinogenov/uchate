@@ -1,6 +1,6 @@
 #include "uchat-client.h"
 
-static GtkWidget *user_window;
+//static GtkWidget *user_window;
 static GtkWidget* add_new_chat_when_no_chats;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;

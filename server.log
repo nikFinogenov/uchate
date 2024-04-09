@@ -24,3 +24,261 @@ SURNAME
 Dima
 Avdeev
 
+2024-04-09 09:46:20: Open database -> OK
+2024-04-09 09:46:20: Init table "Users" -> OK
+2024-04-09 09:46:20: Init table "Chats" -> OK
+2024-04-09 09:46:20: Init table "Messages" -> OK
+2024-04-09 09:46:44: Open database -> OK
+2024-04-09 09:46:44: Open database -> OK
+2024-04-09 09:46:44: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 09:46:55: Open database -> OK
+2024-04-09 09:46:55: Get user -> 1
+2024-04-09 09:47:00: Open database -> OK
+2024-04-09 09:47:00: Get user -> 1
+2024-04-09 09:47:09: Open database -> OK
+2024-04-09 09:47:09: Get user -> 1
+2024-04-09 09:47:09: Open database -> OK
+2024-04-09 09:47:09: Get user -> 1
+2024-04-09 09:47:10: Open database -> OK
+2024-04-09 09:47:10: Get user -> 1
+2024-04-09 09:47:10: Open database -> OK
+2024-04-09 09:47:10: Get user -> 1
+2024-04-09 09:47:40: Open database -> OK
+2024-04-09 09:47:40: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:32:46: Open database -> OK
+2024-04-09 10:32:46: Open database -> OK
+2024-04-09 10:32:46: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:32:51: Open database -> OK
+2024-04-09 10:32:51: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:36:06: Open database -> OK
+2024-04-09 10:36:06: Open database -> OK
+2024-04-09 10:36:06: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:36:12: Open database -> OK
+2024-04-09 10:36:12: Get user -> 1
+2024-04-09 10:36:19: Open database -> OK
+2024-04-09 10:36:19: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:40:22: Open database -> OK
+2024-04-09 10:40:22: Open database -> OK
+2024-04-09 10:40:22: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:40:26: Open database -> OK
+2024-04-09 10:40:26: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:43:52: Open database -> OK
+2024-04-09 10:43:52: Open database -> OK
+2024-04-09 10:43:52: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:43:57: Open database -> OK
+2024-04-09 10:43:57: Get user -> 1
+2024-04-09 10:44:02: Open database -> OK
+2024-04-09 10:44:02: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:50:46: Open database -> OK
+2024-04-09 10:50:48: Open database -> OK
+2024-04-09 10:50:48: Open database -> OK
+2024-04-09 10:50:48: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:50:54: Open database -> OK
+2024-04-09 10:50:54: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:53:07: Open database -> OK
+2024-04-09 10:53:07: Open database -> OK
+2024-04-09 10:53:07: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:53:11: Open database -> OK
+2024-04-09 10:53:11: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 10:56:02: Open database -> OK
+2024-04-09 10:56:02: Open database -> OK
+2024-04-09 10:56:02: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 10:56:07: Open database -> OK
+2024-04-09 10:56:07: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:00:41: Open database -> OK
+2024-04-09 11:00:41: Open database -> OK
+2024-04-09 11:00:41: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:00:45: Open database -> OK
+2024-04-09 11:00:45: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:18:50: Open database -> OK
+2024-04-09 11:18:50: Open database -> OK
+2024-04-09 11:18:50: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:18:56: Open database -> OK
+2024-04-09 11:18:56: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:21:15: Open database -> OK
+2024-04-09 11:21:15: Open database -> OK
+2024-04-09 11:21:15: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:21:19: Open database -> OK
+2024-04-09 11:21:19: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:25:01: Open database -> OK
+2024-04-09 11:25:02: Open database -> OK
+2024-04-09 11:25:02: Open database -> OK
+2024-04-09 11:25:02: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:25:09: Open database -> OK
+2024-04-09 11:25:09: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:27:30: Open database -> OK
+2024-04-09 11:27:30: Open database -> OK
+2024-04-09 11:27:30: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:27:33: Open database -> OK
+2024-04-09 11:27:33: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:31:19: Open database -> OK
+2024-04-09 11:31:19: Init table "Users" -> OK
+2024-04-09 11:31:19: Init table "Chats" -> OK
+2024-04-09 11:31:19: Init table "Messages" -> OK
+2024-04-09 11:31:29: Open database -> OK
+2024-04-09 11:31:29: Open database -> OK
+2024-04-09 11:31:29: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:31:33: Open database -> OK
+2024-04-09 11:31:33: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:33:08: Open database -> OK
+2024-04-09 11:33:08: Open database -> OK
+2024-04-09 11:33:08: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:33:12: Open database -> OK
+2024-04-09 11:33:12: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:45:33: Open database -> OK
+2024-04-09 11:45:36: Open database -> OK
+2024-04-09 11:45:36: Open database -> OK
+2024-04-09 11:45:36: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:45:43: Open database -> OK
+2024-04-09 11:45:43: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:49:12: Open database -> OK
+2024-04-09 11:49:12: Open database -> OK
+2024-04-09 11:49:12: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:49:16: Open database -> OK
+2024-04-09 11:49:16: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:51:37: Open database -> OK
+2024-04-09 11:51:37: Open database -> OK
+2024-04-09 11:51:37: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:51:43: Open database -> OK
+2024-04-09 11:51:43: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:53:19: Open database -> OK
+2024-04-09 11:53:19: Open database -> OK
+2024-04-09 11:53:19: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:53:23: Open database -> OK
+2024-04-09 11:53:23: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:55:37: Open database -> OK
+2024-04-09 11:55:37: Open database -> OK
+2024-04-09 11:55:37: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:55:41: Open database -> OK
+2024-04-09 11:55:41: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-09 11:58:08: Open database -> OK
+2024-04-09 11:58:08: Open database -> OK
+2024-04-09 11:58:08: Get user -> erter
+Dima
+Avdeev
+
+2024-04-09 11:58:12: Open database -> OK
+2024-04-09 11:58:12: Get user -> ADOLF
+NAME
+SURNAME
+

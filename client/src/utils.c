@@ -57,6 +57,84 @@ static void delete_message(GtkWidget *widget, gpointer data) {
 
     refresh_scrollable_window2(scrollable_window2);
 }
+
+static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) {
+    
+}
+
+static void edit_message(GtkWidget *widget, gpointer data) {
+    int index = GPOINTER_TO_INT(data);
+    g_print("total gays: %d\n", messages_count[selected_user.index]);
+    g_print("gay4 is here-> %d\n", index);
+
+    if (index < 0 || index >= messages_count[selected_user.index]) {
+        // Некорректный индекс
+        return;
+    }
+
+    //messages[selected_user.index][index].text
+
+    // add widget
+    
+    g_print("Edit message clicked\n");
+
+    // Create a pop-up dialog
+    GtkWidget *edit_pop_up = gtk_dialog_new_with_buttons("Edit Message", GTK_WINDOW(user_window),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL);
+
+    gtk_window_set_default_size(GTK_WINDOW(edit_pop_up), 500, 150);
+
+    // Add some content to the dialog
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(edit_pop_up));
+
+    GtkWidget *edit_entry =  gtk_entry_new();
+    
+
+    // Add the text entry to the scrolled window
+    //gtk_container_add(GTK_CONTAINER(scrolled_window), edit_entry);
+
+    gtk_entry_set_placeholder_text(GTK_ENTRY(edit_entry), "Enter edited message...");
+    //gtk_container_add(GTK_CONTAINER(content_area), edit_entry);
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    gtk_entry_set_text(edit_entry, messages[selected_user.index][index].text);
+    gtk_box_pack_start(GTK_BOX(box), edit_entry, TRUE, FALSE, 0);
+    
+
+    // Edit button
+    GtkWidget *edit_button = gtk_button_new_with_label("Edit");
+    //gtk_container_add(GTK_CONTAINER(content_area), edit_button);
+    gtk_box_pack_start(GTK_BOX(box), edit_button, FALSE, FALSE, 0);
+
+    g_signal_connect(edit_button, "clicked", G_CALLBACK(edit_message_button_clicked), edit_entry);
+    // No need to connect the edit_message signal here
+
+    gtk_widget_set_margin_top(edit_button, 10);
+
+    // Center the widgets vertically
+    /*gtk_widget_set_vexpand(edit_entry, TRUE);
+    gtk_widget_set_vexpand(edit_button, TRUE);
+    gtk_widget_set_valign(edit_entry, GTK_ALIGN_FILL);
+    gtk_widget_set_valign(edit_button, GTK_ALIGN_CENTER);*/
+    gtk_container_add(GTK_CONTAINER(content_area), box);
+    gtk_widget_set_size_request(box, 400, 100);
+
+    // Center the content area
+    gtk_widget_set_halign(content_area, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(content_area, GTK_ALIGN_CENTER);
+
+    gtk_widget_show_all(edit_pop_up);
+    
+    // Connect signal handler to close the dialog when the close button is clicked
+    g_signal_connect_swapped(edit_pop_up, "response", G_CALLBACK(gtk_widget_destroy), edit_pop_up);
+
+
+    //end of widget
+
+    refresh_scrollable_window2(scrollable_window2);
+
+}
+
 static void delete_chatter(GtkWidget *widget, gpointer data) {
     int index = GPOINTER_TO_INT(data);
     g_print("Nomer - (%d) v okno;\n", index);
@@ -147,6 +225,7 @@ static void create_tools_menu(GdkEvent *event, int index) {
 
     // Create menu items (buttons)
     menu_item = gtk_menu_item_new_with_label("Edit");
+    g_signal_connect(menu_item, "activate", G_CALLBACK(edit_message), GINT_TO_POINTER(index));
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
     menu_item = gtk_menu_item_new_with_label("Delete");

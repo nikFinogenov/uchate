@@ -110,6 +110,7 @@ extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
+extern GtkWidget *user_window;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
