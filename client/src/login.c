@@ -1,6 +1,5 @@
 #include "uchat-client.h"
 
-static GtkWidget *login_window;
 static GtkWidget *error_label = NULL;
 
 // Define a structure to hold the necessary data
@@ -57,12 +56,15 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     // Send data and handle response
     char **response = check_login_data(parsed_username, parsed_password);
-
+    g_print("--> %s\n", response);
     if (strcmp(response, "1") == 0) {
         display_error_message("Username or Password is incorrect");
         return;
     }
-
+    if (strcmp(response, "1488") == 0) {
+        display_error_message("Server v govne");
+        return;
+    }
     char *token = strtok(response, "\n");
     user.username = strdup(token);
     token = strtok(NULL, "\n");
