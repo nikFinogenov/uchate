@@ -14,7 +14,6 @@ char* get_random_joke() {
     // Generate a random index between 0 and NUM_JOKES - 1
     srand(time(NULL));
     int random_index = rand() % 30;
-
     // Return the joke at the random index
     return strdup(jokes[random_index]); // strdup creates a duplicate of the string
 }
@@ -100,7 +99,24 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
     
     refresh_scrollable_window(scrollable_window);
 }
-
+static void edit_message(GtkWidget *widget, gpointer data) {
+    g_print("edit\n");
+}
+static void react_roll(GtkWidget *widget, gpointer data) {
+    g_print("rzhaka\n");
+}
+static void react_pink(GtkWidget *widget, gpointer data) {
+    g_print("love\n");
+}
+static void react_thumb(GtkWidget *widget, gpointer data) {
+    g_print("like\n");
+}
+static void react_moai(GtkWidget *widget, gpointer data) {
+    g_print("stone\n");
+}
+static void react_sad(GtkWidget *widget, gpointer data) {
+    g_print("sad\n");
+}
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     int width = gdk_pixbuf_get_width(GDK_PIXBUF(pixbuf));
@@ -141,6 +157,7 @@ static void create_tools_menu(GdkEvent *event, int index) {
     g_print("gay2 is here-> %d\n", index);
     GtkWidget *menu;
     GtkWidget *menu_item;
+    GtkWidget *image;
     
     // Create a new menu
     menu = gtk_menu_new();
@@ -153,12 +170,21 @@ static void create_tools_menu(GdkEvent *event, int index) {
     g_signal_connect(menu_item, "activate", G_CALLBACK(delete_message), GINT_TO_POINTER(index));
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
-    // menu_item = gtk_menu_item_new_with_label("Button 3");
+    // menu_item = gtk_menu_item_new_with_label("React");
     // gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
 
+    GtkWidget *submenu = gtk_menu_new();
+    const char *image_files[] = {"client/img/moai.png", "client/img/pink.png", "client/img/thumbs.png", "client/img/sad.png", "client/img/rolling.png"};
+    for (int i = 0; i < 5; i++) {
+        menu_item = gtk_menu_item_new();
+        GdkPixbuf *ipixbuf = gdk_pixbuf_new_from_file_at_size(image_files[i], 24, 24, NULL);
+        GtkWidget *image = gtk_image_new_from_pixbuf(ipixbuf);
+        gtk_container_add(GTK_CONTAINER(menu_item), image);
+        gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menu_item);
+    }
     menu_item = gtk_menu_item_new_with_label("React");
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu_item), submenu);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-
     // Show the menu
     gtk_widget_show_all(menu);
 
@@ -391,8 +417,7 @@ GtkWidget *create_message_box(t_message_s *message) {
 
     if(mx_strcmp(message->text, ":ucode") == 0) {
         mx_b64_decodef("code.txt", "server/source/tmp.png");
-        // GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("server/source/tmp.png", NULL);
-        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/ucode.png", NULL);
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("server/source/tmp.png", NULL);
         if (ucode_pixbuf != NULL) {
             // Create an image widget
             GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);

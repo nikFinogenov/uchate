@@ -21,27 +21,9 @@
 // #include <gdk-pixbuf-core.h>
 
 #include "../../libmx/inc/libmx.h"
-#include <stdio.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include <sys/socket.h>
 #include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include "../../libmx/inc/libmx.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include <string.h>
-#include <netinet/in.h>
 #include <sqlite3.h>
-#include <pthread.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>

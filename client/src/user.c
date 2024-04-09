@@ -376,10 +376,10 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
 
     // Создаем новый элемент структуры t_chatter_s
     t_chatter_s new_chatter = {
-        .name = name,
-        .surname = surname,
-        .username = username,
-        .lastmsg = "No messages yet",
+        .name = strdup(name),
+        .surname = strdup(surname),
+        .username = strdup(username),
+        .lastmsg = strdup("No messages yet"),
         .avatar = NULL
     };
     
