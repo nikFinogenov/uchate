@@ -106,6 +106,7 @@ extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
 extern GtkWidget *chats_box;
 extern GtkWidget *settings_box;
+extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
@@ -151,7 +152,9 @@ void set_widget_height(GtkWidget *widget, int height);
 int connect_to_server(int *sock);
 char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password);
 char **check_login_data(char *username, char* password);
+char **get_chatter_data(char *username);
 
+// char **get_user_data(char *username);
 
 
 // Xyeta widgets, Podderjivau
@@ -167,5 +170,6 @@ gboolean is_in_format(char* text, char* format);
 
 // Dad jokes
 char* get_random_joke();
+void clear_all(void);
 
 #endif

@@ -9,11 +9,11 @@ typedef struct {
     GtkWidget *password_entry;
 } EntryWidgets;
 
-void show_login() {
+void show_login(void) {
     gtk_widget_show_all(login_window);
 }
 
-void go_to_signup() {
+void go_to_signup(void) {
     gtk_widget_hide(login_window);
     show_signup();
 }
@@ -60,14 +60,20 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     if (strcmp(response, "1") == 0) {
         display_error_message("Username or Password is incorrect");
-    } 
-    
-    if (strcmp(response, "0") == 0) {
-        // gtk_widget_destroy(login_window);
-        gtk_widget_hide(login_window);
-        draw_user_window();
-        show_user_window();
+        return;
     }
+
+    char *token = strtok(response, "\n");
+    user.username = strdup(token);
+    token = strtok(NULL, "\n");
+    user.name = strdup(token);
+    token = strtok(NULL, "\n");
+    user.surname = strdup(token);
+
+    // gtk_widget_destroy(login_window);
+    gtk_widget_hide(login_window);
+    draw_user_window();
+    show_user_window();
 }
 
 void draw_login(void) {

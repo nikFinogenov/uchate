@@ -55,18 +55,50 @@ void mx_get_user(char** data, int sockfd) {
     char temp_buff[DEFAULT_MESSAGE_SIZE];
     memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
 
-    sprintf(sql, "SELECT * FROM USERS WHERE ID = %d;", mx_atoi(data[1])); 
+    sprintf(sql, "SELECT * FROM USERS WHERE username = '%s';", data[1]); 
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) == SQLITE_ROW) {
-        const unsigned char *username = sqlite3_column_text(res, 1);
-        const unsigned char *password = sqlite3_column_text(res, 2);
-        const unsigned char *name = sqlite3_column_text(res, 3);
-        const unsigned char *surname = sqlite3_column_text(res, 4);
-        sprintf(temp_buff, "%s\n%s\n%s\n%s\n", username, password, name, surname);
+        const unsigned char *username = sqlite3_column_text(res, 0);
+        const unsigned char *password = sqlite3_column_text(res, 1);
+        const unsigned char *name = sqlite3_column_text(res, 2);
+        const unsigned char *surname = sqlite3_column_text(res, 3);
+        const unsigned char *desc = sqlite3_column_text(res, 4);
+        sprintf(temp_buff, "%s\n%s\n%s\n%s\n%s\n", username, password, name, surname, desc);
     }
     int exit = sqlite3_finalize(res);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Get user", st, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
+
+void mx_get_chatter(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+
+    memset(sql, 0, sizeof(sql));
+    memset(temp_buff, 0, sizeof(temp_buff));
+
+    sprintf(sql, "SELECT username, name, surname FROM USERS WHERE username = '%s';", data[1]);
+
+    if (sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK) {
+        int step = sqlite3_step(res);
+        if (step == SQLITE_ROW) {
+            const unsigned char *username = sqlite3_column_text(res, 0);
+            const unsigned char *name = sqlite3_column_text(res, 1);
+            const unsigned char *surname = sqlite3_column_text(res, 2);
+            sprintf(temp_buff, "%s\n%s\n%s\n", username, name, surname);
+        } else {
+            strcpy(temp_buff, "1"); // User not found
+        }
+        sqlite3_finalize(res);
+    } else {
+        strcpy(temp_buff, "-1"); // Error in SQL execution
+    }
+
+    logger("Get user", temp_buff, "");
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
@@ -140,7 +172,8 @@ void check_login_data(char **data, int sockfd) {
     char response[DEFAULT_MESSAGE_SIZE];
 
     if (mx_check_user(data)) {
-        sprintf(response, "0");
+        mx_get_chatter(data, sockfd);
+        return;
     } else {
         sprintf(response, "1");
     }

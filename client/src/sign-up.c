@@ -13,11 +13,11 @@ typedef struct {
     GtkWidget *repeat_password_entry;
 } EntryWidgets;
 
-void show_signup() {
+void show_signup(void) {
     gtk_widget_show_all(signup_window);
 }
 
-void go_to_login() {
+void go_to_login(void) {
     gtk_widget_hide(signup_window);
     show_login();
 }
@@ -93,14 +93,17 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     if (strcmp(response, "1") == 0) {
         display_error_message("Username already exists");
         return;
-    } 
-    
-    if (strcmp(response, "0") == 0) {
-        // gtk_widget_destroy(signup_window);
-        gtk_widget_hide(signup_window);
-        draw_user_window();
-        show_user_window();
     }
+    
+    // Save new user data to the structure
+    user.name       = parsed_first_name;
+    user.surname    = parsed_last_name;
+    user.username   = parsed_username;
+
+    // gtk_widget_destroy(signup_window);
+    gtk_widget_hide(signup_window);
+    draw_user_window();
+    show_user_window();
 }
 
 void draw_singup() {
