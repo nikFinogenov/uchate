@@ -127,6 +127,7 @@ void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, ch
 GdkPixbuf *file_to_pixbuf(const gchar *filename);
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
 void set_widget_height(GtkWidget *widget, int height);
+void wrap_text(char *text);
 
 // Server stuff
 int connect_to_server(int *sock);

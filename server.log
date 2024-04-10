@@ -1199,3 +1199,45 @@ SURNAME
 2024-04-10 10:54:05: Open database -> OK
 2024-04-10 10:54:05: Open database -> OK
 2024-04-10 10:54:05: Get user -> OK
+2024-04-10 11:31:21: Open database -> OK
+2024-04-10 11:31:21: Init table "Users" -> OK
+2024-04-10 11:31:21: Init table "Chats" -> OK
+2024-04-10 11:31:21: Init table "Messages" -> OK
+2024-04-10 11:32:02: Open database -> OK
+2024-04-10 11:32:02: Init table "Users" -> OK
+2024-04-10 11:32:02: Init table "Chats" -> OK
+2024-04-10 11:32:02: Init table "Messages" -> OK
+2024-04-10 11:32:15: Open database -> OK
+2024-04-10 11:32:15: Open database -> OK
+2024-04-10 11:32:15: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 11:34:23: Open database -> OK
+2024-04-10 11:34:23: Init table "Users" -> OK
+2024-04-10 11:34:23: Init table "Chats" -> OK
+2024-04-10 11:34:23: Init table "Messages" -> OK
+2024-04-10 11:34:32: Open database -> OK
+2024-04-10 11:34:32: Open database -> OK
+2024-04-10 11:34:32: Get user -> OK
+2024-04-10 11:34:43: Open database -> OK
+2024-04-10 11:34:43: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-10 11:38:47: Open database -> OK
+2024-04-10 11:38:47: Open database -> OK
+2024-04-10 11:38:47: Get user -> OK
+2024-04-10 11:39:02: Open database -> OK
+2024-04-10 11:39:02: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-10 11:47:29: Open database -> OK
+2024-04-10 11:47:29: Open database -> OK
+2024-04-10 11:47:29: Get user -> OK
+2024-04-10 11:47:36: Open database -> OK
+2024-04-10 11:47:36: Get user -> ADOLF
+NAME
+SURNAME
+

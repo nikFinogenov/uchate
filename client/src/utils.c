@@ -70,11 +70,12 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
     const gchar *data_edit = gtk_entry_get_text(GTK_ENTRY(data->edit_enter));
 
     char *parsed_edit = (char*)data_edit;
+    wrap_text(parsed_edit);
+    g_print("message wrapped-> ");
     // Edited message can not be bigger then const or less then 1 symbols
     if (strlen(parsed_edit) > DEFAULT_MESSAGE_SIZE || strlen(parsed_edit) == 0) NULL;
     else
         messages[selected_user.index][data->index_of_msg].text = mx_strdup(parsed_edit);
-    g_print("gay4 is here-> %s\n", parsed_edit);
     gtk_widget_destroy(edit_pop_up);
     refresh_scrollable_window2(scrollable_window2);
 }
