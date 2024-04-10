@@ -90,6 +90,23 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     show_user_window();
 }
 
+static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
+    // Проверяем, нажата ли клавиша Enter
+    if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
+        // Получаем указатель на данные, переданные при подключении сигнала
+        EntryWidgets *callback_data = (EntryWidgets *)user_data;
+        
+        // Вызываем функцию-обработчик, которая вызывается при нажатии кнопки отправки сообщения
+        login_button_clicked(GTK_WIDGET(callback_data->password_entry), callback_data);
+        
+        // Возвращаем TRUE, чтобы предотвратить дальнейшую обработку события
+        return TRUE;
+    }
+
+    // Возвращаем FALSE, чтобы разрешить дальнейшую обработку события
+    return FALSE;
+}
+
 void draw_login(void) {
     // Login window
     login_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -128,6 +145,7 @@ void draw_login(void) {
 
     GtkWidget *login_button = gtk_button_new_with_label("Login");
     g_signal_connect(login_button, "clicked", G_CALLBACK(login_button_clicked), entries);
+    g_signal_connect(G_OBJECT(password_entry_login), "key-press-event", G_CALLBACK(on_entry_key_press), entries);
     gtk_box_pack_start(GTK_BOX(login_vbox), login_button, FALSE, FALSE, 0);
 }
 
