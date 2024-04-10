@@ -1081,3 +1081,101 @@ Avdeev
 NAME
 SURNAME
 
+2024-04-10 09:44:13: Open database -> OK
+2024-04-10 09:44:13: Init table "Users" -> OK
+2024-04-10 09:44:13: Init table "Chats" -> OK
+2024-04-10 09:44:13: Init table "Messages" -> OK
+2024-04-10 09:44:20: Open database -> OK
+2024-04-10 09:44:20: Open database -> OK
+2024-04-10 09:44:20: Get user -> OK
+2024-04-10 09:44:32: Open database -> OK
+2024-04-10 09:44:32: Get user -> ADOLF
+NAME
+SURNAME
+
+2024-04-10 09:44:40: Open database -> OK
+2024-04-10 09:44:40: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:42: Open database -> OK
+2024-04-10 09:44:42: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:42: Open database -> OK
+2024-04-10 09:44:42: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:43: Open database -> OK
+2024-04-10 09:44:43: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:44: Open database -> OK
+2024-04-10 09:44:44: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:44: Open database -> OK
+2024-04-10 09:44:44: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:44: Open database -> OK
+2024-04-10 09:44:44: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:44:44: Open database -> OK
+2024-04-10 09:44:44: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:45:47: Open database -> OK
+2024-04-10 09:45:47: Open database -> OK
+2024-04-10 09:45:47: Get user -> OK
+2024-04-10 09:45:55: Open database -> OK
+2024-04-10 09:45:55: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 09:46:37: Open database -> OK
+2024-04-10 09:46:37: Open database -> OK
+2024-04-10 09:46:37: Get user -> OK
+2024-04-10 09:46:43: Open database -> OK
+2024-04-10 09:46:43: Get user -> erter
+Dima
+Avdeev
+
