@@ -228,7 +228,7 @@ char **get_chatter_data(char *username) {
         sockfd = -1;
     }
     
-    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) != 0) {
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
