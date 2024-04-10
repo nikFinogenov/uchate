@@ -961,3 +961,42 @@ cockovich
 huesos
 cockovich
 
+2024-04-10 06:54:54: Open database -> OK
+2024-04-10 06:54:54: Init table "Users" -> OK
+2024-04-10 06:54:54: Init table "Chats" -> OK
+2024-04-10 06:54:54: Init table "Messages" -> OK
+2024-04-10 06:55:08: Open database -> OK
+2024-04-10 06:55:08: Open database -> OK
+2024-04-10 06:55:08: Get user -> m
+huesos
+cockovich
+
+2024-04-10 06:55:14: Open database -> OK
+2024-04-10 06:55:14: Get user -> erter
+Dima
+Avdeev
+
+2024-04-10 07:01:30: Open database -> OK
+2024-04-10 07:01:30: Open database -> OK
+2024-04-10 07:01:30: Get user -> m
+huesos
+cockovich
+
+2024-04-10 07:05:02: Open database -> OK
+2024-04-10 07:05:02: Open database -> OK
+2024-04-10 07:05:02: Get user -> m
+huesos
+cockovich
+
+2024-04-10 07:07:57: Open database -> OK
+2024-04-10 07:07:57: Open database -> OK
+2024-04-10 07:07:57: Get user -> m
+huesos
+cockovich
+
+2024-04-10 07:08:47: Open database -> OK
+2024-04-10 07:08:47: Open database -> OK
+2024-04-10 07:08:47: Get user -> m
+huesos
+cockovich
+

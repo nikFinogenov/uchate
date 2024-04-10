@@ -10,6 +10,7 @@ static GtkWidget *error_label = NULL;
 static bool settings_visible = TRUE;
 static bool account_visible = TRUE;
 static bool chats_visible = FALSE;
+static bool chats_was_opened = FALSE;
 
 static bool toggled = true;
 // static GtkWidget *user_info_box;
@@ -136,6 +137,10 @@ gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *
             account_visible = TRUE;
             deactivate_children(account_settings);
         }
+        if(chats_was_opened){
+            chats_visible = TRUE;
+            gtk_widget_set_visible(chats_box, TRUE);
+        }
     }
 
     // Пропускаем событие дальше
@@ -170,10 +175,32 @@ static void toggle(GtkWidget *widget, GtkWidget *element) {
 
 static void special_toggle_chats(GtkWidget *widget, GtkWidget *element){
     gboolean visible = gtk_widget_get_visible(element);
+
+    if(element == chats_box && account_visible == FALSE) {
+        gtk_widget_hide(account_settings);
+        account_visible = TRUE;
+        deactivate_children(account_settings);
+
+        gtk_widget_set_visible(element, !visible);
+        chats_visible = !visible;
+        activate_children(element);
+        return;
+    } else if (element == chats_box && settings_visible == FALSE) {
+        gtk_widget_hide(settings_box);
+        settings_visible = TRUE;
+        deactivate_children(settings_box);
+
+        gtk_widget_set_visible(element, !visible);
+        chats_visible = !visible;
+        activate_children(element);
+        return;
+    }
+
     if(element == chats_box && account_visible == TRUE && settings_visible == TRUE && chats_visible == TRUE) {
         gtk_widget_set_visible(element, !visible);
         chats_visible = !visible;
         activate_children(element);
+        chats_was_opened = FALSE;
         g_print("1.1\n");
         on_click(NULL, NULL);
         return;
@@ -182,6 +209,7 @@ static void special_toggle_chats(GtkWidget *widget, GtkWidget *element){
         gtk_widget_set_visible(element, !visible);
         chats_visible = !visible;
         activate_children(element);
+        chats_was_opened = TRUE;
         g_print("1.2\n");
         on_click(NULL, NULL);
         return;
