@@ -793,3 +793,49 @@ Avdeev
 Dima
 Avdeev
 
+2024-04-10 16:26:19: Open database -> OK
+2024-04-10 16:26:19: Init table "Users" -> OK
+2024-04-10 16:26:19: Init table "Chats" -> OK
+2024-04-10 16:26:19: Init table "Messages" -> OK
+2024-04-10 16:26:27: Open database -> OK
+2024-04-10 16:26:27: Open database -> OK
+2024-04-10 16:26:27: Get user -> OK
+2024-04-10 16:28:06: Open database -> OK
+2024-04-10 16:28:06: Init table "Users" -> OK
+2024-04-10 16:28:06: Init table "Chats" -> OK
+2024-04-10 16:28:06: Init table "Messages" -> OK
+2024-04-10 16:28:13: Open database -> OK
+2024-04-10 16:28:13: Open database -> OK
+2024-04-10 16:28:13: Get user -> OK
+2024-04-10 16:29:17: Open database -> OK
+2024-04-10 16:29:17: Init table "Users" -> OK
+2024-04-10 16:29:17: Init table "Chats" -> OK
+2024-04-10 16:29:17: Init table "Messages" -> OK
+2024-04-10 16:29:23: Open database -> OK
+2024-04-10 16:29:23: Open database -> OK
+2024-04-10 16:29:23: Get user -> OK
+2024-04-10 16:35:38: Open database -> OK
+2024-04-10 16:35:38: Init table "Users" -> OK
+2024-04-10 16:35:38: Init table "Chats" -> OK
+2024-04-10 16:35:38: Init table "Messages" -> OK
+2024-04-10 16:35:46: Open database -> OK
+2024-04-10 16:35:49: Open database -> OK
+2024-04-10 16:35:49: Open database -> OK
+2024-04-10 16:35:49: Get user -> OK
+2024-04-10 16:37:45: Open database -> OK
+2024-04-10 16:37:45: Open database -> OK
+2024-04-10 16:37:45: Get user -> OK
+2024-04-10 16:39:14: Open database -> OK
+2024-04-10 16:39:14: Init table "Users" -> OK
+2024-04-10 16:39:14: Init table "Chats" -> OK
+2024-04-10 16:39:14: Init table "Messages" -> OK
+2024-04-10 16:39:24: Open database -> OK
+2024-04-10 16:39:24: Open database -> OK
+2024-04-10 16:39:24: Get user -> OK
+2024-04-10 19:28:18: Open database -> OK
+2024-04-10 19:28:18: Init table "Users" -> OK
+2024-04-10 19:28:18: Init table "Chats" -> OK
+2024-04-10 19:28:18: Init table "Messages" -> OK
+2024-04-10 19:28:29: Open database -> OK
+2024-04-10 19:28:29: Open database -> OK
+2024-04-10 19:28:29: Get user -> OK

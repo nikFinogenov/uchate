@@ -56,7 +56,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     // Send data and handle response
     char **response = check_login_data(parsed_username, parsed_password);
-    g_print("--> %s\n", response);
+    // g_print("--> %s\n", response);
     if (strcmp(response, "1") == 0) {
         display_error_message("Username or Password is incorrect");
         return;
@@ -67,10 +67,22 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     }
     char *token = strtok(response, "\n");
     user.username = strdup(token);
+
+    // token = strtok(NULL, "\n");
+    // g_print("passs -> %s\n", token);
+
     token = strtok(NULL, "\n");
     user.name = strdup(token);
+
     token = strtok(NULL, "\n");
     user.surname = strdup(token);
+
+    token = strtok(NULL, "\n");
+    user.desc = strdup(token);
+    g_print("name -> %s\n", user.name);
+    g_print("surn -> %s\n", user.surname);
+    g_print("username -> %s\n", user.username);
+    g_print("desc -> %s\n", user.desc);
 
     // gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);

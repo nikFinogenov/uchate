@@ -10,10 +10,10 @@ GtkWidget *error_poppi_upe;
 void on_close_button_clicked(GtkWidget *widget, gpointer data) {
     gtk_widget_destroy(error_poppi_upe);
 }
-void *mx_run_error_pop_up(void) {
+void *show_error(void) {
     if (!g_main_context_default() || !g_main_context_is_owner(g_main_context_default())) {
         // g_print("ya ya ya pidoras\n");
-        // g_warning("mx_run_error_pop_up should only be called from the main thread");
+        // g_warning("show_error should only be called from the main thread");
         return NULL;
     }
     
@@ -62,7 +62,6 @@ void *mx_run_error_pop_up(void) {
     g_signal_connect_swapped(error_poppi_upe, "response", G_CALLBACK(gtk_widget_destroy), error_poppi_upe);
 }
 
-
 int connect_to_server(int *sock) {
     int portno;
     struct sockaddr_in serv_addr;
@@ -92,16 +91,16 @@ int connect_to_server(int *sock) {
         perror("ERROR connecting to the server!");
         close(*sock);
 
-        // Call mx_run_error_pop_up only from the main thread
+        // Call show_error only from the main thread
         if (g_main_context_default() && g_main_context_is_owner(g_main_context_default())) {
-            // Run mx_run_error_pop_up directly since we're in the main thread
+            // Run show_error directly since we're in the main thread
             // char *err_msg = "Connection lost\nTry again later";
-            mx_run_error_pop_up();
+            show_error();
         } else {
-            // If not in the main thread, create a new thread to run mx_run_error_pop_up
+            // If not in the main thread, create a new thread to run show_error
             pthread_t thread_id;
             // char *err_msg = "";
-            pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL);
+            pthread_create(&thread_id, NULL, show_error, NULL);
         }
 
         return -1;
@@ -136,7 +135,7 @@ char **send_sign_up_data(char *first_name, char *last_name, char *username, char
         perror("ERROR writing to socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL); 
+        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -147,7 +146,7 @@ char **send_sign_up_data(char *first_name, char *last_name, char *username, char
         perror("ERROR reading from socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
-        if(error_revealer == NULL) pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL); 
+        if(error_revealer == NULL) pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -185,7 +184,7 @@ char **check_login_data(char *username, char* password) {
         perror("ERROR writing to socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL); 
+        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -196,7 +195,7 @@ char **check_login_data(char *username, char* password) {
         perror("ERROR reading from socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
-        if(error_revealer == NULL) pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL); 
+        if(error_revealer == NULL) pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -233,11 +232,8 @@ char **get_chatter_data(char *username) {
         perror("ERROR writing to socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL); 
+        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
-    }
-    else{
-        g_print("skipped\n");
     }
 
     char recvBuffer[DEFAULT_MESSAGE_SIZE];
@@ -247,7 +243,7 @@ char **get_chatter_data(char *username) {
         perror("ERROR reading from socket");
         pthread_t thread_id;
         // char *err_msg = "Connection lost\nTry again later";
-        pthread_create(&thread_id, NULL, mx_run_error_pop_up, NULL); 
+        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
