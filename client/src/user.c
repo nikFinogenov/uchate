@@ -137,9 +137,10 @@ gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *
             account_visible = TRUE;
             deactivate_children(account_settings);
         }
-        if(chats_was_opened){
+        if(chats_was_opened && chats_visible == FALSE && account_visible == TRUE && settings_visible == TRUE) {
             chats_visible = TRUE;
             gtk_widget_set_visible(chats_box, TRUE);
+            activate_children(chats_box);
         }
     }
 
