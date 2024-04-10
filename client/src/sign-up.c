@@ -1,7 +1,5 @@
 #include "uchat-client.h"
 
-
-static GtkWidget *signup_window;
 static GtkWidget *error_label = NULL;
 
 // Define a structure to hold the necessary data
@@ -92,6 +90,10 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     // User existence
     if (strcmp(response, "1") == 0) {
         display_error_message("Username already exists");
+        return;
+    }
+    if (strcmp(response, "1488") == 0) {
+        display_error_message("Server v govne");
         return;
     }
     

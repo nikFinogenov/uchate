@@ -1,6 +1,5 @@
 #include "uchat-client.h"
 
-static GtkWidget *user_window;
 static GtkWidget* add_new_chat_when_no_chats;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;
@@ -538,11 +537,15 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
             return;
         }
     }
-
+    
     char **response = get_chatter_data(parsed_username);
 
     if (strcmp(response, "1") == 0) {
         display_error_message("User couldn't be found");
+        return;
+    }
+    if (strcmp(response, "1488") == 0) {
+        display_error_message("Server v govne");
         return;
     }
 
@@ -555,10 +558,10 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
 
     // Создаем новый элемент структуры t_chatter_s
     t_chatter_s new_chatter = {
-        .name = name,
-        .surname = surname,
-        .username = username,
-        .lastmsg = "No messages yet",
+        .name = mx_strdup(name),
+        .surname = mx_strdup(surname),
+        .username = mx_strdup(username),
+        .lastmsg = mx_strdup("No messages yet"),
         .avatar = NULL
     };
     
@@ -572,7 +575,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
             gtk_widget_hide(add_new_chat_when_no_chats);
 
         gtk_widget_destroy(search_pop_up); // Destroy the dialog widget
-
+        
         if (!is_chatters_empty()) {
             // Если массив больше не пуст, обновляем текст метки empty_chat
             gtk_label_set_text(GTK_LABEL(empty_chat), "[ Select a chat to start chatting ]");
@@ -582,7 +585,11 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
 
     g_print("Chatter limit reached\n");
 }
-
+static void destroy_close_search(void){
+    gtk_widget_destroy(error_label);
+    gtk_widget_destroy(search_pop_up);
+    error_label = NULL;
+}
 static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("Add chatter clicked\n");
 
@@ -595,7 +602,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     search_pop_up = gtk_dialog_new_with_buttons("Search User", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL);
-
+    
     gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 400, 150);
 
     // Add some content to the dialog
@@ -630,7 +637,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     gtk_widget_show_all(search_pop_up);
     
     // Connect signal handler to close the dialog when the close button is clicked
-    g_signal_connect_swapped(search_pop_up, "response", G_CALLBACK(gtk_widget_destroy), search_pop_up);
+    g_signal_connect_swapped(search_pop_up, "response", G_CALLBACK(destroy_close_search), NULL);    
 }
 
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {

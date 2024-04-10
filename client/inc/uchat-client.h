@@ -18,47 +18,23 @@
 #define MAX_JOKE_LENGTH 200
 
 #include <gtk/gtk.h>
-// #include <gdk-pixbuf-core.h>
-
 #include "../../libmx/inc/libmx.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include "../../libmx/inc/libmx.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include <string.h>
 #include <netinet/in.h>
 #include <sqlite3.h>
-#include <pthread.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>
 #include <dirent.h>
 #include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <locale.h>
 #include <stdio.h>
 #include <math.h>
 #include <pthread.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
@@ -96,6 +72,9 @@ typedef struct {
     int index; 
 } t_selected_s;
 
+extern GtkWidget *signup_window;
+extern GtkWidget *user_window;
+extern GtkWidget *login_window;
 extern char* default_img;
 extern t_message_s** messages;
 extern t_chatter_s* chatters;
@@ -110,6 +89,7 @@ extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
+extern GtkWidget *error_revealer;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];

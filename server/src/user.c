@@ -55,15 +55,15 @@ void mx_get_user(char** data, int sockfd) {
     char temp_buff[DEFAULT_MESSAGE_SIZE];
     memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
 
-    sprintf(sql, "SELECT * FROM USERS WHERE username = '%s';", data[1]); 
+    sprintf(sql, "SELECT username, name, surname, description FROM USERS WHERE username = '%s';", data[1]); 
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) == SQLITE_ROW) {
         const unsigned char *username = sqlite3_column_text(res, 0);
-        const unsigned char *password = sqlite3_column_text(res, 1);
-        const unsigned char *name = sqlite3_column_text(res, 2);
-        const unsigned char *surname = sqlite3_column_text(res, 3);
-        const unsigned char *desc = sqlite3_column_text(res, 4);
-        sprintf(temp_buff, "%s\n%s\n%s\n%s\n%s\n", username, password, name, surname, desc);
+        // const unsigned char *password = sqlite3_column_text(res, 1);
+        const unsigned char *name = sqlite3_column_text(res, 1);
+        const unsigned char *surname = sqlite3_column_text(res, 2);
+        const unsigned char *desc = sqlite3_column_text(res, 3);
+        sprintf(temp_buff, "%s\n%s\n%s\n%s\n", username, name, surname, desc);
     }
     int exit = sqlite3_finalize(res);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
@@ -172,7 +172,7 @@ void check_login_data(char **data, int sockfd) {
     char response[DEFAULT_MESSAGE_SIZE];
 
     if (mx_check_user(data)) {
-        mx_get_chatter(data, sockfd);
+        mx_get_user(data, sockfd);
         return;
     } else {
         sprintf(response, "1");
