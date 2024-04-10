@@ -783,3 +783,13 @@ Avdeev
 Dima
 Avdeev
 
+2024-04-10 12:29:12: Open database -> OK
+2024-04-10 12:29:12: Init table "Users" -> OK
+2024-04-10 12:29:12: Init table "Chats" -> OK
+2024-04-10 12:29:12: Init table "Messages" -> OK
+2024-04-10 12:29:22: Open database -> OK
+2024-04-10 12:29:22: Open database -> OK
+2024-04-10 12:29:22: Get user -> erter
+Dima
+Avdeev
+

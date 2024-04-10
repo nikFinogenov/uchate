@@ -72,6 +72,7 @@ typedef struct {
     int index; 
 } t_selected_s;
 
+extern GtkWidget *signup_window;
 extern GtkWidget *user_window;
 extern GtkWidget *login_window;
 extern char* default_img;

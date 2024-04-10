@@ -11,6 +11,7 @@ GtkWidget *user_info_box = NULL;
 GtkWidget *error_revealer = NULL;
 GtkWidget *user_window = NULL;
 GtkWidget *login_window = NULL;
+GtkWidget *signup_window = NULL;
 char* default_img = "client/img/simple.png";
 
 t_message_s** messages = NULL; // Global variable declaration
