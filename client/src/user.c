@@ -502,7 +502,7 @@ static void on_clear_mess_search_clicked(GtkButton *button, GtkEntry *entry) {
     refresh_scrollable_window2(scrollable_window2);
 }
 // Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
-static void wrap_text(char *text) {
+void wrap_text(char *text) {
     int len = strlen(text);
     int i, line_length = 0;
     int j = MAX_LINE_LENGTH;
