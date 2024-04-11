@@ -103,6 +103,7 @@ extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
 char **argv_ptr;
 int sockfd;
+int sock_for_chats;
 
 // typedef struct {
 //     char* name;
@@ -143,7 +144,8 @@ int connect_to_server(int *sock);
 char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password);
 char **check_login_data(char *username, char* password);
 char **get_chatter_data(char *username);
-
+char **send_new_chat_data(char *username1, char* username2);
+char **get_chats_data(char *username);
 // char **get_user_data(char *username);
 
 
@@ -157,6 +159,7 @@ void refresh_scrollable_window(GtkWidget *scrollable_window);
 void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);
 gboolean is_in_format(char* text, char* format);
+void load_chats(char *username);
 
 // Dad jokes
 char* get_random_joke();

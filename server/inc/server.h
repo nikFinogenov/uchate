@@ -75,7 +75,7 @@ void mx_update_message(char **data);
 void mx_delete_message(char **data);
 
 
-void mx_create_chat(char **data);
+void mx_create_chat(char **data, int sockfd);
 void mx_get_chat(char **data, int sockfd);
 void mx_update_chat(char **data);
 void mx_delete_chat(char **data);

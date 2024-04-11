@@ -398,7 +398,7 @@ GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_file) {
     // Create the user box
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     // gtk_widget_set_name(box, "user-box");
-    gtk_widget_set_margin_start(box, 10);
+    gtk_widget_set_margin_start(box, 15);
 
     //avatar
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(input_image_file, NULL);
@@ -407,7 +407,8 @@ GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_file) {
 
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
+    gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)) + 3, gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)) + 3);
     g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
     gtk_box_pack_start(GTK_BOX(box), image, FALSE, FALSE, 15);
 
@@ -682,4 +683,58 @@ void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *user
 
     // Освобождаем память, занятую JSON объектом
     cJSON_Delete(json);
+}
+void load_chats(char *username) {
+    char **response = get_chats_data(username);
+    // g_print("--> %s\n\n", response);
+    if (strcmp(response, "1") == 0) {
+        g_print("tut\n");
+        // display_error_message("Username or Password is incorrect");
+        return;
+    }
+    if (strcmp(response, "1488") == 0) {
+        g_print("tut2\n");
+        // display_error_message("Server v govne");
+        return;
+    }
+    char **tokens = mx_strsplit(response, '\n');
+    for(int i = 0; i < mx_get_length(tokens); i++) {
+               // printf("%s\n", token);
+        char **response2 = get_chatter_data(tokens[i]);
+        if (strcmp(response2, "1") == 0) {
+            // display_error_message("User couldn't be found");
+            g_print("%s couldn't be found\n", tokens[i]);
+            return;
+        }
+        if (strcmp(response2, "1488") == 0) {
+            // display_error_message("Server v govne");
+            g_print("%s ne sud'ba\n", tokens[i]);
+            return;
+        }
+        char *token2 = strtok(response2, "\n");
+        // g_print("ya vishel1\n");
+        char *username = strdup(token2);
+        token2 = strtok(NULL, "\n");
+        char *name = strdup(token2);
+        token2 = strtok(NULL, "\n");
+        char *surname = strdup(token2);
+        // g_print("ya vishel2\n");
+        t_chatter_s new_chatter = {
+            .name = mx_strdup(name),
+            .surname = mx_strdup(surname),
+            .username = mx_strdup(username),
+            .lastmsg = mx_strdup("No messages yet"),
+            .avatar = NULL
+        };
+        // g_print("ya vishe3l\n");
+        chatters[chatters_count] = new_chatter;
+        chatters_count++;
+        // g_print("%s\n", token);
+        // tokens[i] = strtok(NULL, "\n");
+        // g_print("ya vishe4l\n");
+    }
+    // while (tokens != NULL) {
+ 
+    // }
+    // g_print("%d\n", chatters_count);
 }

@@ -17,7 +17,6 @@ char* default_img = "client/img/simple.png";
 
 t_message_s** messages = NULL; // Global variable declaration
 int messages_count[MAX_CHATTERS];
-// for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
 // Example initialization of chatters
 t_chatter_s* chatters = NULL; // Global variable declaration
 int chatters_count = 0;
@@ -108,6 +107,7 @@ void fill_data(void) {
     user.desc = " ";
     user.avatar = NULL;
 }
+
 void free_chatters() {
     free(chatters);
     chatters = NULL;

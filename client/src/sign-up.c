@@ -165,4 +165,3 @@ void draw_singup() {
     g_signal_connect(signup_button, "clicked", G_CALLBACK(signup_button_clicked), entries);
     gtk_box_pack_start(GTK_BOX(signup_vbox), signup_button, FALSE, FALSE, 0);
 }
-

@@ -45,7 +45,6 @@ void mx_add_user(char **data, int sockfd) {
     send(sockfd, response, strlen(response), 0);
 }
 
-
 void mx_get_user(char** data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;

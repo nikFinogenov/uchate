@@ -118,19 +118,21 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     token = strtok(NULL, "\n");
     user.desc = strdup(token);
-    g_print("name -> %s\n", user.name);
-    g_print("surn -> %s\n", user.surname);
-    g_print("username -> %s\n", user.username);
-    g_print("desc -> %s\n", user.desc);
-    g_print("parsed_username -> %s\n", user.username);
-    g_print("parsed_password -> %s\n", parsed_password);
+    // g_print("name -> %s\n", user.name);
+    // g_print("surn -> %s\n", user.surname);
+    // g_print("username -> %s\n", user.username);
+    // g_print("desc -> %s\n", user.desc);
+    // g_print("parsed_username -> %s\n", user.username);
+    // g_print("parsed_password -> %s\n", parsed_password);
 
     create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
 
     // gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);
+    load_chats(user.username);
     draw_user_window();
     show_user_window();
+    // mx_configure_chats_list();
 }
 
 static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {

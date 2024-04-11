@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
        exit(0);
     }
     sockfd = -1;
+    sock_for_chats = -1;
     argv_ptr = argv;
     // GtkCssProvider *cssProvider = gtk_css_provider_new();
     // gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);

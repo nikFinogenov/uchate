@@ -631,9 +631,20 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     if(chatters_count + 1 < MAX_CHATTERS) {
         chatters[chatters_count] = new_chatter;
         chatters_count++;
+        char** response2 = send_new_chat_data(user.username, username);
+    
+    // User existence
+        if (strcmp(response2, "1") == 0) {
+            display_error_message("Chat already exists");
+            return;
+        }
+        if (strcmp(response2, "1488") == 0) {
+            display_error_message("Server v govne");
+            return;
+        }
         refresh_scrollable_window(scrollable_window);
-            gtk_widget_show(scrollable_window);
-            gtk_widget_hide(add_new_chat_when_no_chats);
+        gtk_widget_show(scrollable_window);
+        gtk_widget_hide(add_new_chat_when_no_chats);
 
         gtk_widget_destroy(search_pop_up); // Destroy the dialog widget
         
@@ -643,11 +654,12 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         }
         return;
     }
+    
 
     g_print("Chatter limit reached\n");
 }
 static void destroy_close_search(void){
-    gtk_widget_destroy(error_label);
+    if(error_label != NULL) gtk_widget_destroy(error_label);
     gtk_widget_destroy(search_pop_up);
     error_label = NULL;
 }
@@ -848,6 +860,7 @@ void draw_user_info_box(GtkWidget *user_info_box) {
 
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
     g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
     gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
