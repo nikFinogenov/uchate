@@ -51,7 +51,8 @@ int main(int argc, char *argv[]) {
         user.name = strdup(token);
         token = strtok(NULL, "\n");
         user.surname = strdup(token);
-         draw_user_window();
+        load_chats(user.username);
+        draw_user_window();
         show_user_window();
     } else {
         show_login();
