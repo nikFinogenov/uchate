@@ -41,3 +41,87 @@ Avdeev
 Dima
 Avdeev
 
+2024-04-12 01:27:12: Open database -> OK
+2024-04-12 01:27:12: Init table "Users" -> OK
+2024-04-12 01:27:12: Init table "Chats" -> OK
+2024-04-12 01:27:12: Init table "Messages" -> OK
+2024-04-12 01:27:15: Open database -> OK
+2024-04-12 01:27:15: Open database -> OK
+2024-04-12 01:27:15: Get user -> OK
+2024-04-12 01:27:15: Open database -> OK
+2024-04-12 01:27:15: Get chat -> OK
+2024-04-12 01:27:15: Open database -> OK
+2024-04-12 01:27:15: Get user -> erter
+Dima
+Avdeev
+
+2024-04-12 01:27:23: Open database -> OK
+2024-04-12 01:27:23: Open database -> OK
+2024-04-12 01:27:23: Get user -> OK
+2024-04-12 01:27:23: Open database -> OK
+2024-04-12 01:27:23: Get chat -> OK
+2024-04-12 01:27:23: Open database -> OK
+2024-04-12 01:27:23: Get user -> erter
+Dima
+Avdeev
+
+2024-04-12 01:28:02: Open database -> OK
+2024-04-12 01:28:02: Open database -> OK
+2024-04-12 01:28:02: Get user -> OK
+2024-04-12 01:28:02: Open database -> OK
+2024-04-12 01:28:02: Get chat -> OK
+2024-04-12 01:28:02: Open database -> OK
+2024-04-12 01:28:02: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 01:28:02: Open database -> OK
+2024-04-12 01:28:02: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 01:28:02: Open database -> OK
+2024-04-12 01:28:02: Get user -> n
+n
+n
+
+2024-04-12 01:28:13: Open database -> OK
+2024-04-12 01:28:13: Open database -> OK
+2024-04-12 01:28:13: Get user -> OK
+2024-04-12 01:28:13: Open database -> OK
+2024-04-12 01:28:13: Get chat -> OK
+2024-04-12 01:28:13: Open database -> OK
+2024-04-12 01:28:13: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 01:28:13: Open database -> OK
+2024-04-12 01:28:13: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 01:28:13: Open database -> OK
+2024-04-12 01:28:13: Get user -> n
+n
+n
+
+2024-04-12 01:28:30: Open database -> OK
+2024-04-12 01:28:30: Open database -> OK
+2024-04-12 01:28:30: Get user -> OK
+2024-04-12 01:28:30: Open database -> OK
+2024-04-12 01:28:30: Get chat -> OK
+2024-04-12 01:28:30: Open database -> OK
+2024-04-12 01:28:30: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 01:28:30: Open database -> OK
+2024-04-12 01:28:30: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 01:28:30: Open database -> OK
+2024-04-12 01:28:30: Get user -> n
+n
+n
+
