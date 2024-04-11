@@ -7,7 +7,7 @@ typedef struct {
     GtkWidget *username_entry;
     GtkWidget *password_entry;
 } EntryWidgets;
-
+    
 void show_login(void) {
     gtk_widget_show_all(login_window);
 }
@@ -25,6 +25,45 @@ static void display_error_message(char *message) {
     gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
     gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(login_window))), error_label, FALSE, FALSE, 0);
     gtk_widget_show_all(login_window);
+}
+
+void create_json_with_data(const char *filename, const char *username, const char *password, bool button_recognize) {
+    // Create a new cJSON object
+    cJSON *root = cJSON_CreateObject();
+    if (!root) {
+        printf("Error: Failed to create cJSON object.\n");
+        return;
+    }
+
+    // Add the username, password, and button_recognize fields to the object with provided values
+    cJSON_AddStringToObject(root, "username", username);
+    cJSON_AddStringToObject(root, "password", password);
+    cJSON_AddBoolToObject(root, "button_recognize", button_recognize);
+
+    // Open the JSON file for writing
+    FILE *file = fopen(filename, "w");
+    if (!file) {
+        printf("Error: Unable to open file %s for writing.\n", filename);
+        cJSON_Delete(root);
+        return;
+    }
+
+    // Write the JSON object to the file
+    char *json_string = cJSON_Print(root);
+    if (!json_string) {
+        printf("Error: Failed to create JSON string.\n");
+        fclose(file);
+        cJSON_Delete(root);
+        return;
+    }
+    fprintf(file, "%s", json_string);
+    free(json_string);
+
+    // Close the file
+    fclose(file);
+
+    // Clean up the cJSON object
+    cJSON_Delete(root);
 }
 
 static void login_button_clicked(GtkWidget *widget, gpointer data) {
@@ -83,6 +122,10 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     g_print("surn -> %s\n", user.surname);
     g_print("username -> %s\n", user.username);
     g_print("desc -> %s\n", user.desc);
+    g_print("parsed_username -> %s\n", user.username);
+    g_print("parsed_password -> %s\n", parsed_password);
+
+    create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
 
     // gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);
@@ -105,6 +148,18 @@ static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpoint
 
     // Возвращаем FALSE, чтобы разрешить дальнейшую обработку события
     return FALSE;
+}
+
+void on_check_button_toggled(GtkToggleButton *togglebutton, gpointer data) {
+    gboolean active = gtk_toggle_button_get_active(togglebutton);
+    if (active) {
+        userdata.button_recognize = TRUE;
+        g_print("Check button is checked\n");
+    }
+    else {
+        userdata.button_recognize = FALSE;
+        g_print("Check button is unchecked\n");
+    }
 }
 
 void draw_login(void) {
@@ -138,6 +193,9 @@ void draw_login(void) {
     gtk_entry_set_visibility(GTK_ENTRY(password_entry_login), FALSE);
     gtk_box_pack_start(GTK_BOX(login_vbox), password_entry_login, FALSE, FALSE, 0);
 
+    GtkWidget *check_button = gtk_check_button_new_with_label("Remember me");
+    gtk_box_pack_start(GTK_BOX(login_vbox), check_button, FALSE, FALSE, 0);
+
     // Create a structure to hold the entry widgets
     EntryWidgets *entries = g_new(EntryWidgets, 1);
     entries->username_entry = username_entry_login;
@@ -146,6 +204,7 @@ void draw_login(void) {
     GtkWidget *login_button = gtk_button_new_with_label("Login");
     g_signal_connect(login_button, "clicked", G_CALLBACK(login_button_clicked), entries);
     g_signal_connect(G_OBJECT(password_entry_login), "key-press-event", G_CALLBACK(on_entry_key_press), entries);
+    g_signal_connect(G_OBJECT(check_button), "toggled", G_CALLBACK(on_check_button_toggled), NULL);
     gtk_box_pack_start(GTK_BOX(login_vbox), login_button, FALSE, FALSE, 0);
 }
 

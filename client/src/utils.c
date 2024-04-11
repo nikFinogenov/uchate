@@ -516,3 +516,72 @@ gboolean is_in_format(char* text, char* format) {
     
     return FALSE; // Format not found in text
 }
+
+void read_json_from_file(const char *filename, t_user_data_s *userdata) {
+    // Открываем файл для чтения
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        fprintf(stderr, "Could not open %s for reading\n", filename);
+        return;
+    }
+
+    // Получаем размер файла
+    fseek(file, 0, SEEK_END);
+    long file_size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    // Выделяем память для буфера
+    char *json_buffer = malloc(file_size + 1);
+    if (!json_buffer) {
+        fprintf(stderr, "Memory allocation error\n");
+        fclose(file);
+        return;
+    }
+
+    // Считываем содержимое файла в буфер
+    fread(json_buffer, 1, file_size, file);
+    fclose(file);
+    json_buffer[file_size] = '\0';
+
+    // Парсим JSON буфер и заполняем структуру данными
+    parse_json_buffer(json_buffer, file_size, userdata);
+
+    // Освобождаем память, выделенную для буфера
+    free(json_buffer);
+}
+
+void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata) {
+    // Разбираем JSON строку
+    cJSON *json = cJSON_Parse(buffer);
+
+    // Проверяем, удалось ли разобрать JSON строку
+    if (!json) {
+        const char *error_ptr = cJSON_GetErrorPtr();
+        if (error_ptr != NULL) {
+            fprintf(stderr, "Error parsing JSON: %s\n", error_ptr);
+        } else {
+            fprintf(stderr, "Unknown error parsing JSON\n");
+        }
+        return;
+    }
+
+    // Получаем значения из JSON объекта
+    cJSON *username = cJSON_GetObjectItemCaseSensitive(json, "username");
+    cJSON *password = cJSON_GetObjectItemCaseSensitive(json, "password");
+    cJSON *button_recognize = cJSON_GetObjectItemCaseSensitive(json, "button_recognize");
+
+    // Проверяем, что все поля присутствуют и имеют правильные типы
+    if (!cJSON_IsString(username) || !cJSON_IsString(password) || !cJSON_IsBool(button_recognize)) {
+        fprintf(stderr, "Invalid JSON format\n");
+        cJSON_Delete(json);
+        return;
+    }
+
+    // Записываем значения в структуру
+    userdata->username = strdup(username->valuestring);
+    userdata->password = strdup(password->valuestring);
+    userdata->button_recognize = cJSON_IsTrue(button_recognize);
+
+    // Освобождаем память, занятую JSON объектом
+    cJSON_Delete(json);
+}

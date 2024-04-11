@@ -12,6 +12,7 @@ GtkWidget *error_revealer = NULL;
 GtkWidget *user_window = NULL;
 GtkWidget *login_window = NULL;
 GtkWidget *signup_window = NULL;
+bool remember;
 char* default_img = "client/img/simple.png";
 
 t_message_s** messages = NULL; // Global variable declaration
@@ -28,6 +29,12 @@ t_user_s user = {
     .surname = NULL,
     .desc = NULL,
     .avatar = NULL
+};
+
+t_user_data_s userdata = {
+    .username = NULL,
+    .password = NULL,
+    .button_recognize = FALSE
 };
 
 bool is_chatters_empty(void) {

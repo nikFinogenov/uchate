@@ -6,6 +6,8 @@ INCD = inc
 OBJD = obj
 LMXA = ../libmx/libmx.a
 LMXI = ../libmx/inc
+LIB_JSON_DIR = ../cJSON
+LIB_JSON = ../cJSON/libcjson.a
 
 SRCS = $(wildcard $(SRCD)/*.c)
 INCS = $(wildcard $(INCD)/*.h)
@@ -24,11 +26,11 @@ all: install
 install: $(NAME)
 
 $(NAME): $(OBJS)
-	@clang -lsqlite3 -lpthread `pkg-config --libs gtk+-3.0` $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
+	@clang -lsqlite3 -lpthread `pkg-config --libs gtk+-3.0` $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) $(LIB_JSON) -o ../$(NAME)
 	@printf "$(CLEAR)$@\t   $(GREENB)created$(NORMAL)\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS) | $(OBJD)
-	@clang $(FLAGS) $(DFLAGS) -c $< -o $@ -I$(INCD) -I$(LMXI)
+	@clang $(FLAGS) $(DFLAGS) -c $< -o $@ -I$(INCD) -I$(LMXI) -I$(LIB_JSON_DIR)
 	@printf "$(CLEAR)$(NAME)\t   $(YELLOWB)compile $(NORMAL)$(<:$(SRCD)/%.c=%) "
 
 $(OBJD):

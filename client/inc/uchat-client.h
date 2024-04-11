@@ -37,9 +37,16 @@
 #include <pthread.h>
 #include <netdb.h>
 #include <errno.h>
+#include <cJSON.h>
 #include <arpa/inet.h>
 
 extern const char *jokes[];
+
+typedef struct {
+    char *username;
+    char *password;
+    bool button_recognize;
+} t_user_data_s;
 
 typedef struct {
     char* username;
@@ -79,6 +86,7 @@ extern char* default_img;
 extern t_message_s** messages;
 extern t_chatter_s* chatters;
 extern t_user_s user;
+extern t_user_data_s userdata;
 extern t_selected_s selected_user;
 // extern GtkWidget *scrollable_window2;
 extern GtkWidget *chat_box;
@@ -127,6 +135,8 @@ void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, ch
 GdkPixbuf *file_to_pixbuf(const gchar *filename);
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
 void set_widget_height(GtkWidget *widget, int height);
+void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata);
+void read_json_from_file(const char *filename, t_user_data_s *userdata);
 
 // Server stuff
 int connect_to_server(int *sock);

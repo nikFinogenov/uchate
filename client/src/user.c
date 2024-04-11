@@ -26,6 +26,51 @@ static void clicked_settings(GtkWidget *widget, gpointer data){
     g_print("settings clicked\n");
 }
 
+void on_confirm_button_clicked(GtkButton *button, gpointer data) {
+    // Получаем текст из всех GtkEntry
+    GtkWidget *name_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "name_entry"));
+    GtkWidget *surname_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "surname_entry"));
+    GtkWidget *username_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "username_entry"));
+    GtkWidget *description_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "description_entry"));
+
+    const gchar *name_text = gtk_entry_get_text(GTK_ENTRY(name_entry));
+    const gchar *surname_text = gtk_entry_get_text(GTK_ENTRY(surname_entry));
+    const gchar *username_text = gtk_entry_get_text(GTK_ENTRY(username_entry));
+    const gchar *description_text = gtk_entry_get_text(GTK_ENTRY(description_entry));
+
+    // Создаем объединенную строку с данными из всех GtkEntry
+    gchar *combined_text = g_strdup_printf("Name: %s\nSurname: %s\nUsername: %s\nDescription: %s\n",
+                                           name_text, surname_text, username_text, description_text);
+
+    // Выводим данные в консоль
+    g_print("Text from entries:\n%s\n", combined_text);
+
+    // Освобождаем память, выделенную для combined_text
+    g_free(combined_text);
+}
+
+
+static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data) {
+    GdkPixbuf *pixbuf = (GdkPixbuf *)user_data;
+    gint width = gdk_pixbuf_get_width(pixbuf);
+    gint height = gdk_pixbuf_get_height(pixbuf);
+    gint radius = MIN(width, height) / 2;
+
+    // Calculate the center position
+    gint x = (gtk_widget_get_allocated_width(widget) - width) / 2;
+    gint y = (gtk_widget_get_allocated_height(widget) - height) / 2;
+
+    // Draw a circle clip
+    cairo_arc(cr, x + width / 2, y + height / 2, radius, 0, 2 * M_PI);
+    cairo_clip(cr);
+
+    // Draw the image
+    gdk_cairo_set_source_pixbuf(cr, pixbuf, x, y);
+    cairo_paint(cr);
+
+    return FALSE;
+}
+
 static void on_click(GtkWidget *widget, gpointer data){
     if(chats_visible){
         g_print("chats TRUE\n");
@@ -42,6 +87,11 @@ static void on_click(GtkWidget *widget, gpointer data){
     } else {
         g_print("settings FALSE\n");
     }
+}
+
+void set_textview_text(GtkTextView *textview, const char *text) {
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
+    gtk_text_buffer_set_text(buffer, text ? text : "", -1); // Если text равен NULL, установите пустую строку
 }
 
 static void on_change_button_clicked(GtkWidget *button, gpointer user_data) {
@@ -842,6 +892,7 @@ static void clicked_side(GtkWidget *widget, gpointer data){
 
 static void logout_clicked(GtkWidget *widget, gpointer data){
     gtk_widget_hide(user_window);
+    userdata.button_recognize = false;
     // clear_all();
     // go_to_login();
     show_login();
@@ -982,42 +1033,66 @@ void draw_user_window() {
 
     //user settings + yatogorot ebal
 
-    GtkWidget *avatar_image;
-    GtkWidget *user_name_entry;
-    GtkWidget *surname_entry;
-    GtkWidget *nickname_entry;
-    GtkWidget *description_entry;
     GtkWidget *avatar_button;
     GtkWidget *confirm_button;
-
+    context = gtk_widget_get_style_context(GTK_WIDGET(account_settings));
+    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    //server/source/standard_avatar.png
+    GtkWidget *drawing_area = gtk_drawing_area_new();
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("server/source/standard_avatar.png", NULL);
     GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(pixbuf, 128, 128, GDK_INTERP_BILINEAR);
-    avatar_image = gtk_image_new_from_pixbuf(scaled_pixbuf);
-    g_object_unref(pixbuf); // Free the original pixbuf
-    g_object_unref(scaled_pixbuf); // Free the scaled pixbuf
 
-    user_name_entry = gtk_entry_new();
+    gtk_widget_set_size_request(drawing_area, 128, 128);
+    g_signal_connect(drawing_area, "draw", G_CALLBACK(on_draw_event), scaled_pixbuf);
+    gtk_widget_set_margin_top(drawing_area, 5);
+    gtk_widget_set_margin_bottom(drawing_area, 5);
+    gtk_widget_set_valign(drawing_area, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(drawing_area, GTK_ALIGN_CENTER);
+
+    GtkWidget *name_entry;
+    GtkWidget *surname_entry;
+    GtkWidget *username_entry;
+    GtkWidget *description_entry;
+
+    name_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(name_entry), user.name);
 
     surname_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(surname_entry), user.surname);
 
-    nickname_entry = gtk_entry_new();
+    username_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(username_entry), user.username);
 
     description_entry = gtk_entry_new();
-
+    gtk_entry_set_text(GTK_ENTRY(description_entry), user.desc);
+    
+    gtk_widget_set_margin_top(username_entry, 5);
+    gtk_widget_set_margin_bottom(username_entry, 5);
+    gtk_widget_set_margin_bottom(name_entry, 5);
+    gtk_widget_set_margin_bottom(surname_entry, 5);
+    gtk_widget_set_margin_bottom(description_entry, 5);
+    
     avatar_button = gtk_button_new_with_label("Change");
 
     confirm_button = gtk_button_new_with_label("Confirm");
 
-    g_signal_connect(G_OBJECT(avatar_button), "clicked", G_CALLBACK(on_change_button_clicked), NULL);
+    GtkTextBuffer *buffer = gtk_text_buffer_new(NULL);
 
-    gtk_box_pack_start(GTK_BOX(account_settings), avatar_image, FALSE, FALSE, 0);
+    g_signal_connect(G_OBJECT(avatar_button), "clicked", G_CALLBACK(on_change_button_clicked), NULL);
+    g_signal_connect(G_OBJECT(confirm_button), "clicked", G_CALLBACK(on_confirm_button_clicked), buffer);
+
+    gtk_box_pack_start(GTK_BOX(account_settings), drawing_area, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), avatar_button, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), user_name_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), username_entry, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), surname_entry, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), nickname_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), name_entry, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), description_entry, FALSE, FALSE, 0);
     gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 0);
     g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), account_settings);
+    g_object_set_data(G_OBJECT(confirm_button), "name_entry", name_entry);
+    g_object_set_data(G_OBJECT(confirm_button), "surname_entry", surname_entry);
+    g_object_set_data(G_OBJECT(confirm_button), "username_entry", username_entry);
+    g_object_set_data(G_OBJECT(confirm_button), "description_entry", description_entry);
     //end user setttings
 
     GtkWidget *side_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
