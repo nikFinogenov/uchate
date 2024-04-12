@@ -68,6 +68,7 @@ typedef struct {
 } t_chatter_s;
 
 typedef struct {
+    int id;
     char* text;
     char* time;
     bool is_user;
@@ -147,6 +148,7 @@ char **check_login_data(char *username, char* password);
 char **get_chatter_data(char *username);
 char **send_new_chat_data(char *username1, char* username2);
 char **get_chats_data(char *username);
+char **add_new_message(char *username_1, char *username_2, char* text, char* time);
 // char **get_user_data(char *username);
 
 

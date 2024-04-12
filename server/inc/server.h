@@ -69,7 +69,7 @@ char *encrypt_pass(char *str);
 void db_init(void);
 void mx_write_photo_to_bd(char *path, int id);
 
-void mx_add_message(char **data);
+void mx_add_message(char **data, int sockfd);
 void mx_get_message(char **data, int sockfd);
 void mx_update_message(char **data);
 void mx_delete_message(char **data);

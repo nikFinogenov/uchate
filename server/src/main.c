@@ -13,7 +13,7 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "/user/delete")) mx_delete_user(data);
     else if (!mx_strcmp(request, "/user/check-login-data")) check_login_data(data, new_socket);
     //message-endpoints
-    else if (!mx_strcmp(request, "/messages/add")) mx_add_message(data);
+    else if (!mx_strcmp(request, "/messages/add")) mx_add_message(data, new_socket);
     else if (!mx_strcmp(request, "/messages/get")) mx_get_message(data, new_socket);
     else if (!mx_strcmp(request, "/messages/update")) mx_update_message(data);
     else if (!mx_strcmp(request, "/messages/delete")) mx_delete_message(data);

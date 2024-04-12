@@ -742,9 +742,14 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     timeinfo = localtime(&rawtime);
     char time_str[6]; // HH:MM format
     strftime(time_str, sizeof(time_str), "%H:%M", timeinfo);
+
+    int m_id = mx_atoi(add_new_message(user.username, chatters[selected_user.index].username, text, time_str));
+
+    g_print("Message id - %d\n", m_id);
     
     // Создаем новый элемент структуры
     t_message_s new_mes = {
+        .id = m_id,
         .text = mx_strdup(text),
         .time = mx_strdup(time_str),
         .is_user = TRUE

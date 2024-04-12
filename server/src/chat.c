@@ -27,7 +27,7 @@ void mx_get_chat(char **data, int sockfd) {
     memset(sql, 0, 500);
     char temp_buff[1024];
     memset(temp_buff, 0, 1024);
-sprintf(sql, "SELECT u.username AS interlocutor_username "
+    sprintf(sql, "SELECT u.username AS interlocutor_username "
            "FROM CHATS c "
            "JOIN USERS u ON (c.user1_id = u.id OR c.user2_id = u.id) "
            "WHERE (c.user1_id = (SELECT id FROM USERS WHERE username = '%s') "
@@ -38,7 +38,7 @@ sprintf(sql, "SELECT u.username AS interlocutor_username "
 
     int offset = 0; // Смещение для записи в буфер
 
-   while (sqlite3_step(res) == SQLITE_ROW) {
+    while (sqlite3_step(res) == SQLITE_ROW) {
     // Get the username of the interlocutor
         const unsigned char *interlocutor_username = sqlite3_column_text(res, 0);
 
