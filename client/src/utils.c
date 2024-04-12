@@ -16,6 +16,7 @@ typedef struct {
     GtkWidget *edit_enter;
     int index_of_msg;
 } InfoWidgets;
+pthread_t chat_checker_thread;
 
 char* get_random_joke() {
     // Generate a random index between 0 and NUM_JOKES - 1
@@ -685,41 +686,49 @@ void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *user
     // Освобождаем память, занятую JSON объектом
     cJSON_Delete(json);
 }
+
+int server_chats_quantity(char *username) {
+    char **response = get_chats_data(username);
+    if (strcmp(response, "1") == 0) {
+        g_print("tut\n");
+        return 1;
+    }
+    if (strcmp(response, "1488") == 0) {
+        g_print("tut2\n");
+        return 1;
+    }
+    char **tokens = mx_strsplit(response, '\n');
+    return(mx_get_length(tokens));
+}
+
 void load_chats(char *username) {
     char **response = get_chats_data(username);
     // g_print("--> %s\n\n", response);
     if (strcmp(response, "1") == 0) {
         g_print("tut\n");
-        // display_error_message("Username or Password is incorrect");
         return;
     }
     if (strcmp(response, "1488") == 0) {
         g_print("tut2\n");
-        // display_error_message("Server v govne");
         return;
     }
     char **tokens = mx_strsplit(response, '\n');
     for(int i = 0; i < mx_get_length(tokens); i++) {
-               // printf("%s\n", token);
         char **response2 = get_chatter_data(tokens[i]);
         if (strcmp(response2, "1") == 0) {
-            // display_error_message("User couldn't be found");
             g_print("%s couldn't be found\n", tokens[i]);
             return;
         }
         if (strcmp(response2, "1488") == 0) {
-            // display_error_message("Server v govne");
             g_print("%s ne sud'ba\n", tokens[i]);
             return;
         }
         char *token2 = strtok(response2, "\n");
-        // g_print("ya vishel1\n");
         char *username = strdup(token2);
         token2 = strtok(NULL, "\n");
         char *name = strdup(token2);
         token2 = strtok(NULL, "\n");
         char *surname = strdup(token2);
-        // g_print("ya vishel2\n");
         t_chatter_s new_chatter = {
             .name = mx_strdup(name),
             .surname = mx_strdup(surname),
@@ -727,15 +736,101 @@ void load_chats(char *username) {
             .lastmsg = mx_strdup("No messages yet"),
             .avatar = NULL
         };
-        // g_print("ya vishe3l\n");
         chatters[chatters_count] = new_chatter;
         chatters_count++;
-        // g_print("%s\n", token);
-        // tokens[i] = strtok(NULL, "\n");
-        // g_print("ya vishe4l\n");
     }
-    // while (tokens != NULL) {
- 
-    // }
-    // g_print("%d\n", chatters_count);
+}
+
+void reload_chats(char *username) {
+    // Clear the chatters array and reset the chatters_count variable
+    for (int i = 0; i < chatters_count; i++) {
+        free(chatters[i].name);
+        free(chatters[i].surname);
+        free(chatters[i].username);
+        free(chatters[i].lastmsg);
+        if (chatters[i].avatar != NULL) {
+            free(chatters[i].avatar);
+        }
+    }
+    free(chatters);
+    chatters = NULL;
+    chatters_count = 0;
+
+    // Load the chats data
+    char **response = get_chats_data(username);
+    if (strcmp(response, "1") == 0) {
+        g_print("tut\n");
+        return;
+    }
+    if (strcmp(response, "1488") == 0) {
+        g_print("tut2\n");
+        return;
+    }
+    char **tokens = mx_strsplit(response, '\n');
+    for(int i = 0; i < mx_get_length(tokens); i++) {
+        char **response2 = get_chatter_data(tokens[i]);
+        if (strcmp(response2, "1") == 0) {
+            g_print("%s couldn't be found\n", tokens[i]);
+            return;
+        }
+        if (strcmp(response2, "1488") == 0) {
+            g_print("%s ne sud'ba\n", tokens[i]);
+            return;
+        }
+        char *token2 = strtok(response2, "\n");
+        char *username = strdup(token2);
+        token2 = strtok(NULL, "\n");
+        char *name = strdup(token2);
+        token2 = strtok(NULL, "\n");
+        char *surname = strdup(token2);
+        t_chatter_s new_chatter = {
+            .name = mx_strdup(name),
+            .surname = mx_strdup(surname),
+            .username = mx_strdup(username),
+            .lastmsg = mx_strdup("No messages yet"),
+            .avatar = NULL
+        };
+        chatters = realloc(chatters, sizeof(t_chatter_s) * (chatters_count + 1));
+        chatters[chatters_count] = new_chatter;
+        chatters_count++;
+    }
+}
+
+// Function to check the chat quantity and reload the chatters if necessary
+void *chat_checker_thread_func(void *arg) {
+    char *username = (char *)arg;
+    int server_chats_amount = 0;
+    while (1) {
+        // Check the chat quantity on the server
+        server_chats_amount = server_chats_quantity(username);
+        if (server_chats_quantity != chatters_count) {
+            // Reload the chatters if the chat quantity has changed
+            reload_chats(username);
+            refresh_scrollable_window(scrollable_window);
+        }
+        // Sleep for a while before checking again
+        sleep(5);
+    }
+    return NULL;
+}
+// Global variable to store the thread ID
+
+// Function to start the chat checker thread
+void start_chat_checker(char *username) {
+    // Create a new thread to check the chat quantity
+    int rc = pthread_create(&chat_checker_thread, NULL, chat_checker_thread_func, (void *)username);
+    if (rc) {
+        g_print("Error creating chat checker thread\n");
+        exit(-1);
+    }
+}
+
+// Function to stop the chat checker thread
+void stop_chat_checker() {
+    // Cancel the chat checker thread
+    int rc = pthread_cancel(chat_checker_thread);
+    if (rc) {
+        g_print("Error canceling chat checker thread\n");
+        exit(-1);
+    }
 }

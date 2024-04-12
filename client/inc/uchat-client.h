@@ -161,6 +161,8 @@ void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);
 gboolean is_in_format(char* text, char* format);
 void load_chats(char *username);
+void reload_chats(char *username);
+void start_chat_checker(char *username);
 
 // Dad jokes
 char* get_random_joke();
