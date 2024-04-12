@@ -22,3 +22,552 @@ repeshka
 n
 n
 
+2024-04-12 14:15:56: Open database -> OK
+2024-04-12 14:15:56: Init table "Users" -> OK
+2024-04-12 14:15:56: Init table "Chats" -> OK
+2024-04-12 14:15:56: Init table "Messages" -> OK
+2024-04-12 14:16:52: Open database -> OK
+2024-04-12 14:16:52: Update user -> FAILED -> no such column: erter
+2024-04-12 14:17:53: Open database -> OK
+2024-04-12 14:17:53: Update user -> FAILED -> no such column: erter
+2024-04-12 14:23:18: Open database -> OK
+2024-04-12 14:23:18: Init table "Users" -> OK
+2024-04-12 14:23:18: Init table "Chats" -> OK
+2024-04-12 14:23:18: Init table "Messages" -> OK
+2024-04-12 14:24:45: Open database -> OK
+2024-04-12 14:24:45: Update user -> OK
+2024-04-12 14:40:25: Open database -> OK
+2024-04-12 14:40:25: Open database -> OK
+2024-04-12 14:40:25: Get user -> OK
+2024-04-12 14:40:25: Open database -> OK
+2024-04-12 14:40:25: Get chat -> OK
+2024-04-12 14:40:25: Open database -> OK
+2024-04-12 14:40:25: Get user -> huesos
+Gitlerovich
+Gandonich
+
+2024-04-12 14:42:28: Open database -> OK
+2024-04-12 14:42:28: Open database -> OK
+2024-04-12 14:42:28: Get user -> OK
+2024-04-12 14:42:28: Open database -> OK
+2024-04-12 14:42:28: Get chat -> OK
+2024-04-12 14:42:28: Open database -> OK
+2024-04-12 14:42:28: Get user -> huesos
+Gitlerovich
+Gandonich
+
+2024-04-12 14:44:03: Open database -> OK
+2024-04-12 14:44:03: Open database -> OK
+2024-04-12 14:44:03: Get user -> OK
+2024-04-12 14:44:03: Open database -> OK
+2024-04-12 14:44:03: Get chat -> OK
+2024-04-12 14:44:03: Open database -> OK
+2024-04-12 14:44:03: Get user -> huesos
+Gitlerovich
+Gandonich
+
+2024-04-12 14:44:29: Open database -> OK
+2024-04-12 14:44:29: Update user -> OK
+2024-04-12 14:49:47: Open database -> OK
+2024-04-12 15:16:06: Open database -> OK
+2024-04-12 15:16:06: Init table "Users" -> OK
+2024-04-12 15:16:06: Init table "Chats" -> OK
+2024-04-12 15:16:06: Init table "Messages" -> OK
+2024-04-12 15:16:16: Open database -> OK
+2024-04-12 15:16:16: Open database -> OK
+2024-04-12 15:16:16: Get user -> OK
+2024-04-12 15:16:16: Open database -> OK
+2024-04-12 15:16:16: Get chat -> OK
+2024-04-12 15:16:16: Open database -> OK
+2024-04-12 15:16:16: Get user -> ADOLFIK
+CHLENOSOSICH
+Hitlerenko
+
+2024-04-12 15:16:16: Open database -> OK
+2024-04-12 15:16:16: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:16:16: Open database -> OK
+2024-04-12 15:16:16: Get user -> n
+n
+n
+
+2024-04-12 15:16:47: Open database -> OK
+2024-04-12 15:16:47: Update user -> OK
+2024-04-12 15:16:47: Open database -> OK
+2024-04-12 15:16:47: Update user -> OK
+2024-04-12 15:17:39: Open database -> OK
+2024-04-12 15:17:39: Update user -> OK
+2024-04-12 15:17:39: Open database -> OK
+2024-04-12 15:17:39: Update user -> OK
+2024-04-12 15:20:54: Open database -> OK
+2024-04-12 15:20:54: Open database -> OK
+2024-04-12 15:20:54: Get user -> OK
+2024-04-12 15:20:54: Open database -> OK
+2024-04-12 15:20:54: Get chat -> OK
+2024-04-12 15:20:54: Open database -> OK
+2024-04-12 15:20:54: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:20:54: Open database -> OK
+2024-04-12 15:20:54: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:20:54: Open database -> OK
+2024-04-12 15:20:54: Get user -> n
+n
+n
+
+2024-04-12 15:21:24: Open database -> OK
+2024-04-12 15:21:24: Update user -> OK
+2024-04-12 15:21:24: Open database -> OK
+2024-04-12 15:21:24: Update user -> OK
+2024-04-12 15:27:09: Open database -> OK
+2024-04-12 15:27:09: Init table "Users" -> OK
+2024-04-12 15:27:09: Init table "Chats" -> OK
+2024-04-12 15:27:09: Init table "Messages" -> OK
+2024-04-12 15:27:43: Open database -> OK
+2024-04-12 15:27:43: Open database -> OK
+2024-04-12 15:27:43: Get user -> OK
+2024-04-12 15:27:43: Open database -> OK
+2024-04-12 15:27:43: Get chat -> OK
+2024-04-12 15:27:43: Open database -> OK
+2024-04-12 15:27:43: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:27:43: Open database -> OK
+2024-04-12 15:27:43: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:27:43: Open database -> OK
+2024-04-12 15:27:43: Get user -> n
+n
+n
+
+2024-04-12 15:27:52: Open database -> OK
+2024-04-12 15:27:52: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:27:52: Open database -> OK
+2024-04-12 15:27:52: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:32:51: Open database -> OK
+2024-04-12 15:32:51: Init table "Users" -> OK
+2024-04-12 15:32:51: Init table "Chats" -> OK
+2024-04-12 15:32:51: Init table "Messages" -> OK
+2024-04-12 15:33:00: Open database -> OK
+2024-04-12 15:33:00: Open database -> OK
+2024-04-12 15:33:00: Get user -> OK
+2024-04-12 15:33:00: Open database -> OK
+2024-04-12 15:33:00: Get chat -> OK
+2024-04-12 15:33:00: Open database -> OK
+2024-04-12 15:33:00: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:33:00: Open database -> OK
+2024-04-12 15:33:00: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:33:00: Open database -> OK
+2024-04-12 15:33:00: Get user -> n
+n
+n
+
+2024-04-12 15:33:22: Open database -> OK
+2024-04-12 15:33:22: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:33:22: Open database -> OK
+2024-04-12 15:33:22: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:37:06: Open database -> OK
+2024-04-12 15:37:06: Open database -> OK
+2024-04-12 15:37:06: Get user -> OK
+2024-04-12 15:37:06: Open database -> OK
+2024-04-12 15:37:06: Get chat -> OK
+2024-04-12 15:37:06: Open database -> OK
+2024-04-12 15:37:06: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:37:06: Open database -> OK
+2024-04-12 15:37:06: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:37:06: Open database -> OK
+2024-04-12 15:37:06: Get user -> n
+n
+n
+
+2024-04-12 15:37:13: Open database -> OK
+2024-04-12 15:37:13: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:37:13: Open database -> OK
+2024-04-12 15:37:13: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:41:00: Open database -> OK
+2024-04-12 15:41:00: Open database -> OK
+2024-04-12 15:41:00: Get user -> OK
+2024-04-12 15:41:00: Open database -> OK
+2024-04-12 15:41:00: Get chat -> OK
+2024-04-12 15:41:00: Open database -> OK
+2024-04-12 15:41:00: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:41:00: Open database -> OK
+2024-04-12 15:41:00: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:41:00: Open database -> OK
+2024-04-12 15:41:00: Get user -> n
+n
+n
+
+2024-04-12 15:41:08: Open database -> OK
+2024-04-12 15:41:08: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:41:08: Open database -> OK
+2024-04-12 15:41:08: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:43:32: Open database -> OK
+2024-04-12 15:43:32: Open database -> OK
+2024-04-12 15:43:32: Get user -> OK
+2024-04-12 15:43:32: Open database -> OK
+2024-04-12 15:43:32: Get chat -> OK
+2024-04-12 15:43:32: Open database -> OK
+2024-04-12 15:43:32: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:43:32: Open database -> OK
+2024-04-12 15:43:32: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:43:32: Open database -> OK
+2024-04-12 15:43:32: Get user -> n
+n
+n
+
+2024-04-12 15:43:36: Open database -> OK
+2024-04-12 15:43:36: Get user -> 1
+2024-04-12 15:43:36: Open database -> OK
+2024-04-12 15:43:36: Get user -> 1
+2024-04-12 15:43:36: Open database -> OK
+2024-04-12 15:43:36: Get user -> 1
+2024-04-12 15:43:56: Open database -> OK
+2024-04-12 15:43:56: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:43:56: Open database -> OK
+2024-04-12 15:43:56: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:44:31: Open database -> OK
+2024-04-12 15:44:31: Open database -> OK
+2024-04-12 15:44:31: Get user -> OK
+2024-04-12 15:44:31: Open database -> OK
+2024-04-12 15:44:31: Get chat -> OK
+2024-04-12 15:44:31: Open database -> OK
+2024-04-12 15:44:31: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:44:31: Open database -> OK
+2024-04-12 15:44:31: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:44:31: Open database -> OK
+2024-04-12 15:44:31: Get user -> n
+n
+n
+
+2024-04-12 15:44:39: Open database -> OK
+2024-04-12 15:44:39: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:44:39: Open database -> OK
+2024-04-12 15:44:39: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:35: Open database -> OK
+2024-04-12 15:45:35: Open database -> OK
+2024-04-12 15:45:35: Get user -> OK
+2024-04-12 15:45:35: Open database -> OK
+2024-04-12 15:45:35: Get chat -> OK
+2024-04-12 15:45:35: Open database -> OK
+2024-04-12 15:45:35: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:45:35: Open database -> OK
+2024-04-12 15:45:35: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:45:35: Open database -> OK
+2024-04-12 15:45:35: Get user -> n
+n
+n
+
+2024-04-12 15:45:41: Open database -> OK
+2024-04-12 15:45:41: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:41: Open database -> OK
+2024-04-12 15:45:41: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:56: Open database -> OK
+2024-04-12 15:45:56: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:56: Open database -> OK
+2024-04-12 15:45:56: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:57: Open database -> OK
+2024-04-12 15:45:57: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:57: Open database -> OK
+2024-04-12 15:45:57: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:57: Open database -> OK
+2024-04-12 15:45:57: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:57: Open database -> OK
+2024-04-12 15:45:57: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:57: Open database -> OK
+2024-04-12 15:45:57: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:57: Open database -> OK
+2024-04-12 15:45:57: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:58: Open database -> OK
+2024-04-12 15:45:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:45:59: Open database -> OK
+2024-04-12 15:45:59: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:00: Open database -> OK
+2024-04-12 15:46:00: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:02: Open database -> OK
+2024-04-12 15:46:02: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:46:02: Open database -> OK
+2024-04-12 15:46:02: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:21: Open database -> OK
+2024-04-12 15:48:21: Open database -> OK
+2024-04-12 15:48:21: Get user -> OK
+2024-04-12 15:48:21: Open database -> OK
+2024-04-12 15:48:21: Get chat -> OK
+2024-04-12 15:48:21: Open database -> OK
+2024-04-12 15:48:21: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:48:21: Open database -> OK
+2024-04-12 15:48:21: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:48:21: Open database -> OK
+2024-04-12 15:48:21: Get user -> n
+n
+n
+
+2024-04-12 15:48:27: Open database -> OK
+2024-04-12 15:48:27: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:27: Open database -> OK
+2024-04-12 15:48:27: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:28: Open database -> OK
+2024-04-12 15:48:28: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:28: Open database -> OK
+2024-04-12 15:48:28: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:29: Open database -> OK
+2024-04-12 15:48:29: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:30: Open database -> OK
+2024-04-12 15:48:30: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:48:30: Open database -> OK
+2024-04-12 15:48:30: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:49:51: Open database -> OK
+2024-04-12 15:49:51: Open database -> OK
+2024-04-12 15:49:51: Get user -> OK
+2024-04-12 15:49:51: Open database -> OK
+2024-04-12 15:49:51: Get chat -> OK
+2024-04-12 15:49:51: Open database -> OK
+2024-04-12 15:49:51: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:49:51: Open database -> OK
+2024-04-12 15:49:51: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:49:51: Open database -> OK
+2024-04-12 15:49:51: Get user -> n
+n
+n
+
+2024-04-12 15:49:58: Open database -> OK
+2024-04-12 15:49:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:49:58: Open database -> OK
+2024-04-12 15:49:58: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:15: Open database -> OK
+2024-04-12 15:50:15: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:15: Open database -> OK
+2024-04-12 15:50:15: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:15: Open database -> OK
+2024-04-12 15:50:15: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:15: Open database -> OK
+2024-04-12 15:50:15: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:15: Open database -> OK
+2024-04-12 15:50:15: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:15: Open database -> OK
+2024-04-12 15:50:15: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:18: Open database -> OK
+2024-04-12 15:50:18: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:50:18: Open database -> OK
+2024-04-12 15:50:18: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:51:47: Open database -> OK
+2024-04-12 15:51:47: Open database -> OK
+2024-04-12 15:51:47: Get user -> OK
+2024-04-12 15:51:47: Open database -> OK
+2024-04-12 15:51:47: Get chat -> OK
+2024-04-12 15:51:47: Open database -> OK
+2024-04-12 15:51:47: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:51:47: Open database -> OK
+2024-04-12 15:51:47: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:51:47: Open database -> OK
+2024-04-12 15:51:47: Get user -> n
+n
+n
+
+2024-04-12 15:51:54: Open database -> OK
+2024-04-12 15:51:54: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:51:54: Open database -> OK
+2024-04-12 15:51:54: Username already exists -> FAILED -> Username already exists in the database
+2024-04-12 15:54:09: Open database -> OK
+2024-04-12 15:54:09: Init table "Users" -> OK
+2024-04-12 15:54:09: Init table "Chats" -> OK
+2024-04-12 15:54:09: Init table "Messages" -> OK
+2024-04-12 15:54:21: Open database -> OK
+2024-04-12 15:54:21: Open database -> OK
+2024-04-12 15:54:21: Get user -> OK
+2024-04-12 15:54:21: Open database -> OK
+2024-04-12 15:54:21: Get chat -> OK
+2024-04-12 15:54:21: Open database -> OK
+2024-04-12 15:54:21: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:54:21: Open database -> OK
+2024-04-12 15:54:21: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:54:21: Open database -> OK
+2024-04-12 15:54:21: Get user -> n
+n
+n
+
+2024-04-12 15:54:32: Open database -> OK
+2024-04-12 15:54:32: Update user -> OK
+2024-04-12 15:54:32: Open database -> OK
+2024-04-12 15:54:32: Error checking username existence -> FAILED -> query aborted
+2024-04-12 15:54:43: Open database -> OK
+2024-04-12 15:54:43: Error checking username existence -> FAILED -> query aborted
+2024-04-12 15:54:43: Open database -> OK
+2024-04-12 15:54:43: Error checking username existence -> FAILED -> query aborted
+2024-04-12 15:55:29: Open database -> OK
+2024-04-12 15:55:29: Error checking username existence -> FAILED -> query aborted
+2024-04-12 15:55:29: Open database -> OK
+2024-04-12 15:55:29: Error checking username existence -> FAILED -> query aborted
+2024-04-12 15:56:58: Open database -> OK
+2024-04-12 15:56:58: Open database -> OK
+2024-04-12 15:56:58: Get user -> OK
+2024-04-12 15:56:58: Open database -> OK
+2024-04-12 15:56:58: Get chat -> OK
+2024-04-12 15:56:58: Open database -> OK
+2024-04-12 15:56:58: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 15:56:58: Open database -> OK
+2024-04-12 15:56:58: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 15:56:58: Open database -> OK
+2024-04-12 15:56:58: Get user -> n
+n
+n
+
+2024-04-12 15:57:10: Open database -> OK
+2024-04-12 15:57:10: Error checking username existence -> FAILED -> query aborted
+2024-04-12 15:57:10: Open database -> OK
+2024-04-12 15:57:10: Error checking username existence -> FAILED -> query aborted

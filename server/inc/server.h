@@ -36,7 +36,7 @@ void logger(char *proccess, char* status, char* errmsg);
 void mx_add_user(char **data, int sockfd);
 void mx_get_user(char **data, int sockfd);
 void mx_get_chatter(char** data, int sockfd);
-void mx_update_user(char **data);
+void mx_update_user(char **data, int sockfd);
 void check_login_data(char **data, int sockfd);
 // void mx_get_user2(char **data, int sockfd);
 
