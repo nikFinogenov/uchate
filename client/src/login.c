@@ -17,6 +17,7 @@ void go_to_signup(void) {
     show_signup();
 }
 
+
 static void display_error_message(char *message) {
     GdkRGBA color_red;
     gdk_rgba_parse(&color_red, "#de34eb");
