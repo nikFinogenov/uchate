@@ -22,3 +22,51 @@ repeshka
 n
 n
 
+2024-04-12 01:42:45: Open database -> OK
+2024-04-12 01:42:45: Init table "Users" -> OK
+2024-04-12 01:42:45: Init table "Chats" -> OK
+2024-04-12 01:42:45: Init table "Messages" -> OK
+2024-04-12 01:42:57: Open database -> OK
+2024-04-12 01:42:57: Open database -> OK
+2024-04-12 01:42:57: Get user -> OK
+2024-04-12 01:42:57: Open database -> OK
+2024-04-12 01:42:57: Get chat -> OK
+2024-04-12 01:42:57: Open database -> OK
+2024-04-12 01:42:57: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 01:42:57: Open database -> OK
+2024-04-12 01:42:57: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 01:42:57: Open database -> OK
+2024-04-12 01:42:57: Get user -> n
+n
+n
+
+2024-04-12 11:14:32: Open database -> OK
+2024-04-12 11:14:32: Init table "Users" -> OK
+2024-04-12 11:14:32: Init table "Chats" -> OK
+2024-04-12 11:14:32: Init table "Messages" -> OK
+2024-04-12 11:14:46: Open database -> OK
+2024-04-12 11:14:46: Open database -> OK
+2024-04-12 11:14:46: Get user -> OK
+2024-04-12 11:14:46: Open database -> OK
+2024-04-12 11:14:46: Get chat -> OK
+2024-04-12 11:14:46: Open database -> OK
+2024-04-12 11:14:46: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 11:14:46: Open database -> OK
+2024-04-12 11:14:46: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 11:14:46: Open database -> OK
+2024-04-12 11:14:46: Get user -> n
+n
+n
+
