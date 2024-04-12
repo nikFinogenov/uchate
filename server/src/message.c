@@ -61,9 +61,6 @@ void mx_add_message(char **data, int sockfd) {
     // Get the ID of the last inserted row
     sqlite3_int64 message_id = sqlite3_last_insert_rowid(db);
     sqlite3_close(db);
-
-    logger("Added message with id", mx_itoa(message_id), "");
-
     // Convert the message ID to a string
     char message_id_str[50];
     snprintf(message_id_str, sizeof(message_id_str), "%" PRId64, (int64_t)message_id);

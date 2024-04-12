@@ -714,7 +714,6 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
 }
 
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
-    g_print("Add message clicked\n");
     CallbackData *data = (CallbackData *)user_data;
     char *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
 
@@ -744,8 +743,6 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     strftime(time_str, sizeof(time_str), "%H:%M", timeinfo);
 
     int m_id = mx_atoi(add_new_message(user.username, chatters[selected_user.index].username, text, time_str));
-
-    g_print("Message id - %d\n", m_id);
     
     // Создаем новый элемент структуры
     t_message_s new_mes = {
@@ -755,7 +752,6 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
         .is_user = TRUE
     };
 
-    g_print("%d\n", messages_count[selected_user.index]);
     // Find the first available slot in the chatters array
     if(messages_count[selected_user.index] + 1 < MAX_MESSAGES) {
         messages[selected_user.index][messages_count[selected_user.index]] = new_mes;
