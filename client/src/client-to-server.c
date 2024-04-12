@@ -218,7 +218,6 @@ char **get_chatter_data(char *username) {
     socklen_t len = sizeof (error);
     int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
 
-
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
         sockfd = -1;
@@ -347,6 +346,7 @@ char **get_chats_data(char *username) {
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
+<<<<<<< HEAD
 
 char **add_new_message(char *username_1, char *username_2, char* text, char* time) {
         // Connect to the server if not yet
@@ -396,3 +396,5 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
+=======
+>>>>>>> 1cd77ba5649825e1b5863bbfb758ed8dcbfdc500

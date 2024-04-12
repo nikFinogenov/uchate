@@ -803,10 +803,11 @@ void *chat_checker_thread_func(void *arg) {
     while (1) {
         // Check the chat quantity on the server
         server_chats_amount = server_chats_quantity(username);
-        if (server_chats_quantity != chatters_count) {
+        if (server_chats_amount != chatters_count) {
             // Reload the chatters if the chat quantity has changed
             reload_chats(username);
             refresh_scrollable_window(scrollable_window);
+            g_print("refreaed %d -> %d\n", server_chats_amount, chatters_count);
         }
         // Sleep for a while before checking again
         sleep(5);
