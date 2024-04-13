@@ -71,6 +71,60 @@ void mx_get_user(char** data, int sockfd) {
     sqlite3_close(db);
 }
 
+void mx_get_user_avatar(char** data, int sockfd) {
+    if (data == NULL || data[1] == NULL) {
+        logger("Get user avatar", ST_NEOK, "Invalid data");
+        return;
+    }
+
+    sqlite3* db = open_db();
+    if (db == NULL) {
+        logger("Get user avatar", ST_NEOK, "Failed to open database");
+        return;
+    }
+
+    sqlite3_stmt* res;
+    char sql[500];
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+    memset(sql, 0, 500);
+    memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
+
+    sprintf(sql, "SELECT profile_img FROM USERS WHERE username = '%s';", data[1]); 
+    if (sqlite3_prepare_v2(db, sql, -1, &res, 0) != SQLITE_OK) {
+        logger("Get user avatar", ST_NEOK, "Failed to prepare SQL statement");
+        sqlite3_close(db);
+        return;
+    }
+
+    while (sqlite3_step(res) == SQLITE_ROW) {
+        const void* blob_data = sqlite3_column_blob(res, 0);
+        int blob_size = sqlite3_column_bytes(res, 0);
+
+        // Отправляем размер файла
+        if (send(sockfd, &blob_size, sizeof(blob_size), 0) == -1) {
+            perror("Error sending data size through socket");
+            logger("Send avatar size", ST_NEOK, "Failed to send avatar size through socket");
+            sqlite3_finalize(res);
+            sqlite3_close(db);
+            return;
+        }
+
+        // Отправляем BLOB через сокет
+        if (send(sockfd, blob_data, blob_size, 0) == -1) {
+            perror("Error sending data through socket");
+            logger("Send avatar data", ST_NEOK, "Failed to send avatar data through socket");
+            sqlite3_finalize(res);
+            sqlite3_close(db);
+            return;
+        }
+    }
+
+    int exit = sqlite3_finalize(res);
+    char* st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Get user avatar", st, "");
+    sqlite3_close(db);
+}
+
 void mx_get_chatter(char** data, int sockfd) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res;

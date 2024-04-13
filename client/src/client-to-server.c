@@ -346,6 +346,7 @@ char **get_chats_data(char *username) {
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
+
 char **update_user_info(char *changed_username, char *name, char *surname, char *desc, char *username) {
         // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);
@@ -440,4 +441,72 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
+}
+
+void get_and_save_avatar_to_file(char *username) {
+    if (connect_to_server(&sockfd) == -1) {
+        fprintf(stderr, "Error connecting to server\n");
+        return;
+    }
+
+    // Формируем запрос на сервер
+    char sendBuffer[MAX_BUFFER_SIZE];
+    snprintf(sendBuffer, sizeof(sendBuffer), "/user/get-avatar\n%s\n", username);
+
+    // Отправляем запрос на сервер
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("Error writing to socket");
+        close(sockfd);
+        return;
+    }
+
+    // Создаем путь к файлу для сохранения полученных данных
+    char filename[MAX_BUFFER_SIZE];
+    snprintf(filename, sizeof(filename), "%s%s_avatar.png", AVATAR_FOLDER, username);
+    FILE *file = fopen(filename, "wb");
+    if (file == NULL) {
+        perror("Error creating file");
+        close(sockfd);
+        return;
+    }
+
+    // Получаем размер файла
+    int file_size;
+    if (recv(sockfd, &file_size, sizeof(file_size), 0) == -1) {
+        perror("Error receiving data size through socket");
+        fclose(file);
+        close(sockfd);
+        return;
+    }
+
+    // Выделяем буфер для хранения BLOB
+    char *blob_data = (char *)malloc(file_size);
+    if (blob_data == NULL) {
+        perror("Error allocating memory for blob data");
+        fclose(file);
+        close(sockfd);
+        return;
+    }
+
+    // Принимаем BLOB через сокет
+    ssize_t total_bytes_received = 0;
+    while (total_bytes_received < file_size) {
+        ssize_t bytes_received = recv(sockfd, blob_data + total_bytes_received, file_size - total_bytes_received, 0);
+        if (bytes_received == -1) {
+            perror("Error receiving data through socket");
+            free(blob_data);
+            fclose(file);
+            close(sockfd);
+            return;
+        }
+        total_bytes_received += bytes_received;
+    }
+
+    // Записываем BLOB в файл
+    fwrite(blob_data, sizeof(char), file_size, file);
+
+    // Освобождаем выделенную память для BLOB
+    free(blob_data);
+    
+    fclose(file);
 }

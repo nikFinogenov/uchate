@@ -2,6 +2,7 @@
 
 static GtkWidget *error_label = NULL;
 
+
 // Define a structure to hold the necessary data
 typedef struct {
     GtkWidget *username_entry;
@@ -30,7 +31,7 @@ static void display_error_message(char *message) {
 static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
-
+    char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
     // Get the username and password from the entry widgets
     const gchar *username = gtk_entry_get_text(GTK_ENTRY(entries->username_entry));
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
@@ -88,8 +89,13 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     //create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
     create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
-
-    // gtk_widget_destroy(login_window);
+    get_and_save_avatar_to_file(user.username);
+    sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
+    g_print("%s\n", avatar_path);
+    user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
+    remove(avatar_path);
+    free(avatar_path);
+    gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);
     load_chats(user.username);
     draw_user_window();

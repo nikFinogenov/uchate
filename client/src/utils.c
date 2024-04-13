@@ -723,7 +723,7 @@ int server_chats_quantity(char *username) {
         return 1;
     }
     if (strcmp(response, "1488") == 0) {
-        g_print("tut2\n");
+        g_print("tut4\n");
         return 1;
     }
     char **tokens = mx_strsplit(response, '\n');
@@ -801,7 +801,7 @@ void load_chats(char *username) {
         return;
     }
     if (strcmp(response, "1488") == 0) {
-        g_print("tut2\n");
+        g_print("tut5\n");
         return;
     }
     char **tokens = mx_strsplit(response, '\n');

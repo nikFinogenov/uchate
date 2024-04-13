@@ -38,6 +38,7 @@ void mx_get_user(char **data, int sockfd);
 void mx_get_chatter(char** data, int sockfd);
 void mx_update_user(char **data, int sockfd);
 void check_login_data(char **data, int sockfd);
+void mx_get_user_avatar(char** data, int sockfd);
 // void mx_get_user2(char **data, int sockfd);
 
 

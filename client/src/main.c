@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     gtk_init(&argc, &argv);
     // g_log_set_handler(NULL, G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION, log_handler, NULL);
-
+    
     fill_data();
 
     // Get screen width and height
@@ -42,6 +42,8 @@ int main(int argc, char *argv[]) {
     // read_json_from_file("client/client-data/login_info.json", &userdata);
     read_txt_from_file(login_info, &userdata);
 
+    char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
+
     if (userdata.button_recognize) {
         char **response = check_login_data(userdata.username, userdata.password);
         char *token = strtok(response, "\n");
@@ -52,6 +54,12 @@ int main(int argc, char *argv[]) {
         user.name = strdup(token);
         token = strtok(NULL, "\n");
         user.surname = strdup(token);
+        get_and_save_avatar_to_file(user.username);
+        sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
+        g_print("%s\n", avatar_path);
+        user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
+        remove(avatar_path);
+        free(avatar_path);
         load_chats(user.username);
         draw_user_window();
         show_user_window();
