@@ -97,20 +97,25 @@ void mx_get_message(char **data, int sockfd) {
     sqlite3_close(db);
 }
 
-void mx_update_message(char **data) {
+void mx_update_message(char **data, int sockfd) {
     sqlite3 *db = open_db();
     char sql[500];
     memset(sql, 0, 500);
     char *errmsg;
+    char response[DEFAULT_MESSAGE_SIZE];
 
-    sprintf(sql, "UPDATE MESSAGES SET chat_id=%s, type='%s', date='%s', \
-            text='%s' WHERE id=%d;",
-            data[1], data[2], data[3], data[4], mx_atoi(data[5]));
+    sprintf(sql, "UPDATE MESSAGES SET text='%s' WHERE id=%d;",
+            data[2], mx_atoi(data[1]));
 
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
     char *st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Update message", st, errmsg);
     sqlite3_close(db);
+    if (exit == SQLITE_OK) 
+        sprintf(response, "0");
+    else 
+        sprintf(response, "1");
+    send(sockfd, response, strlen(response), 0);
 }
 
 void mx_delete_message(char **data, int sockfd) {

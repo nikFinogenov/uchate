@@ -70,7 +70,7 @@ void mx_write_photo_to_bd(char *path, int id);
 
 void mx_add_message(char **data, int sockfd);
 void mx_get_message(char **data, int sockfd);
-void mx_update_message(char **data);
+void mx_update_message(char **data, int sockfd);
 void mx_delete_message(char **data, int sockfd);
 
 int get_chat_id(char *username_1, char *username_2);

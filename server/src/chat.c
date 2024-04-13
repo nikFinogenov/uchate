@@ -6,8 +6,6 @@ void mx_create_chat(char **data, int sockfd) {
     memset(sql, 0, 500);
     char response[DEFAULT_MESSAGE_SIZE];
     char *errmsg;
-        // sprintf(sql, "INSERT INTO CHATS (user1_id, user2_id) \
-        //     VALUES (SELECT id from USERS where username = '%s',SELECT id from USERS where username = '%s');", data[1], data[2]);
     sprintf(sql, "INSERT INTO CHATS (user1_id, user2_id) \
     VALUES ((SELECT id from USERS where username = '%s'), (SELECT id from USERS where username = '%s'));", data[1], data[2]);
 

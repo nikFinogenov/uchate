@@ -83,10 +83,18 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
     char *parsed_edit = (char*)data_edit;
     wrap_text(parsed_edit);
     g_print("message wrapped-> ");
+    char** response = update_message_info(messages[selected_user.index][data->index_of_msg].id, parsed_edit);
+    if(mx_strcmp(response, "1") == 0) {
+        g_print("ne poluchilos\n");
+        return;
+    }
+    if(mx_strcmp(response, "1488") == 0) {
+        g_print("Server v govne");
+        return;
+    }
     // Edited message can not be bigger then const or less then 1 symbols
     if (strlen(parsed_edit) > DEFAULT_MESSAGE_SIZE || strlen(parsed_edit) == 0) NULL;
-    else
-        messages[selected_user.index][data->index_of_msg].text = mx_strdup(parsed_edit);
+    else messages[selected_user.index][data->index_of_msg].text = mx_strdup(parsed_edit);
     gtk_widget_destroy(edit_pop_up);
     refresh_scrollable_window2(scrollable_window2);
 }
@@ -176,6 +184,14 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
     }
 
     char **response = chatter_delete(user.username, chatters[index].username);
+    if(mx_strcmp(response, "1") == 0) {
+        g_print("ne poluchilos\n");
+        return;
+    }
+    if(mx_strcmp(response, "1488") == 0) {
+        g_print("server v govne\n");
+        return;
+    }
 
     // // Освобождаем память для удаляемого элемента
     free(chatters[index].name);
@@ -727,11 +743,11 @@ int server_chats_quantity(char *username) {
     char **response = get_chats_data(username);
     if (strcmp(response, "1") == 0) {
         g_print("tut\n");
-        return 1;
+        return chatters_count;
     }
     if (strcmp(response, "1488") == 0) {
         g_print("tut2\n");
-        return 1;
+        return chatters_count;
     }
     char **tokens = mx_strsplit(response, '\n');
     return(mx_get_length(tokens));
