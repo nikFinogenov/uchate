@@ -1,8 +1,10 @@
+OS := $(shell uname)
+
 .PHONY: server client libmx
 
 all: install
 
-server: 
+server:
 	@$(MAKE) -C server/
 
 client:

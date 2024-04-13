@@ -1,6 +1,5 @@
 #include "uchat-client.h"
 
-static GtkWidget *login_window;
 static GtkWidget *error_label = NULL;
 
 // Define a structure to hold the necessary data
@@ -8,12 +7,12 @@ typedef struct {
     GtkWidget *username_entry;
     GtkWidget *password_entry;
 } EntryWidgets;
-
-void show_login() {
+    
+void show_login(void) {
     gtk_widget_show_all(login_window);
 }
 
-void go_to_signup() {
+void go_to_signup(void) {
     gtk_widget_hide(login_window);
     show_signup();
 }
@@ -57,16 +56,74 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     // Send data and handle response
     char **response = check_login_data(parsed_username, parsed_password);
-
+    // g_print("--> %s\n", response);
     if (strcmp(response, "1") == 0) {
         display_error_message("Username or Password is incorrect");
-    } 
-    
-    if (strcmp(response, "0") == 0) {
-        // gtk_widget_destroy(login_window);
-        gtk_widget_hide(login_window);
-        draw_user_window();
-        show_user_window();
+        return;
+    }
+    if (strcmp(response, "1488") == 0) {
+        display_error_message("Server v govne");
+        return;
+    }
+    char *token = strtok(response, "\n");
+    user.username = strdup(token);
+
+    // token = strtok(NULL, "\n");
+    // g_print("passs -> %s\n", token);
+
+    token = strtok(NULL, "\n");
+    user.name = strdup(token);
+
+    token = strtok(NULL, "\n");
+    user.surname = strdup(token);
+
+    token = strtok(NULL, "\n");
+    user.desc = strdup(token);
+    // g_print("name -> %s\n", user.name);
+    // g_print("surn -> %s\n", user.surname);
+    // g_print("username -> %s\n", user.username);
+    // g_print("desc -> %s\n", user.desc);
+    // g_print("parsed_username -> %s\n", user.username);
+    // g_print("parsed_password -> %s\n", parsed_password);
+
+    //create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
+    create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
+
+    // gtk_widget_destroy(login_window);
+    gtk_widget_hide(login_window);
+    load_chats(user.username);
+    draw_user_window();
+    show_user_window();
+    start_chat_checker(user.username);
+    // mx_configure_chats_list();
+}
+
+static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
+    // Проверяем, нажата ли клавиша Enter
+    if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter) {
+        // Получаем указатель на данные, переданные при подключении сигнала
+        EntryWidgets *callback_data = (EntryWidgets *)user_data;
+        
+        // Вызываем функцию-обработчик, которая вызывается при нажатии кнопки отправки сообщения
+        login_button_clicked(GTK_WIDGET(callback_data->password_entry), callback_data);
+        
+        // Возвращаем TRUE, чтобы предотвратить дальнейшую обработку события
+        return TRUE;
+    }
+
+    // Возвращаем FALSE, чтобы разрешить дальнейшую обработку события
+    return FALSE;
+}
+
+void on_check_button_toggled(GtkToggleButton *togglebutton, gpointer data) {
+    gboolean active = gtk_toggle_button_get_active(togglebutton);
+    if (active) {
+        userdata.button_recognize = TRUE;
+        g_print("Check button is checked\n");
+    }
+    else {
+        userdata.button_recognize = FALSE;
+        g_print("Check button is unchecked\n");
     }
 }
 
@@ -101,6 +158,9 @@ void draw_login(void) {
     gtk_entry_set_visibility(GTK_ENTRY(password_entry_login), FALSE);
     gtk_box_pack_start(GTK_BOX(login_vbox), password_entry_login, FALSE, FALSE, 0);
 
+    GtkWidget *check_button = gtk_check_button_new_with_label("Remember me");
+    gtk_box_pack_start(GTK_BOX(login_vbox), check_button, FALSE, FALSE, 0);
+
     // Create a structure to hold the entry widgets
     EntryWidgets *entries = g_new(EntryWidgets, 1);
     entries->username_entry = username_entry_login;
@@ -108,6 +168,8 @@ void draw_login(void) {
 
     GtkWidget *login_button = gtk_button_new_with_label("Login");
     g_signal_connect(login_button, "clicked", G_CALLBACK(login_button_clicked), entries);
+    g_signal_connect(G_OBJECT(password_entry_login), "key-press-event", G_CALLBACK(on_entry_key_press), entries);
+    g_signal_connect(G_OBJECT(check_button), "toggled", G_CALLBACK(on_check_button_toggled), NULL);
     gtk_box_pack_start(GTK_BOX(login_vbox), login_button, FALSE, FALSE, 0);
 }
 

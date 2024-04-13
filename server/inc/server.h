@@ -35,7 +35,8 @@ int socket_init(int port);
 void logger(char *proccess, char* status, char* errmsg);
 void mx_add_user(char **data, int sockfd);
 void mx_get_user(char **data, int sockfd);
-void mx_update_user(char **data);
+void mx_get_chatter(char** data, int sockfd);
+void mx_update_user(char **data, int sockfd);
 void check_login_data(char **data, int sockfd);
 // void mx_get_user2(char **data, int sockfd);
 
@@ -68,13 +69,13 @@ char *encrypt_pass(char *str);
 void db_init(void);
 void mx_write_photo_to_bd(char *path, int id);
 
-void mx_add_message(char **data);
+void mx_add_message(char **data, int sockfd);
 void mx_get_message(char **data, int sockfd);
 void mx_update_message(char **data);
 void mx_delete_message(char **data);
 
 
-void mx_create_chat(char **data);
+void mx_create_chat(char **data, int sockfd);
 void mx_get_chat(char **data, int sockfd);
 void mx_update_chat(char **data);
 void mx_delete_chat(char **data);

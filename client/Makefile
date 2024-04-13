@@ -6,6 +6,8 @@ INCD = inc
 OBJD = obj
 LMXA = ../libmx/libmx.a
 LMXI = ../libmx/inc
+#LIB_JSON_DIR = ../cJSON
+#LIB_JSON = ../cJSON/libcjson.a
 
 SRCS = $(wildcard $(SRCD)/*.c)
 INCS = $(wildcard $(INCD)/*.h)

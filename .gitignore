@@ -52,6 +52,7 @@ ln*
 link
 tests.sh
 uchat.txt
+login_info.txt
 uchat
 uchat_server
 uchat_client
@@ -59,3 +60,4 @@ XYI.db
 language.ui
 server.log
 McOk.db
+login_info.json

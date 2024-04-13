@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
        exit(0);
     }
     sockfd = -1;
+    sock_for_chats = -1;
     argv_ptr = argv;
     // GtkCssProvider *cssProvider = gtk_css_provider_new();
     // gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);
@@ -38,14 +39,34 @@ int main(int argc, char *argv[]) {
     draw_login();
     draw_singup();
     
+    // read_json_from_file("client/client-data/login_info.json", &userdata);
+    read_txt_from_file(login_info, &userdata);
 
+    if (userdata.button_recognize) {
+        char **response = check_login_data(userdata.username, userdata.password);
+        char *token = strtok(response, "\n");
+        user.username = strdup(token);
+        // token = strtok(NULL, "\n");
+        // g_print("passs -> %s\n", token);
+        token = strtok(NULL, "\n");
+        user.name = strdup(token);
+        token = strtok(NULL, "\n");
+        user.surname = strdup(token);
+        load_chats(user.username);
+        draw_user_window();
+        show_user_window();
+    } else {
+        show_login();
+    }
+
+    // printf("Username: %s\n", userdata.username);
+    // printf("Password: %s\n", userdata.password);
+    // printf("Button Recognize: %s\n", userdata.button_recognize ? "true" : "false");
     // // Set background color for both windows
     // GdkRGBA color;
     // gdk_rgba_parse(&color, "#171717");
     // gtk_widget_override_background_color(login_window, GTK_STATE_FLAG_NORMAL, &color);
     // gtk_widget_override_background_color(signup_window, GTK_STATE_FLAG_NORMAL, &color);
-
-    show_login();
     //
 
     gtk_main();

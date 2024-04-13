@@ -15,51 +15,37 @@
 #define DEFAULT_MESSAGE_SIZE 1024
 #define MAX_LINE_LENGTH 70
 
-#include <gtk/gtk.h>
-// #include <gdk-pixbuf-core.h>
+#define MAX_JOKE_LENGTH 200
 
+#include <gtk/gtk.h>
 #include "../../libmx/inc/libmx.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include "../../libmx/inc/libmx.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include <string.h>
 #include <netinet/in.h>
 #include <sqlite3.h>
-#include <pthread.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>
 #include <dirent.h>
 #include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <locale.h>
 #include <stdio.h>
 #include <math.h>
 #include <pthread.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <netdb.h>
 #include <errno.h>
 #include <arpa/inet.h>
+
+extern const char *jokes[];
+
+typedef struct {
+    char *username;
+    char *password;
+    bool button_recognize;
+} t_user_data_s;
 
 typedef struct {
     char* username;
@@ -81,6 +67,7 @@ typedef struct {
 } t_chatter_s;
 
 typedef struct {
+    int id;
     char* text;
     char* time;
     bool is_user;
@@ -92,24 +79,32 @@ typedef struct {
     int index; 
 } t_selected_s;
 
+extern GtkWidget *signup_window;
+extern GtkWidget *user_window;
+extern GtkWidget *login_window;
 extern char* default_img;
 extern t_message_s** messages;
 extern t_chatter_s* chatters;
 extern t_user_s user;
+extern t_user_data_s userdata;
 extern t_selected_s selected_user;
 // extern GtkWidget *scrollable_window2;
 extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
 extern GtkWidget *chats_box;
 extern GtkWidget *settings_box;
+extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
+extern GtkWidget *error_revealer;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
+extern char *login_info;
 char **argv_ptr;
 int sockfd;
+int sock_for_chats;
 
 // typedef struct {
 //     char* name;
@@ -142,12 +137,25 @@ void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, ch
 GdkPixbuf *file_to_pixbuf(const gchar *filename);
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
 void set_widget_height(GtkWidget *widget, int height);
+// void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata);
+// void read_json_from_file(const char *filename, t_user_data_s *userdata);
+void create_txt_with_data(const char *filename, const char *username, const char *password, bool button_recognize);
+void read_txt_from_file(const char *filename, t_user_data_s *userdata);
+void parse_txt_buffer(const char *buffer, t_user_data_s *userdata);
+void update_user_line(const char *filename, const char *new_line);
+void dimas_gandon(const char *filename);
+void wrap_text(char *text);
 
 // Server stuff
 int connect_to_server(int *sock);
 char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password);
 char **check_login_data(char *username, char* password);
-
+char **get_chatter_data(char *username);
+char **send_new_chat_data(char *username1, char* username2);
+char **get_chats_data(char *username);
+char **add_new_message(char *username_1, char *username_2, char* text, char* time);
+char **update_user_info(char *changed_username, char * name, char *surname, char * desc, char *username);
+// char **get_user_data(char *username);
 
 
 // Xyeta widgets, Podderjivau
@@ -160,4 +168,12 @@ void refresh_scrollable_window(GtkWidget *scrollable_window);
 void refresh_scrollable_window2(GtkWidget *scrollable_window);
 char* format_last_msg(char* text);
 gboolean is_in_format(char* text, char* format);
+void load_chats(char *username);
+void reload_chats(char *username);
+void start_chat_checker(char *username);
+
+// Dad jokes
+char* get_random_joke();
+void clear_all(void);
+
 #endif
