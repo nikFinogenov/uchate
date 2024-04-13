@@ -735,7 +735,6 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
     char *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
-
     int i = 0, j = 0;
 
     // Delete spaces from the beginning
@@ -748,6 +747,14 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     // Check if chatters array is initialized
     if (messages == NULL) {
         g_print("Messages array is not initialized\n");
+        return;
+    }
+
+    if(strlen(text) > 512) {
+        GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Error: Message is too long\n512 symbols max, buy premium for more");
+        gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+        gtk_dialog_run(GTK_DIALOG(dialog));
+        gtk_widget_destroy(dialog);
         return;
     }
 
