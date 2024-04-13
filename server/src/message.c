@@ -113,11 +113,12 @@ void mx_update_message(char **data) {
     sqlite3_close(db);
 }
 
-void mx_delete_message(char **data) {
+void mx_delete_message(char **data, int sockfd) {
     sqlite3 *db = open_db();
     char sql[500];
     memset(sql, 0, 500);
     char *errmsg;
+    char response[DEFAULT_MESSAGE_SIZE];
 
     sprintf(sql, "DELETE FROM MESSAGES WHERE id=%d;", mx_atoi(data[1]));
 
@@ -125,6 +126,9 @@ void mx_delete_message(char **data) {
     char *st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Delete message", st, errmsg);
     sqlite3_close(db);
+    if(exit == 0) sprintf(response, "0");
+    else sprintf(response, "1");
+    send(sockfd, response, strlen(response), 0);
 }
 
 

@@ -443,19 +443,18 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
 }
 
 // TODO: dmytro.dolhii
-char **delete_message(char *username_1, char *username_2, char* text, char* time) {
+char **delete_message_data(int id) {
         // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);  
     char sendBuffer[1024];
     bzero(sendBuffer, 1024);
     //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
     //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
-    sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", username_1, username_2, text, time);
+    sprintf(sendBuffer, "/messages/delete\n%s", mx_itoa(id));
     
     int error = 0;
     socklen_t len = sizeof (error);
     int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
-
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));

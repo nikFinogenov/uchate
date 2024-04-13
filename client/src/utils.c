@@ -39,16 +39,26 @@ void refresh_user_box() {
 
 static void delete_message(GtkWidget *widget, gpointer data) {
     int index = GPOINTER_TO_INT(data);
-    g_print("total gays: %d\n", messages_count[selected_user.index]);
-    g_print("gay3 is here-> %d\n", index);
     if (index < 0 || index >= messages_count[selected_user.index]) {
         // Некорректный индекс
         return;
     }
-
+    // g_print("%d\n",messages[selected_user.index][index].id);
+    // g_print("%s\n",messages[selected_user.index][index].text);
+    // g_print("%s\n",messages[selected_user.index][index].time);
+    char** response = delete_message_data(messages[selected_user.index][index].id);
+    if(mx_strcmp(response, "1") == 0) {
+        g_print("ne poluchilos\n");
+        return;
+    }
+    if(mx_strcmp(response, "1488") == 0) {
+        g_print("server v govne\n");
+        return;
+    }
     // Освобождаем память для удаляемого элемента
     free(messages[selected_user.index][index].text);
     free(messages[selected_user.index][index].time);
+    // free(messages[selected_user.index][index].id);
     // free(messages[index]); // Не нужно освобождать сам указатель на сообщение
 
     // Сдвигаем элементы влево для замены удаленного элемента
@@ -244,7 +254,6 @@ static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
     return result;
 }
 static void create_tools_menu(GdkEvent *event, int index) {
-    g_print("gay2 is here-> %d\n", index);
     GtkWidget *menu;
     GtkWidget *menu_item;
     
@@ -328,9 +337,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
 }
 
 static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpointer data) {
-    // int index = GPOINTER_TO_INT(((gpointer*)data)[0]);
     int index = GPOINTER_TO_INT(data);
-    g_print("gay is here-> %d\n", index);
     GtkWidget *event_box = GTK_WIDGET(widget);
     GtkWidget *mess_box = gtk_bin_get_child(GTK_BIN(event_box));
     if (event->type == GDK_BUTTON_PRESS && event->button == GDK_BUTTON_SECONDARY) {
@@ -340,13 +347,6 @@ static gboolean on_button_press(GtkWidget *widget, GdkEventButton *event, gpoint
             gtk_window_get_position(parent_window, &x, &y);
             GtkAllocation allocation;
             gtk_widget_get_allocation(GTK_WIDGET(mess_box), &allocation);
-            //ебаная проверка всё ломает, как же похуй на неё
-    //             g_print("Event coordinates: (%f, %f)\n", event->x_root, event->y_root);
-    //             g_print("Widget position: (%d, %d)\n", x, y);
-    //             g_print("Widget size: (%d, %d)\n", allocation.width, allocation.height);
-    //         if (event->x_root >= allocation.x && event->x_root <= allocation.x + allocation.width &&
-    // event->y_root >= allocation.y && event->y_root <= allocation.y + allocation.height) {
-    //             g_print("triple xui\n\n\n");
             create_tools_menu((GdkEvent *)event, index);
             return TRUE; // Prevent further processing of the event
             // }
