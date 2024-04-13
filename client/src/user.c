@@ -26,7 +26,27 @@ static void clicked_settings(GtkWidget *widget, gpointer data){
     g_print("settings clicked\n");
 }
 
+static void display_error_message(char *message, int which) {
+    GdkRGBA color_red;
+    gdk_rgba_parse(&color_red, "#de34eb");
+
+    error_label = gtk_label_new(message);
+    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_set_margin_top(error_label, 10);
+    if (which == 0){
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(search_pop_up);
+    } else if (which == 1) {
+        gtk_box_pack_end(GTK_BOX(account_settings), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(account_settings);
+    }
+}
+
 void on_confirm_button_clicked(GtkButton *button, gpointer data) {
+    if (error_label != NULL) {
+        gtk_widget_destroy(error_label);
+        error_label = NULL;
+    }
     // Получаем текст из всех GtkEntry
     GtkWidget *name_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "name_entry"));
     GtkWidget *surname_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "surname_entry"));
@@ -44,8 +64,18 @@ void on_confirm_button_clicked(GtkButton *button, gpointer data) {
 
     // Выводим данные в консоль
     g_print("Text from entries:\n%s\n", combined_text);
-
-    // Освобождаем память, выделенную для combined_text
+    
+    char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
+    if(strcmp(response, "Username already exists") == 0) {
+        display_error_message("Username exists", 1);
+    } else if(strcmp(response, "Error checking username existence") == 0) {
+        display_error_message("Username exists", 1);
+    } else {
+        user.username = g_strdup(username_text);
+        update_user_line(login_info, user.username);
+        dimas_gandon(login_info);
+    }
+    
     g_free(combined_text);
 }
 
@@ -61,7 +91,7 @@ static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data
     gint y = (gtk_widget_get_allocated_height(widget) - height) / 2;
 
     // Draw a circle clip
-    cairo_arc(cr, x + width / 2, y + height / 2, radius, 0, 2 * M_PI);
+    cairo_arc(cr, x + width / 2, y + height / 2, radius, 0, 2 * G_PI);
     cairo_clip(cr);
 
     // Draw the image
@@ -480,17 +510,6 @@ static void devs_window(GtkWidget *widget, gpointer data){
     g_signal_connect_swapped(settings_f, "response", G_CALLBACK(gtk_widget_destroy), settings_f);
 }
 
-static void display_error_message(char *message) {
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
-
-    error_label = gtk_label_new(message);
-    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-    gtk_widget_set_margin_top(error_label, 10);
-    gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
-    gtk_widget_show_all(search_pop_up);
-}
-
 static void on_clear_search_clicked(GtkButton *button, GtkEntry *entry) {
     // Clear the text in the entry
     gtk_entry_set_text(entry, "");
@@ -583,18 +602,18 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     }
 
     if (strcmp(parsed_username, "") == 0) {
-        display_error_message("Username cannot be empty");
+        display_error_message("Username cannot be empty", 0);
         return;
     }
 
     if (strcmp(user.username, parsed_username) == 0) {
-        display_error_message("You cannot open chat with yourself");
+        display_error_message("You cannot open chat with yourself", 0);
         return;
     }
 
     for (int i = 0; i < chatters_count; i++) {
         if (strcmp(chatters[i].username, parsed_username) == 0){
-            display_error_message("Chat already exists");
+            display_error_message("Chat already exists", 0);
             return;
         }
     }
@@ -602,11 +621,11 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     char **response = get_chatter_data(parsed_username);
 
     if (strcmp(response, "1") == 0) {
-        display_error_message("User couldn't be found");
+        display_error_message("User couldn't be found", 0);
         return;
     }
     if (strcmp(response, "1488") == 0) {
-        display_error_message("Server v govne");
+        display_error_message("Server v govne", 0);
         return;
     }
 
@@ -635,11 +654,11 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     
     // User existence
         if (strcmp(response2, "1") == 0) {
-            display_error_message("Chat already exists");
+            display_error_message("Chat already exists", 0);
             return;
         }
         if (strcmp(response2, "1488") == 0) {
-            display_error_message("Server v govne");
+            display_error_message("Server v govne", 0);
             return;
         }
         refresh_scrollable_window(scrollable_window);

@@ -27,45 +27,6 @@ static void display_error_message(char *message) {
     gtk_widget_show_all(login_window);
 }
 
-void create_json_with_data(const char *filename, const char *username, const char *password, bool button_recognize) {
-    // Create a new cJSON object
-    cJSON *root = cJSON_CreateObject();
-    if (!root) {
-        printf("Error: Failed to create cJSON object.\n");
-        return;
-    }
-
-    // Add the username, password, and button_recognize fields to the object with provided values
-    cJSON_AddStringToObject(root, "username", username);
-    cJSON_AddStringToObject(root, "password", password);
-    cJSON_AddBoolToObject(root, "button_recognize", button_recognize);
-
-    // Open the JSON file for writing
-    FILE *file = fopen(filename, "w");
-    if (!file) {
-        printf("Error: Unable to open file %s for writing.\n", filename);
-        cJSON_Delete(root);
-        return;
-    }
-
-    // Write the JSON object to the file
-    char *json_string = cJSON_Print(root);
-    if (!json_string) {
-        printf("Error: Failed to create JSON string.\n");
-        fclose(file);
-        cJSON_Delete(root);
-        return;
-    }
-    fprintf(file, "%s", json_string);
-    free(json_string);
-
-    // Close the file
-    fclose(file);
-
-    // Clean up the cJSON object
-    cJSON_Delete(root);
-}
-
 static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
@@ -125,7 +86,8 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // g_print("parsed_username -> %s\n", user.username);
     // g_print("parsed_password -> %s\n", parsed_password);
 
-    create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
+    //create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
+    create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
 
     // gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);

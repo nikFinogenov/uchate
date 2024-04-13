@@ -37,7 +37,6 @@
 #include <pthread.h>
 #include <netdb.h>
 #include <errno.h>
-#include <cJSON.h>
 #include <arpa/inet.h>
 
 extern const char *jokes[];
@@ -102,6 +101,7 @@ extern GtkWidget *error_revealer;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
+extern char *login_info;
 char **argv_ptr;
 int sockfd;
 int sock_for_chats;
@@ -137,8 +137,13 @@ void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, ch
 GdkPixbuf *file_to_pixbuf(const gchar *filename);
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
 void set_widget_height(GtkWidget *widget, int height);
-void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata);
-void read_json_from_file(const char *filename, t_user_data_s *userdata);
+// void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata);
+// void read_json_from_file(const char *filename, t_user_data_s *userdata);
+void create_txt_with_data(const char *filename, const char *username, const char *password, bool button_recognize);
+void read_txt_from_file(const char *filename, t_user_data_s *userdata);
+void parse_txt_buffer(const char *buffer, t_user_data_s *userdata);
+void update_user_line(const char *filename, const char *new_line);
+void dimas_gandon(const char *filename);
 void wrap_text(char *text);
 
 // Server stuff
@@ -149,6 +154,7 @@ char **get_chatter_data(char *username);
 char **send_new_chat_data(char *username1, char* username2);
 char **get_chats_data(char *username);
 char **add_new_message(char *username_1, char *username_2, char* text, char* time);
+char **update_user_info(char *changed_username, char * name, char *surname, char * desc, char *username);
 // char **get_user_data(char *username);
 
 
