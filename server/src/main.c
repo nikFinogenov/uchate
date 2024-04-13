@@ -21,7 +21,7 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "/chat/add")) mx_create_chat(data, new_socket);
     else if (!mx_strcmp(request, "/chat/get")) mx_get_chat(data, new_socket);
     else if (!mx_strcmp(request, "/chat/update")) mx_update_chat(data);
-    else if (!mx_strcmp(request, "/chat/delete")) mx_delete_chat(data);
+    else if (!mx_strcmp(request, "/chat/delete")) mx_delete_chat(data, new_socket);
     //xyeta-endpoints
     // else if (!mx_strcmp(request, "CheckLastRoom")) mx_check_last_room(data, new_socket);
     // else if (!mx_strcmp(request, "AddImageMessage")) message_img(data, new_socket);

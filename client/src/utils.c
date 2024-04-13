@@ -164,6 +164,9 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
         // Некорректный индекс
         return;
     }
+
+    char **response = chatter_delete(user.username, chatters[index].username);
+
     // // Освобождаем память для удаляемого элемента
     free(chatters[index].name);
     free(chatters[index].surname);
@@ -196,6 +199,10 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
     else if(selected_user.index > index){
         selected_user.index--;
     }
+
+    if (strcmp(response, "1") == 0) {
+        g_print("There was a problem deleting a user...\n");
+    } else g_print("O, nihuya, pracue\n");
     
     refresh_scrollable_window(scrollable_window);
 }

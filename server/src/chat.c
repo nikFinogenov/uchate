@@ -75,16 +75,29 @@ void mx_update_chat(char **data) {
     sqlite3_close(db);
 }
 
-void mx_delete_chat(char **data) {
+void mx_delete_chat(char **data, int sockfd) {
     sqlite3 *db = open_db();
     char sql[500];
-    memset(sql, 0, 500);
     char *errmsg;
 
-    sprintf(sql, "DELETE FROM CHATS WHERE id=%d;", mx_atoi(data[1]));
+    int chat_id = get_chat_id(data[1], data[2]);
 
-    int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
-    char *st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Delete chat", st, errmsg);
+    // Delete all messages associated with the chat
+    sprintf(sql, "DELETE FROM MESSAGES WHERE chat_id=%d;", chat_id);
+    int exit_messages = sqlite3_exec(db, sql, NULL, 0, &errmsg);
+
+    // Delete the chat
+    sprintf(sql, "DELETE FROM CHATS WHERE id=%d;", chat_id);
+    int exit_chats = sqlite3_exec(db, sql, NULL, 0, &errmsg);
+
+    char *st_messages = (exit_messages == 0) ? ST_OK : ST_NEOK;
+    char *st_chats = (exit_chats == 0) ? ST_OK : ST_NEOK;
+
+    logger("Delete chat messages", st_messages, errmsg);
+    logger("Delete chat", st_chats, errmsg);
+
+    char response[2] = {(exit_messages == 0 && exit_chats == 0) ? '0' : '1', '\0'};
+    send(sockfd, response, strlen(response), 0);
+
     sqlite3_close(db);
 }

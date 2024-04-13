@@ -155,6 +155,7 @@ char **send_new_chat_data(char *username1, char* username2);
 char **get_chats_data(char *username);
 char **add_new_message(char *username_1, char *username_2, char* text, char* time);
 char **update_user_info(char *changed_username, char * name, char *surname, char * desc, char *username);
+char **chatter_delete(char *username_1, char *username_2);
 // char **get_user_data(char *username);
 
 

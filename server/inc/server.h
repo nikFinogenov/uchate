@@ -74,11 +74,12 @@ void mx_get_message(char **data, int sockfd);
 void mx_update_message(char **data);
 void mx_delete_message(char **data);
 
+int get_chat_id(char *username_1, char *username_2);
 
 void mx_create_chat(char **data, int sockfd);
 void mx_get_chat(char **data, int sockfd);
 void mx_update_chat(char **data);
-void mx_delete_chat(char **data);
+void mx_delete_chat(char **data, int sockfd);
 
 
 #endif

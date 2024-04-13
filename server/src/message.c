@@ -10,13 +10,13 @@
 //     data[n] - NULL
 // */
 
-static int get_chat_id(char *username_1, char *username_2) {
+int get_chat_id(char *username_1, char *username_2) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[500];
     memset(sql, 0, 500);
     int chat_id = -1; // Initialize chat_id to a default value
-
+    
     sprintf(sql, "SELECT c.id "
                  "FROM CHATS c "
                  "JOIN USERS u1 ON c.user1_id = u1.id "
