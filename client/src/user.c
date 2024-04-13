@@ -11,6 +11,7 @@ static bool account_visible = TRUE;
 static bool chats_visible = FALSE;
 static bool chats_was_opened = FALSE;
 static char *file_path_for_db;
+static bool change_button_yes = FALSE;
 
 static bool toggled = true;
 // static GtkWidget *user_info_box;
@@ -142,10 +143,11 @@ static void on_change_button_clicked(GtkWidget *area, gpointer user_data) {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         temp_avatar = gdk_pixbuf_new_from_file(filename, NULL);
         file_path_for_db = g_strdup(filename);
+        change_button_yes = TRUE;
         // Делаем что-то с выбранным файлом, например, загружаем изображение
         // Пример кода загрузки изображения можно найти в предыдущих ответах
-        user.avatar = temp_avatar;
         refresh_account_settings();
+        change_button_yes = FALSE;
         // Освобождаем память
         g_free(filename);
     }
@@ -218,9 +220,15 @@ void on_confirm_button_clicked(GtkButton *button, gpointer data) {
 void draw_account_settings_box(){
     GtkWidget *avatar_button;
     GtkWidget *confirm_button;
+    GdkPixbuf *avatar;
     //server/source/standard_avatar.png
+    if (change_button_yes){
+        avatar = temp_avatar;
+    } else {
+        avatar = user.avatar;
+    }
     GtkWidget *drawing_area = gtk_drawing_area_new();
-    GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(user.avatar, 128, 128, GDK_INTERP_BILINEAR);
+    GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(avatar, 128, 128, GDK_INTERP_BILINEAR);
 
     gtk_widget_set_size_request(drawing_area, 128, 128);
     g_signal_connect(drawing_area, "draw", G_CALLBACK(on_draw_event), scaled_pixbuf);
@@ -390,7 +398,7 @@ static void special_toggle_account(GtkWidget *widget, GtkWidget *element){
         gtk_widget_hide(chats_box);
         chats_visible = FALSE;
         deactivate_children(chats_box);
-
+        refresh_account_settings();
         gtk_widget_set_visible(element, !visible);
         account_visible = !tvisible;
         activate_children(element);
@@ -404,7 +412,7 @@ static void special_toggle_account(GtkWidget *widget, GtkWidget *element){
         gtk_widget_hide(settings_box);
         settings_visible = TRUE;
         deactivate_children(settings_box);
-
+        refresh_account_settings();
         gtk_widget_set_visible(element, !visible);
         account_visible = !tvisible;
         activate_children(element);
@@ -415,6 +423,7 @@ static void special_toggle_account(GtkWidget *widget, GtkWidget *element){
 
 
     if (element == account_settings && settings_visible == FALSE || chats_visible == FALSE) {
+        refresh_account_settings();
         gtk_widget_set_visible(element, !visible);
         account_visible = !tvisible;
         activate_children(element);
@@ -607,7 +616,7 @@ static void on_clear_mess_search_clicked(GtkButton *button, GtkEntry *entry) {
     gtk_entry_set_text(entry, "");
     refresh_scrollable_window2(scrollable_window2);
 }
-// Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
+
 void wrap_text(char *text) {
     int len = strlen(text);
     int i, line_length = 0;
