@@ -173,6 +173,7 @@ gboolean is_in_format(char* text, char* format);
 void load_chats(char *username);
 void reload_chats(char *username);
 void start_chat_checker(char *username);
+void stop_chat_checker(void);
 
 // Dad jokes
 char* get_random_joke();

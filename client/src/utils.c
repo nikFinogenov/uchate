@@ -802,7 +802,6 @@ void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
 
 void load_chats(char *username) {
     char **response = get_chats_data(username);
-    // g_print("--> %s\n\n", response);
     if (strcmp(response, "1") == 0) {
         g_print("tut\n");
         return;
@@ -926,7 +925,7 @@ void start_chat_checker(char *username) {
 }
 
 // Function to stop the chat checker thread
-void stop_chat_checker() {
+void stop_chat_checker(void) {
     // Cancel the chat checker thread
     int rc = pthread_cancel(chat_checker_thread);
     if (rc) {
