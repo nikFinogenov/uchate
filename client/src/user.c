@@ -64,8 +64,6 @@ void on_confirm_button_clicked(GtkButton *button, gpointer data) {
 
     // Выводим данные в консоль
     g_print("Text from entries:\n%s\n", combined_text);
-
-    update_user_info(username_text, name_text, surname_text, description_text, user.username);
     
     char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
     if(strcmp(response, "Username already exists") == 0) {

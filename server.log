@@ -571,3 +571,31 @@ n
 2024-04-12 15:57:10: Error checking username existence -> FAILED -> query aborted
 2024-04-12 15:57:10: Open database -> OK
 2024-04-12 15:57:10: Error checking username existence -> FAILED -> query aborted
+2024-04-12 19:10:37: Open database -> OK
+2024-04-12 19:10:37: Open database -> OK
+2024-04-12 19:10:37: Get user -> OK
+2024-04-12 19:10:37: Open database -> OK
+2024-04-12 19:10:37: Get chat -> OK
+2024-04-12 19:10:37: Open database -> OK
+2024-04-12 19:10:37: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-12 19:10:37: Open database -> OK
+2024-04-12 19:10:37: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-12 19:10:37: Open database -> OK
+2024-04-12 19:10:37: Get user -> n
+n
+n
+
+2024-04-12 19:10:50: Open database -> OK
+2024-04-12 19:10:50: Error checking username existence -> FAILED -> query aborted
+2024-04-12 19:11:08: Open database -> OK
+2024-04-12 19:11:08: Update user -> OK
+2024-04-12 19:11:15: Open database -> OK
+2024-04-12 19:11:15: Error checking username existence -> FAILED -> query aborted
+2024-04-12 19:11:28: Open database -> OK
+2024-04-12 19:11:28: Error checking username existence -> FAILED -> query aborted
