@@ -103,7 +103,7 @@ void mx_update_message(char **data) {
     memset(sql, 0, 500);
     char *errmsg;
 
-    sprintf(sql, "UPDATE MESSAGES SET chat_id=%s, type='%s', status='%s', \
+    sprintf(sql, "UPDATE MESSAGES SET chat_id=%s, type='%s', date='%s', \
             text='%s' WHERE id=%d;",
             data[1], data[2], data[3], data[4], mx_atoi(data[5]));
 

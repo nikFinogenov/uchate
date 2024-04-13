@@ -742,6 +742,15 @@ void load_chats(char *username) {
 }
 
 void reload_chats(char *username) {
+    char **response = get_chats_data(username);
+    if (strcmp(response, "1") == 0) {
+        g_print("tut\n");
+        return;
+    }
+    if (strcmp(response, "1488") == 0) {
+        g_print("tut2\n");
+        return;
+    }
     // Clear the chatters array and reset the chatters_count variable
     for (int i = 0; i < chatters_count; i++) {
         free(chatters[i].name);
@@ -757,15 +766,6 @@ void reload_chats(char *username) {
     chatters_count = 0;
 
     // Load the chats data
-    char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
-        g_print("tut\n");
-        return;
-    }
-    if (strcmp(response, "1488") == 0) {
-        g_print("tut2\n");
-        return;
-    }
     char **tokens = mx_strsplit(response, '\n');
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chatter_data(tokens[i]);

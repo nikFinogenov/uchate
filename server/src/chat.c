@@ -49,10 +49,11 @@ void mx_get_chat(char **data, int sockfd) {
     int exit = sqlite3_finalize(res);
     char *st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Get chat", st, "");
-    
+    if (strlen(temp_buff) == 0) {
+        send(sockfd, "1", strlen("1"), 0);
+    }
+    else send(sockfd, temp_buff, strlen(temp_buff), 0);
     // Отправляем весь буфер клиенту
-    send(sockfd, temp_buff, strlen(temp_buff), 0);
-    
     sqlite3_close(db);
 }
 

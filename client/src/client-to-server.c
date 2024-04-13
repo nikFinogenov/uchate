@@ -346,7 +346,6 @@ char **get_chats_data(char *username) {
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
-<<<<<<< HEAD
 
 char **add_new_message(char *username_1, char *username_2, char* text, char* time) {
         // Connect to the server if not yet
@@ -396,5 +395,3 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
-=======
->>>>>>> 1cd77ba5649825e1b5863bbfb758ed8dcbfdc500

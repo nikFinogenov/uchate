@@ -2626,3 +2626,158 @@ q
 q
 
 >>>>>>> 1cd77ba5649825e1b5863bbfb758ed8dcbfdc500
+2024-04-13 13:44:29: Open database -> OK
+2024-04-13 13:44:29: Init table "Users" -> OK
+2024-04-13 13:44:29: Init table "Chats" -> OK
+2024-04-13 13:44:29: Init table "Messages" -> OK
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> OK
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get chat -> OK
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> n
+n
+n
+
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> m
+m
+m
+
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> q
+q
+q
+
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 13:44:31: Open database -> OK
+2024-04-13 13:44:31: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 13:44:39: Open database -> OK
+2024-04-13 13:44:39: Open database -> OK
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> OK
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get chat -> OK
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> shluxa
+Inesa
+repeshka
+
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> n
+n
+n
+
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> m
+m
+m
+
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> q
+q
+q
+
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 14:08:13: Open database -> OK
+2024-04-13 14:08:13: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 14:09:33: Open database -> OK
+2024-04-13 14:09:33: Open database -> OK
+2024-04-13 14:09:33: Open database -> OK
+2024-04-13 14:09:33: Open database -> OK
+2024-04-13 14:09:34: Open database -> OK
+2024-04-13 14:09:34: Open database -> OK
+2024-04-13 14:09:34: Open database -> OK
+2024-04-13 14:09:34: Open database -> OK
+2024-04-13 14:09:34: Open database -> OK
+2024-04-13 14:09:34: Open database -> OK
+2024-04-13 14:09:35: Open database -> OK
+2024-04-13 14:09:35: Open database -> OK
+2024-04-13 14:09:36: Open database -> OK
+2024-04-13 14:09:36: Open database -> OK
+2024-04-13 14:09:45: Open database -> OK
+2024-04-13 14:09:45: Open database -> OK
+2024-04-13 14:15:10: Open database -> OK
+2024-04-13 14:15:10: Init table "Users" -> OK
+2024-04-13 14:15:10: Init table "Chats" -> OK
+2024-04-13 14:15:10: Init table "Messages" -> OK
+2024-04-13 14:15:24: Open database -> OK
+2024-04-13 14:15:24: Init table "Users" -> OK
+2024-04-13 14:15:24: Init table "Chats" -> OK
+2024-04-13 14:15:24: Init table "Messages" -> OK
+2024-04-13 14:15:27: Open database -> OK
+2024-04-13 14:16:08: Open database -> OK
+2024-04-13 14:16:25: Open database -> OK
+2024-04-13 14:16:25: Add user -> OK
+2024-04-13 14:16:35: Open database -> OK
+2024-04-13 14:16:35: Get user -> 1
+2024-04-13 14:16:59: Open database -> OK
+2024-04-13 14:16:59: Add user -> OK
+2024-04-13 14:17:10: Open database -> OK
+2024-04-13 14:17:10: Get user -> erter
+Dima
+Avdeev
+
+2024-04-13 14:17:10: Open database -> OK
+2024-04-13 14:17:10: Create chat -> OK
+2024-04-13 14:17:13: Open database -> OK
+2024-04-13 14:17:13: Open database -> OK
+2024-04-13 14:18:07: Open database -> OK
+2024-04-13 14:18:07: Open database -> OK
+2024-04-13 14:18:07: Get user -> OK
+2024-04-13 14:18:07: Open database -> OK
+2024-04-13 14:18:07: Get chat -> OK
+2024-04-13 14:18:07: Open database -> OK
+2024-04-13 14:18:07: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-13 14:18:07: Open database -> OK
+2024-04-13 14:18:07: Get chat -> OK
+2024-04-13 14:18:12: Open database -> OK
+2024-04-13 14:18:12: Get chat -> OK
+2024-04-13 14:18:25: Open database -> OK
+2024-04-13 14:18:25: Open database -> OK
+2024-04-13 14:18:25: Get user -> OK
+2024-04-13 14:18:25: Open database -> OK
+2024-04-13 14:18:25: Get chat -> OK
+2024-04-13 14:18:25: Open database -> OK
+2024-04-13 14:18:25: Get user -> erter
+Dima
+Avdeev
+
+2024-04-13 14:18:25: Open database -> OK
+2024-04-13 14:18:25: Get chat -> OK
+2024-04-13 14:18:30: Open database -> OK
+2024-04-13 14:18:30: Get chat -> OK
