@@ -10,6 +10,7 @@ static bool settings_visible = TRUE;
 static bool account_visible = TRUE;
 static bool chats_visible = FALSE;
 static bool chats_was_opened = FALSE;
+static char *file_path_for_db;
 
 static bool toggled = true;
 // static GtkWidget *user_info_box;
@@ -21,6 +22,13 @@ typedef struct {
 typedef struct {
     GtkWidget *username_entry;
 } EntryWidgets;
+
+static void refresh_account_settings(){
+    gtk_container_foreach(GTK_CONTAINER(account_settings), (GtkCallback)gtk_widget_destroy, NULL);
+        // Refreshed content has been added to the chat_box, so show it
+    draw_account_settings_box();
+    gtk_widget_show_all(account_settings);
+}
 
 static void deactivate_children(GtkWidget *widget) {
     // Получаем список всех дочерних виджетов settings_box
@@ -133,14 +141,11 @@ static void on_change_button_clicked(GtkWidget *area, gpointer user_data) {
         char *filename;
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         temp_avatar = gdk_pixbuf_new_from_file(filename, NULL);
+        file_path_for_db = g_strdup(filename);
         // Делаем что-то с выбранным файлом, например, загружаем изображение
         // Пример кода загрузки изображения можно найти в предыдущих ответах
         user.avatar = temp_avatar;
-        gtk_container_foreach(GTK_CONTAINER(account_settings), (GtkCallback)gtk_widget_destroy, NULL);
-
-        // Refreshed content has been added to the chat_box, so show it
-        draw_account_settings_box();
-        gtk_widget_show_all(account_settings);
+        refresh_account_settings();
         // Освобождаем память
         g_free(filename);
     }
@@ -190,19 +195,24 @@ void on_confirm_button_clicked(GtkButton *button, gpointer data) {
                                            name_text, surname_text, username_text, description_text);
 
     // Выводим данные в консоль
-    g_print("Text from entries:\n%s\n", combined_text);
+    //g_print("Text from entries:\n%s\n", combined_text);
+    update_avatar(file_path_for_db, user.username);
     
     char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
-    if(strcmp(response, "Username already exists") == 0) {
-        display_error_message("Username exists", 1);
-    } else if(strcmp(response, "Error checking username existence") == 0) {
-        display_error_message("Username exists", 1);
+    if (username_text == user.username){
+        g_free(combined_text);
     } else {
-        user.username = g_strdup(username_text);
-        update_user_line(login_info, user.username);
-        dimas_gandon(login_info);
+        if(strcmp(response, "Username already exists") == 0) {
+        display_error_message("Username exists", 1);
+        } else if(strcmp(response, "Error checking username existence") == 0) {
+            display_error_message("Username exists", 1);
+        } else {
+            user.username = g_strdup(username_text);
+            update_user_line(login_info, user.username);
+            dimas_gandon(login_info);
+        }
+        g_free(combined_text);
     }
-    g_free(combined_text);
 }
 
 void draw_account_settings_box(){

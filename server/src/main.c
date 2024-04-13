@@ -11,6 +11,7 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "/user/get-avatar")) mx_get_user_avatar(data, new_socket);
     else if (!mx_strcmp(request, "/user/get-chatter")) mx_get_chatter(data, new_socket);
     else if (!mx_strcmp(request, "/user/update")) mx_update_user(data, new_socket);
+    else if (!mx_strcmp(request, "/user/update-avatar")) mx_update_avatar(data, new_socket);
     else if (!mx_strcmp(request, "/user/delete")) mx_delete_user(data);
     else if (!mx_strcmp(request, "/user/check-login-data")) check_login_data(data, new_socket);
     //message-endpoints

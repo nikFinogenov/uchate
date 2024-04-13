@@ -510,3 +510,30 @@ void get_and_save_avatar_to_file(char *username) {
     
     fclose(file);
 }
+
+void update_avatar(char *path, char *username) {
+    if (connect_to_server(&sockfd) == -1) {
+        fprintf(stderr, "Error connecting to server\n");
+        return;
+    }
+    char sendBuffer[DEFAULT_MESSAGE_SIZE];
+    memset(sendBuffer, 0, DEFAULT_MESSAGE_SIZE);
+    sprintf(sendBuffer, "/user/update-avatar\n%s\n%s\n", path, username);
+
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    memset(recvBuffer, 0, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+
+    //printf("Server response: %s\n", recvBuffer);
+}

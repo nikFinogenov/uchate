@@ -161,6 +161,7 @@ char **get_chats_data(char *username);
 char **add_new_message(char *username_1, char *username_2, char* text, char* time);
 char **update_user_info(char *changed_username, char *name, char *surname, char *desc, char *username);
 void get_and_save_avatar_to_file(char *username);
+void update_avatar(char *path, char *username);
 // char **get_user_data(char *username);
 
 

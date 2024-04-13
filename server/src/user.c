@@ -71,6 +71,73 @@ void mx_get_user(char** data, int sockfd) {
     sqlite3_close(db);
 }
 
+void mx_update_avatar(char **data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    int rc;
+    
+    // Открываем файл с аватаром в бинарном режиме
+    FILE *file = fopen(data[1], "rb");
+    if (!file) {
+        printf("Error opening file %s\n", data[1]);
+        sqlite3_close(db);
+        return;
+    }
+
+    // Определяем размер файла
+    fseek(file, 0, SEEK_END);
+    long file_size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    // Выделяем память для хранения данных аватара
+    unsigned char *avatar_data = (unsigned char*)malloc(file_size);
+    if (!avatar_data) {
+        printf("Error allocating memory for avatar data\n");
+        fclose(file);
+        sqlite3_close(db);
+        return;
+    }
+
+    // Считываем данные из файла в память
+    fread(avatar_data, 1, file_size, file);
+    fclose(file);
+
+    // Подготавливаем SQL-запрос для обновления аватара
+    const char *sql = "UPDATE USERS SET profile_img=? WHERE username=?";
+    
+    // Подготавливаем выражение SQL
+    rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    if (rc != SQLITE_OK) {
+        printf("Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        free(avatar_data);
+        sqlite3_close(db);
+        return;
+    }
+
+    // Привязываем BLOB к параметрам в запросе
+    sqlite3_bind_blob(res, 1, avatar_data, file_size, SQLITE_STATIC);
+    sqlite3_bind_text(res, 2, data[2], -1, SQLITE_STATIC);
+
+    // Выполняем запрос
+    rc = sqlite3_step(res);
+    if (rc != SQLITE_DONE) {
+        printf("Failed to execute statement: %s\n", sqlite3_errmsg(db));
+        free(avatar_data);
+        sqlite3_finalize(res);
+        sqlite3_close(db);
+        return;
+    }
+
+    // Освобождаем ресурсы
+    sqlite3_finalize(res);
+    free(avatar_data);
+    sqlite3_close(db);
+
+    // Отправляем ответ клиенту
+    const char *response = "Avatar updated successfully";
+    send(sockfd, response, strlen(response), 0);
+}
+
 void mx_get_user_avatar(char** data, int sockfd) {
     if (data == NULL || data[1] == NULL) {
         logger("Get user avatar", ST_NEOK, "Invalid data");
@@ -155,8 +222,6 @@ void mx_get_chatter(char** data, int sockfd) {
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
-
-#include <stdbool.h>
 
 // Callback function for the SELECT query
 static int username_exists_callback(void *not_used, int argc, char **argv, char **az_col_name) {
