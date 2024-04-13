@@ -12,6 +12,7 @@ GtkWidget *error_revealer = NULL;
 GtkWidget *user_window = NULL;
 GtkWidget *login_window = NULL;
 GtkWidget *signup_window = NULL;
+char *login_info = "client/client-data/login_info.txt";
 bool remember;
 char* default_img = "client/img/simple.png";
 
