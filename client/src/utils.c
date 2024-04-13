@@ -368,7 +368,7 @@ void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data) {
     int img_h = alloc.height;
 
     double corner_radius = 12.0;
-    double degrees = M_PI / 180.0;
+    double degrees = G_PI / 180.0;
     double radius = corner_radius;
 
     // Draw rounded rectangle
@@ -617,74 +617,213 @@ gboolean is_in_format(char* text, char* format) {
     return FALSE; // Format not found in text
 }
 
-void read_json_from_file(const char *filename, t_user_data_s *userdata) {
-    // Открываем файл для чтения
-    FILE *file = fopen(filename, "r");
+void create_txt_with_data(const char *filename, const char *username, const char *password, bool button_recognize) {
+    // Открываем файл для записи
+    FILE *file = fopen(filename, "w");
     if (!file) {
-        fprintf(stderr, "Could not open %s for reading\n", filename);
+        printf("Error: Unable to open file %s for writing.\n", filename);
         return;
     }
 
-    // Получаем размер файла
-    fseek(file, 0, SEEK_END);
-    long file_size = ftell(file);
-    fseek(file, 0, SEEK_SET);
+    // Записываем данные в файл
+    fprintf(file, "%s\n%s\n%s\n", username, password, (button_recognize ? "button_recognize" : ""));
 
-    // Выделяем память для буфера
-    char *json_buffer = malloc(file_size + 1);
-    if (!json_buffer) {
-        fprintf(stderr, "Memory allocation error\n");
+    // Закрываем файл
+    fclose(file);
+}
+
+void read_txt_from_file(const char *filename, t_user_data_s *userdata) {
+    // Открываем файл для чтения
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        printf("Error: Unable to open file %s for reading.\n", filename);
+        return;
+    }
+
+    // Читаем данные из файла
+    char buffer[256];
+    fgets(buffer, sizeof(buffer), file);
+    userdata->username = strdup(buffer); // Выделение памяти и копирование строки
+    if (!userdata->username) {
+        printf("Error: Memory allocation failed.\n");
         fclose(file);
         return;
     }
 
-    // Считываем содержимое файла в буфер
-    fread(json_buffer, 1, file_size, file);
+    fgets(buffer, sizeof(buffer), file);
+    userdata->password = strdup(buffer); // Выделение памяти и копирование строки
+    if (!userdata->password) {
+        printf("Error: Memory allocation failed.\n");
+        fclose(file);
+        free(userdata->username); // Освобождаем ранее выделенную память
+        return;
+    }
+
+    fgets(buffer, sizeof(buffer), file);
+    userdata->button_recognize = (strcmp(buffer, "button_recognize\n") == 0);
+
+    // Закрываем файл
     fclose(file);
-    json_buffer[file_size] = '\0';
-
-    // Парсим JSON буфер и заполняем структуру данными
-    parse_json_buffer(json_buffer, file_size, userdata);
-
-    // Освобождаем память, выделенную для буфера
-    free(json_buffer);
 }
 
-void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata) {
-    // Разбираем JSON строку
-    cJSON *json = cJSON_Parse(buffer);
-
-    // Проверяем, удалось ли разобрать JSON строку
-    if (!json) {
-        const char *error_ptr = cJSON_GetErrorPtr();
-        if (error_ptr != NULL) {
-            fprintf(stderr, "Error parsing JSON: %s\n", error_ptr);
-        } else {
-            fprintf(stderr, "Unknown error parsing JSON\n");
-        }
+void update_user_line(const char *filename, const char *new_line) {
+    // Открываем файл для чтения и записи
+    FILE *file = fopen(filename, "r+");
+    if (!file) {
+        fprintf(stderr, "Could not open %s for reading and writing\n", filename);
         return;
     }
 
-    // Получаем значения из JSON объекта
-    cJSON *username = cJSON_GetObjectItemCaseSensitive(json, "username");
-    cJSON *password = cJSON_GetObjectItemCaseSensitive(json, "password");
-    cJSON *button_recognize = cJSON_GetObjectItemCaseSensitive(json, "button_recognize");
+    // Записываем новую строку в начало файла
+    fseek(file, 0, SEEK_SET);
+    fputs(new_line, file);
 
-    // Проверяем, что все поля присутствуют и имеют правильные типы
-    if (!cJSON_IsString(username) || !cJSON_IsString(password) || !cJSON_IsBool(button_recognize)) {
-        fprintf(stderr, "Invalid JSON format\n");
-        cJSON_Delete(json);
+    // Если новая строка короче предыдущей, то усекаем файл до длины новой строки
+    long new_line_length = strlen(new_line);
+    long remaining_length = ftell(file) - new_line_length;
+    if (remaining_length > 0) {
+        ftruncate(fileno(file), new_line_length);
+    }
+
+    // Закрываем файл
+    fclose(file);
+}
+
+void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
+    // Разбиваем буфер на строки
+    char *token;
+    int count = 0;
+    char *lines[3];
+
+    token = strtok(buffer, "\n");
+    while (token != NULL && count < 3) {
+        lines[count++] = token;
+        token = strtok(NULL, "\n");
+    }
+
+    if (count != 3) {
+        fprintf(stderr, "Error: Invalid format in txt buffer\n");
         return;
     }
 
-    // Записываем значения в структуру
-    userdata->username = strdup(username->valuestring);
-    userdata->password = strdup(password->valuestring);
-    userdata->button_recognize = cJSON_IsTrue(button_recognize);
-
-    // Освобождаем память, занятую JSON объектом
-    cJSON_Delete(json);
+    // Заполняем структуру данными
+    strncpy(userdata->username, lines[0], sizeof(userdata->username));
+    strncpy(userdata->password, lines[1], sizeof(userdata->password));
+    if (strcmp(lines[2], "button_recognize") == 0) {
+        userdata->button_recognize = true;
+    } else {
+        userdata->button_recognize = false;
+    }
 }
+
+
+// void create_json_with_data(const char *filename, const char *username, const char *password, bool button_recognize) {
+//     // Create a new cJSON object
+//     cJSON *root = cJSON_CreateObject();
+//     if (!root) {
+//         printf("Error: Failed to create cJSON object.\n");
+//         return;
+//     }
+
+//     // Add the username, password, and button_recognize fields to the object with provided values
+//     cJSON_AddStringToObject(root, "username", username);
+//     cJSON_AddStringToObject(root, "password", password);
+//     cJSON_AddBoolToObject(root, "button_recognize", button_recognize);
+
+//     // Open the JSON file for writing
+//     FILE *file = fopen(filename, "w");
+//     if (!file) {
+//         printf("Error: Unable to open file %s for writing.\n", filename);
+//         cJSON_Delete(root);
+//         return;
+//     }
+
+//     // Write the JSON object to the file
+//     char *json_string = cJSON_Print(root);
+//     if (!json_string) {
+//         printf("Error: Failed to create JSON string.\n");
+//         fclose(file);
+//         cJSON_Delete(root);
+//         return;
+//     }
+//     fprintf(file, "%s", json_string);
+//     free(json_string);
+
+//     // Close the file
+//     fclose(file);
+
+//     // Clean up the cJSON object
+//     cJSON_Delete(root);
+// }
+
+// void read_json_from_file(const char *filename, t_user_data_s *userdata) {
+//     // Открываем файл для чтения
+//     FILE *file = fopen(filename, "r");
+//     if (!file) {
+//         fprintf(stderr, "Could not open %s for reading\n", filename);
+//         return;
+//     }
+
+//     // Получаем размер файла
+//     fseek(file, 0, SEEK_END);
+//     long file_size = ftell(file);
+//     fseek(file, 0, SEEK_SET);
+
+//     // Выделяем память для буфера
+//     char *json_buffer = malloc(file_size + 1);
+//     if (!json_buffer) {
+//         fprintf(stderr, "Memory allocation error\n");
+//         fclose(file);
+//         return;
+//     }
+
+//     // Считываем содержимое файла в буфер
+//     fread(json_buffer, 1, file_size, file);
+//     fclose(file);
+//     json_buffer[file_size] = '\0';
+
+//     // Парсим JSON буфер и заполняем структуру данными
+//     parse_json_buffer(json_buffer, file_size, userdata);
+
+//     // Освобождаем память, выделенную для буфера
+//     free(json_buffer);
+// }
+
+// void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata) {
+//     // Разбираем JSON строку
+//     cJSON *json = cJSON_Parse(buffer);
+
+//     // Проверяем, удалось ли разобрать JSON строку
+//     if (!json) {
+//         const char *error_ptr = cJSON_GetErrorPtr();
+//         if (error_ptr != NULL) {
+//             fprintf(stderr, "Error parsing JSON: %s\n", error_ptr);
+//         } else {
+//             fprintf(stderr, "Unknown error parsing JSON\n");
+//         }
+//         return;
+//     }
+
+//     // Получаем значения из JSON объекта
+//     cJSON *username = cJSON_GetObjectItemCaseSensitive(json, "username");
+//     cJSON *password = cJSON_GetObjectItemCaseSensitive(json, "password");
+//     cJSON *button_recognize = cJSON_GetObjectItemCaseSensitive(json, "button_recognize");
+
+//     // Проверяем, что все поля присутствуют и имеют правильные типы
+//     if (!cJSON_IsString(username) || !cJSON_IsString(password) || !cJSON_IsBool(button_recognize)) {
+//         fprintf(stderr, "Invalid JSON format\n");
+//         cJSON_Delete(json);
+//         return;
+//     }
+
+//     // Записываем значения в структуру
+//     userdata->username = strdup(username->valuestring);
+//     userdata->password = strdup(password->valuestring);
+//     userdata->button_recognize = cJSON_IsTrue(button_recognize);
+
+//     // Освобождаем память, занятую JSON объектом
+//     cJSON_Delete(json);
+// }
 void load_chats(char *username) {
     char **response = get_chats_data(username);
     // g_print("--> %s\n\n", response);

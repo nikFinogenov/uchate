@@ -39,7 +39,8 @@ int main(int argc, char *argv[]) {
     draw_login();
     draw_singup();
     
-    read_json_from_file("client/client-data/login_info.json", &userdata);
+    // read_json_from_file("client/client-data/login_info.json", &userdata);
+    read_txt_from_file(login_info, &userdata);
 
     if (userdata.button_recognize) {
         char **response = check_login_data(userdata.username, userdata.password);
@@ -58,9 +59,9 @@ int main(int argc, char *argv[]) {
         show_login();
     }
 
-    printf("Username: %s\n", userdata.username);
-    printf("Password: %s\n", userdata.password);
-    printf("Button Recognize: %s\n", userdata.button_recognize ? "true" : "false");
+    // printf("Username: %s\n", userdata.username);
+    // printf("Password: %s\n", userdata.password);
+    // printf("Button Recognize: %s\n", userdata.button_recognize ? "true" : "false");
     // // Set background color for both windows
     // GdkRGBA color;
     // gdk_rgba_parse(&color, "#171717");

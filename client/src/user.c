@@ -74,6 +74,7 @@ void on_confirm_button_clicked(GtkButton *button, gpointer data) {
         display_error_message("Username exists", 1);
     } else {
         user.username = g_strdup(username_text);
+        update_user_line(login_info, user.username);
     }
     
     g_free(combined_text);
