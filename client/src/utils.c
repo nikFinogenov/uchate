@@ -908,7 +908,93 @@ void reload_chats(char *username) {
         chatters_count++;
     }
 }
+void reload_messages(char *username) {
+    char **response = get_chats_data(username);
+    if (strcmp(response, "1") == 0) {
+        g_print("%s ne sud'ba2\n", username);
+        return;
+    }
+    g_print("p0");
+    for (int i = 0; i < MAX_CHATTERS; ++i){
+        for(int j = 0; j < messages_count[i]; j++) clear_message(&messages[i][j]);
+    }
+    g_print("p1");
+    for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
+    g_free(messages);
+    messages = NULL;
+    messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
+    for (int i = 0; i < MAX_CHATTERS; i++) {
+        messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
+        messages_count[i] = 0;
+    }
+    g_print("p2");
+    char **tokens = mx_strsplit(response, '\n');
+    for (int i = 0; i < mx_get_length(tokens); i++) {
+        // g_print("%s\n", tokens[i]);
+        char **response2 = get_chat_messages(username, tokens[i]);
+        if (strcmp(response2, "1") == 0) {
+            g_print("%s couldn't be found3\n", tokens[i]);
+            continue;
+        }
+        if (strcmp(response2, "1488") == 0) {
+            g_print("%s ne sud'ba\n", tokens[i]);
+            return;
+        }
+        g_print("p3");
+        char **tokens2 = mx_strsplit(response2, '\n');
+        int mess_count_ahuet = mx_get_length(tokens2) / 5;
+        // g_print("%d\n", mess_count_ahuet);
+        char *token2 = strtok(response2, "\n");
+        // messages[i] = realloc(messages[i], sizeof(t_message_s) * mess_count_ahuet);
+        g_print("p4");
+        for (int j = 0; j < mess_count_ahuet; j++) {
+            char *id = token2;
+            token2 = strtok(NULL, "\n");
+            char *chat_id = token2;
+            token2 = strtok(NULL, "\n");
+            char *text = token2;
+            token2 = strtok(NULL, "\n");
+            char *type = token2;
+            token2 = strtok(NULL, "\n");
+            char *time = token2;
+            token2 = strtok(NULL, "\n");
+            t_message_s new_message = {
+                .id = atoi(id),
+                .text = strdup(text),
+                .time = strdup(time),
+                .is_user = (strcmp(username, type) == 0) ? true : false
+            };
+            messages[i][j] = new_message;
+            messages_count[i]++;
+        }
+        g_print("p5");
+    }
+}
+int server_messages_quantity(char *username) {
+    char **response = get_chats_data(username);
+    int total_messages = 0;
 
+    if (strcmp(response, "1") == 0) {
+        g_print("%s ne sud'ba2\n", username);
+        return -1;
+    }
+
+    char **tokens = mx_strsplit(response, '\n');
+    for (int i = 0; i < mx_get_length(tokens); i++) {
+        char **response2 = get_mess_chat_amount(username, tokens[i]);
+        if (strcmp(response2, "1") == 0) {
+            g_print("%s couldn't be found3\n", tokens[i]);
+            continue;
+        }
+        if (strcmp(response2, "1488") == 0) {
+            g_print("%s ne sud'ba\n", tokens[i]);
+            return -1;
+        }
+        total_messages += mx_atoi(response2);
+    }
+
+    return total_messages;
+}
 // Function to check the chat quantity and reload the chatters if necessary
 void *chat_checker_thread_func(void *arg) {
     char *username = (char *)arg;
@@ -916,12 +1002,25 @@ void *chat_checker_thread_func(void *arg) {
     while (1) {
         // Check the chat quantity on the server
         server_chats_amount = server_chats_quantity(username);
+        int server_message_amount = server_messages_quantity(username);
+        g_print("chats amount -> %d\n", server_message_amount);
+        // int selectd_message_amount = (selected_user.index != -1) ? server_message_chat_quantity(username, chatters[selected_user.index].username) : -1;
+        // bool refresh = (selectd_message_amount != -1 && selectd_message_amount != messages_count[selected_user.index]) ? true : false;
         // g_print("%d - %d\n", server_chats_amount, chatters_count);
+        int total_local_messages_amount = 0;
+        for(int i = 0; i < MAX_CHATTERS; i++) {
+            total_local_messages_amount += messages_count[i];
+        }
         if (server_chats_amount != chatters_count) {
             // Reload the chatters if the chat quantity has changed
             reload_chats(username);
             refresh_scrollable_window(scrollable_window);
             // g_print("refreaed %d -> %d\n", server_chats_amount, chatters_count);
+        }
+        if (server_message_amount != total_local_messages_amount) { 
+            reload_messages(username);
+            refresh_scrollable_window2(scrollable_window2);
+            refresh_scrollable_window(scrollable_window);
         }
         // g_print("nothing to refresh\n");
         // Sleep for a while before checking again
@@ -974,31 +1073,6 @@ int server_message_chat_quantity(char *username1, char* username2) {
     return mx_atoi(response);
     // }
 }
-int server_messages_quantity(char *username) {
-    char **response = get_chats_data(username);
-    int total_messages = 0;
-
-    if (strcmp(response, "1") == 0) {
-        g_print("%s ne sud'ba2\n", username);
-        return -1;
-    }
-
-    char **tokens = mx_strsplit(response, '\n');
-    for (int i = 0; i < mx_get_length(tokens); i++) {
-        char **response2 = get_mess_chat_amount(username, tokens[i]);
-        if (strcmp(response2, "1") == 0) {
-            g_print("%s couldn't be found3\n", tokens[i]);
-            continue;
-        }
-        if (strcmp(response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
-            return -1;
-        }
-        total_messages += mx_atoi(response2);
-    }
-
-    return total_messages;
-}
 void load_message(char *username) {
     // int total = server_messages_quantity(username);
     // g_print("%d\n", total);
@@ -1047,62 +1121,6 @@ void load_message(char *username) {
                 .is_user = (mx_strcmp(user.username, type) == 0) ? true : false
             };
             messages[i][messages_count[i]] = new_message;
-            messages_count[i]++;
-        }
-    }
-}
-void reload_messages(char *username) {
-    char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
-        g_print("%s ne sud'ba2\n", username);
-        return;
-    }
-    for (int i = 0; i < MAX_CHATTERS; ++i){
-        for(int j = 0; j < messages_count[i]; j++) clear_message(&messages[i][j]);
-    }
-    for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
-    g_free(messages);
-    messages = NULL;
-    messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
-    for (int i = 0; i < MAX_CHATTERS; i++) {
-        messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
-        messages_count[i] = 0;
-    }
-    char **tokens = mx_strsplit(response, '\n');
-    for (int i = 0; i < mx_get_length(tokens); i++) {
-        g_print("%s\n", tokens[i]);
-        char **response2 = get_chat_messages(username, tokens[i]);
-        if (strcmp(response2, "1") == 0) {
-            g_print("%s couldn't be found3\n", tokens[i]);
-            continue;
-        }
-        if (strcmp(response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
-            return;
-        }
-        char **tokens2 = mx_strsplit(response2, '\n');
-        int mess_count_ahuet = mx_get_length(tokens2) / 5;
-        g_print("%d\n", mess_count_ahuet);
-        char *token2 = strtok(response2, "\n");
-        messages[i] = realloc(messages[i], sizeof(t_message_s) * mess_count_ahuet);
-        for (int j = 0; j < mess_count_ahuet; j++) {
-            char *id = token2;
-            token2 = strtok(NULL, "\n");
-            char *chat_id = token2;
-            token2 = strtok(NULL, "\n");
-            char *text = token2;
-            token2 = strtok(NULL, "\n");
-            char *type = token2;
-            token2 = strtok(NULL, "\n");
-            char *time = token2;
-            token2 = strtok(NULL, "\n");
-            t_message_s new_message = {
-                .id = atoi(id),
-                .text = strdup(text),
-                .time = strdup(time),
-                .is_user = (strcmp(username, type) == 0) ? true : false
-            };
-            messages[i][j] = new_message;
             messages_count[i]++;
         }
     }
