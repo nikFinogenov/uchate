@@ -971,14 +971,28 @@ void show_user_window() {
 
 
 void draw_user_info_box(GtkWidget *user_info_box) {
-    GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
-    GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
-
+    GdkPixbuf *avatar_for_chat;
+    GdkPixbuf *pixbuf;
+    GdkPixbuf *prev_pixbuf;
+    if (chatters == NULL || selected_user.index == -1) {
+        pixbuf = file_to_pixbuf(default_img);
+        prev_pixbuf = gdk_pixbuf_copy(pixbuf);
+    } else {
+        char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(chatters[selected_user.index].username) + strlen("_avatar.png") + 1);
+        get_and_save_avatar_to_file(chatters[selected_user.index].username);
+        sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, chatters[selected_user.index].username);
+        avatar_for_chat = gdk_pixbuf_new_from_file(avatar_path, NULL);
+        pixbuf = gdk_pixbuf_scale_simple(avatar_for_chat, 64, 64, GDK_INTERP_BILINEAR);
+        prev_pixbuf = gdk_pixbuf_copy(pixbuf);
+        remove(avatar_path);
+        free(avatar_path);
+    }
+    
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
-    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
+    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
     gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
 
     GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);

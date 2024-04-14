@@ -362,6 +362,25 @@ GdkPixbuf *file_to_pixbuf(const gchar *filename) {
 }
 
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data) {
+    GdkPixbuf *pixbuf = (GdkPixbuf *)data;
+    gint width = gdk_pixbuf_get_width(pixbuf);
+    gint height = gdk_pixbuf_get_height(pixbuf);
+    gint radius = MIN(width, height) / 2;
+
+    // Calculate the center position
+    gint x = (gtk_widget_get_allocated_width(widget) - width) / 2;
+    gint y = (gtk_widget_get_allocated_height(widget) - height) / 2;
+
+    // Draw a circle clip
+    cairo_arc(cr, x + width / 2, y + height / 2, radius, 0, 2 * G_PI);
+    cairo_clip(cr);
+
+    // Draw the image
+    gdk_cairo_set_source_pixbuf(cr, pixbuf, x, y);
+    cairo_paint(cr);
+}
+
+void draw_image_for_chat_box(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data){
     // Get widget allocation
     GtkAllocation alloc;
     gtk_widget_get_allocation(widget, &alloc);
@@ -385,6 +404,7 @@ void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data) {
     cairo_fill(cr);
 }
 
+
 void set_widget_height(GtkWidget *widget, int height) {
     GtkAllocation alloc;
     gtk_widget_get_allocation(widget, &alloc);
@@ -405,7 +425,7 @@ GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_file) {
     //avatar
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(input_image_file, NULL);
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
-    // prev_pixbuf = resize_img(prev_pixbuf, 150, 150);
+    prev_pixbuf = resize_img(prev_pixbuf, 64, 64);
 
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
@@ -441,11 +461,15 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
 
     GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
+    char *avatar_path;
     
     if (chatters != NULL) {
         // g_print("%d\n", chatters_count);s
         for (int i = 0; i < chatters_count; i++) {
-            GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+            avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(chatters[i].username) + strlen("_avatar.png") + 1);
+            get_and_save_avatar_to_file(chatters[i].username);
+            sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, chatters[i].username);
+            GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, avatar_path);
             gtk_widget_set_name(user_box, "user-box");
             if(i == selected_user.index) {
                 selected_user.box = user_box;
@@ -454,6 +478,8 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
             g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
 
             gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+            remove(avatar_path);
+            free(avatar_path);
         }
     }
 }
@@ -461,12 +487,15 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
 void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
     GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
-    
+    char *avatar_path;
     if (chatters != NULL) {
         // g_print("%d\n", chatters_count);s
         for (int i = 0; i < chatters_count; i++) {
             if(is_in_format(chatters[i].username, filter) || is_in_format(chatters[i].name, filter)) {
-                GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+                avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(chatters[i].username) + strlen("_avatar.png") + 1);
+                get_and_save_avatar_to_file(chatters[i].username);
+                sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, chatters[i].username);
+                GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, avatar_path);
                 gtk_widget_set_name(user_box, "user-box");
                 if(i == selected_user.index) {
                     selected_user.box = user_box;
@@ -475,6 +504,8 @@ void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char*
                 g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
 
                 gtk_box_pack_start(GTK_BOX(user_list), user_box, FALSE, FALSE, 0);
+                remove(avatar_path);
+                free(avatar_path);
             }
         }
     }
@@ -825,8 +856,7 @@ void load_chats(char *username) {
             .name = mx_strdup(name),
             .surname = mx_strdup(surname),
             .username = mx_strdup(username),
-            .lastmsg = mx_strdup("No messages yet"),
-            .avatar = NULL
+            .lastmsg = mx_strdup("No messages yet")
         };
         chatters[chatters_count] = new_chatter;
         chatters_count++;
@@ -879,8 +909,7 @@ void reload_chats(char *username) {
             .name = mx_strdup(name),
             .surname = mx_strdup(surname),
             .username = mx_strdup(username),
-            .lastmsg = mx_strdup("No messages yet"),
-            .avatar = NULL
+            .lastmsg = mx_strdup("No messages yet")
         };
         chatters = realloc(chatters, sizeof(t_chatter_s) * (chatters_count + 1));
         chatters[chatters_count] = new_chatter;

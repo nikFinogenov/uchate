@@ -134,6 +134,7 @@ void draw_user_window(void);
 void show_user_window(void);
 void draw_user_info_box(GtkWidget *user_info_box);
 void draw_account_settings_box();
+void draw_image_for_chat_box(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
 
 void user_populate_scrollable_window(GtkWidget *scrollable_window);
 void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter);
