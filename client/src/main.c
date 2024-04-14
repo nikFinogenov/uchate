@@ -45,24 +45,36 @@ int main(int argc, char *argv[]) {
     char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
 
     if (userdata.button_recognize) {
-        char **response = check_login_data(userdata.username, userdata.password);
-        char *token = strtok(response, "\n");
-        user.username = strdup(token);
-        // token = strtok(NULL, "\n");
-        // g_print("passs -> %s\n", token);
-        token = strtok(NULL, "\n");
-        user.name = strdup(token);
-        token = strtok(NULL, "\n");
-        user.surname = strdup(token);
-        get_and_save_avatar_to_file(user.username);
-        sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
-        g_print("%s\n", avatar_path);
-        user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
-        remove(avatar_path);
-        free(avatar_path);
-        load_chats(user.username);
-        draw_user_window();
-        show_user_window();
+        char **status_response = get_user_status(userdata.username);
+        char *tok = strtok(status_response, "\n");
+        user.status = strdup(tok);
+
+        if (strcmp(user.status, "online") == 0){
+            GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Error: User is already logged in\n");
+            gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+            gtk_dialog_run(GTK_DIALOG(dialog));
+            gtk_widget_destroy(dialog);
+        } else {
+            char **response = check_login_data(userdata.username, userdata.password);
+            char *token = strtok(response, "\n");
+            user.username = strdup(token);
+            // token = strtok(NULL, "\n");
+            // g_print("passs -> %s\n", token);
+            token = strtok(NULL, "\n");
+            user.name = strdup(token);
+            token = strtok(NULL, "\n");
+            user.surname = strdup(token);
+            get_and_save_avatar_to_file(user.username);
+            sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
+            g_print("%s\n", avatar_path);
+            user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
+            remove(avatar_path);
+            free(avatar_path);
+            update_user_status("online", user.username);
+            load_chats(user.username);
+            draw_user_window();
+            show_user_window();
+        }
     } else {
         show_login();
     }
@@ -76,7 +88,6 @@ int main(int argc, char *argv[]) {
     // gtk_widget_override_background_color(login_window, GTK_STATE_FLAG_NORMAL, &color);
     // gtk_widget_override_background_color(signup_window, GTK_STATE_FLAG_NORMAL, &color);
     //
-
     gtk_main();
 
     return 0;

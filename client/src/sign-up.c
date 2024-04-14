@@ -38,7 +38,7 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     GdkRGBA color_red;
     gdk_rgba_parse(&color_red, "#de34eb");
 
-
+    char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
     // Get the username and password from the entry widgets
     const gchar *first_name = gtk_entry_get_text(GTK_ENTRY(entries->first_name_entry));
     const gchar *last_name = gtk_entry_get_text(GTK_ENTRY(entries->last_name_entry));
@@ -85,7 +85,7 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
 
-    char **response = send_sign_up_data(parsed_first_name, parsed_last_name, parsed_username, parsed_password);
+    char **response = send_sign_up_data(parsed_first_name, parsed_last_name, parsed_username, parsed_password, "online");
 
     // User existence
     if (strcmp(response, "1") == 0) {
@@ -101,6 +101,11 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     user.name       = parsed_first_name;
     user.surname    = parsed_last_name;
     user.username   = parsed_username;
+
+    get_and_save_avatar_to_file(user.username);
+    sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
+    g_print("%s\n", avatar_path);
+    user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
 
     // gtk_widget_destroy(signup_window);
     gtk_widget_hide(signup_window);

@@ -56,6 +56,7 @@ typedef struct {
     char* name;
     char* surname;
     char* desc;
+    char* status;
     GdkPixbuf *avatar;
     // mx_read_photo_from_bd(t_user.id);
     // t_user.avatar = mx_get_pixbuf_with_size("client/img/tmp_avatar.png", 100, 100);
@@ -153,7 +154,7 @@ void wrap_text(char *text);
 
 // Server stuff
 int connect_to_server(int *sock);
-char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password);
+char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password, char *status);
 char **check_login_data(char *username, char* password);
 char **get_chatter_data(char *username);
 char **send_new_chat_data(char *username1, char* username2);
@@ -162,6 +163,8 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
 char **update_user_info(char *changed_username, char *name, char *surname, char *desc, char *username);
 void get_and_save_avatar_to_file(char *username);
 void update_avatar(char *path, char *username);
+char **update_user_status(char *status, char *username);
+char **get_user_status(char *username);
 // char **get_user_data(char *username);
 
 

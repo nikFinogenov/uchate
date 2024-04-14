@@ -1033,12 +1033,16 @@ static void clicked_side(GtkWidget *widget, gpointer data){
 static void logout_clicked(GtkWidget *widget, gpointer data){
     gtk_widget_hide(user_window);
     userdata.button_recognize = false;
+    update_user_status("offline", user.username);
     // clear_all();
     // go_to_login();
     show_login();
 }
 
-
+void on_window_destroy(GtkWidget *widget, gpointer data) {
+    update_user_status("offline", user.username);
+    gtk_main_quit(); // Выход из главного цикла GTK
+}
 
 void draw_user_window() {
     GtkCssProvider *cssProvider = gtk_css_provider_new();
@@ -1047,7 +1051,7 @@ void draw_user_window() {
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
-    g_signal_connect(user_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
 
     // Create the main horizontal box container
     GtkWidget *hbox_main = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);

@@ -54,6 +54,15 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Password cannot be empty");
         return;
     }
+    
+    char **status_response = get_user_status(parsed_username);
+    char *tok = strtok(status_response, "\n");
+    user.status = strdup(tok);
+
+    if (strcmp(user.status, "online") == 0){
+        display_error_message("User is already logged in");
+        return;
+    }
 
     // Send data and handle response
     char **response = check_login_data(parsed_username, parsed_password);
@@ -86,8 +95,8 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // g_print("desc -> %s\n", user.desc);
     // g_print("parsed_username -> %s\n", user.username);
     // g_print("parsed_password -> %s\n", parsed_password);
-
     //create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
+
     create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
     get_and_save_avatar_to_file(user.username);
     sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
@@ -95,7 +104,9 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
     remove(avatar_path);
     free(avatar_path);
-    gtk_widget_destroy(login_window);
+    update_user_status("online", user.username);
+
+    //gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);
     load_chats(user.username);
     draw_user_window();

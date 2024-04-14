@@ -29,6 +29,7 @@ t_user_s user = {
     .name = NULL,
     .surname = NULL,
     .desc = NULL,
+    .status = NULL,
     .avatar = NULL
 };
 

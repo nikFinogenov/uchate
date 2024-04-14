@@ -30,7 +30,7 @@ void mx_add_user(char **data, int sockfd) {
         sprintf(sql, 
                 "INSERT INTO USERS (username, password, name, surname, description, status, date, token) \
                 VALUES( '%s','%s','%s','%s','%s','%s','%s','%s');", 
-                data[1], encrypted_pass, data[3], data[4], " ", " ", " ", " ");   
+                data[1], encrypted_pass, data[3], data[4], " ", data[5], " ", " ");   
         int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
         char* st = (exit == 0) ? ST_OK : ST_NEOK;
         logger("Add user", st, errmsg);
@@ -67,6 +67,49 @@ void mx_get_user(char** data, int sockfd) {
     int exit = sqlite3_finalize(res);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Get user", st, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
+
+void mx_update_user_status(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    char sql[500];
+    memset(sql, 0, sizeof(sql));
+    char response[DEFAULT_MESSAGE_SIZE];
+    char *errmsg;
+    memset(sql, 0, sizeof(sql));
+    sprintf(sql, "UPDATE USERS SET status='%s' WHERE username='%s';",
+            data[1], data[2]);   
+    int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
+    char* st = (exit == SQLITE_OK) ? ST_OK : ST_NEOK;
+    logger("Update user", st, errmsg);
+    sqlite3_close(db);
+    if (exit == SQLITE_OK) 
+        sprintf(response, "0");
+    else 
+        sprintf(response, "1");
+    send(sockfd, response, strlen(response), 0);
+}
+
+void mx_get_user_status(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+
+    memset(sql, 0, 500);
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+    memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
+
+    sprintf(sql, "SELECT status FROM USERS WHERE username = '%s';", data[1]); 
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    while (sqlite3_step(res) == SQLITE_ROW) {
+        // const unsigned char *password = sqlite3_column_text(res, 1);
+        const unsigned char *status = sqlite3_column_text(res, 0);
+        sprintf(temp_buff, "%s\n", status);
+    }
+    int exit = sqlite3_finalize(res);
+    char* st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Get user status", st, "");
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
