@@ -905,12 +905,20 @@ void reload_chats(char *username) {
         char *name = strdup(token2);
         token2 = strtok(NULL, "\n");
         char *surname = strdup(token2);
+        char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(username) + strlen("_avatar.png") + 1);
+        get_and_save_avatar_to_file(username);
+        sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, username);
+        GdkPixbuf *avatar_reload = gdk_pixbuf_new_from_file(avatar_path, NULL);
+        GdkPixbuf *pixbuf = gdk_pixbuf_scale_simple(avatar_reload, 64, 64, GDK_INTERP_BILINEAR);
         t_chatter_s new_chatter = {
             .name = mx_strdup(name),
             .surname = mx_strdup(surname),
             .username = mx_strdup(username),
-            .lastmsg = mx_strdup("No messages yet")
+            .lastmsg = mx_strdup("No messages yet"),
+            .avatar = gdk_pixbuf_copy(pixbuf)
         };
+        remove(avatar_path);
+        free(avatar_path);
         chatters = realloc(chatters, sizeof(t_chatter_s) * (chatters_count + 1));
         chatters[chatters_count] = new_chatter;
         chatters_count++;

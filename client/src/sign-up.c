@@ -106,7 +106,8 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
     g_print("%s\n", avatar_path);
     user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
-
+    remove(avatar_path);
+    free(avatar_path);
     // gtk_widget_destroy(signup_window);
     gtk_widget_hide(signup_window);
     draw_user_window();
