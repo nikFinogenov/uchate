@@ -9107,3 +9107,3218 @@ repeshko
 2024-04-14 15:31:52: Get messages amount -> OK
 2024-04-14 15:31:52: Open database -> OK
 2024-04-14 15:31:52: Get user -> 1
+Умер мужик
+2024-04-14 15:34:16: Open database -> OK
+2024-04-14 15:34:16: Init table "Users" -> OK
+2024-04-14 15:34:16: Init table "Chats" -> OK
+2024-04-14 15:34:16: Init table "Messages" -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get user -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get chat -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get chat -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get messages from chat -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get messages from chat -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get chat -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get chat -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get messages amount -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Open database -> OK
+2024-04-14 15:34:30: Get messages amount -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Get chat -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Get messages amount -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Get messages amount -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Open database -> OK
+2024-04-14 15:34:35: Get messages amount -> OK
+2024-04-14 15:34:37: Open database -> OK
+2024-04-14 15:34:37: Get chat -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Get chat -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Get messages amount -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Get messages amount -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Open database -> OK
+2024-04-14 15:34:40: Get messages amount -> OK
+2024-04-14 15:34:44: Open database -> OK
+2024-04-14 15:34:44: Get chat -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Get chat -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Get messages amount -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Get messages amount -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Open database -> OK
+2024-04-14 15:34:45: Get messages amount -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Get chat -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Get messages amount -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Get messages amount -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Open database -> OK
+2024-04-14 15:34:50: Get messages amount -> OK
+2024-04-14 15:34:51: Open database -> OK
+2024-04-14 15:34:51: Get chat -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Get chat -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Get messages amount -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Get messages amount -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Open database -> OK
+2024-04-14 15:34:55: Get messages amount -> OK
+2024-04-14 15:34:58: Open database -> OK
+2024-04-14 15:34:58: Get chat -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Get chat -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Get messages amount -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Get messages amount -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Open database -> OK
+2024-04-14 15:35:00: Get messages amount -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get user -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get messages from chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get messages from chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get messages amount -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get messages amount -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get messages from chat -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Open database -> OK
+2024-04-14 15:35:22: Get messages from chat -> OK
+Умер мужик
+2024-04-14 16:01:51: Open database -> OK
+2024-04-14 16:01:51: Init table "Users" -> OK
+2024-04-14 16:01:51: Init table "Chats" -> OK
+2024-04-14 16:01:51: Init table "Messages" -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get user -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get chat -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get chat -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get messages from chat -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get messages from chat -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get chat -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get chat -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get messages amount -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Open database -> OK
+2024-04-14 16:01:57: Get messages amount -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Get chat -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Get messages amount -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Get messages amount -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Open database -> OK
+2024-04-14 16:02:02: Get messages amount -> OK
+2024-04-14 16:02:04: Open database -> OK
+2024-04-14 16:02:04: Get chat -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Get chat -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Get messages amount -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Get messages amount -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Open database -> OK
+2024-04-14 16:02:07: Get messages amount -> OK
+2024-04-14 16:02:11: Open database -> OK
+2024-04-14 16:02:11: Get chat -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Get chat -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Get messages amount -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Get messages amount -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Open database -> OK
+2024-04-14 16:02:12: Get messages amount -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Get chat -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Get messages amount -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Get messages amount -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Open database -> OK
+2024-04-14 16:02:17: Get messages amount -> OK
+2024-04-14 16:02:18: Open database -> OK
+2024-04-14 16:02:18: Get chat -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Get user -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Get chat -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Get chat -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Get messages from chat -> OK
+2024-04-14 16:02:20: Open database -> OK
+2024-04-14 16:02:20: Get chat -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Get chat -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Get messages amount -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Get messages amount -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Open database -> OK
+2024-04-14 16:02:22: Get messages amount -> OK
+2024-04-14 16:02:25: Open database -> OK
+2024-04-14 16:02:25: Get chat -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Get chat -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Get messages amount -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Get chat -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Get messages amount -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Get messages amount -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Open database -> OK
+2024-04-14 16:02:27: Get messages amount -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get messages amount -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get chat -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get chat -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get messages amount -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get messages amount -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get messages amount -> OK
+2024-04-14 16:02:32: Open database -> OK
+2024-04-14 16:02:32: Get chat -> OK
+2024-04-14 16:02:34: Open database -> OK
+2024-04-14 16:02:34: Get chat -> OK
+2024-04-14 16:02:34: Open database -> OK
+2024-04-14 16:02:34: Get chat -> OK
+2024-04-14 16:02:41: Open database -> OK
+2024-04-14 16:02:41: Get chat -> OK
+Умер мужик
+2024-04-14 16:14:27: Open database -> OK
+2024-04-14 16:14:27: Init table "Users" -> OK
+2024-04-14 16:14:27: Init table "Chats" -> OK
+2024-04-14 16:14:27: Init table "Messages" -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get user -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get chat -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get chat -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get messages from chat -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get messages from chat -> OK
+2024-04-14 16:14:33: Open database -> OK
+2024-04-14 16:14:33: Get chat -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Get chat -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Get messages amount -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Get chat -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Get messages amount -> OK
+2024-04-14 16:14:40: Open database -> OK
+2024-04-14 16:14:40: Get user -> 1
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get user -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get chat -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get chat -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get messages from chat -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get messages from chat -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get chat -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get chat -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get messages amount -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Open database -> OK
+2024-04-14 16:17:05: Get messages amount -> OK
+2024-04-14 16:17:06: Open database -> OK
+2024-04-14 16:17:06: Get chat -> OK
+2024-04-14 16:17:06: Open database -> OK
+2024-04-14 16:17:06: Open database -> OK
+2024-04-14 16:17:06: Get messages amount -> OK
+2024-04-14 16:17:06: Open database -> OK
+2024-04-14 16:17:06: Open database -> OK
+2024-04-14 16:17:06: Get messages amount -> OK
+2024-04-14 16:17:07: Open database -> OK
+2024-04-14 16:17:07: Get chat -> OK
+2024-04-14 16:17:07: Open database -> OK
+2024-04-14 16:17:07: Open database -> OK
+2024-04-14 16:17:07: Get messages amount -> OK
+2024-04-14 16:17:07: Open database -> OK
+2024-04-14 16:17:07: Open database -> OK
+2024-04-14 16:17:07: Get messages amount -> OK
+2024-04-14 16:17:08: Open database -> OK
+2024-04-14 16:17:08: Get chat -> OK
+2024-04-14 16:17:08: Open database -> OK
+2024-04-14 16:17:08: Open database -> OK
+2024-04-14 16:17:08: Get messages amount -> OK
+2024-04-14 16:17:08: Open database -> OK
+2024-04-14 16:17:08: Open database -> OK
+2024-04-14 16:17:08: Get messages amount -> OK
+2024-04-14 16:17:09: Open database -> OK
+2024-04-14 16:17:09: Get chat -> OK
+2024-04-14 16:17:09: Open database -> OK
+2024-04-14 16:17:09: Open database -> OK
+2024-04-14 16:17:09: Get messages amount -> OK
+2024-04-14 16:17:09: Open database -> OK
+2024-04-14 16:17:09: Open database -> OK
+2024-04-14 16:17:09: Get messages amount -> OK
+2024-04-14 16:17:10: Open database -> OK
+2024-04-14 16:17:10: Get chat -> OK
+2024-04-14 16:17:10: Open database -> OK
+2024-04-14 16:17:10: Open database -> OK
+2024-04-14 16:17:10: Get messages amount -> OK
+2024-04-14 16:17:10: Open database -> OK
+2024-04-14 16:17:10: Open database -> OK
+2024-04-14 16:17:10: Get messages amount -> OK
+2024-04-14 16:17:11: Open database -> OK
+2024-04-14 16:17:11: Get chat -> OK
+2024-04-14 16:17:11: Open database -> OK
+2024-04-14 16:17:11: Open database -> OK
+2024-04-14 16:17:11: Get messages amount -> OK
+2024-04-14 16:17:11: Open database -> OK
+2024-04-14 16:17:11: Open database -> OK
+2024-04-14 16:17:11: Get messages amount -> OK
+2024-04-14 16:17:12: Open database -> OK
+2024-04-14 16:17:12: Get chat -> OK
+2024-04-14 16:17:12: Open database -> OK
+2024-04-14 16:17:12: Get chat -> OK
+2024-04-14 16:17:12: Open database -> OK
+2024-04-14 16:17:12: Open database -> OK
+2024-04-14 16:17:12: Get messages amount -> OK
+2024-04-14 16:17:12: Open database -> OK
+2024-04-14 16:17:12: Open database -> OK
+2024-04-14 16:17:12: Get messages amount -> OK
+2024-04-14 16:17:13: Open database -> OK
+2024-04-14 16:17:13: Get chat -> OK
+2024-04-14 16:17:13: Open database -> OK
+2024-04-14 16:17:13: Open database -> OK
+2024-04-14 16:17:13: Get messages amount -> OK
+2024-04-14 16:17:13: Open database -> OK
+2024-04-14 16:17:13: Open database -> OK
+2024-04-14 16:17:13: Get messages amount -> OK
+2024-04-14 16:17:14: Open database -> OK
+2024-04-14 16:17:14: Get chat -> OK
+2024-04-14 16:17:14: Open database -> OK
+2024-04-14 16:17:14: Open database -> OK
+2024-04-14 16:17:14: Get messages amount -> OK
+2024-04-14 16:17:14: Open database -> OK
+2024-04-14 16:17:14: Open database -> OK
+2024-04-14 16:17:14: Get messages amount -> OK
+2024-04-14 16:17:15: Open database -> OK
+2024-04-14 16:17:15: Get chat -> OK
+2024-04-14 16:17:15: Open database -> OK
+2024-04-14 16:17:15: Open database -> OK
+2024-04-14 16:17:15: Get messages amount -> OK
+2024-04-14 16:17:15: Open database -> OK
+2024-04-14 16:17:15: Open database -> OK
+2024-04-14 16:17:15: Get messages amount -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Get chat -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Get messages amount -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Get messages amount -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Open database -> OK
+2024-04-14 16:17:16: Get messages amount -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Get chat -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Get messages amount -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Get messages amount -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Open database -> OK
+2024-04-14 16:17:17: Get messages amount -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Get chat -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Get messages amount -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Get messages amount -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Open database -> OK
+2024-04-14 16:17:18: Get messages amount -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Get chat -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Get chat -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Get messages amount -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Get messages amount -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Open database -> OK
+2024-04-14 16:17:19: Get messages amount -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Get chat -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Get messages amount -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Get messages amount -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Open database -> OK
+2024-04-14 16:17:20: Get messages amount -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Get chat -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Get messages amount -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Get messages amount -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Open database -> OK
+2024-04-14 16:17:21: Get messages amount -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Get chat -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Get messages amount -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Get messages amount -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Open database -> OK
+2024-04-14 16:17:22: Get messages amount -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Get chat -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Get messages amount -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Get messages amount -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Open database -> OK
+2024-04-14 16:17:23: Get messages amount -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Get chat -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Get messages amount -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Get messages amount -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Open database -> OK
+2024-04-14 16:17:24: Get messages amount -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Get chat -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Get messages amount -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Get messages amount -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Open database -> OK
+2024-04-14 16:17:25: Get messages amount -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Get chat -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Get chat -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Get messages amount -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Get messages amount -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Open database -> OK
+2024-04-14 16:17:26: Get messages amount -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Get chat -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Get messages amount -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Get messages amount -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Open database -> OK
+2024-04-14 16:17:27: Get messages amount -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Get chat -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Get messages amount -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Get messages amount -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Open database -> OK
+2024-04-14 16:17:28: Get messages amount -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Get chat -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Get messages amount -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Get messages amount -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Open database -> OK
+2024-04-14 16:17:29: Get messages amount -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Get chat -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Get messages amount -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Get messages amount -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Open database -> OK
+2024-04-14 16:17:30: Get messages amount -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Get chat -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Get messages amount -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Get messages amount -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Open database -> OK
+2024-04-14 16:17:31: Get messages amount -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get user -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get chat -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get chat -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get messages from chat -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get chat -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get chat -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get chat -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get messages amount -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get messages amount -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Open database -> OK
+2024-04-14 16:17:32: Get messages amount -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Get chat -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Get chat -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Get messages amount -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Get messages amount -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Open database -> OK
+2024-04-14 16:17:33: Get messages amount -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Get chat -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Get messages amount -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Get messages amount -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Open database -> OK
+2024-04-14 16:17:34: Get messages amount -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Get chat -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Get messages amount -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Get messages amount -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Open database -> OK
+2024-04-14 16:17:35: Get messages amount -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Get chat -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Get messages amount -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Get messages amount -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Open database -> OK
+2024-04-14 16:17:36: Get messages amount -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Get chat -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Get messages amount -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Get messages amount -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Open database -> OK
+2024-04-14 16:17:37: Get messages amount -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Get chat -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Get messages amount -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Get messages amount -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Open database -> OK
+2024-04-14 16:17:38: Get messages amount -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Get chat -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Get messages amount -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Get chat -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Get messages amount -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Get messages amount -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Open database -> OK
+2024-04-14 16:17:39: Get messages amount -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Get chat -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Get chat -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Get messages amount -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Get messages amount -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Open database -> OK
+2024-04-14 16:17:40: Get messages amount -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Get chat -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Get messages amount -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Get messages amount -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Open database -> OK
+2024-04-14 16:17:41: Get messages amount -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Get chat -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Get messages amount -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Get messages amount -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Open database -> OK
+2024-04-14 16:17:42: Get messages amount -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Get chat -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Get messages amount -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Get messages amount -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Open database -> OK
+2024-04-14 16:17:43: Get messages amount -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get chat -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get messages amount -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get messages amount -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get messages amount -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get chat -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get messages from chat -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Open database -> OK
+2024-04-14 16:17:44: Get messages from chat -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Get chat -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Get messages amount -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Get messages amount -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Open database -> OK
+2024-04-14 16:17:45: Get messages amount -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Get chat -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Get chat -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Get chat -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Get messages amount -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Get messages amount -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Open database -> OK
+2024-04-14 16:17:46: Get messages amount -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Get chat -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Get chat -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Get messages amount -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Get messages amount -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Open database -> OK
+2024-04-14 16:17:47: Get messages amount -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Get chat -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Get messages amount -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Get messages amount -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Open database -> OK
+2024-04-14 16:17:48: Get messages amount -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Get chat -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Get messages amount -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Get messages amount -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Open database -> OK
+2024-04-14 16:17:49: Get messages amount -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Get chat -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Get messages amount -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Get messages amount -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Open database -> OK
+2024-04-14 16:17:50: Get messages amount -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Get chat -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Get messages amount -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Get messages amount -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Open database -> OK
+2024-04-14 16:17:51: Get messages amount -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get chat -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get messages amount -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get messages amount -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get messages amount -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get chat -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get messages from chat -> OK
+2024-04-14 16:17:53: Open database -> OK
+2024-04-14 16:17:53: Get chat -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get chat -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get messages amount -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get messages amount -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get messages amount -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get chat -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get messages amount -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get messages amount -> OK
+2024-04-14 16:17:54: Open database -> OK
+2024-04-14 16:17:54: Get chat -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Get chat -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Get messages amount -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Get messages amount -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Open database -> OK
+2024-04-14 16:17:55: Get messages amount -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Get chat -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Get messages amount -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Get messages amount -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Open database -> OK
+2024-04-14 16:17:56: Get messages amount -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Get chat -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Get messages amount -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Get messages amount -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Open database -> OK
+2024-04-14 16:17:57: Get messages amount -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Get chat -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Get messages amount -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Get messages amount -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Open database -> OK
+2024-04-14 16:17:58: Get messages amount -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Get chat -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Get messages amount -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Get messages amount -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Open database -> OK
+2024-04-14 16:17:59: Get messages amount -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Get chat -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Get messages amount -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Get messages amount -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Open database -> OK
+2024-04-14 16:18:00: Get messages amount -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Get chat -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Get messages amount -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Get messages amount -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Get messages amount -> OK
+2024-04-14 16:18:01: Open database -> OK
+2024-04-14 16:18:01: Get chat -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Get chat -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Get messages amount -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Get messages amount -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Open database -> OK
+2024-04-14 16:18:02: Get messages amount -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Get chat -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Get messages amount -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Get messages amount -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Open database -> OK
+2024-04-14 16:18:03: Get messages amount -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Get chat -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Get messages amount -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Get messages amount -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Open database -> OK
+2024-04-14 16:18:04: Get messages amount -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Get chat -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Get messages amount -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Get messages amount -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Open database -> OK
+2024-04-14 16:18:05: Get messages amount -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Get chat -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Get messages amount -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Get messages amount -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Open database -> OK
+2024-04-14 16:18:06: Get messages amount -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Get chat -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Get messages amount -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Get messages amount -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Open database -> OK
+2024-04-14 16:18:07: Get messages amount -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Get chat -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Get messages amount -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Get messages amount -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Get messages amount -> OK
+2024-04-14 16:18:08: Open database -> OK
+2024-04-14 16:18:08: Get chat -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Get chat -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Get messages amount -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Get messages amount -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Open database -> OK
+2024-04-14 16:18:09: Get messages amount -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Get chat -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Get messages amount -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Get messages amount -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Open database -> OK
+2024-04-14 16:18:10: Get messages amount -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Get chat -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Get messages amount -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Get messages amount -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Open database -> OK
+2024-04-14 16:18:11: Get messages amount -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Get chat -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Get messages amount -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Get messages amount -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Open database -> OK
+2024-04-14 16:18:12: Get messages amount -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Get chat -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Get messages amount -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Get messages amount -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Open database -> OK
+2024-04-14 16:18:13: Get messages amount -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Get chat -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Get messages amount -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Get messages amount -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Open database -> OK
+2024-04-14 16:18:14: Get messages amount -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Get chat -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Get messages amount -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Get messages amount -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Get messages amount -> OK
+2024-04-14 16:18:15: Open database -> OK
+2024-04-14 16:18:15: Get chat -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Get chat -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Get messages amount -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Get messages amount -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Open database -> OK
+2024-04-14 16:18:16: Get messages amount -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Get chat -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Get messages amount -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Get messages amount -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Open database -> OK
+2024-04-14 16:18:17: Get messages amount -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Get chat -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Get messages amount -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Get messages amount -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Open database -> OK
+2024-04-14 16:18:18: Get messages amount -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Get chat -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Get messages amount -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Get messages amount -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Get messages amount -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:19: Open database -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Get chat -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Get messages amount -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Get messages amount -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Open database -> OK
+2024-04-14 16:18:20: Get messages amount -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Get chat -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Get messages amount -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Get messages amount -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Open database -> OK
+2024-04-14 16:18:21: Get messages amount -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Get chat -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Get messages amount -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Get messages amount -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Get messages amount -> OK
+2024-04-14 16:18:22: Open database -> OK
+2024-04-14 16:18:22: Get chat -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Get chat -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Get messages amount -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Get messages amount -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Open database -> OK
+2024-04-14 16:18:23: Get messages amount -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Get chat -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Get messages amount -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Get messages amount -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Open database -> OK
+2024-04-14 16:18:24: Get messages amount -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Get chat -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Get messages amount -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Get messages amount -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Open database -> OK
+2024-04-14 16:18:25: Get messages amount -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Get chat -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Get messages amount -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Get messages amount -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Open database -> OK
+2024-04-14 16:18:26: Get messages amount -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get user -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get chat -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get chat -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get messages from chat -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get chat -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get chat -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Open database -> OK
+2024-04-14 16:19:51: Get messages amount -> OK
+2024-04-14 16:19:52: Open database -> OK
+2024-04-14 16:19:52: Get chat -> OK
+2024-04-14 16:19:52: Open database -> OK
+2024-04-14 16:19:52: Open database -> OK
+2024-04-14 16:19:52: Get messages amount -> OK
+2024-04-14 16:19:53: Open database -> OK
+2024-04-14 16:19:53: Get chat -> OK
+2024-04-14 16:19:53: Open database -> OK
+2024-04-14 16:19:53: Open database -> OK
+2024-04-14 16:19:53: Get messages amount -> OK
+2024-04-14 16:19:54: Open database -> OK
+2024-04-14 16:19:54: Get chat -> OK
+2024-04-14 16:19:54: Open database -> OK
+2024-04-14 16:19:54: Open database -> OK
+2024-04-14 16:19:54: Get messages amount -> OK
+2024-04-14 16:19:55: Open database -> OK
+2024-04-14 16:19:55: Get chat -> OK
+2024-04-14 16:19:55: Open database -> OK
+2024-04-14 16:19:55: Open database -> OK
+2024-04-14 16:19:55: Get messages amount -> OK
+2024-04-14 16:19:55: Open database -> OK
+2024-04-14 16:19:55: Open database -> OK
+2024-04-14 16:19:55: Get messages amount -> OK
+2024-04-14 16:19:56: Open database -> OK
+2024-04-14 16:19:56: Get chat -> OK
+2024-04-14 16:19:56: Open database -> OK
+2024-04-14 16:19:56: Open database -> OK
+2024-04-14 16:19:56: Get messages amount -> OK
+2024-04-14 16:19:56: Open database -> OK
+2024-04-14 16:19:56: Open database -> OK
+2024-04-14 16:19:56: Get messages amount -> OK
+2024-04-14 16:19:57: Open database -> OK
+2024-04-14 16:19:57: Get chat -> OK
+2024-04-14 16:19:57: Open database -> OK
+2024-04-14 16:19:57: Open database -> OK
+2024-04-14 16:19:57: Get messages amount -> OK
+2024-04-14 16:19:57: Open database -> OK
+2024-04-14 16:19:57: Open database -> OK
+2024-04-14 16:19:57: Get messages amount -> OK
+2024-04-14 16:19:58: Open database -> OK
+2024-04-14 16:19:58: Get chat -> OK
+2024-04-14 16:19:58: Open database -> OK
+2024-04-14 16:19:58: Get chat -> OK
+2024-04-14 16:19:58: Open database -> OK
+2024-04-14 16:19:58: Open database -> OK
+2024-04-14 16:19:58: Get messages amount -> OK
+2024-04-14 16:19:58: Open database -> OK
+2024-04-14 16:19:58: Open database -> OK
+2024-04-14 16:19:58: Get messages amount -> OK
+2024-04-14 16:19:59: Open database -> OK
+2024-04-14 16:19:59: Get chat -> OK
+2024-04-14 16:19:59: Open database -> OK
+2024-04-14 16:19:59: Open database -> OK
+2024-04-14 16:19:59: Get messages amount -> OK
+2024-04-14 16:19:59: Open database -> OK
+2024-04-14 16:19:59: Open database -> OK
+2024-04-14 16:19:59: Get messages amount -> OK
+2024-04-14 16:20:00: Open database -> OK
+2024-04-14 16:20:00: Get chat -> OK
+2024-04-14 16:20:00: Open database -> OK
+2024-04-14 16:20:00: Open database -> OK
+2024-04-14 16:20:00: Get messages amount -> OK
+2024-04-14 16:20:00: Open database -> OK
+2024-04-14 16:20:00: Open database -> OK
+2024-04-14 16:20:00: Get messages amount -> OK
+2024-04-14 16:20:01: Open database -> OK
+2024-04-14 16:20:01: Get chat -> OK
+2024-04-14 16:20:01: Open database -> OK
+2024-04-14 16:20:01: Open database -> OK
+2024-04-14 16:20:01: Get messages amount -> OK
+2024-04-14 16:20:01: Open database -> OK
+2024-04-14 16:20:01: Open database -> OK
+2024-04-14 16:20:01: Get messages amount -> OK
+2024-04-14 16:20:02: Open database -> OK
+2024-04-14 16:20:02: Get chat -> OK
+2024-04-14 16:20:02: Open database -> OK
+2024-04-14 16:20:02: Open database -> OK
+2024-04-14 16:20:02: Get messages amount -> OK
+2024-04-14 16:20:02: Open database -> OK
+2024-04-14 16:20:02: Open database -> OK
+2024-04-14 16:20:02: Get messages amount -> OK
+2024-04-14 16:20:03: Open database -> OK
+2024-04-14 16:20:03: Get chat -> OK
+2024-04-14 16:20:03: Open database -> OK
+2024-04-14 16:20:03: Open database -> OK
+2024-04-14 16:20:03: Get messages amount -> OK
+2024-04-14 16:20:03: Open database -> OK
+2024-04-14 16:20:03: Open database -> OK
+2024-04-14 16:20:03: Get messages amount -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get user -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get chat -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get chat -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get messages from chat -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get messages from chat -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get chat -> OK
+2024-04-14 16:20:10: Open database -> OK
+2024-04-14 16:20:10: Get chat -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get chat -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get messages amount -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get messages amount -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get chat -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get chat -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get messages from chat -> OK
+2024-04-14 16:20:17: Open database -> OK
+2024-04-14 16:20:17: Get user -> 1
+2024-04-14 16:20:24: Open database -> OK
+2024-04-14 16:20:24: Get chat -> OK
+2024-04-14 16:20:24: Open database -> OK
+2024-04-14 16:20:24: Get chat -> OK
+2024-04-14 16:20:24: Open database -> OK
+2024-04-14 16:20:24: Open database -> OK
+2024-04-14 16:20:24: Get messages from chat -> OK
+2024-04-14 16:20:24: Open database -> OK
+2024-04-14 16:20:24: Get user -> 1
+2024-04-14 16:20:25: Open database -> OK
+2024-04-14 16:20:25: Get chat -> OK
+Умер мужик
+2024-04-14 16:20:56: Open database -> OK
+2024-04-14 16:20:56: Init table "Users" -> OK
+2024-04-14 16:20:56: Init table "Chats" -> OK
+2024-04-14 16:20:56: Init table "Messages" -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get user -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get chat -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get chat -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get messages from chat -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Open database -> OK
+2024-04-14 16:21:01: Get messages from chat -> OK
+2024-04-14 16:21:02: Open database -> OK
+2024-04-14 16:21:02: Get chat -> OK
+2024-04-14 16:21:02: Open database -> OK
+2024-04-14 16:21:02: Get chat -> OK
+2024-04-14 16:21:02: Open database -> OK
+2024-04-14 16:21:02: Open database -> OK
+2024-04-14 16:21:02: Get messages amount -> OK
+2024-04-14 16:21:02: Open database -> OK
+2024-04-14 16:21:02: Open database -> OK
+2024-04-14 16:21:02: Get messages amount -> OK
+2024-04-14 16:21:03: Open database -> OK
+2024-04-14 16:21:03: Get chat -> OK
+2024-04-14 16:21:03: Open database -> OK
+2024-04-14 16:21:03: Open database -> OK
+2024-04-14 16:21:03: Get messages amount -> OK
+2024-04-14 16:21:03: Open database -> OK
+2024-04-14 16:21:03: Open database -> OK
+2024-04-14 16:21:03: Get messages amount -> OK
+2024-04-14 16:21:04: Open database -> OK
+2024-04-14 16:21:04: Get chat -> OK
+2024-04-14 16:21:04: Open database -> OK
+2024-04-14 16:21:04: Open database -> OK
+2024-04-14 16:21:04: Get messages amount -> OK
+2024-04-14 16:21:04: Open database -> OK
+2024-04-14 16:21:04: Open database -> OK
+2024-04-14 16:21:04: Get messages amount -> OK
+2024-04-14 16:21:05: Open database -> OK
+2024-04-14 16:21:05: Get chat -> OK
+2024-04-14 16:21:05: Open database -> OK
+2024-04-14 16:21:05: Get chat -> OK
+2024-04-14 16:21:05: Open database -> OK
+2024-04-14 16:21:05: Open database -> OK
+2024-04-14 16:21:05: Get messages amount -> OK
+2024-04-14 16:21:05: Open database -> OK
+2024-04-14 16:21:05: Open database -> OK
+2024-04-14 16:21:05: Get messages amount -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Get chat -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Get messages amount -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Get messages amount -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Open database -> OK
+2024-04-14 16:21:06: Get messages amount -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Get chat -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Get messages amount -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Get messages amount -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Open database -> OK
+2024-04-14 16:21:07: Get messages amount -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Get chat -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Get chat -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Get messages amount -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Get messages amount -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Open database -> OK
+2024-04-14 16:21:08: Get messages amount -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Get chat -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Get messages amount -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Get messages amount -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Open database -> OK
+2024-04-14 16:21:09: Get messages amount -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Get chat -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Get messages amount -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Get messages amount -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Open database -> OK
+2024-04-14 16:21:10: Get messages amount -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Get chat -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Get chat -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Get messages amount -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Get messages amount -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Open database -> OK
+2024-04-14 16:21:11: Get messages amount -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Get chat -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Get messages amount -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Get messages amount -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Open database -> OK
+2024-04-14 16:21:12: Get messages amount -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Get chat -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Get messages amount -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Get messages amount -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Open database -> OK
+2024-04-14 16:21:13: Get messages amount -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Get chat -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Get chat -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Get messages amount -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Get messages amount -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Open database -> OK
+2024-04-14 16:21:14: Get messages amount -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Get chat -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Get messages amount -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Get messages amount -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Open database -> OK
+2024-04-14 16:21:15: Get messages amount -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Get chat -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Get messages amount -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Get messages amount -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Open database -> OK
+2024-04-14 16:21:16: Get messages amount -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Get chat -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Get chat -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Get messages amount -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Get messages amount -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Open database -> OK
+2024-04-14 16:21:17: Get messages amount -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get chat -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get messages amount -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get messages amount -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get messages amount -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get user -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get chat -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get chat -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get messages from chat -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get chat -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get chat -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Open database -> OK
+2024-04-14 16:21:18: Get messages amount -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Get chat -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Get messages amount -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Get messages amount -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Get messages amount -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Get chat -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Open database -> OK
+2024-04-14 16:21:19: Get messages amount -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get chat -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get chat -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get messages amount -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get messages amount -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get messages amount -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get chat -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Open database -> OK
+2024-04-14 16:21:20: Get messages amount -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get chat -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get messages amount -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get messages amount -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get messages amount -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get chat -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get chat -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Open database -> OK
+2024-04-14 16:21:21: Get messages amount -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Get chat -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Get messages amount -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Get messages amount -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Get messages amount -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Get chat -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Open database -> OK
+2024-04-14 16:21:22: Get messages amount -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get chat -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get chat -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get messages amount -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get messages amount -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get messages amount -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get chat -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Open database -> OK
+2024-04-14 16:21:23: Get messages amount -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get chat -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get messages amount -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get messages amount -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get messages amount -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get chat -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get chat -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get messages amount -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Open database -> OK
+2024-04-14 16:21:24: Get messages amount -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get chat -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get messages amount -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get messages amount -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get messages amount -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get chat -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get messages amount -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Open database -> OK
+2024-04-14 16:21:25: Get messages amount -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get chat -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get chat -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get messages amount -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get messages amount -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get messages amount -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get chat -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get messages amount -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Open database -> OK
+2024-04-14 16:21:26: Get messages amount -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get chat -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get messages amount -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get messages amount -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get messages amount -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get chat -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get chat -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get messages amount -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Open database -> OK
+2024-04-14 16:21:27: Get messages amount -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get chat -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get messages amount -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get messages amount -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get messages amount -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get chat -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get messages amount -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Open database -> OK
+2024-04-14 16:21:28: Get messages amount -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get chat -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get chat -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages amount -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages amount -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages amount -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get chat -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages from chat -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages from chat -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get chat -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages amount -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Open database -> OK
+2024-04-14 16:21:29: Get messages amount -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get chat -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get messages amount -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get messages amount -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get messages amount -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get chat -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get chat -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get messages amount -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Open database -> OK
+2024-04-14 16:21:30: Get messages amount -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get chat -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get messages amount -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get messages amount -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get messages amount -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get chat -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get messages amount -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Open database -> OK
+2024-04-14 16:21:31: Get messages amount -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get chat -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get chat -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get messages amount -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get messages amount -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get messages amount -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get chat -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get messages amount -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Open database -> OK
+2024-04-14 16:21:32: Get messages amount -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get chat -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get messages amount -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get messages amount -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get messages amount -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get chat -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get chat -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get messages amount -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Open database -> OK
+2024-04-14 16:21:33: Get messages amount -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get chat -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get messages amount -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get messages amount -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get messages amount -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get chat -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get messages amount -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Open database -> OK
+2024-04-14 16:21:34: Get messages amount -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get chat -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get chat -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get messages amount -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get messages amount -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get messages amount -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get chat -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get messages amount -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Open database -> OK
+2024-04-14 16:21:35: Get messages amount -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get chat -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get messages amount -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get messages amount -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get messages amount -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get chat -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get chat -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get messages amount -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Open database -> OK
+2024-04-14 16:21:36: Get messages amount -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get chat -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get messages amount -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get messages amount -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get messages amount -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get chat -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get messages amount -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Open database -> OK
+2024-04-14 16:21:37: Get messages amount -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get chat -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get chat -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get messages amount -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get messages amount -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get messages amount -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get chat -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get messages amount -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Open database -> OK
+2024-04-14 16:21:38: Get messages amount -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get chat -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get messages amount -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get messages amount -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get messages amount -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get chat -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get chat -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get messages amount -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Open database -> OK
+2024-04-14 16:21:39: Get messages amount -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get chat -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get messages amount -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get messages amount -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get messages amount -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get chat -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get messages amount -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Open database -> OK
+2024-04-14 16:21:40: Get messages amount -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get chat -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get chat -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get messages amount -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get messages amount -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get messages amount -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get chat -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get messages amount -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Open database -> OK
+2024-04-14 16:21:41: Get messages amount -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get chat -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get messages amount -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get messages amount -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get messages amount -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get chat -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get chat -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get messages amount -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Open database -> OK
+2024-04-14 16:21:42: Get messages amount -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get chat -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get messages amount -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get messages amount -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get messages amount -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get chat -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get messages amount -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Open database -> OK
+2024-04-14 16:21:43: Get messages amount -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get chat -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get chat -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get messages amount -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get messages amount -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get messages amount -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get chat -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get messages amount -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Open database -> OK
+2024-04-14 16:21:44: Get messages amount -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get chat -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get chat -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get messages amount -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get messages amount -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get messages amount -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get chat -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get messages amount -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Open database -> OK
+2024-04-14 16:21:45: Get messages amount -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get chat -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get messages amount -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get messages amount -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get messages amount -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get chat -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get messages amount -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Open database -> OK
+2024-04-14 16:21:46: Get messages amount -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get chat -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get chat -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get messages amount -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get messages amount -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get messages amount -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get chat -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get messages amount -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Open database -> OK
+2024-04-14 16:21:47: Get messages amount -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get chat -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get chat -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get messages amount -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get messages amount -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get messages amount -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get chat -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get messages amount -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Open database -> OK
+2024-04-14 16:21:48: Get messages amount -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get chat -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get messages amount -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get messages amount -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get messages amount -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get chat -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get messages amount -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Open database -> OK
+2024-04-14 16:21:49: Get messages amount -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get chat -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get chat -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get messages amount -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get messages amount -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get messages amount -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get chat -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get messages amount -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Open database -> OK
+2024-04-14 16:21:50: Get messages amount -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get chat -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get chat -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get messages amount -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get messages amount -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get messages amount -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get chat -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get messages amount -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Open database -> OK
+2024-04-14 16:21:51: Get messages amount -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get chat -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get messages amount -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get messages amount -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get messages amount -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get chat -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get messages amount -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Open database -> OK
+2024-04-14 16:21:52: Get messages amount -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get chat -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get chat -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get messages amount -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get messages amount -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get messages amount -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get chat -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get messages amount -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Open database -> OK
+2024-04-14 16:21:53: Get messages amount -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get chat -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get chat -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get messages amount -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get messages amount -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get messages amount -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get chat -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get messages amount -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Open database -> OK
+2024-04-14 16:21:54: Get messages amount -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get chat -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get messages amount -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get messages amount -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get messages amount -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get chat -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get messages amount -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Open database -> OK
+2024-04-14 16:21:55: Get messages amount -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get chat -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get chat -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get messages amount -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get messages amount -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get messages amount -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get chat -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get messages amount -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Open database -> OK
+2024-04-14 16:21:56: Get messages amount -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get chat -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get chat -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get messages amount -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get messages amount -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get messages amount -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get chat -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get messages amount -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Open database -> OK
+2024-04-14 16:21:57: Get messages amount -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Get chat -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Get messages amount -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Get messages amount -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Open database -> OK
+2024-04-14 16:21:58: Get messages amount -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get chat -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get messages amount -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get messages amount -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get chat -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get chat -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get messages amount -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get messages amount -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Open database -> OK
+2024-04-14 16:21:59: Get messages amount -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get chat -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get messages amount -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get messages amount -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get chat -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get chat -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get messages amount -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get messages amount -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Open database -> OK
+2024-04-14 16:22:00: Get messages amount -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get chat -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get messages amount -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get messages amount -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get chat -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get messages amount -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get messages amount -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Open database -> OK
+2024-04-14 16:22:01: Get messages amount -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get chat -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get messages amount -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get messages amount -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get chat -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get chat -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get messages amount -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get messages amount -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Open database -> OK
+2024-04-14 16:22:02: Get messages amount -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get chat -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get messages amount -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get messages amount -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get chat -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get chat -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get messages amount -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get messages amount -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Open database -> OK
+2024-04-14 16:22:03: Get messages amount -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get chat -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get messages amount -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get messages amount -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get chat -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get messages amount -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get messages amount -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Open database -> OK
+2024-04-14 16:22:04: Get messages amount -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get chat -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get messages amount -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get messages amount -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get chat -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get chat -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get messages amount -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get messages amount -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Open database -> OK
+2024-04-14 16:22:05: Get messages amount -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get chat -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get messages amount -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get messages amount -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get chat -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get chat -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get messages amount -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get messages amount -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Open database -> OK
+2024-04-14 16:22:06: Get messages amount -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get chat -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get messages amount -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get messages amount -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get chat -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get messages amount -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get messages amount -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Open database -> OK
+2024-04-14 16:22:07: Get messages amount -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get chat -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get messages amount -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get messages amount -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get chat -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get chat -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get messages amount -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get messages amount -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Open database -> OK
+2024-04-14 16:22:08: Get messages amount -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get chat -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get messages amount -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get messages amount -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get chat -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get chat -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get messages amount -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get messages amount -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Open database -> OK
+2024-04-14 16:22:09: Get messages amount -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get chat -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages amount -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages amount -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get chat -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages amount -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages amount -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages amount -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get chat -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages from chat -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Open database -> OK
+2024-04-14 16:22:10: Get messages from chat -> OK
+2024-04-14 16:22:11: Open database -> OK
+2024-04-14 16:22:11: Get chat -> OK
+2024-04-14 16:22:11: Open database -> OK
+2024-04-14 16:22:11: Open database -> OK
+2024-04-14 16:22:11: Get messages amount -> OK
+2024-04-14 16:22:11: Open database -> OK
+2024-04-14 16:22:11: Open database -> OK
+2024-04-14 16:22:11: Get messages amount -> OK
+2024-04-14 16:22:11: Open database -> OK
+2024-04-14 16:22:11: Get chat -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get chat -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get messages amount -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get messages amount -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get messages amount -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get chat -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get messages amount -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get messages amount -> OK
+2024-04-14 16:22:12: Open database -> OK
+2024-04-14 16:22:12: Get chat -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get chat -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get messages amount -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get messages amount -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get messages amount -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get chat -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get messages amount -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Open database -> OK
+2024-04-14 16:22:13: Get messages amount -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get chat -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get messages amount -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get messages amount -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get messages amount -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get chat -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get messages amount -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get messages amount -> OK
+2024-04-14 16:22:14: Open database -> OK
+2024-04-14 16:22:14: Get chat -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get chat -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get messages amount -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get messages amount -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get messages amount -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get chat -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get messages amount -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get messages amount -> OK
+2024-04-14 16:22:15: Open database -> OK
+2024-04-14 16:22:15: Get chat -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get chat -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get messages amount -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get messages amount -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get messages amount -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get chat -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get messages amount -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Open database -> OK
+2024-04-14 16:22:16: Get messages amount -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get chat -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get messages amount -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get messages amount -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get messages amount -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get chat -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get messages amount -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get messages amount -> OK
+2024-04-14 16:22:17: Open database -> OK
+2024-04-14 16:22:17: Get chat -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get chat -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get messages amount -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get messages amount -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get messages amount -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get chat -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get messages amount -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get messages amount -> OK
+2024-04-14 16:22:18: Open database -> OK
+2024-04-14 16:22:18: Get chat -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get chat -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get messages amount -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get messages amount -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get messages amount -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get chat -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get messages amount -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Open database -> OK
+2024-04-14 16:22:19: Get messages amount -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Get chat -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Get messages amount -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Get messages amount -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Get chat -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Open database -> OK
+2024-04-14 16:22:20: Get messages from chat -> OK
+Умер мужик
+2024-04-14 16:23:54: Open database -> OK
+2024-04-14 16:23:54: Init table "Users" -> OK
+2024-04-14 16:23:54: Init table "Chats" -> OK
+2024-04-14 16:23:54: Init table "Messages" -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get user -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get chat -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get chat -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get messages from chat -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get messages from chat -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get chat -> OK
+2024-04-14 16:24:01: Open database -> OK
+2024-04-14 16:24:01: Get chat -> OK
+2024-04-14 16:24:04: Open database -> OK
+2024-04-14 16:24:04: Get chat -> OK
+2024-04-14 16:24:04: Open database -> OK
+2024-04-14 16:24:04: Open database -> OK
+2024-04-14 16:24:04: Get messages amount -> OK
+2024-04-14 16:24:04: Open database -> OK
+2024-04-14 16:24:04: Get chat -> OK
+2024-04-14 16:24:04: Open database -> OK
+2024-04-14 16:24:04: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:24:04: Open database -> OK
+2024-04-14 16:24:04: Get chat -> OK
+Умер мужик
+2024-04-14 16:26:15: Open database -> OK
+2024-04-14 16:26:15: Init table "Users" -> OK
+2024-04-14 16:26:15: Init table "Chats" -> OK
+2024-04-14 16:26:15: Init table "Messages" -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get user -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get chat -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get chat -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get messages from chat -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get messages from chat -> OK
+2024-04-14 16:26:18: Open database -> OK
+2024-04-14 16:26:18: Get chat -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Get chat -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Get messages amount -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Get chat -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Get messages amount -> OK
+2024-04-14 16:26:21: Open database -> OK
+2024-04-14 16:26:21: Get user -> 1
+2024-04-14 16:26:24: Open database -> OK
+2024-04-14 16:26:24: Get chat -> OK
+2024-04-14 16:26:24: Open database -> OK
+2024-04-14 16:26:24: Get chat -> OK
+2024-04-14 16:26:24: Open database -> OK
+2024-04-14 16:26:24: Get chat -> OK
+2024-04-14 16:26:24: Open database -> OK
+2024-04-14 16:26:24: Open database -> OK
+2024-04-14 16:26:24: Get messages from chat -> OK
+2024-04-14 16:26:24: Open database -> OK
+2024-04-14 16:26:24: Get user -> 1
+2024-04-14 16:26:27: Open database -> OK
+2024-04-14 16:26:27: Get chat -> OK
+2024-04-14 16:26:27: Open database -> OK
+2024-04-14 16:26:27: Open database -> OK
+2024-04-14 16:26:27: Get messages from chat -> OK
+2024-04-14 16:26:27: Open database -> OK
+2024-04-14 16:26:27: Get chat -> OK
+2024-04-14 16:26:28: Open database -> OK
+2024-04-14 16:26:28: Get chat -> OK
+2024-04-14 16:26:28: Open database -> OK
+2024-04-14 16:26:28: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:26:28: Open database -> OK
+2024-04-14 16:26:28: Open database -> OK
+2024-04-14 16:26:28: Get messages amount -> OK
+2024-04-14 16:27:54: Open database -> OK
+2024-04-14 16:27:54: Init table "Users" -> OK
+2024-04-14 16:27:54: Init table "Chats" -> OK
+2024-04-14 16:27:54: Init table "Messages" -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get user -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get chat -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get chat -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get messages from chat -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Open database -> OK
+2024-04-14 16:28:00: Get messages from chat -> OK
+2024-04-14 16:28:01: Open database -> OK
+2024-04-14 16:28:01: Get chat -> OK
+2024-04-14 16:28:04: Open database -> OK
+2024-04-14 16:28:04: Get chat -> OK
+2024-04-14 16:28:07: Open database -> OK
+2024-04-14 16:28:07: Get chat -> OK
+2024-04-14 16:28:10: Open database -> OK
+2024-04-14 16:28:10: Get chat -> OK
+2024-04-14 16:28:13: Open database -> OK
+2024-04-14 16:28:13: Get chat -> OK
+2024-04-14 16:28:16: Open database -> OK
+2024-04-14 16:28:16: Get chat -> OK
+2024-04-14 16:28:19: Open database -> OK
+2024-04-14 16:28:19: Get chat -> OK
+2024-04-14 16:28:21: Open database -> OK
+2024-04-14 16:28:21: Add user -> OK
+2024-04-14 16:28:21: Open database -> OK
+2024-04-14 16:28:21: Get chat -> OK
+2024-04-14 16:28:22: Open database -> OK
+2024-04-14 16:28:22: Get chat -> OK
+2024-04-14 16:28:24: Open database -> OK
+2024-04-14 16:28:24: Get chat -> OK
+2024-04-14 16:28:25: Open database -> OK
+2024-04-14 16:28:25: Get chat -> OK
+2024-04-14 16:28:27: Open database -> OK
+2024-04-14 16:28:27: Get chat -> OK
+2024-04-14 16:28:28: Open database -> OK
+2024-04-14 16:28:28: Get chat -> OK
+2024-04-14 16:28:29: Open database -> OK
+2024-04-14 16:28:29: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 16:28:29: Open database -> OK
+2024-04-14 16:28:29: Create chat -> OK
+2024-04-14 16:28:30: Open database -> OK
+2024-04-14 16:28:30: Get chat -> OK
+2024-04-14 16:28:31: Open database -> OK
+2024-04-14 16:28:31: Get chat -> OK
+2024-04-14 16:28:31: Open database -> OK
+2024-04-14 16:28:31: Get chat -> OK
+2024-04-14 16:28:31: Open database -> OK
+2024-04-14 16:28:31: Get user -> ADOLF
+Adolfio
+Hitlerino
+
+2024-04-14 16:28:31: Open database -> OK
+2024-04-14 16:28:31: Get user -> shluxa
+inessa
+repeshko
+
+2024-04-14 16:28:31: Open database -> OK
+2024-04-14 16:28:31: Get user -> w
+w
+w
+
+2024-04-14 16:28:33: Open database -> OK
+2024-04-14 16:28:33: Get chat -> OK
+2024-04-14 16:28:34: Open database -> OK
+2024-04-14 16:28:34: Get chat -> OK
+2024-04-14 16:28:36: Open database -> OK
+2024-04-14 16:28:36: Get chat -> OK
+2024-04-14 16:28:37: Open database -> OK
+2024-04-14 16:28:37: Get chat -> OK
+2024-04-14 16:28:39: Open database -> OK
+2024-04-14 16:28:39: Get chat -> OK
+2024-04-14 16:28:40: Open database -> OK
+2024-04-14 16:28:40: Get chat -> OK
+2024-04-14 16:28:42: Open database -> OK
+2024-04-14 16:28:42: Get chat -> OK
+2024-04-14 16:28:43: Open database -> OK
+2024-04-14 16:28:43: Get chat -> OK
+2024-04-14 16:28:45: Open database -> OK
+2024-04-14 16:28:45: Get chat -> OK
+2024-04-14 16:28:46: Open database -> OK
+2024-04-14 16:28:46: Get chat -> OK
+2024-04-14 16:28:48: Open database -> OK
+2024-04-14 16:28:48: Get chat -> OK
+2024-04-14 16:28:49: Open database -> OK
+2024-04-14 16:28:49: Get chat -> OK
+2024-04-14 16:28:51: Open database -> OK
+2024-04-14 16:28:51: Get chat -> OK
+2024-04-14 16:28:52: Open database -> OK
+2024-04-14 16:28:52: Get chat -> OK
+2024-04-14 16:28:54: Open database -> OK
+2024-04-14 16:28:54: Get chat -> OK
+2024-04-14 16:28:55: Open database -> OK
+2024-04-14 16:28:55: Get chat -> OK
+2024-04-14 16:28:57: Open database -> OK
+2024-04-14 16:28:57: Get chat -> OK
+2024-04-14 16:28:58: Open database -> OK
+2024-04-14 16:28:58: Get chat -> OK
+2024-04-14 16:29:00: Open database -> OK
+2024-04-14 16:29:00: Get chat -> OK
+2024-04-14 16:29:01: Open database -> OK
+2024-04-14 16:29:01: Get chat -> OK
+2024-04-14 16:29:03: Open database -> OK
+2024-04-14 16:29:03: Get chat -> OK
+2024-04-14 16:29:04: Open database -> OK
+2024-04-14 16:29:04: Get chat -> OK
+2024-04-14 16:29:06: Open database -> OK
+2024-04-14 16:29:06: Get chat -> OK
+2024-04-14 16:29:07: Open database -> OK
+2024-04-14 16:29:07: Get chat -> OK

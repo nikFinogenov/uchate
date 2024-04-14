@@ -739,20 +739,6 @@ void update_user_line(const char *filename, const char *new_line) {
     fclose(temp_file);
 }
 
-int server_chats_quantity(char *username) {
-    char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
-        g_print("tutya\n");
-        return chatters_count;
-    }
-    if (strcmp(response, "1488") == 0) {
-        g_print("tut2ya\n");
-        return chatters_count;
-    }
-    char **tokens = mx_strsplit(response, '\n');
-    return(mx_get_length(tokens));
-}
-
 void dimas_gandon(const char *filename) {
 // Открываем файл для чтения
     FILE *file = fopen(filename, "r");
@@ -816,6 +802,19 @@ void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
     }
 }
 
+int server_chats_quantity(char *username) {
+    char **response = get_chats_data(username);
+    if (strcmp(response, "1") == 0) {
+        g_print("tutya\n");
+        return chatters_count;
+    }
+    if (strcmp(response, "1488") == 0) {
+        g_print("tut2ya\n");
+        return chatters_count;
+    }
+    char **tokens = mx_strsplit(response, '\n');
+    return(mx_get_length(tokens));
+}
 void load_chats(char *username) {
     char **response = get_chats_data(username);
     if (strcmp(response, "1") == 0) {
@@ -926,7 +925,7 @@ void *chat_checker_thread_func(void *arg) {
         }
         // g_print("nothing to refresh\n");
         // Sleep for a while before checking again
-        sleep(7);
+        sleep(3);
     }
     return NULL;
 }
@@ -951,8 +950,6 @@ void stop_chat_checker(void) {
         exit(-1);
     }
 }
-
-
 
 int server_message_chat_quantity(char *username1, char* username2) {
     // char **response = get_chats_data(username);
@@ -1066,7 +1063,11 @@ void reload_messages(char *username) {
     for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
     g_free(messages);
     messages = NULL;
-    
+    messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
+    for (int i = 0; i < MAX_CHATTERS; i++) {
+        messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
+        messages_count[i] = 0;
+    }
     char **tokens = mx_strsplit(response, '\n');
     for (int i = 0; i < mx_get_length(tokens); i++) {
         g_print("%s\n", tokens[i]);
@@ -1091,15 +1092,15 @@ void reload_messages(char *username) {
             token2 = strtok(NULL, "\n");
             char *text = token2;
             token2 = strtok(NULL, "\n");
-            char *time = token2;
-            token2 = strtok(NULL, "\n");
             char *type = token2;
             token2 = strtok(NULL, "\n");
+            char *time = token2;
+            token2 = strtok(NULL, "\n");
             t_message_s new_message = {
-                .id = mx_atoi(id),
-                .text = mx_strdup(text),
-                .time = mx_strdup(time),
-                .is_user = (mx_strcmp(username, type) == 0) ? true : false
+                .id = atoi(id),
+                .text = strdup(text),
+                .time = strdup(time),
+                .is_user = (strcmp(username, type) == 0) ? true : false
             };
             messages[i][j] = new_message;
             messages_count[i]++;
@@ -1128,7 +1129,8 @@ void *message_checker_thread_func(void *arg) {
             reload_messages(username);
             // refresh_scrollable_window(scrollable_window);
             // char **get_mess_chat_amount(char *username_1, char *username_2)
-            if(refresh) refresh_scrollable_window2(scrollable_window2);
+            // if(refresh) 
+            refresh_scrollable_window2(scrollable_window2);
             // if(mx_strcmp(chatters[selected_user.index].lastmsg, messages[selected_user.index][messages_count[selected_user.index]].text) != 0) {
             // }
             refresh_scrollable_window(scrollable_window);
@@ -1136,7 +1138,7 @@ void *message_checker_thread_func(void *arg) {
         }
         g_print("nothing to refresh2\n");
         // Sleep for a while before checking again
-        sleep(5);
+        sleep(1);
     }
     return NULL;
 }
