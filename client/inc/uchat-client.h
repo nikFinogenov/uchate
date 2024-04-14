@@ -153,11 +153,14 @@ char **check_login_data(char *username, char* password);
 char **get_chatter_data(char *username);
 char **send_new_chat_data(char *username1, char* username2);
 char **get_chats_data(char *username);
-char **add_new_message(char *username_1, char *username_2, char* text, char* time);
+char **add_new_message(char *username_1, char *username_2, char* text, char* time, char* type);
 char **update_user_info(char *changed_username, char * name, char *surname, char *desc, char *username);
 char **chatter_delete(char *username_1, char *username_2);
 char **delete_message_data(int id);
 char **update_message_info(int id, char *new_text);
+char **get_messages_data(char *username);
+char **get_mess_amount(char* username);
+char **get_chat_messages(char *username_1, char *username_2);
 // char **get_user_data(char *username);
 
 
@@ -175,6 +178,7 @@ void load_chats(char *username);
 void reload_chats(char *username);
 void start_chat_checker(char *username);
 void stop_chat_checker(void);
+void load_message(char *username);
 
 // Dad jokes
 char* get_random_joke();

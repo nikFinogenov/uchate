@@ -98,14 +98,15 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     }
     
     // Save new user data to the structure
-    user.name       = parsed_first_name;
-    user.surname    = parsed_last_name;
-    user.username   = parsed_username;
+    user.name       = mx_strdup(parsed_first_name);
+    user.surname    = mx_strdup(parsed_last_name);
+    user.username   = mx_strdup(parsed_username);
 
     // gtk_widget_destroy(signup_window);
     gtk_widget_hide(signup_window);
     draw_user_window();
     show_user_window();
+    start_chat_checker(user.username);
 }
 
 void draw_singup() {

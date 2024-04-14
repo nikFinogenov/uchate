@@ -40,6 +40,7 @@ int main(int argc, char *argv[]) {
     draw_singup();
     
     // read_json_from_file("client/client-data/login_info.json", &userdata);
+    // if()
     read_txt_from_file(login_info, &userdata);
 
     if (userdata.button_recognize) {

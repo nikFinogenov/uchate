@@ -72,6 +72,7 @@ void mx_add_message(char **data, int sockfd);
 void mx_get_message(char **data, int sockfd);
 void mx_update_message(char **data, int sockfd);
 void mx_delete_message(char **data, int sockfd);
+void mx_messages_amount(char **data, int sockfd);
 
 int get_chat_id(char *username_1, char *username_2);
 

@@ -92,6 +92,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);
     load_chats(user.username);
+    load_message(user.username);
     draw_user_window();
     show_user_window();
     start_chat_checker(user.username);
