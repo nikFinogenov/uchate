@@ -136,6 +136,7 @@ void draw_login(void) {
     gtk_window_set_default_size(GTK_WINDOW(login_window), 400, 300);
     gtk_window_set_position(GTK_WINDOW(login_window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(login_window), 20);
+    g_signal_connect(login_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     // g_signal_connect(login_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     GtkWidget *login_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);

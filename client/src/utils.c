@@ -451,6 +451,8 @@ GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_file) {
 
     gtk_box_pack_start(GTK_BOX(info_box), user_tag, FALSE, FALSE, 7);
     gtk_box_pack_start(GTK_BOX(info_box), last_mess, FALSE, FALSE, 0);
+    gtk_widget_set_halign(GTK_WIDGET(user_tag), GTK_ALIGN_START);
+    gtk_widget_set_valign(GTK_WIDGET(last_mess), GTK_ALIGN_START);
 
     // Pack avatar and info_box into the user box
     gtk_box_pack_start(GTK_BOX(box), info_box, FALSE, FALSE, 0);
