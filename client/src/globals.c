@@ -12,6 +12,7 @@ GtkWidget *error_revealer = NULL;
 GtkWidget *user_window = NULL;
 GtkWidget *login_window = NULL;
 GtkWidget *signup_window = NULL;
+GdkPixbuf *temp_avatar = NULL;
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
 char* default_img = "client/img/simple.png";
@@ -28,6 +29,7 @@ t_user_s user = {
     .name = NULL,
     .surname = NULL,
     .desc = NULL,
+    .status = NULL,
     .avatar = NULL
 };
 
@@ -73,33 +75,16 @@ void fill_data(void) {
         for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
     }
     for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
-    // Initialize or populate messages with temporary data here
-    // for(int i = 0; i < 2; i++) {
-    //     for(int j = 0; j < 10; j++) {
-    //         messages[i][j].text = mx_strjoin(mx_itoa(i), ") This is a message.");
-    //         messages[i][j].is_user = (i % 2 == 0) ? true : false;
-    //         messages_count[i]++;
-    //     }
-    // }
 
     // Example initialization of chatters
     chatters = malloc(MAX_CHATTERS * sizeof(t_chatter_s));
     if (chatters == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for chatters.\n");
-        // free(messages); // Free previously allocated memory
         exit(EXIT_FAILURE);
     }
     for(int i = 0; i < MAX_CHATTERS; i++) {
         chatters[i].username = NULL;
     }
-    // Initialize or populate chatters with temporary data here
-    // for (int i = 0; i < 2; i++) {
-    //     chatters[i].name = "Chatter";
-    //     chatters[i].surname = "Surname";
-    //     chatters[i].username = "chatter_username";
-    //     chatters[i].lastmsg = "Last message from chatter.";
-    //     chatters[i].avatar = NULL; // You can initialize the avatar if needed
-    // }
 
     // Example initialization of user
     user.username = "Sidor";
@@ -151,13 +136,12 @@ void clear_chatter(t_chatter_s *chatter) {
 
 // Function to clear t_message_s structure
 void clear_message(t_message_s *message) {
-    if (message) {
-        g_free(message->text);
-        g_free(message->time);
-        // Reset values
-        message->text = NULL;
-        message->time = NULL;
-    }
+    free(message->text);
+    free(message->time);
+    message->id = 0;
+    message->text = NULL;
+    message->time = NULL;
+    message->is_user = false;
 }
 
 // Function to clear t_selected_s structure
@@ -165,20 +149,23 @@ void clear_selected(t_selected_s *selected) {
     if (selected) {
         // Reset values
         selected->box = NULL;
-        selected->index = 0;
+        selected->index = -1;
     }
 }
 
 // Function to clear all structures
 void clear_all(void) {
     clear_user(&user);
-    for (int i = 0; messages[i] != NULL; ++i)
-        clear_message(messages[i]);
+    for (int i = 0; i < MAX_CHATTERS; ++i){
+        for(int j = 0; i < messages[i][j].text != NULL; j++) clear_message(&messages[i][j]);
+    }
+    for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
     g_free(messages);
     messages = NULL;
     for (int i = 0; chatters[i].username != NULL; ++i)
         clear_chatter(&chatters[i]);
     g_free(chatters);
     chatters = NULL;
+    chatters_count = 0;
     clear_selected(&selected_user);
 }

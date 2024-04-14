@@ -36,8 +36,13 @@ void logger(char *proccess, char* status, char* errmsg);
 void mx_add_user(char **data, int sockfd);
 void mx_get_user(char **data, int sockfd);
 void mx_get_chatter(char** data, int sockfd);
+
 void mx_update_user(char **data, int sockfd);
 void check_login_data(char **data, int sockfd);
+void mx_get_user_avatar(char** data, int sockfd);
+void mx_update_avatar(char** data, int sockfd);
+void mx_get_user_status(char** data, int sockfd);
+void mx_update_user_status(char** data, int sockfd);
 // void mx_get_user2(char **data, int sockfd);
 
 
@@ -50,13 +55,12 @@ void mx_get_users_arr(char **data, int sockfd);
 void mx_send_room_data(char **data, int sockfd);
 void mx_authorization(char **data, int sockfd);
 void mx_get_avatar(char **data, int sockfd);
-void mx_update_avatar(char **data, int sockfd);
+//void mx_update_avatar(char **data, int sockfd);
 void mx_insert_message(char **data, int sockfd);
 void mx_load_room(char **data, int sockfd);
 void mx_search_init(char **data, int sockfd);
 void mx_update_language(char **data);
 void mx_get_language(char **data, int sockfd);
-void mx_delete_message(char **data);
 void mx_edit_message(char **data);
 void message_img(char **data, int sockfd);
 void mx_check_last_room(char **data, int sockfd);
@@ -71,14 +75,17 @@ void mx_write_photo_to_bd(char *path, int id);
 
 void mx_add_message(char **data, int sockfd);
 void mx_get_message(char **data, int sockfd);
-void mx_update_message(char **data);
-void mx_delete_message(char **data);
+void mx_update_message(char **data, int sockfd);
+void mx_delete_message(char **data, int sockfd);
+void mx_messages_amount(char **data, int sockfd);
+void mx_message_amount(char **data, int sockfd);
 
+int get_chat_id(char *username_1, char *username_2);
 
 void mx_create_chat(char **data, int sockfd);
 void mx_get_chat(char **data, int sockfd);
 void mx_update_chat(char **data);
-void mx_delete_chat(char **data);
+void mx_delete_chat(char **data, int sockfd);
 
 
 #endif

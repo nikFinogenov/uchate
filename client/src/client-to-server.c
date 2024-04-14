@@ -109,7 +109,7 @@ int connect_to_server(int *sock) {
     return 0;
 }
 
-char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password) {
+char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password, char* status) {
     // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);
     
@@ -117,7 +117,7 @@ char **send_sign_up_data(char *first_name, char *last_name, char *username, char
     bzero(sendBuffer, 1024);
     //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
     //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
-    sprintf(sendBuffer, "/user/add\n%s\n%s\n%s\n%s\n", username, password, first_name, last_name);
+    sprintf(sendBuffer, "/user/add\n%s\n%s\n%s\n%s\n%s\n", username, password, first_name, last_name, status);
     
     int error = 0;
     socklen_t len = sizeof (error);
@@ -346,6 +346,7 @@ char **get_chats_data(char *username) {
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
+
 char **update_user_info(char *changed_username, char *name, char *surname, char *desc, char *username) {
         // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);
@@ -393,15 +394,60 @@ char **update_user_info(char *changed_username, char *name, char *surname, char 
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
 }
+char **update_message_info(int id, char *new_text) {
+        // Connect to the server if not yet
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    sprintf(sendBuffer, "/messages/update\n%s\n%s\n", mx_itoa(id), new_text);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
 
-char **add_new_message(char *username_1, char *username_2, char* text, char* time) {
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+char **add_new_message(char *username_1, char *username_2, char* text, char* time, char* type) {
         // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);  
     char sendBuffer[1024];
     bzero(sendBuffer, 1024);
     //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
     //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
-    sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", username_1, username_2, text, time);
+    sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n%s\n", username_1, username_2, text, time, type);
     
     int error = 0;
     socklen_t len = sizeof (error);
@@ -437,6 +483,431 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
         sockfd = -1;
     }
     
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+char **delete_message_data(int id) {
+        // Connect to the server if not yet
+    if (sockfd == -1) connect_to_server(&sockfd);  
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/messages/delete\n%s", mx_itoa(id));
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+char **chatter_delete(char *username_1, char *username_2) {
+        // Connect to the server if not yet
+    if (sockfd == -1) connect_to_server(&sockfd);  
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/chat/delete\n%s\n%s\n", username_1, username_2);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+char **get_mess_amount(char* username) {
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/messages/amount\n%s\n", username);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+char **get_mess_chat_amount(char *username_1, char *username_2) {
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/message/amount\n%s\n%s\n", username_1, username_2);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+char **get_chat_messages(char *username_1, char *username_2) {
+    // Connect to the server if not yet
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/messages/get\n%s\n%s\n", username_1, username_2);
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+
+void get_and_save_avatar_to_file(char *username) {
+    if (connect_to_server(&sockfd) == -1) {
+        fprintf(stderr, "Error connecting to server\n");
+        return;
+    }
+
+    // Формируем запрос на сервер
+    char sendBuffer[MAX_BUFFER_SIZE];
+    snprintf(sendBuffer, sizeof(sendBuffer), "/user/get-avatar\n%s\n", username);
+
+    // Отправляем запрос на сервер
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("Error writing to socket");
+        close(sockfd);
+        return;
+    }
+
+    // Создаем путь к файлу для сохранения полученных данных
+    char filename[MAX_BUFFER_SIZE];
+    snprintf(filename, sizeof(filename), "%s%s_avatar.png", AVATAR_FOLDER, username);
+    FILE *file = fopen(filename, "wb");
+    if (file == NULL) {
+        perror("Error creating file");
+        close(sockfd);
+        return;
+    }
+
+    // Получаем размер файла
+    int file_size;
+    if (recv(sockfd, &file_size, sizeof(file_size), 0) == -1) {
+        perror("Error receiving data size through socket");
+        fclose(file);
+        close(sockfd);
+        return;
+    }
+
+    // Выделяем буфер для хранения BLOB
+    char *blob_data = (char *)malloc(file_size);
+    if (blob_data == NULL) {
+        perror("Error allocating memory for blob data");
+        fclose(file);
+        close(sockfd);
+        return;
+    }
+
+    // Принимаем BLOB через сокет
+    ssize_t total_bytes_received = 0;
+    while (total_bytes_received < file_size) {
+        ssize_t bytes_received = recv(sockfd, blob_data + total_bytes_received, file_size - total_bytes_received, 0);
+        if (bytes_received == -1) {
+            perror("Error receiving data through socket");
+            free(blob_data);
+            fclose(file);
+            close(sockfd);
+            return;
+        }
+        total_bytes_received += bytes_received;
+    }
+
+    // Записываем BLOB в файл
+    fwrite(blob_data, sizeof(char), file_size, file);
+
+    // Освобождаем выделенную память для BLOB
+    free(blob_data);
+    
+    fclose(file);
+}
+
+void update_avatar(char *path, char *username) {
+
+    if (connect_to_server(&sockfd) == -1) {
+        fprintf(stderr, "Error connecting to server\n");
+        return;
+    }
+    char sendBuffer[DEFAULT_MESSAGE_SIZE];
+    memset(sendBuffer, 0, DEFAULT_MESSAGE_SIZE);
+    sprintf(sendBuffer, "/user/update-avatar\n%s\n%s\n", path, username);
+
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    memset(recvBuffer, 0, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        close(sockfd);
+        exit(EXIT_FAILURE);
+    }
+
+    //printf("Server response: %s\n", recvBuffer);
+}
+
+char **get_user_status(char *username) {
+    // Connect to the server if not yet
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/user/get-status\n%s\n", username);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
+    return recvBuffer;
+}
+
+char **update_user_status(char *status, char *username) {
+        // Connect to the server if not yet
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    //sprintf(sendBuffer, "/chat/add\n%s\n%s\n%s\n", id1, id2, date);
+    //sprintf(sendBuffer, "/messages/add\n%s\n%s\n%s\n%s\n", chat_id, text, type, status);
+    sprintf(sendBuffer, "/user/update-status\n%s\n%s\n", status, username);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        // char *err_msg = "Connection lost\nTry again later";
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     // char **user_recv_data = mx_strsplit(recvBuffer, '\n');
     return recvBuffer;
