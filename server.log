@@ -3271,3 +3271,39 @@ yyyyyy
 2024-04-14 07:29:06: Get chat -> OK
 2024-04-14 07:29:11: Open database -> OK
 2024-04-14 07:29:11: Get chat -> OK
+2024-04-14 07:33:09: Open database -> OK
+2024-04-14 07:33:09: Init table "Users" -> OK
+2024-04-14 07:33:09: Init table "Chats" -> OK
+2024-04-14 07:33:09: Init table "Messages" -> OK
+2024-04-14 07:33:20: Open database -> OK
+2024-04-14 07:33:20: Get user status -> OK
+2024-04-14 07:33:22: Open database -> OK
+2024-04-14 07:33:22: Get user status -> OK
+2024-04-14 07:33:22: Open database -> OK
+2024-04-14 07:33:22: Get user status -> OK
+2024-04-14 07:33:22: Open database -> OK
+2024-04-14 07:33:22: Get user status -> OK
+2024-04-14 07:33:22: Open database -> OK
+2024-04-14 07:33:22: Get user status -> OK
+2024-04-14 07:33:23: Open database -> OK
+2024-04-14 07:33:23: Get user status -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Get user status -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Get user -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Get user avatar -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Update user -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Get chat -> OK
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Get user -> erter
+Dima
+Avdeev
+
+2024-04-14 07:33:26: Open database -> OK
+2024-04-14 07:33:26: Get chat -> OK
+2024-04-14 07:33:30: Open database -> OK
+2024-04-14 07:33:30: Update user -> OK

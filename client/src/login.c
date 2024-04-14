@@ -40,6 +40,10 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     char *parsed_username = (char*)username;
     char *parsed_password = (char*)password;
 
+    char **status_response = get_user_status(parsed_username);
+    char *tok = strtok(status_response, "\n");
+    user.status = strdup(tok);
+
     if (error_label != NULL) {
         gtk_widget_destroy(error_label);
         error_label = NULL;
@@ -55,14 +59,6 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
     
-    char **status_response = get_user_status(parsed_username);
-    char *tok = strtok(status_response, "\n");
-    user.status = strdup(tok);
-
-    if (strcmp(user.status, "online") == 0){
-        display_error_message("User is already logged in");
-        return;
-    }
 
     // Send data and handle response
     char **response = check_login_data(parsed_username, parsed_password);
@@ -75,6 +71,13 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Server v govne");
         return;
     }
+
+
+    if (strcmp(user.status, "online") == 0){
+        display_error_message("User is already logged in");
+        return;
+    }
+
     char *token = strtok(response, "\n");
     user.username = strdup(token);
 
