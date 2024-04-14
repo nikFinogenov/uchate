@@ -161,6 +161,7 @@ char **update_message_info(int id, char *new_text);
 char **get_messages_data(char *username);
 char **get_mess_amount(char* username);
 char **get_chat_messages(char *username_1, char *username_2);
+char **get_mess_chat_amount(char *username_1, char *username_2);
 // char **get_user_data(char *username);
 
 

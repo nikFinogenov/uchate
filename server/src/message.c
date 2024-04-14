@@ -190,3 +190,25 @@ void mx_messages_amount(char **data, int sockfd) {
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
+void mx_message_amount(char **data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+    memset(sql, 0, 500);
+    char temp_buff[1024];
+    memset(temp_buff, 0, 1024);
+    int chat_id = get_chat_id(data[1], data[2]);
+    sprintf(sql, "SELECT COUNT(*) FROM MESSAGES WHERE chat_id = %d;", chat_id);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+
+    if (sqlite3_step(res) == SQLITE_ROW) {
+        int count = sqlite3_column_int(res, 0);
+        sprintf(temp_buff, "%s\n", mx_itoa(count));
+    }
+
+    int exit = sqlite3_finalize(res);
+    char *st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Get messages amount", st, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
