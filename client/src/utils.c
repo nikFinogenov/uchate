@@ -445,7 +445,7 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
     if (chatters != NULL) {
         // g_print("%d\n", chatters_count);s
         for (int i = 0; i < chatters_count; i++) {
-            GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+            GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg,  chatters[i].avatar);
             gtk_widget_set_name(user_box, "user-box");
             if(i == selected_user.index) {
                 selected_user.box = user_box;
@@ -466,7 +466,7 @@ void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char*
         // g_print("%d\n", chatters_count);s
         for (int i = 0; i < chatters_count; i++) {
             if(is_in_format(chatters[i].username, filter) || is_in_format(chatters[i].name, filter)) {
-                GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, default_img);
+                GtkWidget *user_box = create_user_box(chatters[i].username, chatters[i].lastmsg, chatters[i].avatar);
                 gtk_widget_set_name(user_box, "user-box");
                 if(i == selected_user.index) {
                     selected_user.box = user_box;

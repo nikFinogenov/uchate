@@ -689,7 +689,7 @@ static void on_window_realize(GtkWidget *widget, gpointer data) {
 static void search_user(GtkWidget *widget, gpointer user_data) {
     EntryWidgets *data = (EntryWidgets *)user_data;
     const gchar *data_username = gtk_entry_get_text(GTK_ENTRY(data->username_entry));
-
+    char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
     char *parsed_username = (char*)data_username; 
 
     if (error_label != NULL) {
@@ -732,15 +732,20 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     token = strtok(NULL, "\n");
     char *surname = strdup(token);
 
+    get_and_save_avatar_to_file(username);
+    sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, username);
+
     // Создаем новый элемент структуры t_chatter_s
     t_chatter_s new_chatter = {
         .name = mx_strdup(name),
         .surname = mx_strdup(surname),
         .username = mx_strdup(username),
         .lastmsg = mx_strdup("No messages yet"),
-        .avatar = NULL
+        .avatar = gdk_pixbuf_new_from_file(avatar_path, NULL)
     };
-    
+
+    remove(avatar_path);
+    free(avatar_path);
     // Find the first available slot in the chatters array
 
     if(chatters_count + 1 < MAX_CHATTERS) {
