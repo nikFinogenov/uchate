@@ -12,6 +12,7 @@ GtkWidget *error_revealer = NULL;
 GtkWidget *user_window = NULL;
 GtkWidget *login_window = NULL;
 GtkWidget *signup_window = NULL;
+GdkPixbuf *temp_avatar = NULL;
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
 char* default_img = "client/img/simple.png";
@@ -28,6 +29,7 @@ t_user_s user = {
     .name = NULL,
     .surname = NULL,
     .desc = NULL,
+    .status = NULL,
     .avatar = NULL
 };
 

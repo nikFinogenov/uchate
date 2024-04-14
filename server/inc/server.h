@@ -36,8 +36,13 @@ void logger(char *proccess, char* status, char* errmsg);
 void mx_add_user(char **data, int sockfd);
 void mx_get_user(char **data, int sockfd);
 void mx_get_chatter(char** data, int sockfd);
+
 void mx_update_user(char **data, int sockfd);
 void check_login_data(char **data, int sockfd);
+void mx_get_user_avatar(char** data, int sockfd);
+void mx_update_avatar(char** data, int sockfd);
+void mx_get_user_status(char** data, int sockfd);
+void mx_update_user_status(char** data, int sockfd);
 // void mx_get_user2(char **data, int sockfd);
 
 
@@ -50,7 +55,7 @@ void mx_get_users_arr(char **data, int sockfd);
 void mx_send_room_data(char **data, int sockfd);
 void mx_authorization(char **data, int sockfd);
 void mx_get_avatar(char **data, int sockfd);
-void mx_update_avatar(char **data, int sockfd);
+//void mx_update_avatar(char **data, int sockfd);
 void mx_insert_message(char **data, int sockfd);
 void mx_load_room(char **data, int sockfd);
 void mx_search_init(char **data, int sockfd);

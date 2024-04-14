@@ -2,6 +2,7 @@
 
 static GtkWidget *error_label = NULL;
 
+
 // Define a structure to hold the necessary data
 typedef struct {
     GtkWidget *username_entry;
@@ -30,7 +31,7 @@ static void display_error_message(char *message) {
 static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
-
+    char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
     // Get the username and password from the entry widgets
     const gchar *username = gtk_entry_get_text(GTK_ENTRY(entries->username_entry));
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
@@ -38,6 +39,10 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // Parsing const gchar* to char*
     char *parsed_username = (char*)username;
     char *parsed_password = (char*)password;
+
+    char **status_response = get_user_status(parsed_username);
+    char *tok = strtok(status_response, "\n");
+    user.status = strdup(tok);
 
     if (error_label != NULL) {
         gtk_widget_destroy(error_label);
@@ -53,6 +58,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Password cannot be empty");
         return;
     }
+    
 
     // Send data and handle response
     char **response = check_login_data(parsed_username, parsed_password);
@@ -65,6 +71,13 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Server v govne");
         return;
     }
+
+
+    if (strcmp(user.status, "online") == 0){
+        display_error_message("User is already logged in");
+        return;
+    }
+
     char *token = strtok(response, "\n");
     user.username = strdup(token);
 
@@ -85,11 +98,18 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     // g_print("desc -> %s\n", user.desc);
     // g_print("parsed_username -> %s\n", user.username);
     // g_print("parsed_password -> %s\n", parsed_password);
-
     //create_json_with_data("client/client-data/login_info.json", user.username, parsed_password, userdata.button_recognize);
-    create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
 
-    // gtk_widget_destroy(login_window);
+    create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
+    get_and_save_avatar_to_file(user.username);
+    sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
+    g_print("%s\n", avatar_path);
+    user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
+    remove(avatar_path);
+    free(avatar_path);
+    update_user_status("online", user.username);
+
+    //gtk_widget_destroy(login_window);
     gtk_widget_hide(login_window);
     load_chats(user.username);
     load_message(user.username);

@@ -10,6 +10,8 @@ static bool settings_visible = TRUE;
 static bool account_visible = TRUE;
 static bool chats_visible = FALSE;
 static bool chats_was_opened = FALSE;
+static char *file_path_for_db;
+static bool change_button_yes = FALSE;
 
 static bool toggled = true;
 // static GtkWidget *user_info_box;
@@ -22,147 +24,11 @@ typedef struct {
     GtkWidget *username_entry;
 } EntryWidgets;
 
-static void clicked_settings(GtkWidget *widget, gpointer data){
-    g_print("settings clicked\n");
-}
-
-static void display_error_message(char *message, int which) {
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
-
-    error_label = gtk_label_new(message);
-    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
-    gtk_widget_set_margin_top(error_label, 10);
-    if (which == 0){
-        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(search_pop_up);
-    } else if (which == 1) {
-        gtk_box_pack_end(GTK_BOX(account_settings), error_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(account_settings);
-    }
-}
-
-void on_confirm_button_clicked(GtkButton *button, gpointer data) {
-    if (error_label != NULL) {
-        gtk_widget_destroy(error_label);
-        error_label = NULL;
-    }
-    // Получаем текст из всех GtkEntry
-    GtkWidget *name_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "name_entry"));
-    GtkWidget *surname_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "surname_entry"));
-    GtkWidget *username_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "username_entry"));
-    GtkWidget *description_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "description_entry"));
-
-    const gchar *name_text = gtk_entry_get_text(GTK_ENTRY(name_entry));
-    const gchar *surname_text = gtk_entry_get_text(GTK_ENTRY(surname_entry));
-    const gchar *username_text = gtk_entry_get_text(GTK_ENTRY(username_entry));
-    const gchar *description_text = gtk_entry_get_text(GTK_ENTRY(description_entry));
-
-    // Создаем объединенную строку с данными из всех GtkEntry
-    gchar *combined_text = g_strdup_printf("Name: %s\nSurname: %s\nUsername: %s\nDescription: %s\n",
-                                           name_text, surname_text, username_text, description_text);
-
-    // Выводим данные в консоль
-    g_print("Text from entries:\n%s\n", combined_text);
-    
-    char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
-    if(strcmp(response, "Username already exists") == 0) {
-        display_error_message("Username exists", 1);
-    } else if(strcmp(response, "Error checking username existence") == 0) {
-        display_error_message("Username exists", 1);
-    } else {
-        user.username = g_strdup(username_text);
-        update_user_line(login_info, user.username);
-        dimas_gandon(login_info);
-    }
-    
-    g_free(combined_text);
-}
-
-
-static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data) {
-    GdkPixbuf *pixbuf = (GdkPixbuf *)user_data;
-    gint width = gdk_pixbuf_get_width(pixbuf);
-    gint height = gdk_pixbuf_get_height(pixbuf);
-    gint radius = MIN(width, height) / 2;
-
-    // Calculate the center position
-    gint x = (gtk_widget_get_allocated_width(widget) - width) / 2;
-    gint y = (gtk_widget_get_allocated_height(widget) - height) / 2;
-
-    // Draw a circle clip
-    cairo_arc(cr, x + width / 2, y + height / 2, radius, 0, 2 * G_PI);
-    cairo_clip(cr);
-
-    // Draw the image
-    gdk_cairo_set_source_pixbuf(cr, pixbuf, x, y);
-    cairo_paint(cr);
-
-    return FALSE;
-}
-
-static void on_click(GtkWidget *widget, gpointer data){
-    if(chats_visible){
-        g_print("chats TRUE\n");
-    } else {
-        g_print("chat FALSE\n");
-    }
-    if(account_visible){
-        g_print("account TRUE\n");
-    } else {
-        g_print("account FALSE\n");
-    }
-    if(settings_visible){
-        g_print("settings TRUE\n");
-    } else {
-        g_print("settings FALSE\n");
-    }
-}
-
-void set_textview_text(GtkTextView *textview, const char *text) {
-    GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
-    gtk_text_buffer_set_text(buffer, text ? text : "", -1); // Если text равен NULL, установите пустую строку
-}
-
-static void on_change_button_clicked(GtkWidget *button, gpointer user_data) {
-    // Открываем диалоговое окно выбора файла
-    GtkWidget *dialog;
-    dialog = gtk_file_chooser_dialog_new("Select a file",
-                                         GTK_WINDOW(user_window),
-                                         GTK_FILE_CHOOSER_ACTION_OPEN,
-                                         "Cancel",
-                                         GTK_RESPONSE_CANCEL,
-                                         "Open",
-                                         GTK_RESPONSE_ACCEPT,
-                                         NULL);
-
-    // Устанавливаем кнопку "Open" активной по умолчанию
-    gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
-
-    // Добавляем фильтр для изображений
-    GtkFileFilter *filter;
-    filter = gtk_file_filter_new();
-    gtk_file_filter_add_pattern(filter, "*.png");
-    gtk_file_filter_add_pattern(filter, "*.jpg");
-    gtk_file_filter_add_pattern(filter, "*.jpeg");
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
-
-    // Отображаем диалоговое окно и обрабатываем результат
-    gint res = gtk_dialog_run(GTK_DIALOG(dialog));
-    if (res == GTK_RESPONSE_ACCEPT) {
-        // Получаем путь выбранного файла
-        char *filename;
-        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-
-        // Делаем что-то с выбранным файлом, например, загружаем изображение
-        // Пример кода загрузки изображения можно найти в предыдущих ответах
-
-        // Освобождаем память
-        g_free(filename);
-    }
-
-    // Закрываем диалоговое окно
-    gtk_widget_destroy(dialog);
+static void refresh_account_settings(){
+    gtk_container_foreach(GTK_CONTAINER(account_settings), (GtkCallback)gtk_widget_destroy, NULL);
+        // Refreshed content has been added to the chat_box, so show it
+    draw_account_settings_box();
+    gtk_widget_show_all(account_settings);
 }
 
 static void deactivate_children(GtkWidget *widget) {
@@ -225,6 +91,235 @@ gboolean on_window_clicked(GtkWidget *widget, GdkEventButton *event, GtkWidget *
 
     // Пропускаем событие дальше
     return FALSE;
+}
+
+static void clicked_settings(GtkWidget *widget, gpointer data){
+    g_print("settings clicked\n");
+}
+
+static void display_error_message(char *message, int which) {
+    GdkRGBA color_red;
+    gdk_rgba_parse(&color_red, "#de34eb");
+
+    error_label = gtk_label_new(message);
+    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_set_margin_top(error_label, 10);
+    if (which == 0){
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(search_pop_up);
+    } else if (which == 1) {
+        gtk_box_pack_end(GTK_BOX(account_settings), error_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(account_settings);
+    }
+}
+
+static void on_change_button_clicked(GtkWidget *area, gpointer user_data) {
+    // Открываем диалоговое окно выбора файла
+    GtkWidget *dialog;
+    dialog = gtk_file_chooser_dialog_new("Select a file",
+                                         GTK_WINDOW(user_window),
+                                         GTK_FILE_CHOOSER_ACTION_OPEN,
+                                         "Cancel",
+                                         GTK_RESPONSE_CANCEL,
+                                         "Open",
+                                         GTK_RESPONSE_ACCEPT,
+                                         NULL);
+
+    // Устанавливаем кнопку "Open" активной по умолчанию
+    gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
+
+    // Добавляем фильтр для изображений
+    GtkFileFilter *filter;
+    filter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(filter, "*.png");
+    gtk_file_filter_add_pattern(filter, "*.jpg");
+    gtk_file_filter_add_pattern(filter, "*.jpeg");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
+
+    // Отображаем диалоговое окно и обрабатываем результат
+    gint res = gtk_dialog_run(GTK_DIALOG(dialog));
+    if (res == GTK_RESPONSE_ACCEPT) {
+        char *filename;
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        temp_avatar = gdk_pixbuf_new_from_file(filename, NULL);
+        file_path_for_db = g_strdup(filename);
+        change_button_yes = TRUE;
+        // Делаем что-то с выбранным файлом, например, загружаем изображение
+        // Пример кода загрузки изображения можно найти в предыдущих ответах
+        refresh_account_settings();
+        change_button_yes = FALSE;
+        // Освобождаем память
+        g_free(filename);
+    }
+    // Закрываем диалоговое окно
+    gtk_widget_destroy(dialog);
+}
+
+static gboolean on_draw_event(GtkWidget *widget, cairo_t *cr, gpointer user_data) {
+    GdkPixbuf *pixbuf = (GdkPixbuf *)user_data;
+    gint width = gdk_pixbuf_get_width(pixbuf);
+    gint height = gdk_pixbuf_get_height(pixbuf);
+    gint radius = MIN(width, height) / 2;
+
+    // Calculate the center position
+    gint x = (gtk_widget_get_allocated_width(widget) - width) / 2;
+    gint y = (gtk_widget_get_allocated_height(widget) - height) / 2;
+
+    // Draw a circle clip
+    cairo_arc(cr, x + width / 2, y + height / 2, radius, 0, 2 * G_PI);
+    cairo_clip(cr);
+
+    // Draw the image
+    gdk_cairo_set_source_pixbuf(cr, pixbuf, x, y);
+    cairo_paint(cr);
+
+    return FALSE;
+}
+
+void on_confirm_button_clicked(GtkButton *button, gpointer data) {
+    if (error_label != NULL) {
+        gtk_widget_destroy(error_label);
+        error_label = NULL;
+    }
+    // Получаем текст из всех GtkEntry
+    GtkWidget *name_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "name_entry"));
+    GtkWidget *surname_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "surname_entry"));
+    GtkWidget *username_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "username_entry"));
+    GtkWidget *description_entry = GTK_WIDGET(g_object_get_data(G_OBJECT(button), "description_entry"));
+
+    const gchar *name_text = gtk_entry_get_text(GTK_ENTRY(name_entry));
+    const gchar *surname_text = gtk_entry_get_text(GTK_ENTRY(surname_entry));
+    const gchar *username_text = gtk_entry_get_text(GTK_ENTRY(username_entry));
+    const gchar *description_text = gtk_entry_get_text(GTK_ENTRY(description_entry));
+
+    // Создаем объединенную строку с данными из всех GtkEntry
+    gchar *combined_text = g_strdup_printf("Name: %s\nSurname: %s\nUsername: %s\nDescription: %s\n",
+                                           name_text, surname_text, username_text, description_text);
+
+    // Выводим данные в консоль
+    //g_print("Text from entries:\n%s\n", combined_text);
+    update_avatar(file_path_for_db, user.username);
+    
+    char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
+    if (username_text == user.username){
+        g_free(combined_text);
+    } else {
+        if(strcmp(response, "Username already exists") == 0) {
+        display_error_message("Username exists", 1);
+        } else if(strcmp(response, "Error checking username existence") == 0) {
+            display_error_message("Username exists", 1);
+        } else {
+            user.username = g_strdup(username_text);
+            update_user_line(login_info, user.username);
+            dimas_gandon(login_info);
+        }
+        g_free(combined_text);
+    }
+}
+
+void draw_account_settings_box(){
+    GtkWidget *avatar_button;
+    GtkWidget *confirm_button;
+    GdkPixbuf *avatar;
+    //server/source/standard_avatar.png
+    if (change_button_yes){
+        avatar = temp_avatar;
+    } else {
+        avatar = user.avatar;
+    }
+    GtkWidget *drawing_area = gtk_drawing_area_new();
+    GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(avatar, 128, 128, GDK_INTERP_BILINEAR);
+
+    gtk_widget_set_size_request(drawing_area, 128, 128);
+    g_signal_connect(drawing_area, "draw", G_CALLBACK(on_draw_event), scaled_pixbuf);
+    gtk_widget_set_margin_top(drawing_area, 5);
+    gtk_widget_set_margin_bottom(drawing_area, 5);
+    gtk_widget_set_valign(drawing_area, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(drawing_area, GTK_ALIGN_CENTER);
+
+    GtkWidget *name_entry;
+    GtkWidget *surname_entry;
+    GtkWidget *username_entry;
+    GtkWidget *description_entry;
+
+    name_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(name_entry), user.name);
+
+    surname_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(surname_entry), user.surname);
+
+    username_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(username_entry), user.username);
+
+    description_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(description_entry), user.desc);
+    
+    gtk_widget_set_margin_top(username_entry, 5);
+    gtk_widget_set_margin_bottom(username_entry, 5);
+    gtk_widget_set_margin_bottom(name_entry, 5);
+    gtk_widget_set_margin_bottom(surname_entry, 5);
+    gtk_widget_set_margin_bottom(description_entry, 5);
+    
+    avatar_button = gtk_button_new_with_label("Change");
+
+    confirm_button = gtk_button_new_with_label("Confirm");
+
+    GtkTextBuffer *buffer = gtk_text_buffer_new(NULL);
+
+    g_signal_connect(G_OBJECT(avatar_button), "clicked", G_CALLBACK(on_change_button_clicked), drawing_area);
+    g_signal_connect(G_OBJECT(confirm_button), "clicked", G_CALLBACK(on_confirm_button_clicked), buffer);
+
+    gtk_box_pack_start(GTK_BOX(account_settings), drawing_area, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), avatar_button, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), username_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), surname_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), name_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), description_entry, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 0);
+    g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), account_settings);
+    g_object_set_data(G_OBJECT(confirm_button), "name_entry", name_entry);
+    g_object_set_data(G_OBJECT(confirm_button), "surname_entry", surname_entry);
+    g_object_set_data(G_OBJECT(confirm_button), "username_entry", username_entry);
+    g_object_set_data(G_OBJECT(confirm_button), "description_entry", description_entry);
+}
+
+void update_box_widgets(GtkWidget *box) {
+    // Получаем список дочерних виджетов в боксе
+    GList *children = gtk_container_get_children(GTK_CONTAINER(box));
+
+    // Итерируемся по списку дочерних виджетов
+    for (GList *iter = children; iter != NULL; iter = g_list_next(iter)) {
+        GtkWidget *widget = GTK_WIDGET(iter->data);
+
+        // Отправляем сообщение о перерисовке каждого виджета
+        gtk_widget_queue_draw(widget);
+    }
+
+    // Освобождаем память, выделенную для списка дочерних виджетов
+    g_list_free(children);
+}
+
+static void on_click(GtkWidget *widget, gpointer data){
+    if(chats_visible){
+        g_print("chats TRUE\n");
+    } else {
+        g_print("chat FALSE\n");
+    }
+    if(account_visible){
+        g_print("account TRUE\n");
+    } else {
+        g_print("account FALSE\n");
+    }
+    if(settings_visible){
+        g_print("settings TRUE\n");
+    } else {
+        g_print("settings FALSE\n");
+    }
+}
+
+void set_textview_text(GtkTextView *textview, const char *text) {
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
+    gtk_text_buffer_set_text(buffer, text ? text : "", -1); // Если text равен NULL, установите пустую строку
 }
 
 gboolean on_window_clicked_for_sub(GtkWidget *widget, GdkEventButton *event, GtkWidget *element) {
@@ -303,7 +398,7 @@ static void special_toggle_account(GtkWidget *widget, GtkWidget *element){
         gtk_widget_hide(chats_box);
         chats_visible = FALSE;
         deactivate_children(chats_box);
-
+        refresh_account_settings();
         gtk_widget_set_visible(element, !visible);
         account_visible = !tvisible;
         activate_children(element);
@@ -317,7 +412,7 @@ static void special_toggle_account(GtkWidget *widget, GtkWidget *element){
         gtk_widget_hide(settings_box);
         settings_visible = TRUE;
         deactivate_children(settings_box);
-
+        refresh_account_settings();
         gtk_widget_set_visible(element, !visible);
         account_visible = !tvisible;
         activate_children(element);
@@ -328,6 +423,7 @@ static void special_toggle_account(GtkWidget *widget, GtkWidget *element){
 
 
     if (element == account_settings && settings_visible == FALSE || chats_visible == FALSE) {
+        refresh_account_settings();
         gtk_widget_set_visible(element, !visible);
         account_visible = !tvisible;
         activate_children(element);
@@ -520,7 +616,7 @@ static void on_clear_mess_search_clicked(GtkButton *button, GtkEntry *entry) {
     gtk_entry_set_text(entry, "");
     refresh_scrollable_window2(scrollable_window2);
 }
-// Add \n after each MAX_LINE_LENGTH in order to avoid adjustments of message box and scrollable window
+
 void wrap_text(char *text) {
     int len = strlen(text);
     int i, line_length = 0;
@@ -882,14 +978,28 @@ void show_user_window() {
 
 
 void draw_user_info_box(GtkWidget *user_info_box) {
-    GdkPixbuf *pixbuf = file_to_pixbuf(default_img);
-    GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
-
+    GdkPixbuf *avatar_for_chat;
+    GdkPixbuf *pixbuf;
+    GdkPixbuf *prev_pixbuf;
+    if (chatters == NULL || selected_user.index == -1) {
+        pixbuf = file_to_pixbuf(default_img);
+        prev_pixbuf = gdk_pixbuf_copy(pixbuf);
+    } else {
+        char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(chatters[selected_user.index].username) + strlen("_avatar.png") + 1);
+        get_and_save_avatar_to_file(chatters[selected_user.index].username);
+        sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, chatters[selected_user.index].username);
+        avatar_for_chat = gdk_pixbuf_new_from_file(avatar_path, NULL);
+        pixbuf = gdk_pixbuf_scale_simple(avatar_for_chat, 64, 64, GDK_INTERP_BILINEAR);
+        prev_pixbuf = gdk_pixbuf_copy(pixbuf);
+        remove(avatar_path);
+        free(avatar_path);
+    }
+    
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
-    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image), prev_pixbuf);
+    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
     gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
 
     GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
@@ -948,11 +1058,16 @@ static void logout_clicked(GtkWidget *widget, gpointer data){
     userdata.button_recognize = false;
     clear_all();
     fill_data();
+    update_user_status("offline", user.username);
+    // clear_all();
     // go_to_login();
     show_login();
 }
 
-
+void on_window_destroy(GtkWidget *widget, gpointer data) {
+    update_user_status("offline", user.username);
+    gtk_main_quit(); // Выход из главного цикла GTK
+}
 
 void draw_user_window() {
     GtkCssProvider *cssProvider = gtk_css_provider_new();
@@ -961,7 +1076,7 @@ void draw_user_window() {
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
-    g_signal_connect(user_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
 
     // Create the main horizontal box container
     GtkWidget *hbox_main = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1087,66 +1202,7 @@ void draw_user_window() {
 
     //user settings + yatogorot ebal
 
-    GtkWidget *avatar_button;
-    GtkWidget *confirm_button;
-    context = gtk_widget_get_style_context(GTK_WIDGET(account_settings));
-    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
-    //server/source/standard_avatar.png
-    GtkWidget *drawing_area = gtk_drawing_area_new();
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("server/source/standard_avatar.png", NULL);
-    GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(pixbuf, 128, 128, GDK_INTERP_BILINEAR);
-
-    gtk_widget_set_size_request(drawing_area, 128, 128);
-    g_signal_connect(drawing_area, "draw", G_CALLBACK(on_draw_event), scaled_pixbuf);
-    gtk_widget_set_margin_top(drawing_area, 5);
-    gtk_widget_set_margin_bottom(drawing_area, 5);
-    gtk_widget_set_valign(drawing_area, GTK_ALIGN_CENTER);
-    gtk_widget_set_halign(drawing_area, GTK_ALIGN_CENTER);
-
-    GtkWidget *name_entry;
-    GtkWidget *surname_entry;
-    GtkWidget *username_entry;
-    GtkWidget *description_entry;
-
-    name_entry = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(name_entry), user.name);
-
-    surname_entry = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(surname_entry), user.surname);
-
-    username_entry = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(username_entry), user.username);
-
-    description_entry = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(description_entry), user.desc);
-    
-    gtk_widget_set_margin_top(username_entry, 5);
-    gtk_widget_set_margin_bottom(username_entry, 5);
-    gtk_widget_set_margin_bottom(name_entry, 5);
-    gtk_widget_set_margin_bottom(surname_entry, 5);
-    gtk_widget_set_margin_bottom(description_entry, 5);
-    
-    avatar_button = gtk_button_new_with_label("Change");
-
-    confirm_button = gtk_button_new_with_label("Confirm");
-
-    GtkTextBuffer *buffer = gtk_text_buffer_new(NULL);
-
-    g_signal_connect(G_OBJECT(avatar_button), "clicked", G_CALLBACK(on_change_button_clicked), NULL);
-    g_signal_connect(G_OBJECT(confirm_button), "clicked", G_CALLBACK(on_confirm_button_clicked), buffer);
-
-    gtk_box_pack_start(GTK_BOX(account_settings), drawing_area, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), avatar_button, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), username_entry, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), surname_entry, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), name_entry, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(account_settings), description_entry, FALSE, FALSE, 0);
-    gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 0);
-    g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), account_settings);
-    g_object_set_data(G_OBJECT(confirm_button), "name_entry", name_entry);
-    g_object_set_data(G_OBJECT(confirm_button), "surname_entry", surname_entry);
-    g_object_set_data(G_OBJECT(confirm_button), "username_entry", username_entry);
-    g_object_set_data(G_OBJECT(confirm_button), "description_entry", description_entry);
+    draw_account_settings_box();
     //end user setttings
 
     GtkWidget *side_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
