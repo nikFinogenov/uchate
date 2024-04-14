@@ -96,6 +96,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     draw_user_window();
     show_user_window();
     start_chat_checker(user.username);
+    start_message_checker(user.username);
     // mx_configure_chats_list();
 }
 

@@ -134,13 +134,12 @@ void clear_chatter(t_chatter_s *chatter) {
 
 // Function to clear t_message_s structure
 void clear_message(t_message_s *message) {
-    if (message) {
-        g_free(message->text);
-        g_free(message->time);
-        // Reset values
-        message->text = NULL;
-        message->time = NULL;
-    }
+    free(message->text);
+    free(message->time);
+    message->id = 0;
+    message->text = NULL;
+    message->time = NULL;
+    message->is_user = false;
 }
 
 // Function to clear t_selected_s structure

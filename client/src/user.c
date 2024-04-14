@@ -944,6 +944,7 @@ static void clicked_side(GtkWidget *widget, gpointer data){
 static void logout_clicked(GtkWidget *widget, gpointer data){
     gtk_widget_hide(user_window);
     stop_chat_checker();
+    stop_message_checker();
     userdata.button_recognize = false;
     clear_all();
     fill_data();

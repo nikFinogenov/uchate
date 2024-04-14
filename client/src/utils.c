@@ -917,14 +917,14 @@ void *chat_checker_thread_func(void *arg) {
     while (1) {
         // Check the chat quantity on the server
         server_chats_amount = server_chats_quantity(username);
-        g_print("%d - %d\n", server_chats_amount, chatters_count);
+        // g_print("%d - %d\n", server_chats_amount, chatters_count);
         if (server_chats_amount != chatters_count) {
             // Reload the chatters if the chat quantity has changed
             reload_chats(username);
             refresh_scrollable_window(scrollable_window);
-            g_print("refreaed %d -> %d\n", server_chats_amount, chatters_count);
+            // g_print("refreaed %d -> %d\n", server_chats_amount, chatters_count);
         }
-        g_print("nothing to refresh\n");
+        // g_print("nothing to refresh\n");
         // Sleep for a while before checking again
         sleep(5);
     }
@@ -1027,58 +1027,46 @@ void load_message(char *username) {
 void reload_messages(char *username) {
     char **response = get_chats_data(username);
     if (strcmp(response, "1") == 0) {
-        g_print("tut\n");
+        g_print("%s ne sud'ba2\n", username);
         return;
     }
-    if (strcmp(response, "1488") == 0) {
-        g_print("tut2\n");
-        return;
-    }
-    // Clear the chatters array and reset the chatters_count variable
-    for (int i = 0; i < chatters_count; i++) {
-        free(chatters[i].name);
-        free(chatters[i].surname);
-        free(chatters[i].username);
-        free(chatters[i].lastmsg);
-        if (chatters[i].avatar != NULL) {
-            free(chatters[i].avatar);
-        }
-    }
-    free(chatters);
-    chatters = NULL;
-    chatters_count = 0;
-
-    // Load the chats data
     char **tokens = mx_strsplit(response, '\n');
-    for(int i = 0; i < mx_get_length(tokens); i++) {
-        char **response2 = get_chatter_data(tokens[i]);
+    for (int i = 0; i < mx_get_length(tokens); i++) {
+        g_print("%s\n", tokens[i]);
+        char **response2 = get_chat_messages(username, tokens[i]);
         if (strcmp(response2, "1") == 0) {
-            g_print("%s couldn't be found4\n", tokens[i]);
-            return;
+            g_print("%s couldn't be found3\n", tokens[i]);
+            continue;
         }
         if (strcmp(response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
             return;
         }
+        char **tokens2 = mx_strsplit(response2, '\n');
+        int mess_count_ahuet = mx_get_length(tokens2) / 5;
+        g_print("%d\n", mess_count_ahuet);
         char *token2 = strtok(response2, "\n");
-        char *username = strdup(token2);
-        token2 = strtok(NULL, "\n");
-        char *name = strdup(token2);
-        token2 = strtok(NULL, "\n");
-        char *surname = strdup(token2);
-        t_chatter_s new_chatter = {
-            .name = mx_strdup(name),
-            .surname = mx_strdup(surname),
-            .username = mx_strdup(username),
-            .lastmsg = mx_strdup("No messages yet"),
-            .avatar = NULL
-        };
-        chatters = realloc(chatters, sizeof(t_chatter_s) * (chatters_count + 1));
-        chatters[chatters_count] = new_chatter;
-        chatters_count++;
+        for (int j = 0; j < mx_get_length(tokens2); j++) {
+            char *id = tokens2[j];
+            j++;
+            char *chat_id = tokens2[j];
+            j++;
+            char *text = tokens2[j];
+            j++;
+            char *type = tokens2[j];
+            j++;
+            char *time = tokens2[j];
+            t_message_s new_message = {
+                .id = mx_atoi(id),
+                .text = mx_strdup(text),
+                .time = mx_strdup(time),
+                .is_user = (mx_strcmp(username, type) == 0) ? true : false
+            };
+            messages[i][messages_count[i]] = new_message;
+            messages_count[i]++;
+        }
     }
-}
-void *message_checker_thread_func(void *arg) {
+}void *message_checker_thread_func(void *arg) {
     char *username = (char *)arg;
     int server_message_amount = 0;
     int total_local_messages_amount = 0;
@@ -1088,13 +1076,13 @@ void *message_checker_thread_func(void *arg) {
     while (1) {
         // Check the chat quantity on the server
         server_message_amount = server_messages_quantity(username);
-        // g_print("%d - %d\n", server_message_amount, messages_count[selec]);
+        g_print("%d - %d\n", server_message_amount, total_local_messages_amount);
         if (server_message_amount != total_local_messages_amount) {
             // Reload the chatters if the chat quantity has changed
             reload_messages(username);
             // refresh_scrollable_window(scrollable_window);
-            if(mx_strcmp(chatters[selected_user.index].lastmsg, messages[selected_user.index][messages_count[selected_user.index]].text) == 0) {
-                refresh_scrollable_window(scrollable_window2);
+            if(mx_strcmp(chatters[selected_user.index].lastmsg, messages[selected_user.index][messages_count[selected_user.index]].text) != 0) {
+                refresh_scrollable_window2(scrollable_window2);
             }
             refresh_scrollable_window(scrollable_window);
             g_print("refreaed2 %d -> %d\n", server_message_amount, total_local_messages_amount);

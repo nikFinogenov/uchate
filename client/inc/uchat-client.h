@@ -179,6 +179,9 @@ void reload_chats(char *username);
 void start_chat_checker(char *username);
 void stop_chat_checker(void);
 void load_message(char *username);
+void start_message_checker(char *username);
+void stop_message_checker(void);
+void clear_message(t_message_s *message);
 
 // Dad jokes
 char* get_random_joke();
