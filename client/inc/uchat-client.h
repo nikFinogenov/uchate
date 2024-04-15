@@ -1,7 +1,6 @@
 #ifndef UCHAT_CLIENT_H
 #define UCHAT_CLIENT_H
 
-// Graphic elements
 #define DARK_GRAY 0.23
 #define LIGHT_GRAY 0.39
 #define LIGHTER_GRAY 0.75
@@ -10,8 +9,8 @@
 #define MAIN_WINDOW_HEIGHT 900
 #define MAIN_WINDOW_WIDTH 1500
 
-#define MAX_MESSAGES 1000 // Maximum number of messages
-#define MAX_CHATTERS 50 // Maximum number of chatters
+#define MAX_MESSAGES 1000
+#define MAX_CHATTERS 50
 #define DEFAULT_MESSAGE_SIZE 1024
 #define MAX_LINE_LENGTH 70
 #define MAX_PATH_LENGTH 256
@@ -93,7 +92,6 @@ extern t_chatter_s* chatters;
 extern t_user_s user;
 extern t_user_data_s userdata;
 extern t_selected_s selected_user;
-// extern GtkWidget *scrollable_window2;
 extern GtkWidget *chat_box;
 extern GtkWidget *empty_chat;
 extern GtkWidget *chats_box;
@@ -102,7 +100,6 @@ extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
-extern GtkWidget *error_revealer;
 
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];

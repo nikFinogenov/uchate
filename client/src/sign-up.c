@@ -2,7 +2,6 @@
 
 static GtkWidget *error_label = NULL;
 
-// Define a structure to hold the necessary data
 typedef struct {
     GtkWidget *first_name_entry;
     GtkWidget *last_name_entry;
@@ -31,22 +30,18 @@ static void display_error_message(char *message) {
 }
 
 static void signup_button_clicked(GtkWidget *widget, gpointer data) {
-    // Cast the data pointer to the EntryWidgets structure
     EntryWidgets *entries = (EntryWidgets *)data;
 
-    // Set the color of the error messages
     GdkRGBA color_red;
     gdk_rgba_parse(&color_red, "#de34eb");
 
     char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
-    // Get the username and password from the entry widgets
     const gchar *first_name = gtk_entry_get_text(GTK_ENTRY(entries->first_name_entry));
     const gchar *last_name = gtk_entry_get_text(GTK_ENTRY(entries->last_name_entry));
     const gchar *username = gtk_entry_get_text(GTK_ENTRY(entries->username_entry));
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
     const gchar *repeat_password = gtk_entry_get_text(GTK_ENTRY(entries->repeat_password_entry));
 
-    // Parsing const gchar* to char*
     char *parsed_first_name = (char*)first_name;
     char *parsed_last_name = (char*)last_name;
     char *parsed_username = (char*)username;
@@ -73,13 +68,11 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
 
-    // Password mismatch
     if (strcmp(parsed_password, parsed_repeat_password) != 0) {
         display_error_message("Passwords don't match");
         return;
     }
 
-    // Short password
     if (strlen(parsed_password) < 8) {
         display_error_message("Password is less than 8 characters");
         return;
@@ -97,7 +90,6 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
     
-    // Save new user data to the structure
     user.name       = mx_strdup(parsed_first_name);
     user.surname    = mx_strdup(parsed_last_name);
     user.username   = mx_strdup(parsed_username);
@@ -108,16 +100,13 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
     remove(avatar_path);
     free(avatar_path);
-    // gtk_widget_destroy(signup_window);
     gtk_widget_hide(signup_window);
     draw_user_window();
     show_user_window();
     start_chat_checker(user.username);
-    // start_message_checker(user.username);
 }
 
 void draw_singup() {
-    // Sign up window
     signup_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(signup_window), "McOk Chat - Sign Up");
     gtk_window_set_default_size(GTK_WINDOW(signup_window), 400, 300);
@@ -161,7 +150,6 @@ void draw_singup() {
     gtk_entry_set_visibility(GTK_ENTRY(repeat_password_signup), FALSE);
     gtk_box_pack_start(GTK_BOX(signup_vbox), repeat_password_signup, FALSE, FALSE, 0);
 
-    // Create a structure to hold the entry widgets
     EntryWidgets *entries = g_new(EntryWidgets, 1);
     entries->first_name_entry = first_name_entry_signup;
     entries->last_name_entry = last_name_entry_signup;

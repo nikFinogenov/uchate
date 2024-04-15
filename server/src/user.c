@@ -58,7 +58,6 @@ void mx_get_user(char** data, int sockfd) {
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) == SQLITE_ROW) {
         const unsigned char *username = sqlite3_column_text(res, 0);
-        // const unsigned char *password = sqlite3_column_text(res, 1);
         const unsigned char *name = sqlite3_column_text(res, 1);
         const unsigned char *surname = sqlite3_column_text(res, 2);
         const unsigned char *desc = sqlite3_column_text(res, 3);
@@ -342,7 +341,7 @@ bool mx_check_user(char **data) {
     char sql[500];
 
     memset(sql, 0, 500);
-    sprintf(sql, "SELECT PASSWORD FROM USERS WHERE USERNAME='%s';", data[1]);
+    sprintf(sql, "SELECT password FROM USERS WHERE USERNAME='%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (sqlite3_step(res) != SQLITE_DONE) {
         char *check_password = mx_strdup((char *)sqlite3_column_text(res, 0));
@@ -378,6 +377,5 @@ void check_login_data(char **data, int sockfd) {
     } else {
         sprintf(response, "1");
     }
-
     send(sockfd, response, strlen(response), 0);
 }

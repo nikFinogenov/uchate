@@ -1,29 +1,27 @@
 #include "uchat-client.h"
-#include "../../libmx/inc/libmx.h"
-// GtkWidget *scrollable_window2 =NULL;
+
 GtkWidget *empty_chat = NULL;
 GtkWidget *chat_box = NULL;
 GtkWidget *chats_box = NULL;
-// GtkWidget *chats_box = NULL;
 GtkWidget *settings_box = NULL;
 GtkWidget *account_settings = NULL;
 GtkWidget *user_info_box = NULL;
-GtkWidget *error_revealer = NULL;
 GtkWidget *user_window = NULL;
 GtkWidget *login_window = NULL;
 GtkWidget *signup_window = NULL;
 GdkPixbuf *temp_avatar = NULL;
+GtkWidget *scrollable_window = NULL;
+GtkWidget *scrollable_window2 = NULL;
+
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
 char* default_img = "client/img/simple.png";
 
-t_message_s** messages = NULL; // Global variable declaration
+t_message_s** messages = NULL;
 int messages_count[MAX_CHATTERS];
-// Example initialization of chatters
-t_chatter_s* chatters = NULL; // Global variable declaration
+t_chatter_s* chatters = NULL;
 int chatters_count = 0;
 
-// Example initialization of user
 t_user_s user = {
     .username = NULL,
     .name = NULL,
@@ -38,6 +36,40 @@ t_user_data_s userdata = {
     .password = NULL,
     .button_recognize = FALSE
 };
+
+const char *jokes[] = {
+    "Why don't skeletons fight each other? They don't have the guts!",
+    "Why couldn't the bicycle stand up by itself? Because it was two-tired!",
+    "Why did the scarecrow win an award? Because he was outstanding in his field!",
+    "What do you call fake spaghetti? An impasta!",
+    "Why did the math book look sad? Because it had too many problems.",
+    "What did one wall say to the other wall? I'll meet you at the corner!",
+    "Why did the tomato turn red? Because it saw the salad dressing!",
+    "What do you get when you cross a snowman with a vampire? Frostbite!",
+    "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+    "How does a penguin build its house? Igloos it together!",
+    "What did the janitor say when he jumped out of the closet? Supplies!",
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "What did the fish say when it hit the wall? Dam!",
+    "Why did the coffee file a police report? It got mugged!",
+    "Why was the belt arrested? For holding up a pair of pants!",
+    "What did one hat say to the other? You stay here, I'll go on ahead!",
+    "Why don't skeletons fight each other? They don't have the guts!",
+    "What do you call a bear with no teeth? A gummy bear!",
+    "What did one ocean say to the other ocean? Nothing, they just waved!",
+    "Why did the scarecrow win an award? Because he was outstanding in his field!",
+    "What's orange and sounds like a parrot? A carrot!",
+    "Why did the bicycle fall over? Because it was two-tired!",
+    "What did one snowman say to the other snowman? Do you smell carrots?",
+    "Why did the tomato turn red? Because it saw the salad dressing!",
+    "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+    "How do you make holy water? You boil the hell out of it!",
+    "Why don't eggs tell jokes? Because they'd crack each other up!",
+    "What do you call a fake noodle? An impasta!",
+    "Why did the math book look sad? Because it had too many problems.",
+    "What do you call a can opener that doesn't work? A can't opener!"
+};
+
 
 bool is_chatters_empty(void) {
     for (int i = 0; i < MAX_CHATTERS; i++) {
@@ -65,7 +97,6 @@ void fill_data(void) {
         fprintf(stderr, "Error: Memory allocation failed for messages array.\n");
         exit(EXIT_FAILURE);
     }
-    // Example initialization of messages
     for(int i = 0; i < MAX_CHATTERS; i++) {
         messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
         if (messages[i] == NULL) {
@@ -76,7 +107,6 @@ void fill_data(void) {
     }
     for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
 
-    // Example initialization of chatters
     chatters = malloc(MAX_CHATTERS * sizeof(t_chatter_s));
     if (chatters == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for chatters.\n");
@@ -86,11 +116,10 @@ void fill_data(void) {
         chatters[i].username = NULL;
     }
 
-    // Example initialization of user
-    user.username = "Sidor";
-    user.name = "Pidor";
-    user.surname = "Pidorovich";
-    user.desc = " ";
+    user.username = "";
+    user.name = "";
+    user.surname = "";
+    user.desc = "";
     user.avatar = NULL;
 }
 
@@ -107,7 +136,7 @@ void clear_user(t_user_s *user) {
         g_free(user->desc);
         if (user->avatar)
             g_object_unref(user->avatar);
-        // Reset values
+
         user->username = NULL;
         user->name = NULL;
         user->surname = NULL;
@@ -116,7 +145,6 @@ void clear_user(t_user_s *user) {
     }
 }
 
-// Function to clear t_chatter_s structure
 void clear_chatter(t_chatter_s *chatter) {
     if (chatter) {
         g_free(chatter->name);
@@ -125,7 +153,7 @@ void clear_chatter(t_chatter_s *chatter) {
         g_free(chatter->lastmsg);
         if (chatter->avatar)
             g_object_unref(chatter->avatar);
-        // Reset values
+
         chatter->name = NULL;
         chatter->surname = NULL;
         chatter->username = NULL;
@@ -134,7 +162,6 @@ void clear_chatter(t_chatter_s *chatter) {
     }
 }
 
-// Function to clear t_message_s structure
 void clear_message(t_message_s *message) {
     free(message->text);
     free(message->time);
@@ -144,16 +171,13 @@ void clear_message(t_message_s *message) {
     message->is_user = false;
 }
 
-// Function to clear t_selected_s structure
 void clear_selected(t_selected_s *selected) {
     if (selected) {
-        // Reset values
         selected->box = NULL;
         selected->index = -1;
     }
 }
 
-// Function to clear all structures
 void clear_all(void) {
     clear_user(&user);
     for (int i = 0; i < MAX_CHATTERS; ++i){
