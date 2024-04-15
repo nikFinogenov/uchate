@@ -16,7 +16,12 @@ unsigned int mx_b64_decodef(char *InFile, char *OutFile) {
 		return 0;
 	}
 	
-	while((int)c!=EOF) {
+	fseek(pInFile, 0, SEEK_END);
+	long fileSize = ftell(pInFile);
+	fseek(pInFile, 0, SEEK_SET);
+
+	long bytesRead = fileSize - 12;
+	while((int)c!=EOF && ftell(pInFile) < bytesRead) {
 		c=fgetc(pInFile);
 		if ((int)c==EOF)
 		break;

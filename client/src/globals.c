@@ -70,7 +70,6 @@ const char *jokes[] = {
     "What do you call a can opener that doesn't work? A can't opener!"
 };
 
-
 bool is_chatters_empty(void) {
     for (int i = 0; i < MAX_CHATTERS; i++) {
         if (chatters[i].username != NULL) {

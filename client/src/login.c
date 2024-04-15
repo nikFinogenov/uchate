@@ -71,7 +71,8 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     token = strtok(NULL, "\n");
     user.desc = strdup(token);
-    char **status_response = get_user_status(parsed_username);
+
+    char **status_response = get_user_status(user.username);
     char *tok = strtok(status_response, "\n");
     user.status = strdup(tok);
     if (strcmp(user.status, "online") == 0){

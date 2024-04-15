@@ -10,17 +10,14 @@ void mx_add_user(char **data, int sockfd) {
     memset(sql, 0, 500);
     char *errmsg;
 
-    // Check if user with given username already exists
     sprintf(sql, "SELECT id FROM USERS WHERE username = '%s';", data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     int result = sqlite3_step(res);
     sqlite3_finalize(res);
 
     if (result == SQLITE_ROW) {
-        // User with the given username already exists
         sprintf(response, "1");
     } else {
-        // User does not exist, add new user
         sprintf(sql, "SELECT id FROM USERS ORDER BY id DESC LIMIT 1;");
         sqlite3_prepare_v2(db, sql, -1, &res, 0);
         sqlite3_step(res);
@@ -102,7 +99,6 @@ void mx_get_user_status(char** data, int sockfd) {
     sprintf(sql, "SELECT status FROM USERS WHERE username = '%s';", data[1]); 
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
     while (sqlite3_step(res) == SQLITE_ROW) {
-        // const unsigned char *password = sqlite3_column_text(res, 1);
         const unsigned char *status = sqlite3_column_text(res, 0);
         sprintf(temp_buff, "%s\n", status);
     }
@@ -118,7 +114,6 @@ void mx_update_avatar(char **data, int sockfd) {
     sqlite3_stmt *res;
     int rc;
     
-    // Открываем файл с аватаром в бинарном режиме
     FILE *file = fopen(data[1], "rb");
     if (!file) {
         printf("Error opening file %s\n", data[1]);
@@ -126,12 +121,10 @@ void mx_update_avatar(char **data, int sockfd) {
         return;
     }
 
-    // Определяем размер файла
     fseek(file, 0, SEEK_END);
     long file_size = ftell(file);
     fseek(file, 0, SEEK_SET);
 
-    // Выделяем память для хранения данных аватара
     unsigned char *avatar_data = (unsigned char*)malloc(file_size);
     if (!avatar_data) {
         printf("Error allocating memory for avatar data\n");
@@ -140,14 +133,11 @@ void mx_update_avatar(char **data, int sockfd) {
         return;
     }
 
-    // Считываем данные из файла в память
     fread(avatar_data, 1, file_size, file);
     fclose(file);
 
-    // Подготавливаем SQL-запрос для обновления аватара
     const char *sql = "UPDATE USERS SET profile_img=? WHERE username=?";
     
-    // Подготавливаем выражение SQL
     rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
     if (rc != SQLITE_OK) {
         printf("Failed to prepare statement: %s\n", sqlite3_errmsg(db));
@@ -156,11 +146,9 @@ void mx_update_avatar(char **data, int sockfd) {
         return;
     }
 
-    // Привязываем BLOB к параметрам в запросе
     sqlite3_bind_blob(res, 1, avatar_data, file_size, SQLITE_STATIC);
     sqlite3_bind_text(res, 2, data[2], -1, SQLITE_STATIC);
 
-    // Выполняем запрос
     rc = sqlite3_step(res);
     if (rc != SQLITE_DONE) {
         printf("Failed to execute statement: %s\n", sqlite3_errmsg(db));
@@ -170,12 +158,10 @@ void mx_update_avatar(char **data, int sockfd) {
         return;
     }
 
-    // Освобождаем ресурсы
     sqlite3_finalize(res);
     free(avatar_data);
     sqlite3_close(db);
 
-    // Отправляем ответ клиенту
     const char *response = "Avatar updated successfully";
     send(sockfd, response, strlen(response), 0);
 }
@@ -209,7 +195,6 @@ void mx_get_user_avatar(char** data, int sockfd) {
         const void* blob_data = sqlite3_column_blob(res, 0);
         int blob_size = sqlite3_column_bytes(res, 0);
 
-        // Отправляем размер файла
         if (send(sockfd, &blob_size, sizeof(blob_size), 0) == -1) {
             perror("Error sending data size through socket");
             logger("Send avatar size", ST_NEOK, "Failed to send avatar size through socket");
@@ -218,7 +203,6 @@ void mx_get_user_avatar(char** data, int sockfd) {
             return;
         }
 
-        // Отправляем BLOB через сокет
         if (send(sockfd, blob_data, blob_size, 0) == -1) {
             perror("Error sending data through socket");
             logger("Send avatar data", ST_NEOK, "Failed to send avatar data through socket");
@@ -253,11 +237,11 @@ void mx_get_chatter(char** data, int sockfd) {
             const unsigned char *surname = sqlite3_column_text(res, 2);
             sprintf(temp_buff, "%s\n%s\n%s\n", username, name, surname);
         } else {
-            strcpy(temp_buff, "1"); // User not found
+            strcpy(temp_buff, "1");
         }
         sqlite3_finalize(res);
     } else {
-        strcpy(temp_buff, "-1"); // Error in SQL execution
+        strcpy(temp_buff, "-1");
     }
 
     logger("Get user", temp_buff, "");
@@ -265,9 +249,7 @@ void mx_get_chatter(char** data, int sockfd) {
     sqlite3_close(db);
 }
 
-// Callback function for the SELECT query
 static int username_exists_callback(void *not_used, int argc, char **argv, char **az_col_name) {
-    // If this function is called, it means the username exists
     return 1;
 }
 
@@ -279,11 +261,9 @@ void mx_update_user(char **data, int sockfd) {
     char *errmsg;
     bool username_exists = false;
 
-    // Check if the username already exists in the database
     sprintf(sql, "SELECT * FROM USERS WHERE username='%s';", data[1]);
     int result = sqlite3_exec(db, sql, username_exists_callback, 0, NULL);
 
-    // If the result is not zero, it means the username already exists
     if (result != SQLITE_OK) {
         logger("Error checking username existence", ST_NEOK, sqlite3_errmsg(db));
         sqlite3_close(db);
@@ -292,7 +272,6 @@ void mx_update_user(char **data, int sockfd) {
         return;
     }
 
-    // If the callback function was called, it means the username exists
     if (username_exists) {
         logger("Username already exists", ST_NEOK, "Username already exists in the database");
         sprintf(response, "Username already exists");
@@ -301,7 +280,6 @@ void mx_update_user(char **data, int sockfd) {
         return;
     }
 
-    // If the username does not exist, perform the update
     memset(sql, 0, sizeof(sql));
     sprintf(sql, "UPDATE USERS SET username='%s', name='%s', \
             surname='%s', description='%s' WHERE username='%s';",
@@ -328,7 +306,6 @@ void mx_delete_user(char **data) {
     sprintf(sql, "DELETE FROM USERS WHERE id=%d;", mx_atoi(data[1]));   
     int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    // logger(errmsg, st);
     logger("Delete user", st, errmsg);
     sqlite3_close(db);
 }

@@ -1,21 +1,11 @@
 #include "server.h"
 
-// /*
-//     data - recv data from client
-//     data[0] - Operation
-//     data[1] - addresser
-//     data[2] - destination
-//     data[3] - time
-//     data[4...n-1] - text
-//     data[n] - NULL
-// */
-
 int get_chat_id(char *username_1, char *username_2) {
     sqlite3 *db = open_db();
     sqlite3_stmt *res = NULL;
     char sql[500];
     memset(sql, 0, 500);
-    int chat_id = -1; // Initialize chat_id to a default value
+    int chat_id = -1;
     
     sprintf(sql, "SELECT c.id "
                  "FROM CHATS c "
@@ -27,7 +17,6 @@ int get_chat_id(char *username_1, char *username_2) {
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
 
     if (sqlite3_step(res) == SQLITE_ROW) {
-        // Get the chat_id
         chat_id = sqlite3_column_int(res, 0);
     }
 
@@ -53,18 +42,14 @@ void mx_add_message(char **data, int sockfd) {
         logger("Add message", ST_NEOK, errmsg);
         sqlite3_free(errmsg);
         sqlite3_close(db);
-        // Handle error
         return;
     }
 
-    // Get the ID of the last inserted row
     sqlite3_int64 message_id = sqlite3_last_insert_rowid(db);
     sqlite3_close(db);
-    // Convert the message ID to a string
     char message_id_str[50];
     snprintf(message_id_str, sizeof(message_id_str), "%" PRId64, (int64_t)message_id);
 
-    // Send the message ID back to the client
     send(sockfd, message_id_str, strlen(message_id_str), 0);
 }
 
@@ -82,7 +67,6 @@ void mx_get_message(char **data, int sockfd) {
     int offset = 0; 
     while (sqlite3_step(res) == SQLITE_ROW) {
         int id = sqlite3_column_int(res, 0);
-        // int chat_id = sqlite3_column_int(res, 1);
         const unsigned char *text = sqlite3_column_text(res, 2);
         const unsigned char *type = sqlite3_column_text(res, 3);
         const unsigned char *time = sqlite3_column_text(res, 4);

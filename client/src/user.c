@@ -176,7 +176,7 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
         } else {
             user.username = g_strdup(username_text);
             update_user_line(login_info, user.username);
-            dimas_gandon(login_info);
+            delete_more_than_three_lines(login_info);
         }
         g_free(combined_text);
     }

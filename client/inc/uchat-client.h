@@ -57,9 +57,6 @@ typedef struct {
     char* desc;
     char* status;
     GdkPixbuf *avatar;
-    // mx_read_photo_from_bd(t_user.id);
-    // t_user.avatar = mx_get_pixbuf_with_size("client/img/tmp_avatar.png", 100, 100);
-    // remove("client/img/tmp_avatar.png");
 } t_user_s;
 
 typedef struct {
@@ -75,7 +72,6 @@ typedef struct {
     char* text;
     char* time;
     bool is_user;
-    //reaction
 } t_message_s;
 
 typedef struct {
@@ -108,25 +104,14 @@ char **argv_ptr;
 int sockfd;
 int sock_for_chats;
 
-// typedef struct {
-//     char* name;
-//     char* surname;
-//     GdkPixbuf *avatar;
-// } t_chatter_s;
-
-
-// Login side
-// void draw_login(GtkWidget *window);
 void draw_login(void);
 void show_login(void);
 void go_to_signup(void);
 
-// Sign up side
 void draw_singup(void);
 void show_signup(void);
 void go_to_login(void);
 
-// User window
 void draw_user_window(void);
 void show_user_window(void);
 void draw_user_info_box(GtkWidget *user_info_box);
@@ -141,16 +126,14 @@ void message_populate_scrollable_filtred_window(GtkWidget *scrollable_window, ch
 GdkPixbuf *file_to_pixbuf(const gchar *filename);
 void draw_image(GtkWidget *widget, cairo_t *cr, GdkPixbuf *data);
 void set_widget_height(GtkWidget *widget, int height);
-// void parse_json_buffer(const char *buffer, long buffer_size, t_user_data_s *userdata);
-// void read_json_from_file(const char *filename, t_user_data_s *userdata);
 void create_txt_with_data(const char *filename, const char *username, const char *password, bool button_recognize);
 void read_txt_from_file(const char *filename, t_user_data_s *userdata);
 void parse_txt_buffer(const char *buffer, t_user_data_s *userdata);
 void update_user_line(const char *filename, const char *new_line);
-void dimas_gandon(const char *filename);
+void delete_more_than_three_lines(const char *filename);
 void wrap_text(char *text);
 
-// Server stuff
+//Server stuff
 int connect_to_server(int *sock);
 char **send_sign_up_data(char *first_name, char *last_name, char *username, char *password, char *status);
 char **check_login_data(char *username, char* password);
@@ -163,20 +146,15 @@ char **chatter_delete(char *username_1, char *username_2);
 char **delete_message_data(int id);
 char **update_message_info(int id, char *new_text);
 char **get_messages_data(char *username);
-char **get_mess_amount(char* username);
 char **get_chat_messages(char *username_1, char *username_2);
 char **get_mess_chat_amount(char *username_1, char *username_2);
-// char **add_new_message(char *username_1, char *username_2, char* text, char* time);
 char **update_user_info(char *changed_username, char *name, char *surname, char *desc, char *username);
 void get_and_save_avatar_to_file(char *username);
 void update_avatar(char *path, char *username);
 char **update_user_status(char *status, char *username);
 char **get_user_status(char *username);
-// char **get_user_data(char *username);
 
 
-// Xyeta widgets, Podderjivau
-GtkWidget *create_penis(void);
 void fill_data(void);
 bool is_chatters_empty(void);
 bool is_messages_empty(void);
@@ -194,7 +172,6 @@ void start_message_checker(char *username);
 void stop_message_checker(void);
 void clear_message(t_message_s *message);
 
-// Dad jokes
 char* get_random_joke();
 void clear_all(void);
 

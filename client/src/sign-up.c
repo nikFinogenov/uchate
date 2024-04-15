@@ -80,7 +80,6 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
 
     char **response = send_sign_up_data(parsed_first_name, parsed_last_name, parsed_username, parsed_password, "online");
 
-    // User existence
     if (strcmp(response, "1") == 0) {
         display_error_message("Username already exists");
         return;

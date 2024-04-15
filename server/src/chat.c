@@ -34,13 +34,11 @@ void mx_get_chat(char **data, int sockfd) {
            data[1], data[1], data[1]);
     sqlite3_prepare_v2(db, sql, -1, &res, 0);
 
-    int offset = 0; // Смещение для записи в буфер
+    int offset = 0; 
 
     while (sqlite3_step(res) == SQLITE_ROW) {
-    // Get the username of the interlocutor
         const unsigned char *interlocutor_username = sqlite3_column_text(res, 0);
 
-    // Print the username to the buffer
         offset += sprintf(temp_buff + offset, "%s\n", interlocutor_username);
     }
 
@@ -51,7 +49,6 @@ void mx_get_chat(char **data, int sockfd) {
         send(sockfd, "1", strlen("1"), 0);
     }
     else send(sockfd, temp_buff, strlen(temp_buff), 0);
-    // Отправляем весь буфер клиенту
     sqlite3_close(db);
 }
 
@@ -80,11 +77,9 @@ void mx_delete_chat(char **data, int sockfd) {
 
     int chat_id = get_chat_id(data[1], data[2]);
 
-    // Delete all messages associated with the chat
     sprintf(sql, "DELETE FROM MESSAGES WHERE chat_id=%d;", chat_id);
     int exit_messages = sqlite3_exec(db, sql, NULL, 0, &errmsg);
 
-    // Delete the chat
     sprintf(sql, "DELETE FROM CHATS WHERE id=%d;", chat_id);
     int exit_chats = sqlite3_exec(db, sql, NULL, 0, &errmsg);
 

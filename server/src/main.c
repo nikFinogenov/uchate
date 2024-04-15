@@ -1,12 +1,8 @@
 #include "server.h"
 
 static void handle_request(char* request, char** data, int new_socket) {
-    //utils-endpoint
-    if (!mx_strcmp(request, "SearchInit")) mx_search_init(data, new_socket);
-    else if (!mx_strcmp(request, "LoadMessages")) mx_load_messages(data, new_socket);
-    else if (!mx_strcmp(request, "Authorization")) mx_authorization(data, new_socket);
     //user-endpoints
-    else if (!mx_strcmp(request, "/user/add")) mx_add_user(data, new_socket);
+    if (!mx_strcmp(request, "/user/add")) mx_add_user(data, new_socket);
     else if (!mx_strcmp(request, "/user/get")) mx_get_user(data, new_socket);
     else if (!mx_strcmp(request, "/user/get-avatar")) mx_get_user_avatar(data, new_socket);
     else if (!mx_strcmp(request, "/user/get-status")) mx_get_user_status(data, new_socket);
@@ -21,26 +17,11 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "/messages/get")) mx_get_message(data, new_socket);
     else if (!mx_strcmp(request, "/messages/update")) mx_update_message(data, new_socket);
     else if (!mx_strcmp(request, "/messages/delete")) mx_delete_message(data, new_socket);
-    else if (!mx_strcmp(request, "/messages/amount")) mx_messages_amount(data, new_socket);
     else if (!mx_strcmp(request, "/message/amount")) mx_message_amount(data, new_socket);
     //chat-endpoints
     else if (!mx_strcmp(request, "/chat/add")) mx_create_chat(data, new_socket);
     else if (!mx_strcmp(request, "/chat/get")) mx_get_chat(data, new_socket);
-    else if (!mx_strcmp(request, "/chat/update")) mx_update_chat(data);
     else if (!mx_strcmp(request, "/chat/delete")) mx_delete_chat(data, new_socket);
-    //xyeta-endpoints
-    // else if (!mx_strcmp(request, "CheckLastRoom")) mx_check_last_room(data, new_socket);
-    // else if (!mx_strcmp(request, "AddImageMessage")) message_img(data, new_socket);
-    // else if (!mx_strcmp(request, "GetMessageImage")) mx_get_image_message(data, new_socket);
-    // else if (!mx_strcmp(request, "LoadRoom")) mx_load_room(data, new_socket);
-    // else if (!mx_strcmp(request, "/user/getsArr")) mx_get_users_arr(data, new_socket);
-    // else if (!mx_strcmp(request, "SendRoomData")) mx_send_room_data(data, new_socket);
-    // else if (!mx_strcmp(request, "GetAvatar")) mx_get_avatar(data, new_socket);
-    // else if (!mx_strcmp(request, "UpdateAvatar")) mx_update_avatar(data, new_socket);
-    // else if (!mx_strcmp(request, "UpdateLanguage")) mx_update_language(data);
-    // else if (!mx_strcmp(request, "GetLanguage")) mx_get_language(data, new_socket);
-    // else if (!mx_strcmp(request, "GetTheme")) mx_get_theme(data, new_socket);
-    // else if (!mx_strcmp(request, "UpdateTheme")) mx_update_theme(data);
 }
 
 static void *handle_client(void *data) {

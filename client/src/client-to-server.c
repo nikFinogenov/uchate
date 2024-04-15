@@ -360,6 +360,7 @@ char **update_user_info(char *changed_username, char *name, char *surname, char 
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     return recvBuffer;
 }
+
 char **update_message_info(int id, char *new_text) {
     if (sockfd == -1) connect_to_server(&sockfd);
     
@@ -407,7 +408,6 @@ char **update_message_info(int id, char *new_text) {
 }
 
 char **add_new_message(char *username_1, char *username_2, char* text, char* time, char* type) {
-        // Connect to the server if not yet
     if (sockfd == -1) connect_to_server(&sockfd);  
     char sendBuffer[1024];
     bzero(sendBuffer, 1024);
@@ -544,52 +544,6 @@ char **chatter_delete(char *username_1, char *username_2) {
     return recvBuffer;
 }
 
-char **get_mess_amount(char* username) {
-    if (sockfd == -1) connect_to_server(&sockfd);
-    
-    char sendBuffer[1024];
-    bzero(sendBuffer, 1024);
-    sprintf(sendBuffer, "/messages/amount\n%s\n", username);
-    
-    int error = 0;
-    socklen_t len = sizeof (error);
-    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
-
-
-    if (retval != 0) {
-        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
-        sockfd = -1;
-    }
-
-    if (error != 0) {
-        fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
-        sockfd = -1;
-    }
-    
-    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
-        perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
-        sockfd = -1;
-    }
-
-    char recvBuffer[DEFAULT_MESSAGE_SIZE];
-    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
-
-    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
-        perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
-        sockfd = -1;
-    }
-    if(sockfd == -1) sprintf(recvBuffer, "1488");
-    return recvBuffer;
-}
-
 char **get_mess_chat_amount(char *username_1, char *username_2) {
     if (sockfd == -1) connect_to_server(&sockfd);
     
@@ -635,6 +589,7 @@ char **get_mess_chat_amount(char *username_1, char *username_2) {
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     return recvBuffer;
 }
+
 char **get_chat_messages(char *username_1, char *username_2) {
     if (sockfd == -1) connect_to_server(&sockfd);
     
@@ -678,7 +633,6 @@ char **get_chat_messages(char *username_1, char *username_2) {
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     return recvBuffer;
 }
-
 
 void get_and_save_avatar_to_file(char *username) {
     if (connect_to_server(&sockfd) == -1) {
