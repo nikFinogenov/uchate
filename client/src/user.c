@@ -203,7 +203,7 @@ void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     }
     
     char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
-    if (username_text == user.username){
+    if (strcmp(username_text, user.username) == 0) {
         g_free(combined_text);
     } else {
         if(strcmp(response, "Username already exists") == 0) {
