@@ -71,13 +71,11 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Server v govne");
         return;
     }
-
-
     if (strcmp(user.status, "online") == 0){
         display_error_message("User is already logged in");
         return;
     }
-
+    
     char *token = strtok(response, "\n");
     user.username = strdup(token);
 
