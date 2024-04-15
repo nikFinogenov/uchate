@@ -33,9 +33,6 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     const gchar *password = gtk_entry_get_text(GTK_ENTRY(entries->password_entry));
     char *parsed_username = (char*)username;
     char *parsed_password = (char*)password;
-    char **status_response = get_user_status(parsed_username);
-    char *tok = strtok(status_response, "\n");
-    user.status = strdup(tok);
 
     if (error_label != NULL) {
         gtk_widget_destroy(error_label);
@@ -63,12 +60,6 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
 
-
-    if (strcmp(user.status, "online") == 0){
-        display_error_message("User is already logged in");
-        return;
-    }
-
     char *token = strtok(response, "\n");
     user.username = strdup(token);
 
@@ -80,6 +71,13 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
 
     token = strtok(NULL, "\n");
     user.desc = strdup(token);
+    char **status_response = get_user_status(parsed_username);
+    char *tok = strtok(status_response, "\n");
+    user.status = strdup(tok);
+    if (strcmp(user.status, "online") == 0){
+        display_error_message("User is already logged in");
+        return;
+    }
 
     create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
     get_and_save_avatar_to_file(user.username);
