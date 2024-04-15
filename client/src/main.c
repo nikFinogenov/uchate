@@ -34,7 +34,6 @@ int main(int argc, char *argv[]) {
     gint screen_width = gdk_screen_get_width(screen);
     gint screen_height = gdk_screen_get_height(screen);
 
-
     // Draw windows
     draw_login();
     draw_singup();
@@ -54,6 +53,7 @@ int main(int argc, char *argv[]) {
             GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Error: User is already logged in\n");
             gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
             gtk_dialog_run(GTK_DIALOG(dialog));
+            g_signal_connect(GTK_WINDOW(dialog), "destroy", G_CALLBACK(exit), NULL);
             gtk_widget_destroy(dialog);
         } else {
             char **response = check_login_data(userdata.username, userdata.password);

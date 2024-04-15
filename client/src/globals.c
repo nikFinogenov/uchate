@@ -22,6 +22,8 @@ int messages_count[MAX_CHATTERS];
 // Example initialization of chatters
 t_chatter_s* chatters = NULL; // Global variable declaration
 int chatters_count = 0;
+gint screen_width;
+gint screen_height;
 
 // Example initialization of user
 t_user_s user = {

@@ -1,5 +1,12 @@
 #include "server.h"
 
+// Callback function for the SELECT query
+static int username_exists_callback(void *not_used, int argc, char **argv, char **az_col_name) {
+    // If this function is called, it means the username exists
+    return 1;
+}
+
+
 void mx_add_user(char **data, int sockfd) {
     char *encrypted_pass = encrypt_pass(mx_strdup(data[2]));
 
@@ -264,12 +271,6 @@ void mx_get_chatter(char** data, int sockfd) {
     logger("Get user", temp_buff, "");
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
-}
-
-// Callback function for the SELECT query
-static int username_exists_callback(void *not_used, int argc, char **argv, char **az_col_name) {
-    // If this function is called, it means the username exists
-    return 1;
 }
 
 void mx_update_user(char **data, int sockfd) {

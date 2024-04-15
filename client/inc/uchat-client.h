@@ -104,6 +104,9 @@ extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
 extern GtkWidget *error_revealer;
 
+extern gint screen_width;
+extern gint screen_height;
+
 extern int chatters_count;
 extern int messages_count[MAX_CHATTERS];
 extern char *login_info;
