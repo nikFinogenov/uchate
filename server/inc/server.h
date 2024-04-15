@@ -43,8 +43,6 @@ void mx_get_user_avatar(char** data, int sockfd);
 void mx_update_avatar(char** data, int sockfd);
 void mx_get_user_status(char** data, int sockfd);
 void mx_update_user_status(char** data, int sockfd);
-// void mx_get_user2(char **data, int sockfd);
-
 
 bool mx_check_user(char **data);
 void mx_check_room(char **data, int sockfd);
@@ -54,7 +52,6 @@ void mx_delete_user(char **data);
 void mx_get_users_arr(char **data, int sockfd);
 void mx_send_room_data(char **data, int sockfd);
 void mx_get_avatar(char **data, int sockfd);
-//void mx_update_avatar(char **data, int sockfd);
 void mx_insert_message(char **data, int sockfd);
 void mx_load_room(char **data, int sockfd);
 void mx_search_init(char **data, int sockfd);

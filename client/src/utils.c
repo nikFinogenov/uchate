@@ -337,6 +337,61 @@ static GtkWidget *create_message_box(t_message_s *message) {
         }
         remove("server/source/tmp.png");
     }
+    else if(mx_strcmp(message->text, ":like") == 0) { 
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/thumbs.png", NULL);
+        if (ucode_pixbuf != NULL) {
+            GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);
+            prev_pixbuf = resize_img(prev_pixbuf, 32, 32);
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(prev_pixbuf);
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); 
+
+            g_object_unref(ucode_pixbuf);
+        } 
+    }
+    else if(mx_strcmp(message->text, ":love") == 0) {
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/pink.png", NULL);
+        if (ucode_pixbuf != NULL) {
+            GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);
+            prev_pixbuf = resize_img(prev_pixbuf, 32, 32);
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(prev_pixbuf);
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); 
+
+            g_object_unref(ucode_pixbuf);
+        } 
+     }
+    else if(mx_strcmp(message->text, ":stone") == 0) {
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/moai.png", NULL);
+        if (ucode_pixbuf != NULL) {
+            GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);
+            prev_pixbuf = resize_img(prev_pixbuf, 32, 32);
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(prev_pixbuf);
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); 
+
+            g_object_unref(ucode_pixbuf);
+        } 
+     }
+    else if(mx_strcmp(message->text, ":lol") == 0) {
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/rolling.png", NULL);
+        if (ucode_pixbuf != NULL) {
+            GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);
+            prev_pixbuf = resize_img(prev_pixbuf, 32, 32);
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(prev_pixbuf);
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); 
+
+            g_object_unref(ucode_pixbuf);
+        } 
+     }
+    else if(mx_strcmp(message->text, ":sad") == 0) { 
+        GdkPixbuf *ucode_pixbuf = gdk_pixbuf_new_from_file("client/img/sad.png", NULL);
+        if (ucode_pixbuf != NULL) {
+            GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(ucode_pixbuf);
+            prev_pixbuf = resize_img(prev_pixbuf, 32, 32);
+            GtkWidget *ucode_image = gtk_image_new_from_pixbuf(prev_pixbuf);
+            gtk_grid_attach(GTK_GRID(message_box), ucode_image, 0, 0, 1, 1); 
+
+            g_object_unref(ucode_pixbuf);
+        } 
+    }
     else {
         GtkWidget *text_label = gtk_label_new(message->text);
         gtk_grid_attach(GTK_GRID(message_box), text_label, 0, 0, 1, 1);
