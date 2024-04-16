@@ -593,6 +593,8 @@ static void devs_window(GtkWidget *widget, gpointer data){
     gtk_container_add(GTK_CONTAINER(content_area), razrab2);
     gtk_container_add(GTK_CONTAINER(content_area), razrab3);
     gtk_container_add(GTK_CONTAINER(content_area), razrab4);
+    gtk_widget_set_halign(GTK_WIDGET(content_area), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(content_area), GTK_ALIGN_CENTER);
 
     gtk_widget_show_all(settings_f);
 
@@ -1013,8 +1015,8 @@ void draw_user_info_box(GtkWidget *user_info_box) {
     GdkPixbuf *pixbuf;
     GdkPixbuf *prev_pixbuf;
     if (chatters == NULL || selected_user.index == -1) {
-        pixbuf = file_to_pixbuf(default_img);
-        prev_pixbuf = gdk_pixbuf_copy(pixbuf);
+        pixbuf = NULL;
+        prev_pixbuf = NULL;
     } else {
         char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(chatters[selected_user.index].username) + strlen("_avatar.png") + 1);
         get_and_save_avatar_to_file(chatters[selected_user.index].username);
@@ -1029,7 +1031,9 @@ void draw_user_info_box(GtkWidget *user_info_box) {
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
+    int w = (pixbuf == NULL) ? 10 : gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf));
+    int h = (pixbuf == NULL) ? 10 : gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf));
+    gtk_widget_set_size_request(GTK_WIDGET(image), w, h);
     g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
     gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
 

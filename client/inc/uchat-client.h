@@ -176,6 +176,9 @@ void load_message(char *username);
 void start_message_checker(char *username);
 void stop_message_checker(void);
 void clear_message(t_message_s *message);
+int server_chats_quantity(char *username);
+void add_message(int mess_id, int chatter_id, const char* text, const char* time, bool is_user);
+void add_chatter(const char* name, const char* surname, const char* username, const char* lastmsg, GdkPixbuf* avatar);
 
 char* get_random_joke();
 void clear_all(void);

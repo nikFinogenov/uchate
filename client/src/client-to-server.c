@@ -282,7 +282,6 @@ char **get_chats_data(char *username) {
     socklen_t len = sizeof (error);
     int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
 
-
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
         pthread_t thread_id;

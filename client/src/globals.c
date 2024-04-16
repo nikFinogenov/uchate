@@ -15,7 +15,7 @@ GtkWidget *scrollable_window2 = NULL;
 
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
-char* default_img = "client/img/simple.png";
+char* default_img = "client/img/moaii.png";
 
 t_message_s** messages;
 int messages_count[MAX_CHATTERS];

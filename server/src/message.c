@@ -79,7 +79,9 @@ void mx_get_message(char **data, int sockfd) {
     char *st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Get messages from chat", st, "");
     
-    if (offset == 0) {
+    if (offset == 0 && exit == SQLITE_OK) {
+        send(sockfd, "0", strlen("0"), 0);
+    } else if(offset == 0) {
         send(sockfd, "1", strlen("1"), 0);
     } else {
         send(sockfd, temp_buff, offset, 0);

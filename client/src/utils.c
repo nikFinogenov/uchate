@@ -781,11 +781,11 @@ int server_chats_quantity(char *username) {
 void load_chats(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("tut\n");
+        g_print("Ne poluchilos\n");
         return;
     }
     if (strcmp((char *)response, "1488") == 0) {
-        g_print("tut5\n");
+        g_print("Server offline\n");
         return;
     }
     char **tokens = mx_strsplit((char *)response, '\n');
@@ -796,7 +796,7 @@ void load_chats(char *username) {
             return;
         }
         if (strcmp((char *)response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
+            g_print("Server offline\n", tokens[i]);
             return;
         }
         char *token2 = strtok((char *)response2, "\n");
@@ -805,14 +805,15 @@ void load_chats(char *username) {
         char *name = strdup(token2);
         token2 = strtok(NULL, "\n");
         char *surname = strdup(token2);
-        t_chatter_s new_chatter = {
-            .name = mx_strdup(name),
-            .surname = mx_strdup(surname),
-            .username = mx_strdup(username),
-            .lastmsg = mx_strdup("No messages yet")
-        };
-        chatters[chatters_count] = new_chatter;
-        chatters_count++;
+        add_chatter(name, surname, username, "No messages yet", NULL);
+        // t_chatter_s new_chatter = {
+        //     .name = mx_strdup(name),
+        //     .surname = mx_strdup(surname),
+        //     .username = mx_strdup(username),
+        //     .lastmsg = mx_strdup("No messages yet")
+        // };
+        // chatters[chatters_count] = new_chatter;
+        // chatters_count++;
     }
 }
 
@@ -830,13 +831,15 @@ void load_message(char *username) {
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chat_messages(user.username, tokens[i]);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("%s couldn't be found3\n", tokens[i]);
-            continue;
-
+            g_print("Ne poluchilos\n", tokens[i]);
+            return;
         }
         if (strcmp((char *)response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
+            g_print("Server offline\n", tokens[i]);
             return;
+        }
+        if (strcmp((char *)response2, "0") == 0) {
+            continue;
         }
         char **tokens2 = mx_strsplit((char *)response2, '\n');
         int mess_count_ahuet = mx_get_length(tokens2) / 5;
@@ -851,14 +854,15 @@ void load_message(char *username) {
             char *type = tokens2[j];
             j++;
             char *time = tokens2[j];
-            t_message_s new_message = {
-                .id = mx_atoi(id),
-                .text = mx_strdup(text),
-                .time = mx_strdup(time),
-                .is_user = (mx_strcmp(user.username, type) == 0) ? true : false
-            };
-            messages[i][messages_count[i]] = new_message;
-            messages_count[i]++;
+            // t_message_s new_message = {
+            //     .id = mx_atoi(id),
+            //     .text = mx_strdup(text),
+            //     .time = mx_strdup(time),
+            //     .is_user = (mx_strcmp(user.username, type) == 0) ? true : false
+            // };
+            // messages[i][messages_count[i]] = new_message;
+            // messages_count[i]++;
+            add_message(id, i, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
         }
     }
 }

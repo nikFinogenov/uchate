@@ -213,3 +213,231 @@
 2024-04-17 01:19:30: Get user avatar -> OK
 2024-04-17 01:19:31: Get user avatar -> OK
 2024-04-17 01:19:38: Update user -> OK
+Умер мужик
+Мужик ожил
+2024-04-17 01:27:58: Get user status -> OK
+2024-04-17 01:27:58: Get user avatar -> OK
+2024-04-17 01:27:58: Update user -> OK
+2024-04-17 01:28:10: Update user -> OK
+2024-04-17 01:37:47: Get user status -> OK
+2024-04-17 01:37:47: Get user avatar -> OK
+2024-04-17 01:37:47: Update user -> OK
+2024-04-17 01:38:04: Get user status -> OK
+2024-04-17 01:38:13: Get user status -> OK
+2024-04-17 01:38:13: Get user avatar -> OK
+2024-04-17 01:38:13: Update user -> OK
+2024-04-17 01:38:34: Get user status -> OK
+2024-04-17 01:38:34: Get user avatar -> OK
+2024-04-17 01:38:34: Update user -> OK
+2024-04-17 01:38:57: Update user -> OK
+2024-04-17 01:42:35: Get user status -> OK
+2024-04-17 01:42:35: Get user avatar -> OK
+2024-04-17 01:42:35: Update user -> OK
+2024-04-17 01:42:46: Get user status -> OK
+2024-04-17 01:43:05: Get user status -> OK
+2024-04-17 01:43:14: Get user status -> OK
+2024-04-17 01:43:14: Get user avatar -> OK
+2024-04-17 01:43:14: Update user -> OK
+2024-04-17 01:43:27: Update user -> OK
+2024-04-17 01:44:10: Get user status -> OK
+2024-04-17 01:44:10: Get user avatar -> OK
+2024-04-17 01:44:10: Update user -> OK
+2024-04-17 01:44:23: Update user -> OK
+Умер мужик
+Мужик ожил
+2024-04-17 01:55:29: Get user status -> OK
+2024-04-17 01:55:29: Get user avatar -> OK
+2024-04-17 01:55:29: Update user -> OK
+2024-04-17 01:55:29: Get user avatar -> OK
+2024-04-17 01:55:29: Get user avatar -> OK
+2024-04-17 01:55:33: Get user avatar -> OK
+2024-04-17 01:55:34: Get user avatar -> OK
+2024-04-17 01:55:35: Update user -> OK
+Умер мужик
+Мужик ожил
+2024-04-17 02:03:09: Get user status -> OK
+2024-04-17 02:03:09: Get user avatar -> OK
+2024-04-17 02:03:09: Update user -> OK
+2024-04-17 02:03:09: Get messages from chat -> OK
+2024-04-17 02:03:09: Get messages from chat -> OK
+2024-04-17 02:03:09: Get user avatar -> OK
+2024-04-17 02:03:09: Get user avatar -> OK
+2024-04-17 02:03:13: Get user avatar -> OK
+2024-04-17 02:03:14: Get user avatar -> OK
+2024-04-17 02:03:15: Get user avatar -> OK
+2024-04-17 02:03:16: Get user avatar -> OK
+2024-04-17 02:03:16: Get user avatar -> OK
+2024-04-17 02:03:17: Get user avatar -> OK
+2024-04-17 02:03:41: Create chat -> OK
+2024-04-17 02:03:41: Get user avatar -> OK
+2024-04-17 02:03:41: Get user avatar -> OK
+2024-04-17 02:03:41: Get user avatar -> OK
+2024-04-17 02:03:42: Get user avatar -> OK
+2024-04-17 02:03:43: Get user avatar -> OK
+2024-04-17 02:03:44: Get user avatar -> OK
+2024-04-17 02:03:45: Update user -> OK
+2024-04-17 02:18:26: Get user status -> OK
+2024-04-17 02:18:26: Get user avatar -> OK
+2024-04-17 02:18:26: Update user -> OK
+2024-04-17 02:18:26: Get messages from chat -> OK
+2024-04-17 02:18:26: Get messages from chat -> OK
+2024-04-17 02:18:26: Get messages from chat -> OK
+2024-04-17 02:18:26: Get user avatar -> OK
+2024-04-17 02:18:26: Get user avatar -> OK
+2024-04-17 02:18:26: Get user avatar -> OK
+2024-04-17 02:18:31: Get user avatar -> OK
+2024-04-17 02:18:32: Get user avatar -> OK
+2024-04-17 02:18:34: Update user -> OK
+2024-04-17 02:21:32: Get user status -> OK
+2024-04-17 02:21:32: Get user avatar -> OK
+2024-04-17 02:21:32: Update user -> OK
+2024-04-17 02:21:32: Get messages from chat -> OK
+2024-04-17 02:21:32: Get messages from chat -> OK
+2024-04-17 02:21:32: Get messages from chat -> OK
+2024-04-17 02:21:32: Get user avatar -> OK
+2024-04-17 02:21:32: Get user avatar -> OK
+2024-04-17 02:21:32: Get user avatar -> OK
+2024-04-17 02:21:51: Update user -> OK
+2024-04-17 02:22:43: Get user status -> OK
+2024-04-17 02:22:43: Get user avatar -> OK
+2024-04-17 02:22:43: Update user -> FAILED -> database is locked
+2024-04-17 02:22:43: Get messages from chat -> OK
+2024-04-17 02:22:43: Get messages from chat -> OK
+2024-04-17 02:22:43: Get messages from chat -> OK
+2024-04-17 02:22:43: Get user avatar -> OK
+2024-04-17 02:22:43: Get user avatar -> OK
+2024-04-17 02:22:43: Get user avatar -> OK
+2024-04-17 02:22:48: Get user avatar -> OK
+2024-04-17 02:22:49: Get user avatar -> OK
+2024-04-17 02:22:50: Get user avatar -> OK
+2024-04-17 02:22:51: Get user avatar -> OK
+2024-04-17 02:22:53: Get user avatar -> OK
+2024-04-17 02:22:54: Get user avatar -> OK
+2024-04-17 02:22:55: Get user avatar -> OK
+2024-04-17 02:22:55: Get user avatar -> OK
+2024-04-17 02:22:56: Get user avatar -> OK
+2024-04-17 02:22:56: Get user avatar -> OK
+2024-04-17 02:23:08: Update user -> FAILED -> database is locked
+2024-04-17 02:23:34: Get user status -> OK
+2024-04-17 02:23:34: Get user avatar -> OK
+2024-04-17 02:23:34: Update user -> OK
+2024-04-17 02:23:34: Get messages from chat -> OK
+2024-04-17 02:23:34: Get messages from chat -> OK
+2024-04-17 02:23:34: Get messages from chat -> OK
+2024-04-17 02:23:34: Get user avatar -> OK
+2024-04-17 02:23:34: Get user avatar -> OK
+2024-04-17 02:23:34: Get user avatar -> OK
+2024-04-17 02:23:39: Update user -> OK
+Умер мужик
+Мужик ожил
+2024-04-17 02:25:58: Get user status -> OK
+2024-04-17 02:25:58: Get user avatar -> OK
+2024-04-17 02:25:58: Update user -> OK
+2024-04-17 02:25:58: Get messages from chat -> OK
+2024-04-17 02:25:58: Get messages from chat -> OK
+2024-04-17 02:25:58: Get messages from chat -> OK
+2024-04-17 02:25:58: Get user avatar -> OK
+2024-04-17 02:25:58: Get user avatar -> OK
+2024-04-17 02:25:58: Get user avatar -> OK
+2024-04-17 02:26:02: Get user avatar -> OK
+2024-04-17 02:26:03: Get user avatar -> OK
+2024-04-17 02:26:04: Get user avatar -> OK
+2024-04-17 02:26:06: Get user avatar -> OK
+2024-04-17 02:26:12: Update user -> OK
+2024-04-17 02:28:06: Get user status -> OK
+2024-04-17 02:28:06: Get user avatar -> OK
+2024-04-17 02:28:06: Update user -> OK
+2024-04-17 02:28:06: Get messages from chat -> OK
+2024-04-17 02:28:06: Get messages from chat -> OK
+2024-04-17 02:28:06: Get messages from chat -> OK
+2024-04-17 02:28:06: Get user avatar -> OK
+2024-04-17 02:28:06: Get user avatar -> OK
+2024-04-17 02:28:06: Get user avatar -> OK
+2024-04-17 02:28:12: Get user avatar -> OK
+2024-04-17 02:28:13: Get user avatar -> OK
+2024-04-17 02:28:14: Get user avatar -> OK
+2024-04-17 02:28:16: Update user -> OK
+Умер мужик
+Мужик ожил
+2024-04-17 02:29:43: Get user status -> OK
+2024-04-17 02:29:43: Get user avatar -> OK
+2024-04-17 02:29:43: Update user -> OK
+2024-04-17 02:29:43: Get messages from chat -> OK
+2024-04-17 02:29:43: Get messages from chat -> OK
+2024-04-17 02:29:43: Get messages from chat -> OK
+2024-04-17 02:29:43: Get user avatar -> OK
+2024-04-17 02:29:43: Get user avatar -> OK
+2024-04-17 02:29:43: Get user avatar -> OK
+2024-04-17 02:29:55: Update user -> OK
+2024-04-17 02:30:27: Get user status -> OK
+2024-04-17 02:30:27: Get user avatar -> OK
+2024-04-17 02:30:27: Update user -> OK
+2024-04-17 02:30:27: Get messages from chat -> OK
+2024-04-17 02:30:27: Get messages from chat -> OK
+2024-04-17 02:30:27: Get messages from chat -> OK
+2024-04-17 02:30:27: Get user avatar -> OK
+2024-04-17 02:30:27: Get user avatar -> OK
+2024-04-17 02:30:27: Get user avatar -> OK
+2024-04-17 02:30:36: Update user -> OK
+2024-04-17 02:34:24: Get user status -> OK
+2024-04-17 02:34:24: Get user avatar -> OK
+2024-04-17 02:34:24: Update user -> OK
+2024-04-17 02:34:24: Get messages from chat -> OK
+2024-04-17 02:34:24: Get messages from chat -> OK
+2024-04-17 02:34:24: Get messages from chat -> OK
+2024-04-17 02:34:24: Get user avatar -> OK
+2024-04-17 02:34:24: Get user avatar -> OK
+2024-04-17 02:34:24: Get user avatar -> OK
+2024-04-17 02:36:22: Get user status -> OK
+2024-04-17 02:38:34: Get user status -> OK
+2024-04-17 02:38:34: Get user avatar -> OK
+2024-04-17 02:38:34: Update user -> OK
+2024-04-17 02:38:34: Get messages from chat -> OK
+2024-04-17 02:38:34: Get messages from chat -> OK
+2024-04-17 02:38:34: Get messages from chat -> OK
+2024-04-17 02:38:34: Get user avatar -> OK
+2024-04-17 02:38:34: Get user avatar -> OK
+2024-04-17 02:38:34: Get user avatar -> OK
+2024-04-17 02:39:18: Get user status -> OK
+2024-04-17 02:39:26: Get user status -> OK
+2024-04-17 02:39:26: Get user avatar -> OK
+2024-04-17 02:39:26: Update user -> OK
+2024-04-17 02:39:26: Get messages from chat -> OK
+2024-04-17 02:39:26: Get messages from chat -> OK
+2024-04-17 02:39:26: Get messages from chat -> OK
+2024-04-17 02:39:26: Get user avatar -> OK
+2024-04-17 02:39:26: Get user avatar -> OK
+2024-04-17 02:39:26: Get user avatar -> OK
+2024-04-17 02:39:32: Get user avatar -> OK
+2024-04-17 02:39:34: Update user -> OK
+Умер мужик
+Мужик ожил
+2024-04-17 02:42:22: Get user status -> OK
+2024-04-17 02:42:22: Get user avatar -> OK
+2024-04-17 02:42:22: Update user -> OK
+2024-04-17 02:42:22: Get messages from chat -> OK
+2024-04-17 02:42:22: Get messages from chat -> OK
+2024-04-17 02:42:22: Get messages from chat -> OK
+2024-04-17 02:42:22: Get user avatar -> OK
+2024-04-17 02:42:22: Get user avatar -> OK
+2024-04-17 02:42:22: Get user avatar -> OK
+2024-04-17 02:42:55: Get user avatar -> OK
+2024-04-17 02:42:56: Get user avatar -> OK
+2024-04-17 02:42:56: Get user avatar -> OK
+2024-04-17 02:42:57: Get user avatar -> OK
+2024-04-17 02:42:57: Get user avatar -> OK
+2024-04-17 02:42:58: Get user avatar -> OK
+2024-04-17 02:42:59: Update user -> OK
+2024-04-17 02:44:52: Get user status -> OK
+2024-04-17 02:44:52: Get user avatar -> OK
+2024-04-17 02:44:52: Update user -> OK
+2024-04-17 02:44:52: Get messages from chat -> OK
+2024-04-17 02:44:52: Get messages from chat -> OK
+2024-04-17 02:44:52: Get messages from chat -> OK
+2024-04-17 02:44:52: Get user avatar -> OK
+2024-04-17 02:44:52: Get user avatar -> OK
+2024-04-17 02:44:52: Get user avatar -> OK
+2024-04-17 02:44:55: Get user avatar -> OK
+2024-04-17 02:44:56: Get user avatar -> OK
+2024-04-17 02:44:56: Get user avatar -> OK
+2024-04-17 02:44:57: Update user -> OK
