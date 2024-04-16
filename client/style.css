@@ -115,14 +115,14 @@
 } */
 
 #fimg_in_settings {
-    background-image: url("img/anekdot.png");
+    background-image: url("img/software.png");
     background-size: contain;
 }
 #simg_in_settings {
-    background-image: url("img/anekdot.png");
+    background-image: url("img/charity.png");
     background-size: contain;
 }
 #timg_in_settings {
-    background-image: url("img/anekdot.png");
+    background-image: url("img/cash.png");
     background-size: contain;
 }

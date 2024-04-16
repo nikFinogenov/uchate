@@ -980,6 +980,68 @@ void draw_user_window() {
     gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
     GtkWidget *ebox1, *ebox2, *ebox3;
     GtkWidget *nbox1, *nbox2, *nbox3;
+    GtkWidget *help_lable = gtk_label_new("Stickers Help Manual");
+    gtk_label_set_justify(GTK_LABEL(help_lable), GTK_ALIGN_CENTER);
+    GtkWidget *help_f = gtk_label_new("In order to use stickers you need a McOk Bronze subscription or higher");
+    GtkWidget *help_sad = gtk_label_new(":sad");
+    GtkWidget *help_thumbs = gtk_label_new(":like");
+    GtkWidget *help_pink = gtk_label_new(":love");
+    GtkWidget *help_rolling = gtk_label_new(":lol");
+    GtkWidget *help_moai = gtk_label_new(":stone");
+    GtkWidget *help_box1, *help_box2, *help_box3, *help_box4, *help_box5;
+    GtkWidget *help_box_sub1, *help_box_sub2, *help_box_sub3, *help_box_sub4, *help_box_sub5;
+    GdkPixbuf *sticker1, *sticker2, *sticker3, *sticker4, *sticker5;
+    GtkWidget *sticker11, *sticker22, *sticker33, *sticker44, *sticker55;
+
+    sticker1 = gdk_pixbuf_new_from_file("client/img/sad.png", NULL);
+    sticker2 = gdk_pixbuf_new_from_file("client/img/thumbs.png", NULL);
+    sticker3 = gdk_pixbuf_new_from_file("client/img/pink.png", NULL);
+    sticker4 = gdk_pixbuf_new_from_file("client/img/rolling.png", NULL);
+    sticker5 = gdk_pixbuf_new_from_file("client/img/moai.png", NULL);
+
+    GdkPixbuf *scaled_pixbuf1 = gdk_pixbuf_scale_simple(sticker1, 40, 40, GDK_INTERP_BILINEAR);
+    GdkPixbuf *scaled_pixbuf2 = gdk_pixbuf_scale_simple(sticker2, 40, 40, GDK_INTERP_BILINEAR);
+    GdkPixbuf *scaled_pixbuf3 = gdk_pixbuf_scale_simple(sticker3, 40, 40, GDK_INTERP_BILINEAR);
+    GdkPixbuf *scaled_pixbuf4 = gdk_pixbuf_scale_simple(sticker4, 40, 40, GDK_INTERP_BILINEAR);
+    GdkPixbuf *scaled_pixbuf5 = gdk_pixbuf_scale_simple(sticker5, 40, 40, GDK_INTERP_BILINEAR);
+
+    sticker11 = gtk_image_new_from_pixbuf(scaled_pixbuf1);
+    sticker22 = gtk_image_new_from_pixbuf(scaled_pixbuf2);
+    sticker33 = gtk_image_new_from_pixbuf(scaled_pixbuf3);
+    sticker44 = gtk_image_new_from_pixbuf(scaled_pixbuf4);
+    sticker55 = gtk_image_new_from_pixbuf(scaled_pixbuf5);
+
+    //gtk_widget_set_margin_top(error_label, 10);
+    help_box1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    help_box2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    help_box3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    help_box4 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    help_box5 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+
+    help_box_sub1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    help_box_sub2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    help_box_sub3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    help_box_sub4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    help_box_sub5 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+    gtk_container_add(GTK_CONTAINER(help_box_sub1), sticker11);
+    gtk_container_add(GTK_CONTAINER(help_box_sub1), help_sad);
+    gtk_container_add(GTK_CONTAINER(help_box_sub2), sticker22);
+    gtk_container_add(GTK_CONTAINER(help_box_sub2), help_thumbs);
+    gtk_container_add(GTK_CONTAINER(help_box_sub3), sticker33);
+    gtk_container_add(GTK_CONTAINER(help_box_sub3), help_pink);
+    gtk_container_add(GTK_CONTAINER(help_box_sub4), sticker44);
+    gtk_container_add(GTK_CONTAINER(help_box_sub4), help_rolling);
+    gtk_container_add(GTK_CONTAINER(help_box_sub5), sticker55);
+    gtk_container_add(GTK_CONTAINER(help_box_sub5), help_moai);
+
+    // Добавление изображений в боксы
+    gtk_box_pack_start(GTK_BOX(help_box1), help_box_sub1, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(help_box2), help_box_sub2, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(help_box3), help_box_sub3, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(help_box4), help_box_sub4, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(help_box5), help_box_sub5, TRUE, TRUE, 0);
+    
 
     nbox1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     nbox2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -999,9 +1061,13 @@ void draw_user_window() {
     gtk_widget_set_size_request(simage, 40, 40);
     GtkWidget *timage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(timage, 40, 40);
-    GtkWidget *fbutton = gtk_button_new_with_label("Devs(bedolagy)");
-    GtkWidget *sbutton = gtk_button_new_with_label("Пожертвовать в семью бедолаг");
-    GtkWidget *tbutton = gtk_button_new_with_label("McOk Gold | Silver | Bronze");
+    GtkWidget *fbutton = gtk_button_new_with_label("Developers");
+    GtkWidget *sbutton = gtk_button_new_with_label("Donate");
+    GtkWidget *tbutton = gtk_button_new_with_label("Subscription");
+
+    gtk_widget_set_size_request(fbutton, 300, NULL);
+    gtk_widget_set_size_request(sbutton, 300, NULL);
+    gtk_widget_set_size_request(tbutton, 300, NULL);
 
     gtk_widget_set_name(fimage, "fimg_in_settings");
     gtk_widget_set_name(simage, "simg_in_settings");
@@ -1048,11 +1114,11 @@ void draw_user_window() {
     gtk_container_add(GTK_CONTAINER(talign), ebox3);
 
     gtk_alignment_set_padding(GTK_ALIGNMENT(ffalign), 10, 0, 60, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(sfalign), 15, 10, 5, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(sfalign), 13, 10, 5, 0);
     gtk_alignment_set_padding(GTK_ALIGNMENT(fsalign), 10, 0, 60, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(ssalign), 15, 10, 5, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(ssalign), 13, 10, 5, 0);
     gtk_alignment_set_padding(GTK_ALIGNMENT(ftalign), 10, 0, 60, 0);
-    gtk_alignment_set_padding(GTK_ALIGNMENT(stalign), 15, 10, 5, 0);
+    gtk_alignment_set_padding(GTK_ALIGNMENT(stalign), 13, 10, 5, 0);
 
     gtk_alignment_set_padding(GTK_ALIGNMENT(falign), 20, 10, 0, 0);
     gtk_alignment_set_padding(GTK_ALIGNMENT(salign), 0, 10, 0, 0);
@@ -1065,6 +1131,13 @@ void draw_user_window() {
     gtk_box_pack_start(GTK_BOX(settings_box), falign, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(settings_box), salign, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(settings_box), talign, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_lable, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_f, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_box1, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_box2, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_box3, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_box4, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(settings_box), help_box5, FALSE, FALSE, 0);
     g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), settings_box);
 
     draw_account_settings_box();
