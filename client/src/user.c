@@ -1,6 +1,6 @@
 #include "uchat-client.h"
 
-static GtkWidget* add_new_chat_when_no_chats;
+static GtkWidget *add_new_chat_when_no_chats;
 static GtkWidget *search_pop_up = NULL;
 static GtkWidget *error_label = NULL;
 static bool settings_visible = TRUE;
@@ -210,6 +210,41 @@ void draw_account_settings_box(){
     GtkWidget *username_entry;
     GtkWidget *description_entry;
 
+    GtkWidget *user_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(user_frame, "myButton");
+    GtkWidget *user_label = gtk_label_new("Username:");
+    gtk_box_pack_start(GTK_BOX(user_frame), user_label, FALSE, FALSE, 0);
+
+    GtkWidget *name_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(name_frame, "myButton");
+    GtkWidget *name_label = gtk_label_new("Name:");
+    gtk_box_pack_start(GTK_BOX(name_frame), name_label, FALSE, FALSE, 0);
+
+    GtkWidget *sur_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(sur_frame, "myButton");
+    GtkWidget *sur_label = gtk_label_new("Surname:");
+    gtk_box_pack_start(GTK_BOX(sur_frame), sur_label, FALSE, FALSE, 0);
+
+    GtkWidget *desc_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(desc_frame, "myButton");
+    GtkWidget *desc_label = gtk_label_new("Description:");
+    gtk_box_pack_start(GTK_BOX(desc_frame), desc_label, FALSE, FALSE, 0);
+
+
+    gtk_widget_set_margin_top(user_frame, 25);
+    gtk_widget_set_margin_start(user_frame, 10);
+    gtk_widget_set_valign(user_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(user_frame, GTK_ALIGN_START);
+    gtk_widget_set_margin_start(name_frame, 10);
+    gtk_widget_set_valign(name_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(name_frame, GTK_ALIGN_START);
+    gtk_widget_set_margin_start(sur_frame, 10);
+    gtk_widget_set_valign(sur_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(sur_frame, GTK_ALIGN_START);
+    gtk_widget_set_margin_start(desc_frame, 10);
+    gtk_widget_set_valign(desc_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(desc_frame, GTK_ALIGN_START);
+
     name_entry = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(name_entry), user.name);
 
@@ -221,16 +256,31 @@ void draw_account_settings_box(){
 
     description_entry = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(description_entry), user.desc);
+    gtk_entry_set_placeholder_text(GTK_ENTRY(description_entry), "Write your description here...");
     
-    gtk_widget_set_margin_top(username_entry, 5);
-    gtk_widget_set_margin_bottom(username_entry, 5);
-    gtk_widget_set_margin_bottom(name_entry, 5);
-    gtk_widget_set_margin_bottom(surname_entry, 5);
-    gtk_widget_set_margin_bottom(description_entry, 5);
+    gtk_widget_set_margin_bottom(username_entry, 10);
+    gtk_widget_set_margin_start(username_entry, 10);
+    gtk_widget_set_margin_end(username_entry, 10);
+
+    gtk_widget_set_margin_bottom(name_entry, 10);
+    gtk_widget_set_margin_start(name_entry, 10);
+    gtk_widget_set_margin_end(name_entry, 10);
+
+    gtk_widget_set_margin_bottom(surname_entry, 10);
+    gtk_widget_set_margin_start(surname_entry, 10);
+    gtk_widget_set_margin_end(surname_entry, 10);
+
+    gtk_widget_set_margin_bottom(description_entry, 10);
+    gtk_widget_set_margin_start(description_entry, 10);
+    gtk_widget_set_margin_end(description_entry, 10);
     
-    avatar_button = gtk_button_new_with_label("Change");
+    avatar_button = gtk_button_new_with_label("Change image");
+    gtk_widget_set_hexpand(avatar_button, FALSE);
+    gtk_widget_set_halign(avatar_button, GTK_ALIGN_CENTER);
 
     confirm_button = gtk_button_new_with_label("Confirm");
+    gtk_widget_set_hexpand(confirm_button, FALSE);
+    gtk_widget_set_halign(confirm_button, GTK_ALIGN_CENTER);
 
     GtkTextBuffer *buffer = gtk_text_buffer_new(NULL);
 
@@ -239,11 +289,15 @@ void draw_account_settings_box(){
 
     gtk_box_pack_start(GTK_BOX(account_settings), drawing_area, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), avatar_button, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), user_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), username_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), sur_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), surname_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), name_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), name_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), desc_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), description_entry, FALSE, FALSE, 0);
-    gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 50);
     g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), account_settings);
     g_object_set_data(G_OBJECT(confirm_button), "name_entry", name_entry);
     g_object_set_data(G_OBJECT(confirm_button), "surname_entry", surname_entry);
@@ -628,16 +682,16 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     
     char **response = get_chatter_data(parsed_username);
 
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         display_error_message("User couldn't be found", 0);
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         display_error_message("Server offline", 0);
         return;
     }
 
-    char *token = strtok(response, "\n");
+    char *token = strtok((char *)response, "\n");
     char *username = strdup(token);
     token = strtok(NULL, "\n");
     char *name = strdup(token);
@@ -658,11 +712,11 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         chatters_count++;
         char** response2 = send_new_chat_data(user.username, username);
     
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             display_error_message("Chat already exists", 0);
             return;
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             display_error_message("Server offline", 0);
             return;
         }
@@ -729,7 +783,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
 
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
-    char *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
+    char *text = (char *)gtk_entry_get_text(GTK_ENTRY(data->entry));
     int i = 0, j = 0;
 
     while (mx_isspace(text[i])) i++;
@@ -759,7 +813,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     char time_str[6];
     strftime(time_str, sizeof(time_str), "%H:%M", timeinfo);
 
-    int m_id = mx_atoi(add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
+    int m_id = mx_atoi((char *)add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
     
     t_message_s new_mes = {
         .id = m_id,
@@ -806,7 +860,7 @@ static void message_search_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
     gtk_container_foreach(GTK_CONTAINER(scrollable_window2), (GtkCallback)gtk_widget_destroy, NULL);
-    message_populate_scrollable_filtred_window(scrollable_window2, text);
+    message_populate_scrollable_filtred_window(scrollable_window2, (char *)text);
     gtk_widget_show_all(scrollable_window2);
 }
 
@@ -815,7 +869,7 @@ static void chatter_search_clicled(GtkWidget *widget, gpointer user_data) {
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
 
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
-    user_populate_scrollable_filtred_window(scrollable_window, text);
+    user_populate_scrollable_filtred_window(scrollable_window, (char *)text);
     gtk_widget_show_all(scrollable_window);
 }
 
