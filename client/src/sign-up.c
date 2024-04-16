@@ -89,10 +89,10 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
     
-    user.name       = mx_strdup(parsed_first_name);
-    user.surname    = mx_strdup(parsed_last_name);
-    user.username   = mx_strdup(parsed_username);
-    user.desc   = mx_strdup("");
+    user.name = g_strdup(parsed_first_name);
+    user.surname = g_strdup(parsed_last_name);
+    user.username = g_strdup(parsed_username);
+    user.desc = g_strdup(" ");
 
     get_and_save_avatar_to_file(user.username);
     sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
@@ -100,7 +100,6 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
     remove(avatar_path);
     free(avatar_path);
-
     gtk_widget_hide(signup_window);
     draw_user_window();
     show_user_window();
