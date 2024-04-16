@@ -59,7 +59,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Server offline");
         return;
     }
-
+    
     char *token = strtok(response, "\n");
     user.username = strdup(token);
 

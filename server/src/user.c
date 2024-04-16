@@ -1,5 +1,12 @@
 #include "server.h"
 
+// Callback function for the SELECT query
+static int username_exists_callback(void *not_used, int argc, char **argv, char **az_col_name) {
+    // If this function is called, it means the username exists
+    return 1;
+}
+
+
 void mx_add_user(char **data, int sockfd) {
     char *encrypted_pass = encrypt_pass(mx_strdup(data[2]));
 
@@ -249,10 +256,6 @@ void mx_get_chatter(char** data, int sockfd) {
     sqlite3_close(db);
 }
 
-static int username_exists_callback(void *not_used, int argc, char **argv, char **az_col_name) {
-    return 1;
-}
-
 void mx_update_user(char **data, int sockfd) {
     sqlite3 *db = open_db();
     char sql[500];
@@ -260,24 +263,28 @@ void mx_update_user(char **data, int sockfd) {
     char response[DEFAULT_MESSAGE_SIZE];
     char *errmsg;
     bool username_exists = false;
+    if (strcmp(data[1], data[5]) != 0) {
+        // Check if the username already exists in the database
+        sprintf(sql, "SELECT * FROM USERS WHERE username='%s';", data[1]);
+        int result = sqlite3_exec(db, sql, username_exists_callback, 0, NULL);
 
-    sprintf(sql, "SELECT * FROM USERS WHERE username='%s';", data[1]);
-    int result = sqlite3_exec(db, sql, username_exists_callback, 0, NULL);
+        // If the result is not zero, it means the username already exists
+        if (result != SQLITE_OK) {
+            logger("Error checking username existence", ST_NEOK, sqlite3_errmsg(db));
+            sqlite3_close(db);
+            sprintf(response, "Error checking username existence");
+            send(sockfd, response, strlen(response), 0);
+            return;
+        }
 
-    if (result != SQLITE_OK) {
-        logger("Error checking username existence", ST_NEOK, sqlite3_errmsg(db));
-        sqlite3_close(db);
-        sprintf(response, "Error checking username existence");
-        send(sockfd, response, strlen(response), 0);
-        return;
-    }
-
-    if (username_exists) {
-        logger("Username already exists", ST_NEOK, "Username already exists in the database");
-        sprintf(response, "Username already exists");
-        send(sockfd, response, strlen(response), 0);
-        sqlite3_close(db);
-        return;
+        // If the callback function was called, it means the username exists
+        if (username_exists) {
+            logger("Username already exists", ST_NEOK, "Username already exists in the database");
+            sprintf(response, "Username already exists");
+            send(sockfd, response, strlen(response), 0);
+            sqlite3_close(db);
+            return;
+        }
     }
 
     memset(sql, 0, sizeof(sql));

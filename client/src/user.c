@@ -163,10 +163,14 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     gchar *combined_text = g_strdup_printf("Name: %s\nSurname: %s\nUsername: %s\nDescription: %s\n",
                                            name_text, surname_text, username_text, description_text);
 
-    update_avatar(file_path_for_db, user.username);
+    // Выводим данные в консоль
+    //g_print("Text from entries:\n%s\n", combined_text);
+    if (temp_avatar != NULL){
+        update_avatar(file_path_for_db, user.username);
+    }
     
     char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
-    if (username_text == user.username){
+    if (strcmp(username_text, user.username) == 0) {
         g_free(combined_text);
     } else {
         if(strcmp(response, "Username already exists") == 0) {
@@ -947,8 +951,9 @@ void draw_user_window() {
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+    gtk_window_set_default_size(GTK_WINDOW(user_window), screen_width, screen_height);
     g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
+    gtk_window_maximize(GTK_WINDOW(user_window));
 
     GtkWidget *hbox_main = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_container_add(GTK_CONTAINER(user_window), hbox_main);

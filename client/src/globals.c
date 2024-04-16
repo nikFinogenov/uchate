@@ -21,6 +21,8 @@ t_message_s** messages = NULL;
 int messages_count[MAX_CHATTERS];
 t_chatter_s* chatters = NULL;
 int chatters_count = 0;
+gint screen_width;
+gint screen_height;
 
 t_user_s user = {
     .username = NULL,
