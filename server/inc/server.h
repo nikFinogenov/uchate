@@ -32,7 +32,7 @@
 #define DEFAULT_MESSAGE_SIZE 1024
 
 int socket_init(int port);
-void logger(char *proccess, char* status, char* errmsg);
+void logger(char *proccess, char* status, const char* errmsg);
 void mx_add_user(char **data, int sockfd);
 void mx_get_user(char **data, int sockfd);
 void mx_get_chatter(char** data, int sockfd);

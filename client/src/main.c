@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     if (userdata.button_recognize) {
         char **status_response = get_user_status(userdata.username);
-        char *tok = strtok(status_response, "\n");
+        char *tok = strtok((char *)status_response, "\n");
         user.status = strdup(tok);
 
         if (strcmp(user.status, "online") == 0){
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
             gtk_widget_destroy(dialog);
         } else {
             char **response = check_login_data(userdata.username, userdata.password);
-            char *token = strtok(response, "\n");
+            char *token = strtok((char *)response, "\n");
             user.username = strdup(token);
             token = strtok(NULL, "\n");
             user.name = strdup(token);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
             load_message(user.username);
             draw_user_window();
             show_user_window();
-            start_chat_checker(user.username);
+            // start_chat_checker(user.username);
         }
     } else {
         show_login();

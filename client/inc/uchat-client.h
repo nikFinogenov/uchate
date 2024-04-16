@@ -5,6 +5,7 @@
 #define LIGHT_GRAY 0.39
 #define LIGHTER_GRAY 0.75
 #define NORM_CVET &(GdkRGBA){255 / 255.0,  182 / 255.0, 193 / 255.0, 1.0}
+#define RED_CVET &(GdkRGBA){255 / 255.0,  0, 0, 1.0}
 
 #define MAIN_WINDOW_HEIGHT 900
 #define MAIN_WINDOW_WIDTH 1500

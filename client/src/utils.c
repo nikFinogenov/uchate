@@ -32,11 +32,11 @@ static void delete_message(GtkWidget *widget, gpointer data) {
         return;
     }
     char** response = delete_message_data(messages[selected_user.index][index].id);
-    if(mx_strcmp(response, "1") == 0) {
+    if(mx_strcmp((char *)response, "1") == 0) {
         g_print("ne poluchilos\n");
         return;
     }
-    if(mx_strcmp(response, "1488") == 0) {
+    if(mx_strcmp((char *)response, "1488") == 0) {
         g_print("Server offline\n");
         return;
     }
@@ -68,11 +68,11 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
     wrap_text(parsed_edit);
     g_print("message wrapped-> ");
     char** response = update_message_info(messages[selected_user.index][data->index_of_msg].id, parsed_edit);
-    if(mx_strcmp(response, "1") == 0) {
+    if(mx_strcmp((char *)response, "1") == 0) {
         g_print("ne poluchilos\n");
         return;
     }
-    if(mx_strcmp(response, "1488") == 0) {
+    if(mx_strcmp((char *)response, "1488") == 0) {
         g_print("Server offline");
         return;
     }
@@ -97,7 +97,7 @@ static void edit_message(GtkWidget *widget, gpointer data) {
     g_print("Edit message clicked\n");
     edit_pop_up = gtk_dialog_new_with_buttons("Edit Message", GTK_WINDOW(user_window),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
 
     gtk_window_set_default_size(GTK_WINDOW(edit_pop_up), 500, 150);
 
@@ -107,7 +107,7 @@ static void edit_message(GtkWidget *widget, gpointer data) {
 
     gtk_entry_set_placeholder_text(GTK_ENTRY(edit_entry), "Enter edited message...");
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_entry_set_text(edit_entry, messages[selected_user.index][index].text);
+    gtk_entry_set_text(GTK_ENTRY(edit_entry), messages[selected_user.index][index].text);
     gtk_box_pack_start(GTK_BOX(box), edit_entry, TRUE, FALSE, 0);
     
 
@@ -141,11 +141,11 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
     }
 
     char **response = chatter_delete(user.username, chatters[index].username);
-    if(mx_strcmp(response, "1") == 0) {
+    if(mx_strcmp((char *)response, "1") == 0) {
         g_print("ne poluchilos\n");
         return;
     }
-    if(mx_strcmp(response, "1488") == 0) {
+    if(mx_strcmp((char *)response, "1488") == 0) {
         g_print("Server offline\n");
         return;
     }
@@ -181,7 +181,7 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
         selected_user.index--;
     }
 
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("There was a problem deleting a user...\n");
     } else g_print("O, nihuya, pracue\n");
     
@@ -414,7 +414,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
     int index = GPOINTER_TO_INT(user_data);
     if (event->type == GDK_BUTTON_PRESS) {
         if (event->button == GDK_BUTTON_SECONDARY) {
-            create_chatter_menu(event, index);
+            create_chatter_menu((GdkEvent *)event, index);
             return TRUE;
         } else if (event->button == GDK_BUTTON_PRIMARY) {
             if (selected_user.box != NULL && selected_user.index != index) {
@@ -744,7 +744,7 @@ void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
     int count = 0;
     char *lines[3];
 
-    token = strtok(buffer, "\n");
+    token = strtok((char *)buffer, "\n");
     while (token != NULL && count < 3) {
         lines[count++] = token;
         token = strtok(NULL, "\n");
@@ -755,8 +755,8 @@ void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
         return;
     }
 
-    strncpy(userdata->username, lines[0], sizeof(userdata->username));
-    strncpy(userdata->password, lines[1], sizeof(userdata->password));
+    strncpy(userdata->username, lines[0], sizeof((char *)userdata->username));
+    strncpy(userdata->password, lines[1], sizeof((char *)userdata->password));
     if (strcmp(lines[2], "button_recognize") == 0) {
         userdata->button_recognize = true;
     } else {
@@ -766,40 +766,40 @@ void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
 
 int server_chats_quantity(char *username) {
     char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("tutya\n");
         return chatters_count;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         g_print("tut2ya\n");
         return chatters_count;
     }
-    char **tokens = mx_strsplit(response, '\n');
+    char **tokens = mx_strsplit((char *)response, '\n');
     return(mx_get_length(tokens));
 }
 
 void load_chats(char *username) {
     char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("tut\n");
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         g_print("tut5\n");
         return;
     }
-    char **tokens = mx_strsplit(response, '\n');
+    char **tokens = mx_strsplit((char *)response, '\n');
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chatter_data(tokens[i]);
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             g_print("%s couldn't be found1\n", tokens[i]);
             return;
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
             return;
         }
-        char *token2 = strtok(response2, "\n");
+        char *token2 = strtok((char *)response2, "\n");
         char *username = strdup(token2);
         token2 = strtok(NULL, "\n");
         char *name = strdup(token2);
@@ -818,29 +818,29 @@ void load_chats(char *username) {
 
 void load_message(char *username) {
     char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("tut\n");
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         g_print("tut2\n");
         return;
     }
-    char **tokens = mx_strsplit(response, '\n');
+    char **tokens = mx_strsplit((char *)response, '\n');
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chat_messages(user.username, tokens[i]);
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             g_print("%s couldn't be found3\n", tokens[i]);
             continue;
 
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
             return;
         }
-        char **tokens2 = mx_strsplit(response2, '\n');
+        char **tokens2 = mx_strsplit((char *)response2, '\n');
         int mess_count_ahuet = mx_get_length(tokens2) / 5;
-        char *token2 = strtok(response2, "\n");
+        char *token2 = strtok((char *)response2, "\n");
         for(int j = 0; j < mx_get_length(tokens2); j++) {
             char *id = tokens2[j];
             j++;
@@ -865,11 +865,11 @@ void load_message(char *username) {
 
 void reload_chats(char *username) {
     char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("tut\n");
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         g_print("tut2\n");
         return;
     }
@@ -886,18 +886,18 @@ void reload_chats(char *username) {
     chatters = NULL;
     chatters_count = 0;
 
-    char **tokens = mx_strsplit(response, '\n');
+    char **tokens = mx_strsplit((char *)response, '\n');
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chatter_data(tokens[i]);
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             g_print("%s couldn't be found2\n", tokens[i]);
             return;
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
             return;
         }
-        char *token2 = strtok(response2, "\n");
+        char *token2 = strtok((char *)response2, "\n");
         char *username = strdup(token2);
         token2 = strtok(NULL, "\n");
         char *name = strdup(token2);
@@ -925,11 +925,11 @@ void reload_chats(char *username) {
 
 void reload_messages(char *username) {
     char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("%s ne sud'ba2\n", username);
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         g_print("Server offline\n");
         return;
     }
@@ -947,23 +947,23 @@ void reload_messages(char *username) {
         messages_count[i] = 0;
     }
 
-    char **tokens = mx_strsplit(response, '\n');
+    char **tokens = mx_strsplit((char *)response, '\n');
     for (int i = 0; i < mx_get_length(tokens); i++) {
 
         char **response2 = get_chat_messages(username, tokens[i]);
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             g_print("%s couldn't be found3\n", tokens[i]);
             continue;
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
             return;
         }
 
-        char **tokens2 = mx_strsplit(response2, '\n');
+        char **tokens2 = mx_strsplit((char *)response2, '\n');
         int mess_count_ahuet = mx_get_length(tokens2) / 5;
 
-        char *token2 = strtok(response2, "\n");
+        char *token2 = strtok((char *)response2, "\n");
 
 
         for (int j = 0; j < mess_count_ahuet; j++) {
@@ -997,27 +997,27 @@ int server_messages_quantity(char *username) {
         total_local_messages_amount += messages_count[i];
     }
     char **response = get_chats_data(username);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         g_print("%s ne sud'ba2\n", username);
         return total_local_messages_amount;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         g_print("Server offline\n");
         return total_local_messages_amount;
     }
 
-    char **tokens = mx_strsplit(response, '\n');
+    char **tokens = mx_strsplit((char *)response, '\n');
     for (int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_mess_chat_amount(username, tokens[i]);
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             g_print("%s couldn't be found3\n", tokens[i]);
             return total_local_messages_amount;
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
             return total_local_messages_amount;
         }
-        total_messages += mx_atoi(response2);
+        total_messages += mx_atoi((char *)response2);
     }
 
     return total_messages;

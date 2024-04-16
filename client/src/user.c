@@ -1,6 +1,6 @@
 #include "uchat-client.h"
 
-static GtkWidget* add_new_chat_when_no_chats;
+static GtkWidget *add_new_chat_when_no_chats;
 static GtkWidget *search_pop_up = NULL;
 static GtkWidget *error_label = NULL;
 static bool settings_visible = TRUE;
@@ -78,11 +78,8 @@ static void clicked_settings(GtkWidget *widget, gpointer data){
 }
 
 static void display_error_message(char *message, int which) {
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
-
     error_label = gtk_label_new(message);
-    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_override_color(error_label, GTK_STATE_FLAG_NORMAL, RED_CVET);
     gtk_widget_set_margin_top(error_label, 10);
     if (which == 0){
         gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
@@ -168,21 +165,23 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     if (temp_avatar != NULL){
         update_avatar(file_path_for_db, user.username);
     }
-    
-    char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
-    if (strcmp(username_text, user.username) == 0) {
-        g_free(combined_text);
-    } else {
-        if(strcmp(response, "Username already exists") == 0) {
-        display_error_message("Username exists", 1);
-        } else if(strcmp(response, "Error checking username existence") == 0) {
-            display_error_message("Username exists", 1);
+    if (strcmp("", description_text) == 0){
+        description_text = g_strdup(user.desc);
+    }
+    if (strcmp(username_text, user.username) != 0 || strcmp(name_text, user.name) != 0 || strcmp(surname_text, user.surname) != 0 || strcmp(description_text, user.desc) != 0){
+        char **response = update_user_info((char *)username_text, (char *)name_text, (char *)surname_text, (char *)description_text, user.username);
+        if (strcmp((char *)username_text, user.username) == 0) {
         } else {
-            user.username = g_strdup(username_text);
-            update_user_line(login_info, user.username);
-            delete_more_than_three_lines(login_info);
+            if(strcmp((char *)response, "Username already exists") == 0) {
+            display_error_message("Username exists", 1);
+            } else if(strcmp((char *)response, "Error checking username existence") == 0) {
+                display_error_message("Username exists", 1);
+            } else {
+                user.username = g_strdup(username_text);
+                update_user_line(login_info, user.username);
+                delete_more_than_three_lines(login_info);
+            }
         }
-        g_free(combined_text);
     }
 }
 
@@ -210,6 +209,41 @@ void draw_account_settings_box(){
     GtkWidget *username_entry;
     GtkWidget *description_entry;
 
+    GtkWidget *user_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(user_frame, "myButton");
+    GtkWidget *user_label = gtk_label_new("Username:");
+    gtk_box_pack_start(GTK_BOX(user_frame), user_label, FALSE, FALSE, 0);
+
+    GtkWidget *name_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(name_frame, "myButton");
+    GtkWidget *name_label = gtk_label_new("Name:");
+    gtk_box_pack_start(GTK_BOX(name_frame), name_label, FALSE, FALSE, 0);
+
+    GtkWidget *sur_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(sur_frame, "myButton");
+    GtkWidget *sur_label = gtk_label_new("Surname:");
+    gtk_box_pack_start(GTK_BOX(sur_frame), sur_label, FALSE, FALSE, 0);
+
+    GtkWidget *desc_frame = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_name(desc_frame, "myButton");
+    GtkWidget *desc_label = gtk_label_new("Description:");
+    gtk_box_pack_start(GTK_BOX(desc_frame), desc_label, FALSE, FALSE, 0);
+
+
+    gtk_widget_set_margin_top(user_frame, 25);
+    gtk_widget_set_margin_start(user_frame, 10);
+    gtk_widget_set_valign(user_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(user_frame, GTK_ALIGN_START);
+    gtk_widget_set_margin_start(name_frame, 10);
+    gtk_widget_set_valign(name_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(name_frame, GTK_ALIGN_START);
+    gtk_widget_set_margin_start(sur_frame, 10);
+    gtk_widget_set_valign(sur_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(sur_frame, GTK_ALIGN_START);
+    gtk_widget_set_margin_start(desc_frame, 10);
+    gtk_widget_set_valign(desc_frame, GTK_ALIGN_START);
+    gtk_widget_set_halign(desc_frame, GTK_ALIGN_START);
+
     name_entry = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(name_entry), user.name);
 
@@ -220,17 +254,36 @@ void draw_account_settings_box(){
     gtk_entry_set_text(GTK_ENTRY(username_entry), user.username);
 
     description_entry = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(description_entry), user.desc);
+    if (strcmp(" ", user.desc) == 0){
+        gtk_entry_set_text(GTK_ENTRY(description_entry), "");
+    } else {
+        gtk_entry_set_text(GTK_ENTRY(description_entry), user.desc);
+    }
+    gtk_entry_set_placeholder_text(GTK_ENTRY(description_entry), "Write your description here...");
     
-    gtk_widget_set_margin_top(username_entry, 5);
-    gtk_widget_set_margin_bottom(username_entry, 5);
-    gtk_widget_set_margin_bottom(name_entry, 5);
-    gtk_widget_set_margin_bottom(surname_entry, 5);
-    gtk_widget_set_margin_bottom(description_entry, 5);
+    gtk_widget_set_margin_bottom(username_entry, 10);
+    gtk_widget_set_margin_start(username_entry, 10);
+    gtk_widget_set_margin_end(username_entry, 10);
+
+    gtk_widget_set_margin_bottom(name_entry, 10);
+    gtk_widget_set_margin_start(name_entry, 10);
+    gtk_widget_set_margin_end(name_entry, 10);
+
+    gtk_widget_set_margin_bottom(surname_entry, 10);
+    gtk_widget_set_margin_start(surname_entry, 10);
+    gtk_widget_set_margin_end(surname_entry, 10);
+
+    gtk_widget_set_margin_bottom(description_entry, 10);
+    gtk_widget_set_margin_start(description_entry, 10);
+    gtk_widget_set_margin_end(description_entry, 10);
     
-    avatar_button = gtk_button_new_with_label("Change");
+    avatar_button = gtk_button_new_with_label("Change image");
+    gtk_widget_set_hexpand(avatar_button, FALSE);
+    gtk_widget_set_halign(avatar_button, GTK_ALIGN_CENTER);
 
     confirm_button = gtk_button_new_with_label("Confirm");
+    gtk_widget_set_hexpand(confirm_button, FALSE);
+    gtk_widget_set_halign(confirm_button, GTK_ALIGN_CENTER);
 
     GtkTextBuffer *buffer = gtk_text_buffer_new(NULL);
 
@@ -239,11 +292,15 @@ void draw_account_settings_box(){
 
     gtk_box_pack_start(GTK_BOX(account_settings), drawing_area, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), avatar_button, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), user_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), username_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), sur_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), surname_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), name_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), name_entry, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(account_settings), desc_frame, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(account_settings), description_entry, FALSE, FALSE, 0);
-    gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(account_settings), confirm_button, FALSE, FALSE, 50);
     g_signal_connect(user_window, "button-press-event", G_CALLBACK(on_window_clicked), account_settings);
     g_object_set_data(G_OBJECT(confirm_button), "name_entry", name_entry);
     g_object_set_data(G_OBJECT(confirm_button), "surname_entry", surname_entry);
@@ -423,7 +480,7 @@ static void realize_side_bar(GtkWidget *widget, gpointer data) {
 static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *settings_t = gtk_dialog_new_with_buttons("Subscriptions", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_t), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
@@ -451,23 +508,23 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *gold = gtk_button_new_with_label("McOk Gold");
 
     GtkWidget *bronze_title = gtk_label_new("2.50€/month");
-    gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_JUSTIFY_CENTER);
     GtkWidget *bronze_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_ALIGN_END);
+    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_RIGHT);
     gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_title);
     gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_text);
 
     GtkWidget *silver_title = gtk_label_new("5.00€/month");
-    gtk_label_set_justify(GTK_LABEL(silver_title), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(silver_title), GTK_JUSTIFY_CENTER);
     GtkWidget *silver_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_ALIGN_END);
+    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_RIGHT);
     gtk_container_add(GTK_CONTAINER(sub_sbox), silver_title);
     gtk_container_add(GTK_CONTAINER(sub_sbox), silver_text);
 
     GtkWidget *gold_title = gtk_label_new("10.00€/month");
-    gtk_label_set_justify(GTK_LABEL(gold_title), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(gold_title), GTK_JUSTIFY_CENTER);
     GtkWidget *gold_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_ALIGN_END);
+    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_RIGHT);
     gtk_container_add(GTK_CONTAINER(sub_gbox), gold_title);
     gtk_container_add(GTK_CONTAINER(sub_gbox), gold_text);
 
@@ -498,7 +555,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
 static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
     GtkWidget *settings_s = gtk_dialog_new_with_buttons("Donate", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_s), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
@@ -516,7 +573,7 @@ static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
 static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *settings_f = gtk_dialog_new_with_buttons("Developers", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
@@ -561,22 +618,34 @@ static void on_clear_mess_search_clicked(GtkButton *button, GtkEntry *entry) {
 static void display_joke(GtkWidget *widget, gpointer data) {
     GtkWidget *joke = gtk_dialog_new_with_buttons("Random Joke", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
-    
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
+
     gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
 
-    GtkWidget *joke_text = gtk_label_new(get_random_joke());
+    gint random_number = g_random_int_range(1, 3);
 
-    gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
-    gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
-
-    gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
-
+    if (random_number == 1) {
+        GtkWidget *joke_text = gtk_label_new(get_random_joke());
+        gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
+        gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
+    } else {
+        int index = g_random_int_range(1, 31);
+        char path[50];
+        sprintf(path, "client/jokes/%d.png", index);
+        GdkPixbuf *joke_pixbuf = gdk_pixbuf_new_from_file(path, NULL);
+        if (joke_pixbuf != NULL) {
+            GtkWidget *joke_image = gtk_image_new_from_pixbuf(joke_pixbuf);
+            g_object_unref(joke_pixbuf);
+            gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_image, FALSE, FALSE, 100); 
+            gtk_widget_set_size_request(joke, -1, -1); // set the size of the dialog to the size of the image
+            gtk_widget_show_all(joke_image);
+        }
+    }
     gtk_widget_show_all(joke);
-    
+
     g_signal_connect_swapped(joke, "response", G_CALLBACK(gtk_widget_destroy), joke);
 }
-
 static void on_window_realize(GtkWidget *widget, gpointer data) {
     GtkWidget *scrollable_window = GTK_WIDGET(data);
 
@@ -616,16 +685,16 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     
     char **response = get_chatter_data(parsed_username);
 
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         display_error_message("User couldn't be found", 0);
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         display_error_message("Server offline", 0);
         return;
     }
 
-    char *token = strtok(response, "\n");
+    char *token = strtok((char *)response, "\n");
     char *username = strdup(token);
     token = strtok(NULL, "\n");
     char *name = strdup(token);
@@ -646,11 +715,11 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         chatters_count++;
         char** response2 = send_new_chat_data(user.username, username);
     
-        if (strcmp(response2, "1") == 0) {
+        if (strcmp((char *)response2, "1") == 0) {
             display_error_message("Chat already exists", 0);
             return;
         }
-        if (strcmp(response2, "1488") == 0) {
+        if (strcmp((char *)response2, "1488") == 0) {
             display_error_message("Server offline", 0);
             return;
         }
@@ -683,7 +752,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
 
     search_pop_up = gtk_dialog_new_with_buttons("Search User", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     
     gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 400, 150);
 
@@ -717,7 +786,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
 
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
-    char *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
+    char *text = (char *)gtk_entry_get_text(GTK_ENTRY(data->entry));
     int i = 0, j = 0;
 
     while (mx_isspace(text[i])) i++;
@@ -747,7 +816,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     char time_str[6];
     strftime(time_str, sizeof(time_str), "%H:%M", timeinfo);
 
-    int m_id = mx_atoi(add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
+    int m_id = mx_atoi((char *)add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
     
     t_message_s new_mes = {
         .id = m_id,
@@ -794,7 +863,7 @@ static void message_search_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
     gtk_container_foreach(GTK_CONTAINER(scrollable_window2), (GtkCallback)gtk_widget_destroy, NULL);
-    message_populate_scrollable_filtred_window(scrollable_window2, text);
+    message_populate_scrollable_filtred_window(scrollable_window2, (char *)text);
     gtk_widget_show_all(scrollable_window2);
 }
 
@@ -803,7 +872,7 @@ static void chatter_search_clicled(GtkWidget *widget, gpointer user_data) {
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(data->entry));
 
     gtk_container_foreach(GTK_CONTAINER(scrollable_window), (GtkCallback)gtk_widget_destroy, NULL);
-    user_populate_scrollable_filtred_window(scrollable_window, text);
+    user_populate_scrollable_filtred_window(scrollable_window, (char *)text);
     gtk_widget_show_all(scrollable_window);
 }
 
@@ -951,7 +1020,7 @@ void draw_user_window() {
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_default_size(GTK_WINDOW(user_window), screen_width, screen_height);
+    gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
     g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
     gtk_window_maximize(GTK_WINDOW(user_window));
 
