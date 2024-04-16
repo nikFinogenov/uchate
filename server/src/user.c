@@ -295,8 +295,6 @@ void mx_update_user(char **data, int sockfd) {
     send(sockfd, response, strlen(response), 0);
 }
 
-
-
 void mx_delete_user(char **data) {
     sqlite3 *db = open_db();
     char sql[500];

@@ -34087,3 +34087,202 @@ repeshko
 2024-04-15 21:37:09: Get messages amount -> OK
 2024-04-15 21:37:10: Open database -> OK
 2024-04-15 21:37:10: Update user -> OK
+Умер мужик
+2024-04-16 14:57:26: Open database -> OK
+2024-04-16 14:57:26: Init table "Users" -> OK
+2024-04-16 14:57:26: Init table "Chats" -> OK
+2024-04-16 14:57:26: Init table "Messages" -> OK
+2024-04-16 14:57:41: Open database -> OK
+2024-04-16 14:57:41: Add user -> OK
+2024-04-16 14:57:41: Open database -> OK
+2024-04-16 14:57:41: Get user avatar -> OK
+2024-04-16 14:57:41: Open database -> OK
+2024-04-16 14:57:41: Get chat -> OK
+2024-04-16 14:57:41: Open database -> OK
+2024-04-16 14:57:41: Get chat -> OK
+2024-04-16 14:57:41: Open database -> OK
+2024-04-16 14:57:41: Get chat -> OK
+2024-04-16 14:57:44: Open database -> OK
+2024-04-16 14:57:44: Get chat -> OK
+2024-04-16 14:57:44: Open database -> OK
+2024-04-16 14:57:44: Get chat -> OK
+2024-04-16 14:57:44: Open database -> OK
+2024-04-16 14:57:44: Get chat -> OK
+2024-04-16 14:57:47: Open database -> OK
+2024-04-16 14:57:47: Get chat -> OK
+2024-04-16 14:57:47: Open database -> OK
+2024-04-16 14:57:47: Get chat -> OK
+2024-04-16 14:57:47: Open database -> OK
+2024-04-16 14:57:47: Get chat -> OK
+2024-04-16 14:57:50: Open database -> OK
+2024-04-16 14:57:50: Get chat -> OK
+2024-04-16 14:57:50: Open database -> OK
+2024-04-16 14:57:50: Get chat -> OK
+2024-04-16 14:57:50: Open database -> OK
+2024-04-16 14:57:50: Get chat -> OK
+2024-04-16 14:57:53: Open database -> OK
+2024-04-16 14:57:53: Get chat -> OK
+2024-04-16 14:57:53: Open database -> OK
+2024-04-16 14:57:53: Get chat -> OK
+2024-04-16 14:57:53: Open database -> OK
+2024-04-16 14:57:53: Get chat -> OK
+2024-04-16 14:57:56: Open database -> OK
+2024-04-16 14:57:56: Get chat -> OK
+2024-04-16 14:57:56: Open database -> OK
+2024-04-16 14:57:56: Get chat -> OK
+2024-04-16 14:57:56: Open database -> OK
+2024-04-16 14:57:56: Get chat -> OK
+2024-04-16 14:57:59: Open database -> OK
+2024-04-16 14:57:59: Get chat -> OK
+2024-04-16 14:57:59: Open database -> OK
+2024-04-16 14:57:59: Get chat -> OK
+2024-04-16 14:57:59: Open database -> OK
+2024-04-16 14:57:59: Get chat -> OK
+2024-04-16 14:58:02: Open database -> OK
+2024-04-16 14:58:02: Get chat -> OK
+2024-04-16 14:58:02: Open database -> OK
+2024-04-16 14:58:02: Get chat -> OK
+2024-04-16 14:58:02: Open database -> OK
+2024-04-16 14:58:02: Get chat -> OK
+2024-04-16 14:58:05: Open database -> OK
+2024-04-16 14:58:05: Get chat -> OK
+2024-04-16 14:58:05: Open database -> OK
+2024-04-16 14:58:05: Get chat -> OK
+2024-04-16 14:58:05: Open database -> OK
+2024-04-16 14:58:05: Get chat -> OK
+2024-04-16 14:58:08: Open database -> OK
+2024-04-16 14:58:08: Get chat -> OK
+2024-04-16 14:58:08: Open database -> OK
+2024-04-16 14:58:08: Get chat -> OK
+2024-04-16 14:58:08: Open database -> OK
+2024-04-16 14:58:08: Get chat -> OK
+2024-04-16 14:58:11: Open database -> OK
+2024-04-16 14:58:11: Get chat -> OK
+2024-04-16 14:58:11: Open database -> OK
+2024-04-16 14:58:11: Get chat -> OK
+2024-04-16 14:58:11: Open database -> OK
+2024-04-16 14:58:11: Get chat -> OK
+2024-04-16 14:58:14: Open database -> OK
+2024-04-16 14:58:14: Get chat -> OK
+2024-04-16 14:58:14: Open database -> OK
+2024-04-16 14:58:14: Get chat -> OK
+2024-04-16 14:58:14: Open database -> OK
+2024-04-16 14:58:14: Get chat -> OK
+2024-04-16 14:58:14: Open database -> OK
+2024-04-16 14:58:14: Update user -> OK
+2024-04-16 14:58:51: Open database -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get user -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get user status -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get user avatar -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Update user -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get chat -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get chat -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get chat -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get chat -> OK
+2024-04-16 14:58:55: Open database -> OK
+2024-04-16 14:58:55: Get chat -> OK
+2024-04-16 14:58:57: Open database -> OK
+2024-04-16 14:58:57: Update user -> OK
+Умер мужик
+2024-04-16 15:02:12: Open database -> OK
+2024-04-16 15:02:12: Init table "Users" -> OK
+2024-04-16 15:02:12: Init table "Chats" -> OK
+2024-04-16 15:02:12: Init table "Messages" -> OK
+2024-04-16 15:02:32: Open database -> OK
+2024-04-16 15:02:32: Add user -> OK
+2024-04-16 15:02:32: Open database -> OK
+2024-04-16 15:02:32: Get user avatar -> OK
+2024-04-16 15:02:32: Open database -> OK
+2024-04-16 15:02:32: Get chat -> OK
+2024-04-16 15:02:32: Open database -> OK
+2024-04-16 15:02:32: Get chat -> OK
+2024-04-16 15:02:32: Open database -> OK
+2024-04-16 15:02:32: Get chat -> OK
+2024-04-16 15:02:35: Open database -> OK
+2024-04-16 15:02:35: Get chat -> OK
+2024-04-16 15:02:35: Open database -> OK
+2024-04-16 15:02:35: Get chat -> OK
+2024-04-16 15:02:35: Open database -> OK
+2024-04-16 15:02:35: Get chat -> OK
+2024-04-16 15:02:36: Open database -> OK
+2024-04-16 15:02:36: Update user -> OK
+Умер мужик
+2024-04-16 15:12:28: Open database -> OK
+2024-04-16 15:12:28: Init table "Users" -> OK
+2024-04-16 15:12:28: Init table "Chats" -> OK
+2024-04-16 15:12:28: Init table "Messages" -> OK
+2024-04-16 15:12:39: Open database -> OK
+2024-04-16 15:12:39: Add user -> OK
+2024-04-16 15:12:39: Open database -> OK
+2024-04-16 15:12:39: Get user avatar -> OK
+2024-04-16 15:12:39: Open database -> OK
+2024-04-16 15:12:39: Update user -> OK
+2024-04-16 15:12:39: Open database -> OK
+2024-04-16 15:12:39: Get chat -> OK
+2024-04-16 15:12:39: Open database -> OK
+2024-04-16 15:12:39: Get chat -> OK
+2024-04-16 15:12:39: Open database -> OK
+2024-04-16 15:12:39: Get chat -> OK
+2024-04-16 15:12:41: Open database -> OK
+2024-04-16 15:12:41: Update user -> OK
+2024-04-16 15:14:12: Open database -> OK
+2024-04-16 15:14:12: Add user -> OK
+2024-04-16 15:14:12: Open database -> OK
+2024-04-16 15:14:12: Get user avatar -> OK
+2024-04-16 15:14:12: Open database -> OK
+2024-04-16 15:14:12: Update user -> OK
+2024-04-16 15:14:13: Open database -> OK
+2024-04-16 15:14:13: Get chat -> OK
+2024-04-16 15:14:13: Open database -> OK
+2024-04-16 15:14:13: Get chat -> OK
+2024-04-16 15:14:13: Open database -> OK
+2024-04-16 15:14:13: Get chat -> OK
+2024-04-16 15:14:14: Open database -> OK
+2024-04-16 15:14:14: Update user -> OK
+Умер мужик
+2024-04-16 15:16:23: Open database -> OK
+2024-04-16 15:16:23: Init table "Users" -> OK
+2024-04-16 15:16:23: Init table "Chats" -> OK
+2024-04-16 15:16:23: Init table "Messages" -> OK
+2024-04-16 15:16:34: Open database -> OK
+2024-04-16 15:16:34: Add user -> OK
+2024-04-16 15:16:34: Open database -> OK
+2024-04-16 15:16:34: Get user avatar -> OK
+2024-04-16 15:16:34: Open database -> OK
+2024-04-16 15:16:34: Get chat -> OK
+2024-04-16 15:16:34: Open database -> OK
+2024-04-16 15:16:34: Get chat -> OK
+2024-04-16 15:16:34: Open database -> OK
+2024-04-16 15:16:34: Get chat -> OK
+2024-04-16 15:16:35: Open database -> OK
+2024-04-16 15:16:35: Update user -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get user -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get user status -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get user avatar -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Update user -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get chat -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get chat -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get chat -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get chat -> OK
+2024-04-16 15:16:45: Open database -> OK
+2024-04-16 15:16:45: Get chat -> OK
+2024-04-16 15:16:46: Open database -> OK
+2024-04-16 15:16:46: Update user -> OK

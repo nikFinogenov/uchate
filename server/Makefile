@@ -25,7 +25,7 @@ all: install
 install: $(NAME)
 
 $(NAME): $(OBJS)
-	@clang -lcrypto -lssl -lsqlite3 -lpthread $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
+	@clang -lcrypto -lsqlite3 -lpthread $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
 	@printf "${CLEAR}$@\t   ${GREENB}created${NORMAL}\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS)
