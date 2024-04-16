@@ -164,7 +164,6 @@ void clear_chatter(t_chatter_s *chatter) {
 }
 
 void clear_message(t_message_s *message) {
-    g_print(message->id);
     free(message->text);
     free(message->time);
     message->id = 0;
@@ -183,7 +182,7 @@ void clear_selected(t_selected_s *selected) {
 void clear_all(void) {
     clear_user(&user);
     for (int i = 0; i < MAX_CHATTERS; ++i){
-        for(int j = 0; i < messages[i][j].text != NULL; j++) clear_message(&messages[i][j]);
+        for(int j = 0; messages[i][j].text != NULL; j++) clear_message(&messages[i][j]);
     }
     for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
     g_free(messages);

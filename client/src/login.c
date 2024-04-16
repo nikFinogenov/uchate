@@ -17,11 +17,8 @@ void go_to_signup(void) {
 }
 
 static void display_error_message(char *message) {
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
-
     error_label = gtk_label_new(message);
-    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_override_color(error_label, GTK_STATE_FLAG_NORMAL, RED_CVET);
     gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(login_window))), error_label, FALSE, FALSE, 0);
     gtk_widget_show_all(login_window);
 }
@@ -51,16 +48,16 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     
 
     char **response = check_login_data(parsed_username, parsed_password);
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         display_error_message("Username or Password is incorrect");
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         display_error_message("Server offline");
         return;
     }
     
-    char *token = strtok(response, "\n");
+    char *token = strtok((char *)response, "\n");
     user.username = strdup(token);
 
     token = strtok(NULL, "\n");
@@ -73,7 +70,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     user.desc = strdup(token);
 
     char **status_response = get_user_status(user.username);
-    char *tok = strtok(status_response, "\n");
+    char *tok = strtok((char *)status_response, "\n");
     user.status = strdup(tok);
     if (strcmp(user.status, "online") == 0){
         display_error_message("User is already logged in");

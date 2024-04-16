@@ -78,11 +78,8 @@ static void clicked_settings(GtkWidget *widget, gpointer data){
 }
 
 static void display_error_message(char *message, int which) {
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
-
     error_label = gtk_label_new(message);
-    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_override_color(error_label, GTK_STATE_FLAG_NORMAL, RED_CVET);
     gtk_widget_set_margin_top(error_label, 10);
     if (which == 0){
         gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(search_pop_up))), error_label, FALSE, FALSE, 0);
@@ -169,13 +166,13 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
         update_avatar(file_path_for_db, user.username);
     }
     
-    char **response = update_user_info(username_text, name_text, surname_text, description_text, user.username);
-    if (strcmp(username_text, user.username) == 0) {
+    char **response = update_user_info((char *)username_text, (char *)name_text, (char *)surname_text, (char *)description_text, user.username);
+    if (strcmp((char *)username_text, user.username) == 0) {
         g_free(combined_text);
     } else {
-        if(strcmp(response, "Username already exists") == 0) {
+        if(strcmp((char *)response, "Username already exists") == 0) {
         display_error_message("Username exists", 1);
-        } else if(strcmp(response, "Error checking username existence") == 0) {
+        } else if(strcmp((char *)response, "Error checking username existence") == 0) {
             display_error_message("Username exists", 1);
         } else {
             user.username = g_strdup(username_text);
@@ -477,7 +474,7 @@ static void realize_side_bar(GtkWidget *widget, gpointer data) {
 static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *settings_t = gtk_dialog_new_with_buttons("Subscriptions", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_t), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
@@ -505,23 +502,23 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *gold = gtk_button_new_with_label("McOk Gold");
 
     GtkWidget *bronze_title = gtk_label_new("2.50€/month");
-    gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_JUSTIFY_CENTER);
     GtkWidget *bronze_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_ALIGN_END);
+    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_RIGHT);
     gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_title);
     gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_text);
 
     GtkWidget *silver_title = gtk_label_new("5.00€/month");
-    gtk_label_set_justify(GTK_LABEL(silver_title), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(silver_title), GTK_JUSTIFY_CENTER);
     GtkWidget *silver_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_ALIGN_END);
+    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_RIGHT);
     gtk_container_add(GTK_CONTAINER(sub_sbox), silver_title);
     gtk_container_add(GTK_CONTAINER(sub_sbox), silver_text);
 
     GtkWidget *gold_title = gtk_label_new("10.00€/month");
-    gtk_label_set_justify(GTK_LABEL(gold_title), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(gold_title), GTK_JUSTIFY_CENTER);
     GtkWidget *gold_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_ALIGN_END);
+    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_RIGHT);
     gtk_container_add(GTK_CONTAINER(sub_gbox), gold_title);
     gtk_container_add(GTK_CONTAINER(sub_gbox), gold_text);
 
@@ -552,7 +549,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
 static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
     GtkWidget *settings_s = gtk_dialog_new_with_buttons("Donate", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_s), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
@@ -570,7 +567,7 @@ static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
 static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *settings_f = gtk_dialog_new_with_buttons("Developers", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
@@ -615,7 +612,7 @@ static void on_clear_mess_search_clicked(GtkButton *button, GtkEntry *entry) {
 static void display_joke(GtkWidget *widget, gpointer data) {
     GtkWidget *joke = gtk_dialog_new_with_buttons("Random Joke", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
 
     gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
 
@@ -749,7 +746,7 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
 
     search_pop_up = gtk_dialog_new_with_buttons("Search User", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                    NULL);
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
     
     gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 400, 150);
 

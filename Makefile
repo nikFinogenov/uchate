@@ -14,13 +14,13 @@ libmx:
 	@$(MAKE) -C libmx/
 
 install:
-	@$(MAKE) -C libmx/
+#	@$(MAKE) -C libmx/
 	@$(MAKE) -C client/
-	@$(MAKE) -C server/
+#	@$(MAKE) -C server/
 
 uninstall:
-	@$(MAKE) -C server/ uninstall
+#	@$(MAKE) -C server/ uninstall
 	@$(MAKE) -C client/ uninstall
-	@$(MAKE) -C libmx/ uninstall
+#	@$(MAKE) -C libmx/ uninstall
 
 reinstall: uninstall install

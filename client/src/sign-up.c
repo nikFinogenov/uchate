@@ -20,20 +20,14 @@ void go_to_login(void) {
 }
 
 static void display_error_message(char *message) {
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
-
     error_label = gtk_label_new(message);
-    gtk_widget_modify_fg(error_label, GTK_STATE_NORMAL, &color_red);
+    gtk_widget_override_color(error_label, GTK_STATE_FLAG_NORMAL, RED_CVET);
     gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(signup_window))), error_label, FALSE, FALSE, 0);
     gtk_widget_show_all(signup_window);
 }
 
 static void signup_button_clicked(GtkWidget *widget, gpointer data) {
     EntryWidgets *entries = (EntryWidgets *)data;
-
-    GdkRGBA color_red;
-    gdk_rgba_parse(&color_red, "#de34eb");
 
     char *avatar_path = (char *)malloc(strlen(AVATAR_FOLDER) + strlen(user.username) + strlen("_avatar.png") + 1);
     const gchar *first_name = gtk_entry_get_text(GTK_ENTRY(entries->first_name_entry));
@@ -80,11 +74,11 @@ static void signup_button_clicked(GtkWidget *widget, gpointer data) {
 
     char **response = send_sign_up_data(parsed_first_name, parsed_last_name, parsed_username, parsed_password, "online");
 
-    if (strcmp(response, "1") == 0) {
+    if (strcmp((char *)response, "1") == 0) {
         display_error_message("Username already exists");
         return;
     }
-    if (strcmp(response, "1488") == 0) {
+    if (strcmp((char *)response, "1488") == 0) {
         display_error_message("Server offline");
         return;
     }

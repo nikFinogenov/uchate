@@ -23,7 +23,7 @@ void *show_error(void) {
     error_poppi_upe = gtk_dialog_new_with_buttons("Error", 
                                                            GTK_WINDOW(parent_window),
                                                            GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                           NULL);
+                                                           NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_position(GTK_WINDOW(error_poppi_upe), GTK_WIN_POS_CENTER_ON_PARENT);
 
     gtk_window_set_default_size(GTK_WINDOW(error_poppi_upe), 200, 100);

@@ -56,7 +56,7 @@ void db_init(void) {
     sqlite3_close(db);
 }
 
-void logger(char *proccess, char* status, char* errmsg) {
+void logger(char *proccess, char* status, const char* errmsg) {
     FILE *fd = fopen("server.log", "a+t");
     if (fd == NULL) {
         perror("Error opening log file");
