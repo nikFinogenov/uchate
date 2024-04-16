@@ -4,7 +4,7 @@ sqlite3 *open_db(void) {
     sqlite3 *db;
     int status = sqlite3_open("server/source/McOk.db", &db);
     char* st = (status == 0) ? ST_OK : ST_NEOK;
-    logger("Open database", st, "");
+    // logger("Open database", st, "");
     return db;
 }
 
@@ -40,19 +40,19 @@ void db_init(void) {
 
     int exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Init table \"Users\"", st, err_msg);
+    // logger("Init table \"Users\"", st, err_msg);
 
     sql = "CREATE TABLE IF NOT EXISTS CHATS(id INTEGER PRIMARY KEY AUTOINCREMENT, \
         user1_id INTEGER NOT NULL, user2_id INTEGER NOT NULL);";
     exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Init table \"Chats\"", st, err_msg);
+    // logger("Init table \"Chats\"", st, err_msg);
 
     sql = "CREATE TABLE IF NOT EXISTS MESSAGES(id INTEGER PRIMARY KEY AUTOINCREMENT, \
         chat_id INTEGER NOT NULL, text TEXT NOT NULL, type TEXT, date TEXT);";
     exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Init table \"Messages\"", st, err_msg);
+    // logger("Init table \"Messages\"", st, err_msg);
     sqlite3_close(db);
 }
 

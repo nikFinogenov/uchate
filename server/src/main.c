@@ -44,6 +44,12 @@ static void *handle_client(void *data) {
 
 int main(int argc, char **argv) {
     db_init();
+    char *filename = "server.log";
+
+    FILE *fp = fopen(filename, "a");
+    fprintf(fp, "Мужик ожил\n");
+    fclose(fp);
+
     if (argc != 2) {
         mx_printerr("usage: ./server [port]\n");
         exit(1);

@@ -37,7 +37,7 @@ static void delete_message(GtkWidget *widget, gpointer data) {
         return;
     }
     if(mx_strcmp(response, "1488") == 0) {
-        g_print("server v govne\n");
+        g_print("Server offline\n");
         return;
     }
     free(messages[selected_user.index][index].text);
@@ -73,7 +73,7 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
         return;
     }
     if(mx_strcmp(response, "1488") == 0) {
-        g_print("Server v govne");
+        g_print("Server offline");
         return;
     }
     
@@ -146,7 +146,7 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
         return;
     }
     if(mx_strcmp(response, "1488") == 0) {
-        g_print("server v govne\n");
+        g_print("Server offline\n");
         return;
     }
 
@@ -929,8 +929,12 @@ void reload_messages(char *username) {
         g_print("%s ne sud'ba2\n", username);
         return;
     }
+    if (strcmp(response, "1488") == 0) {
+        g_print("Server offline\n");
+        return;
+    }
 
-    for (int i = 0; i < MAX_CHATTERS; ++i){
+    for (int i = 0; i < MAX_CHATTERS; ++i) {
         for(int j = 0; j < messages_count[i]; j++) clear_message(&messages[i][j]);
     }
 
@@ -987,12 +991,19 @@ void reload_messages(char *username) {
 }
 
 int server_messages_quantity(char *username) {
-    char **response = get_chats_data(username);
+    int total_local_messages_amount = 0;
     int total_messages = 0;
-
+    for(int i = 0; i < MAX_CHATTERS; i++) {
+        total_local_messages_amount += messages_count[i];
+    }
+    char **response = get_chats_data(username);
     if (strcmp(response, "1") == 0) {
         g_print("%s ne sud'ba2\n", username);
-        return -1;
+        return total_local_messages_amount;
+    }
+    if (strcmp(response, "1488") == 0) {
+        g_print("Server offline\n");
+        return total_local_messages_amount;
     }
 
     char **tokens = mx_strsplit(response, '\n');
@@ -1000,11 +1011,11 @@ int server_messages_quantity(char *username) {
         char **response2 = get_mess_chat_amount(username, tokens[i]);
         if (strcmp(response2, "1") == 0) {
             g_print("%s couldn't be found3\n", tokens[i]);
-            continue;
+            return total_local_messages_amount;
         }
         if (strcmp(response2, "1488") == 0) {
             g_print("%s ne sud'ba\n", tokens[i]);
-            return -1;
+            return total_local_messages_amount;
         }
         total_messages += mx_atoi(response2);
     }

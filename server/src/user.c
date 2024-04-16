@@ -62,7 +62,7 @@ void mx_get_user(char** data, int sockfd) {
     }
     int exit = sqlite3_finalize(res);
     char* st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Get user", st, "");
+    // logger("Get user", st, "");
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
@@ -244,7 +244,7 @@ void mx_get_chatter(char** data, int sockfd) {
         strcpy(temp_buff, "-1");
     }
 
-    logger("Get user", temp_buff, "");
+    // logger("Get user", temp_buff, "");
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }

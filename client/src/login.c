@@ -56,7 +56,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
     if (strcmp(response, "1488") == 0) {
-        display_error_message("Server v govne");
+        display_error_message("Server offline");
         return;
     }
 

@@ -617,7 +617,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         return;
     }
     if (strcmp(response, "1488") == 0) {
-        display_error_message("Server v govne", 0);
+        display_error_message("Server offline", 0);
         return;
     }
 
@@ -647,7 +647,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
             return;
         }
         if (strcmp(response2, "1488") == 0) {
-            display_error_message("Server v govne", 0);
+            display_error_message("Server offline", 0);
             return;
         }
         refresh_scrollable_window(scrollable_window);

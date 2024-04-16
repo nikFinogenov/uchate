@@ -162,6 +162,7 @@ void clear_chatter(t_chatter_s *chatter) {
 }
 
 void clear_message(t_message_s *message) {
+    g_print(message->id);
     free(message->text);
     free(message->time);
     message->id = 0;

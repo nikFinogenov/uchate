@@ -44,7 +44,7 @@ void mx_get_chat(char **data, int sockfd) {
 
     int exit = sqlite3_finalize(res);
     char *st = (exit == 0) ? ST_OK : ST_NEOK;
-    logger("Get chat", st, "");
+    // logger("Get chat", st, "");
     if (strlen(temp_buff) == 0) {
         send(sockfd, "1", strlen("1"), 0);
     }
@@ -86,7 +86,7 @@ void mx_delete_chat(char **data, int sockfd) {
     char *st_messages = (exit_messages == 0) ? ST_OK : ST_NEOK;
     char *st_chats = (exit_chats == 0) ? ST_OK : ST_NEOK;
 
-    logger("Delete chat messages", st_messages, errmsg);
+    // logger("Delete chat messages", st_messages, errmsg);
     logger("Delete chat", st_chats, errmsg);
 
     char response[2] = {(exit_messages == 0 && exit_chats == 0) ? '0' : '1', '\0'};
