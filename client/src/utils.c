@@ -431,7 +431,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
 
             gtk_widget_show_all(chat_box);
             
-            g_print("%d\n", selected_user.index);
+            //g_print("%d\n", selected_user.index);
 
             return FALSE;
         }
@@ -879,7 +879,7 @@ void reload_chats(char *username) {
         free(chatters[i].username);
         free(chatters[i].lastmsg);
         if (chatters[i].avatar != NULL) {
-            free(chatters[i].avatar);
+            g_object_unref(chatters[i].avatar);
         }
     }
     free(chatters);
@@ -933,13 +933,13 @@ void reload_messages(char *username) {
         g_print("Server offline\n");
         return;
     }
-
+    g_print("%s\n", response);
     for (int i = 0; i < MAX_CHATTERS; ++i) {
         for(int j = 0; j < messages_count[i]; j++) clear_message(&messages[i][j]);
     }
 
     for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
-    g_free(messages);
+    free(messages);
     messages = NULL;
     messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
     for (int i = 0; i < MAX_CHATTERS; i++) {
