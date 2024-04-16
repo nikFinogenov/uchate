@@ -31,6 +31,7 @@ void mx_add_message(char **data, int sockfd) {
     char sql[500];
     memset(sql, 0, 500);
     char *errmsg;
+    // char response[DEFAULT_MESSAGE_SIZE];
     int chat_id = get_chat_id(data[1], data[2]);
 
     sprintf(sql, "INSERT INTO MESSAGES (chat_id, text, type, date) \
@@ -49,8 +50,9 @@ void mx_add_message(char **data, int sockfd) {
     sqlite3_close(db);
     char message_id_str[50];
     snprintf(message_id_str, sizeof(message_id_str), "%" PRId64, (int64_t)message_id);
-
-    send(sockfd, message_id_str, strlen(message_id_str), 0);
+    if(exit == 0) send(sockfd, message_id_str, strlen(message_id_str), 0);
+    else send(sockfd, "-1", strlen("-1"), 0);
+    // send(sockfd, message_id_str, strlen(message_id_str), 0);
 }
 
 void mx_get_message(char **data, int sockfd) {

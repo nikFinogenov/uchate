@@ -417,7 +417,6 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
     socklen_t len = sizeof (error);
     int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
 
-
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
         pthread_t thread_id;
@@ -449,7 +448,7 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
         sockfd = -1;
     }
     
-    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    if(sockfd == -1) sprintf(recvBuffer, "-1488");
     return recvBuffer;
 }
 

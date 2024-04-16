@@ -160,6 +160,7 @@ char **get_user_status(char *username);
 
 
 void fill_data(void);
+void clear_data(void);
 bool is_chatters_empty(void);
 bool is_messages_empty(void);
 gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data);

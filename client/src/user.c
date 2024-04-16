@@ -648,7 +648,49 @@ static void on_window_realize(GtkWidget *widget, gpointer data) {
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment) - gtk_adjustment_get_page_size(v_adjustment));
     gtk_widget_hide(chat_box);   
 }
+void add_chatter(const char* name, const char* surname, const char* username, const char* lastmsg, GdkPixbuf* avatar) {
+    if (chatters_count >= MAX_CHATTERS) {
+        fprintf(stderr, "Error: Maximum number of chatters reached.\n");
+        return;
+    }
 
+    size_t name_len = strlen(name) + 1;
+    size_t surname_len = strlen(surname) + 1;
+    size_t username_len = strlen(username) + 1;
+    size_t lastmsg_len = strlen(lastmsg) + 1;
+
+    chatters[chatters_count].name = malloc(name_len);
+    if (chatters[chatters_count].name == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for name.\n");
+        return;
+    }
+    strcpy(chatters[chatters_count].name, name);
+
+    chatters[chatters_count].surname = malloc(surname_len);
+    if (chatters[chatters_count].surname == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for surname.\n");
+        return;
+    }
+    strcpy(chatters[chatters_count].surname, surname);
+
+    chatters[chatters_count].username = malloc(username_len);
+    if (chatters[chatters_count].username == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for username.\n");
+        return;
+    }
+    strcpy(chatters[chatters_count].username, username);
+
+    chatters[chatters_count].lastmsg = malloc(lastmsg_len);
+    if (chatters[chatters_count].lastmsg == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for lastmsg.\n");
+        return;
+    }
+    strcpy(chatters[chatters_count].lastmsg, lastmsg);
+
+    chatters[chatters_count].avatar = avatar ? gdk_pixbuf_ref(avatar) : NULL;
+
+    chatters_count++;
+}
 static void search_user(GtkWidget *widget, gpointer user_data) {
     EntryWidgets *data = (EntryWidgets *)user_data;
     const gchar *data_username = gtk_entry_get_text(GTK_ENTRY(data->username_entry));
@@ -695,18 +737,18 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     token = strtok(NULL, "\n");
     char *surname = strdup(token);
 
-    t_chatter_s new_chatter = {
-        .name = mx_strdup(name),
-        .surname = mx_strdup(surname),
-        .username = mx_strdup(username),
-        .lastmsg = mx_strdup("No messages yet"),
-        .avatar = NULL
-    };
+    // t_chatter_s new_chatter = {
+    //     .name = mx_strdup(name),
+    //     .surname = mx_strdup(surname),
+    //     .username = mx_strdup(username),
+    //     .lastmsg = mx_strdup("No messages yet"),
+    //     .avatar = NULL
+    // };
     
 
     if(chatters_count + 1 < MAX_CHATTERS) {
-        chatters[chatters_count] = new_chatter;
-        chatters_count++;
+        // chatters[chatters_count] = new_chatter;
+        // chatters_count++;
         char** response2 = send_new_chat_data(user.username, username);
     
         if (strcmp((char *)response2, "1") == 0) {
@@ -717,6 +759,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
             display_error_message("Server offline", 0);
             return;
         }
+        add_chatter(name, surname, username, "No messages yet", NULL);
         refresh_scrollable_window(scrollable_window);
         gtk_widget_show(scrollable_window);
         gtk_widget_hide(add_new_chat_when_no_chats);
@@ -778,6 +821,40 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
     g_signal_connect_swapped(search_pop_up, "response", G_CALLBACK(destroy_close_search), NULL);    
 }
 
+void add_message(int mess_id, int chatter_id, const char* text, const char* time, bool is_user) {
+    if (chatter_id < 0 || chatter_id >= MAX_CHATTERS) {
+        fprintf(stderr, "Error: Invalid chatter ID.\n");
+        return;
+    }
+
+    if (messages_count[chatter_id] >= MAX_MESSAGES) {
+        fprintf(stderr, "Error: Maximum number of messages reached for chatter ID %d.\n", chatter_id);
+        return;
+    }
+
+    size_t text_len = strlen(text) + 1;
+    size_t time_len = strlen(time) + 1;
+
+    messages[chatter_id][messages_count[chatter_id]].id = mess_id;
+    messages[chatter_id][messages_count[chatter_id]].text = malloc(text_len);
+    if (messages[chatter_id][messages_count[chatter_id]].text == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for message text.\n");
+        return;
+    }
+    strcpy(messages[chatter_id][messages_count[chatter_id]].text, text);
+
+    messages[chatter_id][messages_count[chatter_id]].time = malloc(time_len);
+    if (messages[chatter_id][messages_count[chatter_id]].time == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed for message time.\n");
+        return;
+    }
+    strcpy(messages[chatter_id][messages_count[chatter_id]].time, time);
+
+    messages[chatter_id][messages_count[chatter_id]].is_user = is_user;
+
+    messages_count[chatter_id]++;
+}
+
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
     char *text = (char *)gtk_entry_get_text(GTK_ENTRY(data->entry));
@@ -812,16 +889,25 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
 
     int m_id = mx_atoi((char *)add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
     
-    t_message_s new_mes = {
-        .id = m_id,
-        .text = mx_strdup(text),
-        .time = mx_strdup(time_str),
-        .is_user = TRUE
-    };
+    if(m_id == -1) {
+        g_print("Ne poluchilos\n");
+        return;
+    }
+    if(m_id == -1488) {
+        g_print("Server offline\n");
+        return;
+    }
+    // t_message_s new_mes = {
+    //     .id = m_id,
+    //     .text = mx_strdup(text),
+    //     .time = mx_strdup(time_str),
+    //     .is_user = TRUE
+    // };
 
     if(messages_count[selected_user.index] + 1 < MAX_MESSAGES) {
-        messages[selected_user.index][messages_count[selected_user.index]] = new_mes;
-        messages_count[selected_user.index]++;
+        add_message(m_id, selected_user.index, text, time_str, true);
+        // messages[selected_user.index][messages_count[selected_user.index]] = new_mes;
+        // messages_count[selected_user.index]++;
         refresh_scrollable_window2(scrollable_window2);
         gtk_widget_show(scrollable_window2);
         chatters[selected_user.index].lastmsg = format_last_msg((char *)text);
@@ -995,11 +1081,12 @@ static void clicked_side(GtkWidget *widget, gpointer data){
 
 static void logout_clicked(GtkWidget *widget, gpointer data){
     gtk_widget_hide(user_window);
-    stop_chat_checker();
+    // stop_chat_checker();
     userdata.button_recognize = false;
     update_user_status("offline", user.username);
-    clear_all();
-    fill_data();
+    // clear_all();
+    clear_data();
+    // fill_data();
     show_login();
 }
 
