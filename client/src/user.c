@@ -562,21 +562,33 @@ static void display_joke(GtkWidget *widget, gpointer data) {
     GtkWidget *joke = gtk_dialog_new_with_buttons("Random Joke", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL);
-    
+
     gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
 
-    GtkWidget *joke_text = gtk_label_new(get_random_joke());
+    gint random_number = g_random_int_range(1, 3);
 
-    gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
-    gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
-
-    gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
-
+    if (random_number == 1) {
+        GtkWidget *joke_text = gtk_label_new(get_random_joke());
+        gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
+        gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
+        gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
+    } else {
+        int index = g_random_int_range(1, 31);
+        char path[50];
+        sprintf(path, "client/jokes/%d.png", index);
+        GdkPixbuf *joke_pixbuf = gdk_pixbuf_new_from_file(path, NULL);
+        if (joke_pixbuf != NULL) {
+            GtkWidget *joke_image = gtk_image_new_from_pixbuf(joke_pixbuf);
+            g_object_unref(joke_pixbuf);
+            gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_image, FALSE, FALSE, 100); 
+            gtk_widget_set_size_request(joke, -1, -1); // set the size of the dialog to the size of the image
+            gtk_widget_show_all(joke_image);
+        }
+    }
     gtk_widget_show_all(joke);
-    
+
     g_signal_connect_swapped(joke, "response", G_CALLBACK(gtk_widget_destroy), joke);
 }
-
 static void on_window_realize(GtkWidget *widget, gpointer data) {
     GtkWidget *scrollable_window = GTK_WIDGET(data);
 
@@ -951,7 +963,7 @@ void draw_user_window() {
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_default_size(GTK_WINDOW(user_window), screen_width, screen_height);
+    gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
     g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
     gtk_window_maximize(GTK_WINDOW(user_window));
 
