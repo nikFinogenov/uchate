@@ -123,14 +123,16 @@ void draw_login(void) {
     gtk_window_set_position(GTK_WINDOW(login_window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(login_window), 20);
     g_signal_connect(login_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-
+    gtk_widget_override_background_color(login_window, GTK_STATE_FLAG_NORMAL, &black);
     GtkWidget *login_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_container_add(GTK_CONTAINER(login_window), login_vbox);
-
+    PangoFontDescription *font_desc = pango_font_description_new();
+    gtk_widget_override_background_color(login_vbox, GTK_STATE_FLAG_NORMAL, &black);
     GtkWidget *login_label = gtk_label_new("McOk");
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
     gtk_widget_set_halign(login_label, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(login_vbox), login_label, FALSE, FALSE, 0);
-
+    gtk_widget_override_font(login_label, font_desc);
     GtkWidget *signup_link = gtk_label_new("Don't have an account? Sign up");
     gtk_label_set_markup(GTK_LABEL(signup_link), "Don't have an account? <a href=\"#\">Sign up</a>");
     gtk_widget_set_halign(signup_link, GTK_ALIGN_CENTER);

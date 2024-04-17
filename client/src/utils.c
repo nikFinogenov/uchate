@@ -279,13 +279,12 @@ static GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_f
     GtkWidget *event_box = gtk_event_box_new();
     gtk_widget_set_name(event_box, "clickable-user-box");
 
-    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-    gtk_widget_set_margin_start(box, 15);
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file(input_image_file, NULL);
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
     prev_pixbuf = resize_img(prev_pixbuf, 64, 64);
-
+    set_widget_height(box, 70);
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
@@ -418,9 +417,9 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
             return TRUE;
         } else if (event->button == GDK_BUTTON_PRIMARY) {
             if (selected_user.box != NULL && selected_user.index != index) {
-                gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
+                gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple); 
             }
-            gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+            gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &vrode_norm_purple); 
             selected_user.box = widget;
             selected_user.index = index;
 
@@ -517,7 +516,7 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
             gtk_widget_set_name(user_box, "user-box");
             if(i == selected_user.index) {
                 selected_user.box = user_box;
-                gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+                gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &vrode_norm_purple); 
             }
             g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
 
@@ -542,7 +541,7 @@ void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char*
                 gtk_widget_set_name(user_box, "user-box");
                 if(i == selected_user.index) {
                     selected_user.box = user_box;
-                    gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY, LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+                    gtk_widget_override_background_color(user_box, GTK_STATE_FLAG_NORMAL, &vrode_norm_purple); 
                 }
                 g_signal_connect(user_box, "button-press-event", G_CALLBACK(user_box_clicked), GINT_TO_POINTER(i));
 

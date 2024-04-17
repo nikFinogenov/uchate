@@ -1114,7 +1114,6 @@ void draw_user_window() {
     gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
     g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
     gtk_window_maximize(GTK_WINDOW(user_window));
-
     GtkWidget *hbox_main = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_container_add(GTK_CONTAINER(user_window), hbox_main);
 
@@ -1123,10 +1122,10 @@ void draw_user_window() {
     chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0}); 
-    gtk_widget_override_background_color(account_settings, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0});
-    gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHT_GRAY, LIGHT_GRAY, LIGHT_GRAY, 1.0});
-    gtk_widget_override_background_color(chat_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0});
+    gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple); 
+    gtk_widget_override_background_color(account_settings, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple);
+    gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple);
+    gtk_widget_override_background_color(chat_box, GTK_STATE_FLAG_NORMAL, &dark_purple);
 
     gtk_widget_set_size_request(settings_box, 500, -1);
     gtk_widget_set_size_request(account_settings, 500, -1);
@@ -1241,10 +1240,6 @@ void draw_user_window() {
     ebox2 = gtk_event_box_new();
     ebox3 = gtk_event_box_new();
 
-    gtk_widget_override_background_color(ebox1, GTK_STATE_FLAG_NORMAL, NORM_CVET);
-    gtk_widget_override_background_color(ebox2, GTK_STATE_FLAG_NORMAL, NORM_CVET);
-    gtk_widget_override_background_color(ebox3, GTK_STATE_FLAG_NORMAL, NORM_CVET);
-
     GtkWidget *fimage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(fimage, 40, 40);
     GtkWidget *simage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1333,7 +1328,7 @@ void draw_user_window() {
     draw_account_settings_box();
 
     GtkWidget *side_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_override_background_color(side_box, GTK_STATE_FLAG_NORMAL, NORM_CVET);
+    gtk_widget_override_background_color(side_box, GTK_STATE_FLAG_NORMAL, &light_purple);
     gtk_widget_set_size_request(side_box, 75, -1);
     
 
@@ -1420,8 +1415,8 @@ void draw_user_window() {
 
     GtkWidget *search_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    GtkWidget *search_button = gtk_button_new_with_label("[ Find a user ]");
-    gtk_widget_set_size_request(search_button, 25, 35);
+    GtkWidget *search_button = gtk_button_new_with_label("Search");
+    gtk_widget_set_size_request(search_button, 25, 37);
     gtk_widget_set_name(GTK_WIDGET(search_button), "search_button");
     CallbackData *find__data = g_slice_new(CallbackData);
     find__data->entry = search_entry;
@@ -1463,7 +1458,7 @@ void draw_user_window() {
         gtk_widget_hide(add_new_chat_when_no_chats);
     }
     user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
+    gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple); 
     set_widget_height(user_info_box, 70);
     draw_user_info_box(user_info_box);
     gtk_box_pack_start(GTK_BOX(chat_box), user_info_box, FALSE, FALSE, 0);
@@ -1481,7 +1476,8 @@ void draw_user_window() {
     GtkWidget *text_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_pack_start(GTK_BOX(text_box), text_entry, TRUE, TRUE, 0);
 
-    GtkWidget *send_button = gtk_button_new_with_label("[ Send ]");
+    GtkWidget *send_button = gtk_button_new_with_label(NULL);
+    gtk_widget_set_name(GTK_WIDGET(send_button), "send_button");
     gtk_widget_set_size_request(send_button, 25, 25);
     CallbackData *callback_data = g_slice_new(CallbackData);
     callback_data->entry = text_entry;
@@ -1494,7 +1490,7 @@ void draw_user_window() {
 
     empty_chat = (!is_chatters_empty()) ? gtk_label_new("[ Select a chat to start chatting ]") : gtk_label_new("[ Add your first chat! ]");
     gtk_widget_set_name(GTK_WIDGET(empty_chat), "empty-chat");
-    gtk_widget_override_background_color(empty_chat, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){DARK_GRAY, DARK_GRAY, DARK_GRAY, 1.0}); 
+    gtk_widget_override_background_color(empty_chat, GTK_STATE_FLAG_NORMAL, &dark_purple); 
 
     gtk_box_pack_start(GTK_BOX(hbox_main), side_box, FALSE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(hbox_main), chats_box, FALSE, FALSE, 0);

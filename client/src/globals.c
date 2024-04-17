@@ -122,6 +122,12 @@ void fill_data(void) {
     user.surname = "";
     user.desc = "";
     user.avatar = NULL;
+
+    gdk_rgba_parse(&black, "#0B0205");
+    gdk_rgba_parse(&dark_purple, "#2C1B47");
+    gdk_rgba_parse(&not_too_dark_purple, "#724C9D");
+    gdk_rgba_parse(&light_purple, "#DCCAE9");
+    gdk_rgba_parse(&vrode_norm_purple, "#9356A0");
 }
 
 void free_chatters() {

@@ -4,7 +4,7 @@
     border-color: #d3d6db;
     border-radius: 5px;
     padding: 5px;
-    background-color: #cb6ad8;
+    background-color: #9356A0;
 }
 
 #sidebar {
@@ -113,11 +113,21 @@
 }
 
 #search_button{
-    background-color: red;
-    background-size: 0%;
+    background-image: url("img/lupa.png");
+    background-size: 30px;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-color: #9356A0;
 }
 #search_button:hover{
-    opacity: 0.3;
+    opacity: 0.6;
+}
+#send_button{
+    background-image: url("img/side_bar_arrow1v.png");
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #724C9D;
 }
 /* #img_settings {
     background-color: aqua;

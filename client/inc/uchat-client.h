@@ -97,6 +97,11 @@ extern GtkWidget *account_settings;
 extern GtkWidget *user_info_box;
 extern GtkWidget *scrollable_window;
 extern GtkWidget *scrollable_window2;
+GdkRGBA black;
+GdkRGBA dark_purple;
+GdkRGBA not_too_dark_purple;
+GdkRGBA light_purple;
+GdkRGBA vrode_norm_purple;
 
 extern gint screen_width;
 extern gint screen_height;
