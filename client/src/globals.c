@@ -15,7 +15,7 @@ GtkWidget *scrollable_window2 = NULL;
 
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
-char* default_img = "client/img/moaii.png";
+char* default_img = "client/img/moai.png";
 
 t_message_s** messages;
 int messages_count[MAX_CHATTERS];
@@ -198,7 +198,30 @@ void clear_all(void) {
     clear_selected(&selected_user);
 }
 
+void clear_chats(void) {
+    for(int i = 0; i < chatters_count; i++) {
+        free(chatters[i].name);
+        free(chatters[i].surname);
+        free(chatters[i].username);
+        free(chatters[i].lastmsg);
+        if (chatters[i].avatar != NULL) gdk_pixbuf_unref(chatters[i].avatar);
+    }
+    free(chatters);
+    chatters_count = 0;
+}
+
+void clear_messages(void){
+    for(int i = 0; i < chatters_count; i++) {
+        free(messages[i]);
+    }
+    free(messages);
+    for(int i = 0; i < MAX_CHATTERS; i++) {
+        messages_count[i] = 0;
+    }
+}
+
 void clear_data(void) {
+    clear_selected(&selected_user);
     for(int i = 0; i < chatters_count; i++) {
         free(messages[i]);
     }
@@ -209,7 +232,7 @@ void clear_data(void) {
         free(chatters[i].surname);
         free(chatters[i].username);
         free(chatters[i].lastmsg);
-        gdk_pixbuf_unref(chatters[i].avatar);
+        if (chatters[i].avatar != NULL) gdk_pixbuf_unref(chatters[i].avatar);
     }
     free(chatters);
 

@@ -80,7 +80,6 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     create_txt_with_data(login_info, user.username, parsed_password, userdata.button_recognize);
     get_and_save_avatar_to_file(user.username);
     sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
-    // g_print("%s\n", avatar_path);
     user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
     remove(avatar_path);
     free(avatar_path);
@@ -92,7 +91,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     load_message(user.username);
     draw_user_window();
     show_user_window();
-    // start_chat_checker(user.username);
+    start_chat_checker(user.username);
 }
 
 static gboolean on_entry_key_press(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {

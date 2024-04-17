@@ -867,6 +867,36 @@ void load_message(char *username) {
     }
 }
 
+void load_chatter_message(char *chattername) {
+        char **response2 = get_chat_messages(user.username, chattername);
+        if (strcmp((char *)response2, "1") == 0) {
+            g_print("Ne poluchilos\n", chattername);
+            return;
+        }
+        if (strcmp((char *)response2, "1488") == 0) {
+            g_print("Server offline\n", chattername);
+            return;
+        }
+        if (strcmp((char *)response2, "0") == 0) {
+            return;
+        }
+        char **tokens2 = mx_strsplit((char *)response2, '\n');
+        int mess_count_ahuet = mx_get_length(tokens2) / 5;
+        char *token2 = strtok((char *)response2, "\n");
+        for(int j = 0; j < mx_get_length(tokens2); j++) {
+            char *id = tokens2[j];
+            j++;
+            char *chat_id = tokens2[j];
+            j++;
+            char *text = tokens2[j];
+            j++;
+            char *type = tokens2[j];
+            j++;
+            char *time = tokens2[j];
+            add_message(id, selected_user.index, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
+        }
+}
+
 void reload_chats(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
@@ -1026,27 +1056,59 @@ int server_messages_quantity(char *username) {
 
     return total_messages;
 }
-
+void update_messages(char *username) {
+    clear_messages();
+    load_message(username);
+}
 void *chat_checker_thread_func(void *arg) {
     char *username = (char *)arg;
     int server_chats_amount = 0;
     while (1) {
         server_chats_amount = server_chats_quantity(username);
-        int server_message_amount = server_messages_quantity(username);
-        int total_local_messages_amount = 0;
-        for(int i = 0; i < MAX_CHATTERS; i++) {
-            total_local_messages_amount += messages_count[i];
-        }
+        // g_print("%d\n", server_chats_amount);
         if (server_chats_amount != chatters_count) {
-            reload_chats(username);
+            // reload_chats(username);
+            // clear_data();
+            clear_chats();
+            chatters = malloc(MAX_CHATTERS * sizeof(t_chatter_s));
+            for(int i = 0; i < MAX_CHATTERS; i++) {
+                chatters[i].username = NULL;
+            }
+            load_chats(username);
+            // load_message(username);
             refresh_scrollable_window(scrollable_window);
+            // refresh_scrollable_window2(scrollable_window2);
         }
-        if (server_message_amount != total_local_messages_amount) { 
-            reload_messages(username);
-            if(selected_user.index != -1) refresh_scrollable_window2(scrollable_window2);
-            refresh_scrollable_window(scrollable_window);
+        if(selected_user.index != -1) {
+            int server_message_amount = mx_atoi(get_mess_chat_amount(username, chatters[selected_user.index].username));
+            // g_print("%d\n", server_message_amount);
+            int total_local_messages_amount = 0;
+            for(int i = 0; i < MAX_CHATTERS; i++) {
+                total_local_messages_amount += messages_count[i];
+            }
+            if(messages_count[selected_user.index] != server_message_amount) {
+                // g_print("%s - %s\n", username, chatters[selected_user.index].username);
+                g_print("%d - %d\n", messages_count[selected_user.index], server_message_amount);
+                // update_messages(username);
+                clear_messages();
+                messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
+                for (int i = 0; i < MAX_CHATTERS; i++) {
+                    messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
+                    for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
+                }
+                load_message(username);
+                // load_chatter_message(chatters[selected_user.index].username);
+                refresh_scrollable_window2(scrollable_window2);
+            }
         }
-        sleep(3);
+        g_print("end of refresh\n\n");
+
+        // if (server_message_amount != total_local_messages_amount) { 
+        //     reload_messages(username);
+        //     if(selected_user.index != -1) refresh_scrollable_window2(scrollable_window2);
+        //     refresh_scrollable_window(scrollable_window);
+        // }
+        sleep(1);
     }
     return NULL;
 }

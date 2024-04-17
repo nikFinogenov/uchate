@@ -8,7 +8,7 @@
 #define RED_CVET &(GdkRGBA){255 / 255.0,  0, 0, 1.0}
 
 #define MAIN_WINDOW_HEIGHT 900
-#define MAIN_WINDOW_WIDTH 1500
+#define MAIN_WINDOW_WIDTH 500
 
 #define MAX_MESSAGES 1000
 #define MAX_CHATTERS 50
@@ -160,6 +160,8 @@ char **get_user_status(char *username);
 
 
 void fill_data(void);
+void clear_chats(void);
+void clear_messages(void);
 void clear_data(void);
 bool is_chatters_empty(void);
 bool is_messages_empty(void);
