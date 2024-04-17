@@ -61,3 +61,6 @@ language.ui
 server.log
 McOk.db
 login_info.json
+!libsqlite3.a
+!libcrypto.a
+!libssl.a

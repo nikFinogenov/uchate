@@ -12,15 +12,17 @@ GtkWidget *signup_window = NULL;
 GdkPixbuf *temp_avatar = NULL;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;
+GtkWidget *add_new_chat_when_no_chats = NULL;
 
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
-char* default_img = "client/img/simple.png";
+char* default_img = "client/img/moai.png";
 
-t_message_s** messages = NULL;
+t_message_s** messages;
 int messages_count[MAX_CHATTERS];
-t_chatter_s* chatters = NULL;
-int chatters_count = 0;
+t_chatter_s* chatters;
+int chatters_count;
+
 gint screen_width;
 gint screen_height;
 
@@ -129,6 +131,7 @@ void fill_data(void) {
     gdk_rgba_parse(&light_purple, "#DCCAE9");
     gdk_rgba_parse(&vrode_norm_purple, "#9356A0");
     gdk_rgba_parse(&ny_takoy_purple, "#604d9e");
+    chatters_count = 0;
 }
 
 void free_chatters() {
@@ -200,4 +203,60 @@ void clear_all(void) {
     chatters = NULL;
     chatters_count = 0;
     clear_selected(&selected_user);
+}
+
+void clear_chats(void) {
+    for(int i = 0; i < chatters_count; i++) {
+        free(chatters[i].name);
+        free(chatters[i].surname);
+        free(chatters[i].username);
+        free(chatters[i].lastmsg);
+        if (chatters[i].avatar != NULL) gdk_pixbuf_unref(chatters[i].avatar);
+    }
+    free(chatters);
+    chatters_count = 0;
+}
+
+void clear_messages(void){
+    for(int i = 0; i < chatters_count; i++) {
+        free(messages[i]);
+    }
+    free(messages);
+    for(int i = 0; i < MAX_CHATTERS; i++) {
+        messages_count[i] = 0;
+    }
+}
+
+void clear_data(void) {
+    clear_selected(&selected_user);
+    for(int i = 0; i < chatters_count; i++) {
+        free(messages[i]);
+    }
+    free(messages);
+
+    for(int i = 0; i < chatters_count; i++) {
+        free(chatters[i].name);
+        free(chatters[i].surname);
+        free(chatters[i].username);
+        free(chatters[i].lastmsg);
+        if (chatters[i].avatar != NULL) gdk_pixbuf_unref(chatters[i].avatar);
+    }
+    free(chatters);
+
+    free(user.name);
+    free(user.surname);
+    free(user.username);
+    free(user.desc);
+    gdk_pixbuf_unref(user.avatar);
+
+    user.username = "";
+    user.name = "";
+    user.surname = "";
+    user.desc = "";
+    user.avatar = NULL;
+
+    chatters_count = 0;
+    for(int i = 0; i < MAX_CHATTERS; i++) {
+        messages_count[i] = 0;
+    }
 }

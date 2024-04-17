@@ -8,7 +8,7 @@
 #define RED_CVET &(GdkRGBA){255 / 255.0,  0, 0, 1.0}
 
 #define MAIN_WINDOW_HEIGHT 900
-#define MAIN_WINDOW_WIDTH 1500
+#define MAIN_WINDOW_WIDTH 500
 
 #define MAX_MESSAGES 1000
 #define MAX_CHATTERS 50
@@ -81,6 +81,7 @@ typedef struct {
 } t_selected_s;
 
 extern GtkWidget *signup_window;
+extern GtkWidget *add_new_chat_when_no_chats;
 extern GtkWidget *user_window;
 extern GtkWidget *login_window;
 extern char* default_img;
@@ -166,6 +167,9 @@ char **get_user_status(char *username);
 
 
 void fill_data(void);
+void clear_chats(void);
+void clear_messages(void);
+void clear_data(void);
 bool is_chatters_empty(void);
 bool is_messages_empty(void);
 gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer user_data);
@@ -181,6 +185,9 @@ void load_message(char *username);
 void start_message_checker(char *username);
 void stop_message_checker(void);
 void clear_message(t_message_s *message);
+int server_chats_quantity(char *username);
+void add_message(int mess_id, int chatter_id, const char* text, const char* time, bool is_user);
+void add_chatter(const char* name, const char* surname, const char* username, const char* lastmsg, GdkPixbuf* avatar);
 
 char* get_random_joke();
 void clear_all(void);
