@@ -576,30 +576,70 @@ static void devs_window(GtkWidget *widget, gpointer data){
                                                     NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
+    PangoFontDescription *font_desc_for_razr = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
+    pango_font_description_set_size(font_desc_for_razr, 12 * PANGO_SCALE);
     GtkWidget *razrab1 = gtk_label_new(NULL);
     GtkWidget *razrab2 = gtk_label_new(NULL);
     GtkWidget *razrab3 = gtk_label_new(NULL);
     GtkWidget *razrab4 = gtk_label_new(NULL);
-    gtk_widget_override_font(razrab1, font_desc);
-    gtk_widget_override_font(razrab2, font_desc);
-    gtk_widget_override_font(razrab3, font_desc);
-    gtk_widget_override_font(razrab4, font_desc);
-    gtk_label_set_markup(GTK_LABEL(razrab1), "<a href='https://github.com/nikFinogenov'>razrab1</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>razrab2</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>razrab3</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab4), "<a href='https://github.com/kitska'>razrab4</a>");
-    gtk_label_set_justify(GTK_LABEL(razrab1), GTK_JUSTIFY_CENTER);
-    gtk_label_set_justify(GTK_LABEL(razrab2), GTK_JUSTIFY_CENTER);
-    gtk_label_set_justify(GTK_LABEL(razrab3), GTK_JUSTIFY_CENTER);
-    gtk_label_set_justify(GTK_LABEL(razrab4), GTK_JUSTIFY_CENTER);
+    GtkWidget *support1 = gtk_label_new(NULL);
+    GtkWidget *support2 = gtk_label_new(NULL);
+    gtk_label_set_markup(GTK_LABEL(razrab1), "<a href='https://github.com/nikFinogenov'>Nikita Finogenov</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytriy DOLHII</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>Gandon Andrew Yakimov</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab4), "<a href='https://github.com/kitska'>Maksym Bratash</a>");
+    gtk_label_set_markup(GTK_LABEL(support1), "<a href='https://steamcommunity.com/profiles/76561199022185683'>Vladislav Champion Chubukin</a>");
+    gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmytriy Erter Zuckerbergovich</a>");
+    GtkWidget *razrab_label = gtk_label_new("The application was developed by");
+    gtk_widget_override_font(razrab_label, font_desc);
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
+    GtkWidget *razrab_label2 = gtk_label_new("Big Thanks for Supporting");
+    gtk_widget_override_font(razrab_label2, font_desc);
+    GtkWidget *razrab_label3 = gtk_label_new("Kon4eliga");
+    gtk_widget_override_font(razrab_label3, font_desc);
+
+    gtk_widget_override_font(razrab1, font_desc_for_razr);
+    gtk_widget_override_font(razrab2, font_desc_for_razr);
+    gtk_widget_override_font(razrab3, font_desc_for_razr);
+    gtk_widget_override_font(razrab4, font_desc_for_razr);
+    gtk_widget_override_font(support1, font_desc_for_razr);
+    gtk_widget_override_font(support2, font_desc_for_razr);
+
+    GtkWidget *box_text1, *box_text2, *box_text3;
+
+    box_text1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 20);
+    box_text2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 20);
+    box_text3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+
+    gtk_container_add(GTK_CONTAINER(box_text1), razrab1);
+    gtk_container_add(GTK_CONTAINER(box_text1), razrab2);
+    gtk_container_add(GTK_CONTAINER(box_text1), razrab4);
+
+    gtk_container_add(GTK_CONTAINER(box_text2), support1);
+    gtk_container_add(GTK_CONTAINER(box_text2), support2);
+
+    gtk_container_add(GTK_CONTAINER(box_text3), razrab3);
+
+    gtk_container_add(GTK_CONTAINER(vbox), razrab_label);
+    gtk_container_add(GTK_CONTAINER(vbox), box_text1);
+    gtk_container_add(GTK_CONTAINER(vbox), razrab_label2);
+    gtk_container_add(GTK_CONTAINER(vbox), box_text2);
+    gtk_container_add(GTK_CONTAINER(vbox), razrab_label3);
+    gtk_container_add(GTK_CONTAINER(vbox), box_text3);
+
+    gtk_widget_set_valign(GTK_WIDGET(box_text1), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(box_text1), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(box_text2), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(box_text2), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(box_text3), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(box_text3), GTK_ALIGN_CENTER);
 
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_f));
-    gtk_container_add(GTK_CONTAINER(content_area), razrab1);
-    gtk_container_add(GTK_CONTAINER(content_area), razrab2);
-    gtk_container_add(GTK_CONTAINER(content_area), razrab3);
-    gtk_container_add(GTK_CONTAINER(content_area), razrab4);
-
+    gtk_container_add(GTK_CONTAINER(content_area), vbox);
+    gtk_widget_set_valign(GTK_WIDGET(content_area), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(content_area), GTK_ALIGN_CENTER);
+   
     gtk_widget_show_all(settings_f);
 
     g_signal_connect_swapped(settings_f, "response", G_CALLBACK(gtk_widget_destroy), settings_f);
@@ -1062,6 +1102,16 @@ void draw_user_window() {
     GdkPixbuf *sticker1, *sticker2, *sticker3, *sticker4, *sticker5;
     GtkWidget *sticker11, *sticker22, *sticker33, *sticker44, *sticker55;
 
+    gtk_widget_set_halign(GTK_WIDGET(help_sad), GTK_ALIGN_START);
+
+    gtk_widget_set_halign(GTK_WIDGET(help_thumbs), GTK_ALIGN_START);
+
+    gtk_widget_set_halign(GTK_WIDGET(help_pink), GTK_ALIGN_START);
+
+    gtk_widget_set_halign(GTK_WIDGET(help_rolling), GTK_ALIGN_START);
+
+    gtk_widget_set_halign(GTK_WIDGET(help_moai), GTK_ALIGN_START);
+
     sticker1 = gdk_pixbuf_new_from_file("client/img/sad.png", NULL);
     sticker2 = gdk_pixbuf_new_from_file("client/img/thumbs.png", NULL);
     sticker3 = gdk_pixbuf_new_from_file("client/img/pink.png", NULL);
@@ -1080,18 +1130,32 @@ void draw_user_window() {
     sticker44 = gtk_image_new_from_pixbuf(scaled_pixbuf4);
     sticker55 = gtk_image_new_from_pixbuf(scaled_pixbuf5);
 
-    //gtk_widget_set_margin_top(error_label, 10);
-    help_box1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    help_box2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    help_box3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    help_box4 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    help_box5 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    help_box1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    help_box2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    help_box3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    help_box4 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    help_box5 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
-    help_box_sub1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    help_box_sub2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    help_box_sub3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    help_box_sub4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    help_box_sub5 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    help_box_sub1 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    help_box_sub2 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    help_box_sub3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    help_box_sub4 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    help_box_sub5 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+
+    gtk_widget_set_valign(GTK_WIDGET(help_box_sub1), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(help_box_sub1), GTK_ALIGN_CENTER);
+
+    gtk_widget_set_valign(GTK_WIDGET(help_box_sub2), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(help_box_sub2), GTK_ALIGN_CENTER);
+
+    gtk_widget_set_valign(GTK_WIDGET(help_box_sub3), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(help_box_sub3), GTK_ALIGN_CENTER);
+
+    gtk_widget_set_valign(GTK_WIDGET(help_box_sub4), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(help_box_sub4), GTK_ALIGN_CENTER);
+
+    gtk_widget_set_valign(GTK_WIDGET(help_box_sub5), GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(GTK_WIDGET(help_box_sub5), GTK_ALIGN_CENTER);
 
     gtk_container_add(GTK_CONTAINER(help_box_sub1), sticker11);
     gtk_container_add(GTK_CONTAINER(help_box_sub1), help_sad);
@@ -1104,7 +1168,6 @@ void draw_user_window() {
     gtk_container_add(GTK_CONTAINER(help_box_sub5), sticker55);
     gtk_container_add(GTK_CONTAINER(help_box_sub5), help_moai);
 
-    // Добавление изображений в боксы
     gtk_box_pack_start(GTK_BOX(help_box1), help_box_sub1, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(help_box2), help_box_sub2, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(help_box3), help_box_sub3, TRUE, TRUE, 0);
