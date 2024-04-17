@@ -481,68 +481,104 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *settings_t = gtk_dialog_new_with_buttons("Subscriptions", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL, GTK_RESPONSE_NONE, NULL);
-    gtk_window_set_default_size(GTK_WINDOW(settings_t), 600, 400);
+    gtk_window_set_default_size(GTK_WINDOW(settings_t), 800, 600);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
 
-    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
 
-    GtkWidget *bbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    GtkWidget *sub_bbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    GtkWidget *sbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    GtkWidget *sub_sbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    GtkWidget *gbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    GtkWidget *sub_gbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *bbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    GtkWidget *sub_bbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *sub_sub_bbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sub_sub_bbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sub_sub_bbox3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    GtkWidget *sub_sbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *sub_sub_sbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sub_sub_sbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sub_sub_sbox3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *gbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    GtkWidget *sub_gbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *sub_sub_gbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sub_sub_gbox2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *sub_sub_gbox3 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     g_signal_connect(G_OBJECT(sub_bbox), "realize", G_CALLBACK(realize_side_bar), NULL);
     g_signal_connect(G_OBJECT(sub_sbox), "realize", G_CALLBACK(realize_side_bar), NULL);
     g_signal_connect(G_OBJECT(sub_gbox), "realize", G_CALLBACK(realize_side_bar), NULL);
-    gtk_widget_set_size_request(bbox, -1, 30);
-    gtk_widget_set_size_request(sbox, -1, 30);
-    gtk_widget_set_size_request(gbox, -1, 30);
-    gtk_widget_set_size_request(sub_bbox, -1, 30);
-    gtk_widget_set_size_request(sub_sbox, -1, 30);
-    gtk_widget_set_size_request(sub_gbox, -1, 30);
+
+    gtk_widget_set_size_request(GTK_WIDGET(sub_sub_bbox1), 400, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(sub_sub_bbox3), 400, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(sub_sub_sbox1), 400, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(sub_sub_sbox3), 400, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(sub_sub_gbox1), 400, 80);
+    gtk_widget_set_size_request(GTK_WIDGET(sub_sub_gbox3), 400, 80);
 
     GtkWidget *bronze = gtk_button_new_with_label("McOk Bronze");
     GtkWidget *silver = gtk_button_new_with_label("McOk Silver");
     GtkWidget *gold = gtk_button_new_with_label("McOk Gold");
 
+    gtk_widget_set_size_request(GTK_WIDGET(bronze), -1, 50);
+    gtk_widget_set_size_request(GTK_WIDGET(silver), -1, 50);
+    gtk_widget_set_size_request(GTK_WIDGET(gold), -1, 50);
+
+    gtk_widget_set_name(sub_sub_bbox1, "sub_bbox");
+    gtk_widget_set_name(sub_sub_bbox3, "sub_bbox");
+    gtk_widget_set_name(sub_sub_sbox1, "sub_sbox");
+    gtk_widget_set_name(sub_sub_sbox3, "sub_sbox");
+    gtk_widget_set_name(sub_sub_gbox1, "sub_gbox");
+    gtk_widget_set_name(sub_sub_gbox3, "sub_gbox");
+
     GtkWidget *bronze_title = gtk_label_new("2.50€/month");
     gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_JUSTIFY_CENTER);
     GtkWidget *bronze_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_RIGHT);
-    gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_title);
-    gtk_container_add(GTK_CONTAINER(sub_bbox), bronze_text);
+    gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_LEFT);
+    gtk_container_add(GTK_CONTAINER(sub_sub_bbox2), bronze_title);
+    gtk_container_add(GTK_CONTAINER(sub_sub_bbox2), bronze_text);
 
     GtkWidget *silver_title = gtk_label_new("5.00€/month");
     gtk_label_set_justify(GTK_LABEL(silver_title), GTK_JUSTIFY_CENTER);
     GtkWidget *silver_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_RIGHT);
-    gtk_container_add(GTK_CONTAINER(sub_sbox), silver_title);
-    gtk_container_add(GTK_CONTAINER(sub_sbox), silver_text);
+    gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_LEFT);
+    gtk_container_add(GTK_CONTAINER(sub_sub_sbox2), silver_title);
+    gtk_container_add(GTK_CONTAINER(sub_sub_sbox2), silver_text);
 
     GtkWidget *gold_title = gtk_label_new("10.00€/month");
     gtk_label_set_justify(GTK_LABEL(gold_title), GTK_JUSTIFY_CENTER);
     GtkWidget *gold_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
-    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_RIGHT);
-    gtk_container_add(GTK_CONTAINER(sub_gbox), gold_title);
-    gtk_container_add(GTK_CONTAINER(sub_gbox), gold_text);
+    gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_LEFT);
+    gtk_container_add(GTK_CONTAINER(sub_sub_gbox2), gold_title);
+    gtk_container_add(GTK_CONTAINER(sub_sub_gbox2), gold_text);
+
+    gtk_container_add(GTK_CONTAINER(sub_bbox), sub_sub_bbox1);
+    gtk_container_add(GTK_CONTAINER(sub_bbox), sub_sub_bbox2);
+    gtk_container_add(GTK_CONTAINER(sub_bbox), sub_sub_bbox3);
+
+    gtk_container_add(GTK_CONTAINER(sub_sbox), sub_sub_sbox1);
+    gtk_container_add(GTK_CONTAINER(sub_sbox), sub_sub_sbox2);
+    gtk_container_add(GTK_CONTAINER(sub_sbox), sub_sub_sbox3);
+
+    gtk_container_add(GTK_CONTAINER(sub_gbox), sub_sub_gbox1);
+    gtk_container_add(GTK_CONTAINER(sub_gbox), sub_sub_gbox2);
+    gtk_container_add(GTK_CONTAINER(sub_gbox), sub_sub_gbox3);
 
     gtk_container_add(GTK_CONTAINER(bbox), bronze);
     gtk_container_add(GTK_CONTAINER(sbox), silver);
     gtk_container_add(GTK_CONTAINER(gbox), gold);
+
+    gtk_container_add(GTK_CONTAINER(vbox), bbox);
+    gtk_container_add(GTK_CONTAINER(vbox), sub_bbox);
+    gtk_container_add(GTK_CONTAINER(vbox), sbox);
+    gtk_container_add(GTK_CONTAINER(vbox), sub_sbox);
+    gtk_container_add(GTK_CONTAINER(vbox), gbox);
+    gtk_container_add(GTK_CONTAINER(vbox), sub_gbox);
 
     g_signal_connect(G_OBJECT(bronze), "clicked", G_CALLBACK(toggle), sub_bbox);
     g_signal_connect(G_OBJECT(silver), "clicked", G_CALLBACK(toggle), sub_sbox);
     g_signal_connect(G_OBJECT(gold), "clicked", G_CALLBACK(toggle), sub_gbox);
 
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_t));
-    gtk_container_add(GTK_CONTAINER(content_area), bbox);
-    gtk_container_add(GTK_CONTAINER(content_area), sub_bbox);
-    gtk_container_add(GTK_CONTAINER(content_area), sbox);
-    gtk_container_add(GTK_CONTAINER(content_area), sub_sbox);
-    gtk_container_add(GTK_CONTAINER(content_area), gbox);
-    gtk_container_add(GTK_CONTAINER(content_area), sub_gbox);
+    gtk_container_add(GTK_CONTAINER(content_area), vbox);
+
 
     gtk_widget_show_all(settings_t);
 
@@ -556,14 +592,29 @@ static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
     GtkWidget *settings_s = gtk_dialog_new_with_buttons("Donate", GTK_WINDOW(data),
                                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                     NULL, GTK_RESPONSE_NONE, NULL);
-    gtk_window_set_default_size(GTK_WINDOW(settings_s), 600, 400);
+    gtk_window_set_default_size(GTK_WINDOW(settings_s), 800, 600);
     PangoFontDescription *font_desc = pango_font_description_new();
+    PangoFontDescription *font_desc_donaters = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
-    GtkWidget *dengi_goni = gtk_label_new(NULL);
-    gtk_widget_override_font(dengi_goni, font_desc);
-    gtk_label_set_markup(GTK_LABEL(dengi_goni), "<a href=''>Dat' na lapu</a>");
+    pango_font_description_set_size(font_desc_donaters, 14 * PANGO_SCALE);
+    GtkWidget *dengi_goni = gtk_button_new_with_label("Donate");
+    GtkWidget *top_donaters_title = gtk_label_new("Top Donaters");
+    gtk_widget_override_font(top_donaters_title, font_desc);
+    GtkWidget *top_donaters_text = gtk_label_new("");
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *dengibox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    gtk_widget_set_size_request(GTK_WIDGET(dengi_goni), -1, 100);
+
+
+    gtk_container_add(GTK_CONTAINER(dengibox), dengi_goni);
+    gtk_container_add(GTK_CONTAINER(dengibox), top_donaters_title);
+    gtk_container_add(GTK_CONTAINER(dengibox), top_donaters_text);
+    gtk_container_add(GTK_CONTAINER(vbox), dengibox);
+
+
+
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_s));
-    gtk_container_add(GTK_CONTAINER(content_area), dengi_goni);
+    gtk_container_add(GTK_CONTAINER(content_area), vbox);
 
     gtk_widget_show_all(settings_s);
 
@@ -1087,6 +1138,8 @@ void draw_user_window() {
     GtkStyleContext *context;
     context = gtk_widget_get_style_context(GTK_WIDGET(settings_box));
     gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    PangoFontDescription *font_desc = pango_font_description_new();
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
     GtkWidget *ebox1, *ebox2, *ebox3;
     GtkWidget *nbox1, *nbox2, *nbox3;
     GtkWidget *help_lable = gtk_label_new("Stickers Help Manual");
@@ -1101,6 +1154,11 @@ void draw_user_window() {
     GtkWidget *help_box_sub1, *help_box_sub2, *help_box_sub3, *help_box_sub4, *help_box_sub5;
     GdkPixbuf *sticker1, *sticker2, *sticker3, *sticker4, *sticker5;
     GtkWidget *sticker11, *sticker22, *sticker33, *sticker44, *sticker55;
+    gtk_widget_override_font(help_sad, font_desc);
+    gtk_widget_override_font(help_thumbs, font_desc);
+    gtk_widget_override_font(help_pink, font_desc);
+    gtk_widget_override_font(help_rolling, font_desc);
+    gtk_widget_override_font(help_moai, font_desc);
 
     gtk_widget_set_halign(GTK_WIDGET(help_sad), GTK_ALIGN_START);
 

@@ -135,3 +135,15 @@
     background-image: url("img/cash.png");
     background-size: contain;
 }
+#sub_bbox {
+    background-image: url("img/bronze.png");
+    background-size: auto;
+}
+#sub_sbox {
+    background-image: url("img/silver.png");
+    background-size: auto;
+}
+#sub_gbox {
+    background-image: url("img/gold.png");
+    background-size: auto;
+}
