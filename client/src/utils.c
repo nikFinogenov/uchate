@@ -76,6 +76,15 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
         g_print("Server offline");
         return;
     }
+    // int m_id = mx_atoi((char *)add_new_message(user.username, chatters[selected_user.index].username, " ", "14:88", user.username));
+    // if(m_id == -1) {
+    //     g_print("Ne poluchilos\n");
+    //     return;
+    // }
+    // if(m_id == -1488) {
+    //     g_print("Server offline\n");
+    //     return;
+    // }
     
     if (strlen(parsed_edit) > DEFAULT_MESSAGE_SIZE || strlen(parsed_edit) == 0) NULL;
     else messages[selected_user.index][data->index_of_msg].text = mx_strdup(parsed_edit);
@@ -186,7 +195,10 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
     } else g_print("O, nihuya, pracue\n");
     
     refresh_scrollable_window(scrollable_window);
-    if(chatters_count == 0) gtk_widget_show(add_new_chat_when_no_chats);
+    if(chatters_count == 0) {
+        gtk_widget_show(add_new_chat_when_no_chats);
+        gtk_label_set_text(GTK_LABEL(empty_chat), "[ Add your first chat! ]");
+    }
 }
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
@@ -1090,7 +1102,6 @@ void *chat_checker_thread_func(void *arg) {
             if(messages_count[selected_user.index] != server_message_amount) {
                 // g_print("%s - %s\n", username, chatters[selected_user.index].username);
                 g_print("%d - %d\n", messages_count[selected_user.index], server_message_amount);
-                // update_messages(username);
                 clear_messages();
                 messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
                 for (int i = 0; i < MAX_CHATTERS; i++) {
@@ -1098,17 +1109,10 @@ void *chat_checker_thread_func(void *arg) {
                     for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
                 }
                 load_message(username);
-                // load_chatter_message(chatters[selected_user.index].username);
                 refresh_scrollable_window2(scrollable_window2);
             }
         }
         g_print("end of refresh\n\n");
-
-        // if (server_message_amount != total_local_messages_amount) { 
-        //     reload_messages(username);
-        //     if(selected_user.index != -1) refresh_scrollable_window2(scrollable_window2);
-        //     refresh_scrollable_window(scrollable_window);
-        // }
         sleep(1);
     }
     return NULL;

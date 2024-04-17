@@ -848,18 +848,16 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
 static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     CallbackData *data = (CallbackData *)user_data;
     char *text = (char *)gtk_entry_get_text(GTK_ENTRY(data->entry));
+    if(mx_strcmp(text, "") == 0) return;
     int i = 0, j = 0;
-
     while (mx_isspace(text[i])) i++;
     while (text[i]) text[j++] = text[i++];
     text[j] = '\0';
-
     if(mx_strcmp(text, "") == 0) return;
     if (messages == NULL) {
         g_print("Messages array is not initialized\n");
         return;
     }
-
     if(strlen(text) > 512) {
         GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Error: Message is too long\n512 symbols max, buy premium for more");
         gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
@@ -867,9 +865,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
         gtk_widget_destroy(dialog);
         return;
     }
-
     wrap_text(text);
-
     time_t rawtime;
     struct tm *timeinfo;
     time(&rawtime);
