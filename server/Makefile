@@ -10,6 +10,10 @@ OBJD = obj
 LMXA = ../libmx/libmx.a
 LMXI = ../libmx/inc
 
+SSL_FILES := ../libs/openssl/lib/libssl.a
+SSL_FILESC := ../libs/openssl/lib/libcrypto.a
+SQL_FILES := ../libs/libsqlite3.a
+
 SRCS = $(wildcard $(SRCD)/*.c)
 INCS = $(addprefix $(INCD)/, $(INC))
 OBJS = $(patsubst $(SRCD)/%.c, $(OBJD)/%.o, $(SRCS))
@@ -25,7 +29,7 @@ all: install
 install: $(NAME)
 
 $(NAME): $(OBJS)
-	@clang -lcrypto -lsqlite3 -lpthread $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
+	@clang -lpthread $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) $(SSL_FILES) $(SSL_FILESC) $(SQL_FILES) -o ../$(NAME)
 	@printf "${CLEAR}$@\t   ${GREENB}created${NORMAL}\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS)

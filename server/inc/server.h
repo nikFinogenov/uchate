@@ -12,15 +12,18 @@
 #include <stdbool.h>
 #include <string.h>
 #include <netinet/in.h>
-#include <sqlite3.h>
+// #include <sqlite3.h>
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>
-#include <openssl/sha.h>
-#include <openssl/evp.h>
+#include <../libs/openssl/include/openssl/evp.h>
+#include <../libs/openssl/include/openssl/sha.h>
+#include <../libs/sqlite3.h>
+// #include <openssl/sha.h>
+// #include <openssl/evp.h>
 
 #define RED "\x1B[31m"
 #define GREEN "\x1B[32m"
