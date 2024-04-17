@@ -1490,7 +1490,8 @@ void draw_user_window() {
 
     GtkWidget *search_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    GtkWidget *search_button = gtk_button_new_with_label("Search");
+    GtkWidget *search_button = gtk_button_new_with_label("Find");
+    gtk_widget_override_color(search_button, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_set_size_request(search_button, 25, 37);
     gtk_widget_set_name(GTK_WIDGET(search_button), "search_button");
     CallbackData *find__data = g_slice_new(CallbackData);

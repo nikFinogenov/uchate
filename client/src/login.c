@@ -123,21 +123,29 @@ void draw_login(void) {
     gtk_window_set_position(GTK_WINDOW(login_window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(login_window), 20);
     g_signal_connect(login_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    gtk_widget_override_background_color(login_window, GTK_STATE_FLAG_NORMAL, &black);
+    gtk_widget_override_background_color(login_window, GTK_STATE_FLAG_NORMAL, &dark_purple);
     GtkWidget *login_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_container_add(GTK_CONTAINER(login_window), login_vbox);
     PangoFontDescription *font_desc = pango_font_description_new();
-    gtk_widget_override_background_color(login_vbox, GTK_STATE_FLAG_NORMAL, &black);
+    gtk_widget_override_background_color(login_vbox, GTK_STATE_FLAG_NORMAL, &dark_purple);
     GtkWidget *login_label = gtk_label_new("McOk");
+    gtk_widget_override_color(login_label, GTK_STATE_FLAG_NORMAL, NORM_CVET);
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
     gtk_widget_set_halign(login_label, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(login_vbox), login_label, FALSE, FALSE, 0);
     gtk_widget_override_font(login_label, font_desc);
-    GtkWidget *signup_link = gtk_label_new("Don't have an account? Sign up");
-    gtk_label_set_markup(GTK_LABEL(signup_link), "Don't have an account? <a href=\"#\">Sign up</a>");
-    gtk_widget_set_halign(signup_link, GTK_ALIGN_CENTER);
-    g_signal_connect(signup_link, "activate-link", G_CALLBACK(go_to_signup), NULL);
-    gtk_box_pack_start(GTK_BOX(login_vbox), signup_link, FALSE, FALSE, 0);
+    GtkWidget *link_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3);
+    GtkWidget *signup_link = gtk_label_new("Don't have an account?");
+    gtk_widget_override_color(signup_link, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
+    GtkWidget *sign_link = gtk_label_new("Sign up");
+    gtk_label_set_markup(GTK_LABEL(sign_link), "<a href=\"#\">Sign up</a>");
+
+    gtk_widget_set_halign(link_hbox, GTK_ALIGN_CENTER);
+    g_signal_connect(sign_link, "activate-link", G_CALLBACK(go_to_signup), NULL);
+    gtk_box_pack_start(GTK_BOX(link_hbox), signup_link, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(link_hbox), sign_link, FALSE, FALSE, 0);
+
+    gtk_box_pack_start(GTK_BOX(login_vbox), link_hbox, FALSE, FALSE, 0);
 
     GtkWidget *username_entry_login = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(username_entry_login), "Username");
@@ -149,6 +157,7 @@ void draw_login(void) {
     gtk_box_pack_start(GTK_BOX(login_vbox), password_entry_login, FALSE, FALSE, 0);
 
     GtkWidget *check_button = gtk_check_button_new_with_label("Remember me");
+    gtk_widget_override_color(check_button, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_box_pack_start(GTK_BOX(login_vbox), check_button, FALSE, FALSE, 0);
 
     EntryWidgets *entries = g_new(EntryWidgets, 1);

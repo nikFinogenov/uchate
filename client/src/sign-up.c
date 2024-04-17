@@ -110,19 +110,25 @@ void draw_singup() {
     gtk_widget_hide(signup_window);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
-    gtk_widget_override_background_color(signup_window, GTK_STATE_FLAG_NORMAL, &black);
+    gtk_widget_override_background_color(signup_window, GTK_STATE_FLAG_NORMAL, &dark_purple);
     GtkWidget *signup_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_container_add(GTK_CONTAINER(signup_window), signup_vbox);
-    gtk_widget_override_background_color(signup_vbox, GTK_STATE_FLAG_NORMAL, &black);
+    gtk_widget_override_background_color(signup_vbox, GTK_STATE_FLAG_NORMAL, &dark_purple);
     GtkWidget *signup_label = gtk_label_new("McOk");
+    gtk_widget_override_color(signup_label, GTK_STATE_FLAG_NORMAL, NORM_CVET);
     gtk_widget_set_halign(signup_label, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(signup_vbox), signup_label, FALSE, FALSE, 0);
     gtk_widget_override_font(signup_label, font_desc);
-    GtkWidget *login_link = gtk_label_new("Already have an account? Login");
-    gtk_label_set_markup(GTK_LABEL(login_link), "Already have an account? <a href=\"#\">Login</a>");
-    gtk_widget_set_halign(login_link, GTK_ALIGN_CENTER);
-    g_signal_connect(login_link, "activate-link", G_CALLBACK(go_to_login), NULL);
-    gtk_box_pack_start(GTK_BOX(signup_vbox), login_link, FALSE, FALSE, 0);
+
+    GtkWidget *link_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 3);
+    GtkWidget *login_link = gtk_label_new("Already have an account?");
+    gtk_widget_override_color(login_link, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
+    GtkWidget *log_link = gtk_label_new("Sign up");
+    gtk_label_set_markup(GTK_LABEL(log_link), "<a href=\"#\">Login</a>");
+
+    gtk_widget_set_halign(link_hbox, GTK_ALIGN_CENTER);
+    g_signal_connect(log_link, "activate-link", G_CALLBACK(go_to_login), NULL);
+    gtk_box_pack_start(GTK_BOX(signup_vbox), link_hbox, FALSE, FALSE, 0);
 
     GtkWidget *first_name_entry_signup = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(first_name_entry_signup), "First Name");
