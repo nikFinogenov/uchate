@@ -81,6 +81,7 @@ typedef struct {
 } t_selected_s;
 
 extern GtkWidget *signup_window;
+extern GtkWidget *add_new_chat_when_no_chats;
 extern GtkWidget *user_window;
 extern GtkWidget *login_window;
 extern char* default_img;

@@ -1,6 +1,5 @@
 #include "uchat-client.h"
 
-static GtkWidget *add_new_chat_when_no_chats;
 static GtkWidget *search_pop_up = NULL;
 static GtkWidget *error_label = NULL;
 static bool settings_visible = TRUE;
@@ -738,19 +737,8 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
     char *name = strdup(token);
     token = strtok(NULL, "\n");
     char *surname = strdup(token);
-
-    // t_chatter_s new_chatter = {
-    //     .name = mx_strdup(name),
-    //     .surname = mx_strdup(surname),
-    //     .username = mx_strdup(username),
-    //     .lastmsg = mx_strdup("No messages yet"),
-    //     .avatar = NULL
-    // };
     
-
     if(chatters_count + 1 < MAX_CHATTERS) {
-        // chatters[chatters_count] = new_chatter;
-        // chatters_count++;
         char** response2 = send_new_chat_data(user.username, username);
     
         if (strcmp((char *)response2, "1") == 0) {
@@ -1098,7 +1086,10 @@ void on_window_destroy(GtkWidget *widget, gpointer data) {
     update_user_status("offline", user.username);
     gtk_main_quit();
 }
-
+static void realize_chatters(GtkWidget *widget, gpointer data) {
+    if(chatters_count != 0) gtk_widget_hide(add_new_chat_when_no_chats);
+    else gtk_widget_show(add_new_chat_when_no_chats);
+}
 void draw_user_window() {
     GtkCssProvider *cssProvider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(cssProvider, "client/style.css", NULL);
@@ -1324,6 +1315,7 @@ void draw_user_window() {
 
     g_signal_connect(clear_search_button, "clicked", G_CALLBACK(on_clear_search_clicked), search_entry);
 
+    
     GtkWidget *search_entry_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_pack_start(GTK_BOX(search_entry_box), search_entry, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(search_entry_box), clear_search_button, FALSE, FALSE, 0);
@@ -1335,6 +1327,7 @@ void draw_user_window() {
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrollable_window),
                                    GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     user_populate_scrollable_window(scrollable_window);
+    g_signal_connect(G_OBJECT(scrollable_window), "realize", G_CALLBACK(realize_chatters), NULL);
     gtk_box_pack_start(GTK_BOX(chats_box), scrollable_window, TRUE, TRUE, 0);
 
     add_new_chat_when_no_chats = gtk_button_new();
@@ -1345,14 +1338,15 @@ void draw_user_window() {
     gtk_widget_set_name(GTK_WIDGET(add_new_chat_when_no_chats), "add_new_chat_when_no_chats");
     g_signal_connect(G_OBJECT(add_new_chat_when_no_chats), "clicked", G_CALLBACK(add_chatter_button_clicked), user_window);
     gtk_box_pack_end(GTK_BOX(chats_box), add_new_chat_when_no_chats, FALSE, FALSE, 5);
-    
-    if (chatters == NULL) {
-        gtk_widget_show(add_new_chat_when_no_chats);
-        gtk_widget_hide(scrollable_window);
-    } else {
-        gtk_widget_show(scrollable_window);
+
+    if (chatters_count != 0) {
+    // //     gtk_widget_show(add_new_chat_when_no_chats);
+    // //     gtk_widget_hide(scrollable_window);
+    // // } else {
+    //     // gtk_widget_show(scrollable_window);
         gtk_widget_hide(add_new_chat_when_no_chats);
     }
+
     user_info_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_override_background_color(user_info_box, GTK_STATE_FLAG_NORMAL, &(GdkRGBA){LIGHTER_GRAY,LIGHTER_GRAY, LIGHTER_GRAY, 1.0}); 
     set_widget_height(user_info_box, 70);
@@ -1380,7 +1374,6 @@ void draw_user_window() {
     g_signal_connect(G_OBJECT(text_entry), "key-press-event", G_CALLBACK(on_entry_key_press), callback_data);
     
     gtk_box_pack_start(GTK_BOX(text_box), send_button, FALSE, FALSE, 0);
-
     gtk_box_pack_end(GTK_BOX(chat_box),text_box, FALSE, FALSE, 0);
 
     empty_chat = (!is_chatters_empty()) ? gtk_label_new("[ Select a chat to start chatting ]") : gtk_label_new("[ Add your first chat! ]");

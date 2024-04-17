@@ -186,6 +186,7 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
     } else g_print("O, nihuya, pracue\n");
     
     refresh_scrollable_window(scrollable_window);
+    if(chatters_count == 0) gtk_widget_show(add_new_chat_when_no_chats);
 }
 
 static GdkPixbuf *resize_img(GdkPixbuf *pixbuf, int w, int h) {
@@ -502,7 +503,6 @@ void set_widget_height(GtkWidget *widget, int height) {
     alloc.height = height;
     gtk_widget_set_size_request(widget, alloc.width, height);
 }
-
 void user_populate_scrollable_window(GtkWidget *scrollable_window) {
     GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
@@ -558,8 +558,9 @@ void message_populate_scrollable_window(GtkWidget *scrollable_window) {
     GtkWidget *mess_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_container_add(GTK_CONTAINER(scrollable_window), mess_list);
 
-    if (messages != NULL) {
+    if (messages != NULL && selected_user.index != -1) {
         for (int i = 0; i < messages_count[selected_user.index]; i++) {
+            // g_print("%d\n", messages_count[selected_user.index]);
             GtkWidget *event_box = gtk_event_box_new();
             gtk_container_add(GTK_CONTAINER(mess_list), event_box);
             GtkWidget *mess_box = create_message_box(&messages[selected_user.index][i]);

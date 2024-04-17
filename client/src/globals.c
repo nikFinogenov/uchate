@@ -12,6 +12,7 @@ GtkWidget *signup_window = NULL;
 GdkPixbuf *temp_avatar = NULL;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;
+GtkWidget *add_new_chat_when_no_chats = NULL;
 
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
