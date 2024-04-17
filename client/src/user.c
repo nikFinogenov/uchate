@@ -160,8 +160,6 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     gchar *combined_text = g_strdup_printf("Name: %s\nSurname: %s\nUsername: %s\nDescription: %s\n",
                                            name_text, surname_text, username_text, description_text);
 
-    // Выводим данные в консоль
-    //g_print("Text from entries:\n%s\n", combined_text);
     if (temp_avatar != NULL){
         update_avatar(file_path_for_db, user.username);
     }
@@ -484,9 +482,8 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     gtk_window_set_default_size(GTK_WINDOW(settings_t), 800, 600);
     PangoFontDescription *font_desc = pango_font_description_new();
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
-
+    gtk_widget_override_background_color(settings_t, GTK_STATE_FLAG_NORMAL, &black);
     GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
-
     GtkWidget *bbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     GtkWidget *sub_bbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     GtkWidget *sub_sub_bbox1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -595,6 +592,7 @@ static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
     gtk_window_set_default_size(GTK_WINDOW(settings_s), 800, 600);
     PangoFontDescription *font_desc = pango_font_description_new();
     PangoFontDescription *font_desc_donaters = pango_font_description_new();
+    gtk_widget_override_background_color(settings_s, GTK_STATE_FLAG_NORMAL, &black);
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
     pango_font_description_set_size(font_desc_donaters, 14 * PANGO_SCALE);
     GtkWidget *dengi_goni = gtk_button_new_with_label("Donate");
@@ -628,6 +626,7 @@ static void devs_window(GtkWidget *widget, gpointer data){
     gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
     PangoFontDescription *font_desc = pango_font_description_new();
     PangoFontDescription *font_desc_for_razr = pango_font_description_new();
+    gtk_widget_override_background_color(settings_f, GTK_STATE_FLAG_NORMAL, &black);
     pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
     pango_font_description_set_size(font_desc_for_razr, 12 * PANGO_SCALE);
     GtkWidget *razrab1 = gtk_label_new(NULL);
@@ -712,7 +711,7 @@ static void display_joke(GtkWidget *widget, gpointer data) {
                                                     NULL, GTK_RESPONSE_NONE, NULL);
 
     gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
-
+    gtk_widget_override_background_color(joke, GTK_STATE_FLAG_NORMAL, &black);
     gint random_number = g_random_int_range(1, 3);
 
     if (random_number == 1) {
@@ -846,9 +845,9 @@ static void add_chatter_button_clicked(GtkWidget *widget, gpointer data) {
                                                     NULL, GTK_RESPONSE_NONE, NULL);
     
     gtk_window_set_default_size(GTK_WINDOW(search_pop_up), 400, 150);
-
+    
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(search_pop_up));
-
+    gtk_widget_override_background_color(search_pop_up, GTK_STATE_FLAG_NORMAL, &black);
     GtkWidget *search_entry = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(search_entry), "Enter username...");
     gtk_container_add(GTK_CONTAINER(content_area), search_entry);
@@ -1122,9 +1121,9 @@ void draw_user_window() {
     chats_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple); 
-    gtk_widget_override_background_color(account_settings, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple);
-    gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple);
+    gtk_widget_override_background_color(settings_box, GTK_STATE_FLAG_NORMAL, &ny_takoy_purple); 
+    gtk_widget_override_background_color(account_settings, GTK_STATE_FLAG_NORMAL, &ny_takoy_purple);
+    gtk_widget_override_background_color(chats_box, GTK_STATE_FLAG_NORMAL, &ny_takoy_purple);
     gtk_widget_override_background_color(chat_box, GTK_STATE_FLAG_NORMAL, &dark_purple);
 
     gtk_widget_set_size_request(settings_box, 500, -1);

@@ -100,7 +100,7 @@ static void edit_message(GtkWidget *widget, gpointer data) {
                                                     NULL, GTK_RESPONSE_NONE, NULL);
 
     gtk_window_set_default_size(GTK_WINDOW(edit_pop_up), 500, 150);
-
+    gtk_widget_override_background_color(edit_pop_up, GTK_STATE_FLAG_NORMAL, &black);
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(edit_pop_up));
 
     GtkWidget *edit_entry =  gtk_entry_new();
@@ -417,7 +417,7 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
             return TRUE;
         } else if (event->button == GDK_BUTTON_PRIMARY) {
             if (selected_user.box != NULL && selected_user.index != index) {
-                gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &not_too_dark_purple); 
+                gtk_widget_override_background_color(selected_user.box, GTK_STATE_FLAG_NORMAL, &ny_takoy_purple); 
             }
             gtk_widget_override_background_color(widget, GTK_STATE_FLAG_NORMAL, &vrode_norm_purple); 
             selected_user.box = widget;
@@ -503,7 +503,7 @@ void set_widget_height(GtkWidget *widget, int height) {
 }
 
 void user_populate_scrollable_window(GtkWidget *scrollable_window) {
-    GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
     char *avatar_path;
     
@@ -528,7 +528,7 @@ void user_populate_scrollable_window(GtkWidget *scrollable_window) {
 }
 
 void user_populate_scrollable_filtred_window(GtkWidget *scrollable_window, char* filter) {
-    GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    GtkWidget *user_list = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
     gtk_container_add(GTK_CONTAINER(scrollable_window), user_list);
     char *avatar_path;
     if (chatters != NULL) {

@@ -25,7 +25,7 @@ void *show_error(void) {
                                                            GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                            NULL, GTK_RESPONSE_NONE, NULL);
     gtk_window_set_position(GTK_WINDOW(error_poppi_upe), GTK_WIN_POS_CENTER_ON_PARENT);
-
+    gtk_widget_override_background_color(error_poppi_upe, GTK_STATE_FLAG_NORMAL, &black);
     gtk_window_set_default_size(GTK_WINDOW(error_poppi_upe), 200, 100);
 
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(error_poppi_upe));

@@ -102,6 +102,7 @@ GdkRGBA dark_purple;
 GdkRGBA not_too_dark_purple;
 GdkRGBA light_purple;
 GdkRGBA vrode_norm_purple;
+GdkRGBA ny_takoy_purple;
 
 extern gint screen_width;
 extern gint screen_height;

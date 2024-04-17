@@ -128,6 +128,7 @@ void fill_data(void) {
     gdk_rgba_parse(&not_too_dark_purple, "#724C9D");
     gdk_rgba_parse(&light_purple, "#DCCAE9");
     gdk_rgba_parse(&vrode_norm_purple, "#9356A0");
+    gdk_rgba_parse(&ny_takoy_purple, "#604d9e");
 }
 
 void free_chatters() {
