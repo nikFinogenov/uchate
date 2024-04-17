@@ -525,22 +525,28 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     gtk_widget_set_name(sub_sub_gbox3, "sub_gbox");
 
     GtkWidget *bronze_title = gtk_label_new("2.50€/month");
+    gtk_widget_override_color(bronze_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *bronze_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
+    GtkWidget *bronze_text = gtk_label_new("Pros:\nplus money for us :)\n Cons:\nminus money for you :(");
+    gtk_widget_override_color(bronze_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_bbox2), bronze_title);
     gtk_container_add(GTK_CONTAINER(sub_sub_bbox2), bronze_text);
 
     GtkWidget *silver_title = gtk_label_new("5.00€/month");
+    gtk_widget_override_color(silver_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(silver_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *silver_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
+    GtkWidget *silver_text = gtk_label_new("Pros:\nImage sending, more stickers, language changing, etc.\n Cons:\nYou will lost ~5€ every month ^^");
+    gtk_widget_override_color(silver_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_sbox2), silver_title);
     gtk_container_add(GTK_CONTAINER(sub_sub_sbox2), silver_text);
 
     GtkWidget *gold_title = gtk_label_new("10.00€/month");
+    gtk_widget_override_color(gold_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(gold_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *gold_text = gtk_label_new("Pros:\n \tplus money for us :)\n Cons:\n \tminus money for you :(");
+    GtkWidget *gold_text = gtk_label_new("Pros:\nNothing, you just lost your money:)\n Cons:\nAbsolutly no minuses (V)0.o(v)");
+    gtk_widget_override_color(gold_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_gbox2), gold_title);
     gtk_container_add(GTK_CONTAINER(sub_sub_gbox2), gold_text);
@@ -596,6 +602,7 @@ static void three_hundred_bucks_window(GtkWidget *widget, gpointer data){
     pango_font_description_set_size(font_desc_donaters, 14 * PANGO_SCALE);
     GtkWidget *dengi_goni = gtk_button_new_with_label("Donate");
     GtkWidget *top_donaters_title = gtk_label_new("Top Donaters");
+    gtk_widget_override_color(top_donaters_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(top_donaters_title, font_desc);
     GtkWidget *top_donaters_text = gtk_label_new("");
     GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -641,11 +648,14 @@ static void devs_window(GtkWidget *widget, gpointer data){
     gtk_label_set_markup(GTK_LABEL(support1), "<a href='https://steamcommunity.com/profiles/76561199022185683'>Vladislav Champion Chubukin</a>");
     gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmytriy Erter Zuckerbergovich</a>");
     GtkWidget *razrab_label = gtk_label_new("The application was developed by");
+    gtk_widget_override_color(razrab_label, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label, font_desc);
     GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
     GtkWidget *razrab_label2 = gtk_label_new("Big Thanks for Supporting");
+    gtk_widget_override_color(razrab_label2, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label2, font_desc);
     GtkWidget *razrab_label3 = gtk_label_new("Kon4eliga");
+    gtk_widget_override_color(razrab_label3, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label3, font_desc);
 
     gtk_widget_override_font(razrab1, font_desc_for_razr);
@@ -715,6 +725,7 @@ static void display_joke(GtkWidget *widget, gpointer data) {
 
     if (random_number == 1) {
         GtkWidget *joke_text = gtk_label_new(get_random_joke());
+        gtk_widget_override_color(joke_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
         gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
         gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
         gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
@@ -1217,8 +1228,10 @@ void draw_user_window() {
     GtkWidget *ebox1, *ebox2, *ebox3;
     GtkWidget *nbox1, *nbox2, *nbox3;
     GtkWidget *help_lable = gtk_label_new("Stickers Help Manual");
+    gtk_widget_override_color(help_lable, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(help_lable), GTK_ALIGN_CENTER);
     GtkWidget *help_f = gtk_label_new("In order to use stickers you need a McOk Bronze subscription or higher");
+    gtk_widget_override_color(help_f, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     GtkWidget *help_sad = gtk_label_new(":sad");
     GtkWidget *help_thumbs = gtk_label_new(":like");
     GtkWidget *help_pink = gtk_label_new(":love");

@@ -818,14 +818,6 @@ void load_chats(char *username) {
         token2 = strtok(NULL, "\n");
         char *surname = strdup(token2);
         add_chatter(name, surname, username, "No messages yet", NULL);
-        // t_chatter_s new_chatter = {
-        //     .name = mx_strdup(name),
-        //     .surname = mx_strdup(surname),
-        //     .username = mx_strdup(username),
-        //     .lastmsg = mx_strdup("No messages yet")
-        // };
-        // chatters[chatters_count] = new_chatter;
-        // chatters_count++;
     }
 }
 
@@ -1068,10 +1060,6 @@ int server_messages_quantity(char *username) {
 
     return total_messages;
 }
-void update_messages(char *username) {
-    clear_messages();
-    load_message(username);
-}
 void *chat_checker_thread_func(void *arg) {
     char *username = (char *)arg;
     int server_chats_amount = 0;
@@ -1111,7 +1099,7 @@ void *chat_checker_thread_func(void *arg) {
                 refresh_scrollable_window2(scrollable_window2);
             }
         }
-        g_print("end of refresh\n\n");
+        // g_print("end of refresh\n\n");
         sleep(1);
     }
     return NULL;
