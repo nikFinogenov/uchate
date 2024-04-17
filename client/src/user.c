@@ -859,6 +859,10 @@ void show_user_window() {
     gtk_widget_show_all(user_window);
 }
 
+void on_clicked_image (int user_index){ 
+    g_print("pizec tebe");
+}
+
 void draw_user_info_box(GtkWidget *user_info_box) {
     GdkPixbuf *avatar_for_chat;
     GdkPixbuf *pixbuf;
@@ -877,12 +881,17 @@ void draw_user_info_box(GtkWidget *user_info_box) {
         free(avatar_path);
     }
     
+    GtkContainer *image_container = gtk_event_box_new();
+    
     GtkWidget *image = gtk_drawing_area_new();
-    gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(GTK_WIDGET(image), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
-    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
-    gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
+    gtk_container_add(image_container, image);
+    gtk_widget_set_halign(GTK_WIDGET(image_container), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(image_container), GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(GTK_WIDGET(image_container), gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf)), gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf)));
+    g_signal_connect(G_OBJECT(image_container), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
+    gtk_box_pack_start(GTK_BOX(user_info_box), image_container, FALSE, FALSE, 15);
+    g_signal_connect(G_OBJECT(image_container), "button-press-event", G_CALLBACK(on_clicked_image), selected_user.index);
+    
 
     GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
     gtk_widget_set_name(name_label, "chatter-name");
