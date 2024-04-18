@@ -69,6 +69,10 @@ typedef struct {
 } t_chatter_s;
 
 typedef struct {
+    char *desc;
+} t_chatter_desc;
+
+typedef struct {
     int id;
     char* text;
     char* time;
@@ -163,6 +167,7 @@ void get_and_save_avatar_to_file(char *username);
 void update_avatar(char *path, char *username);
 char **update_user_status(char *status, char *username);
 char **get_user_status(char *username);
+char **get_user_desc(char *user);
 
 
 void fill_data(void);

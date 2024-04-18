@@ -43,6 +43,7 @@ void mx_get_user_avatar(char** data, int sockfd);
 void mx_update_avatar(char** data, int sockfd);
 void mx_get_user_status(char** data, int sockfd);
 void mx_update_user_status(char** data, int sockfd);
+void mx_get_user_desc(char** data, int sockfd);
 
 bool mx_check_user(char **data);
 void mx_check_room(char **data, int sockfd);

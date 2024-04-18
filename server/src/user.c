@@ -361,3 +361,25 @@ void check_login_data(char **data, int sockfd) {
     }
     send(sockfd, response, strlen(response), 0);
 }
+
+void mx_get_user_desc(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+
+    memset(sql, 0, 500);
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+    memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
+
+    sprintf(sql, "SELECT description FROM USERS WHERE username = '%s';", data[1]); 
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    while (sqlite3_step(res) == SQLITE_ROW) {
+        const unsigned char *desc = sqlite3_column_text(res, 0);
+        sprintf(temp_buff, "%s\n", desc);
+    }
+    int exit = sqlite3_finalize(res);
+    char* st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Get user desc", st, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
