@@ -1,14 +1,12 @@
 #include "uchat-client.h"
 
-GtkWidget *error_poppi_upe;
-
 void on_close_button_clicked(GtkWidget *widget, gpointer data) {
     gtk_widget_destroy(error_poppi_upe);
+    is_error_shown == false;
 }
 
 void *show_error(void) {
     if (!g_main_context_default() || !g_main_context_is_owner(g_main_context_default())) {
-
         return NULL;
     }
     
@@ -45,10 +43,12 @@ void *show_error(void) {
 
     gtk_widget_set_halign(content_area, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(content_area, GTK_ALIGN_CENTER);
+    g_signal_connect_swapped(error_poppi_upe, "response", G_CALLBACK(on_close_button_clicked), NULL);
 
-    gtk_widget_show_all(error_poppi_upe);
-    
-    g_signal_connect_swapped(error_poppi_upe, "response", G_CALLBACK(gtk_widget_destroy), error_poppi_upe);
+    if(is_error_shown == false) {
+        gtk_widget_show_all(error_poppi_upe);
+        is_error_shown = true;
+    }
 }
 
 int connect_to_server(int *sock) {
@@ -81,14 +81,23 @@ int connect_to_server(int *sock) {
         close(*sock);
 
         if (g_main_context_default() && g_main_context_is_owner(g_main_context_default())) {
-            show_error();
+            // if(error_poppi_upe == NULL){
+                // is_error_shown == NULL;
+                show_error();
+                // is_error_shown == true;
+            // }
         } else {
-            pthread_t thread_id;
-            pthread_create(&thread_id, NULL, show_error, NULL);
+            // if(error_poppi_upe == NULL) {
+                // is_error_shown == true;
+                pthread_t thread_id;
+                pthread_create(&thread_id, NULL, show_error, NULL);
+                // is_error_shown == true;
+            // }
         }
 
         return -1;
     }
+    is_error_shown == false;
     return 0;
 }
 
@@ -105,21 +114,21 @@ char **send_sign_up_data(char *first_name, char *last_name, char *username, char
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -128,8 +137,8 @@ char **send_sign_up_data(char *first_name, char *last_name, char *username, char
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -150,22 +159,22 @@ char **check_login_data(char *username, char* password) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+        // pthread_t thread_id;
+        // pthread_create(&thread_id, NULL, show_error, NULL);
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+        // pthread_t thread_id;
+        // pthread_create(&thread_id, NULL, show_error, NULL);
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -174,8 +183,8 @@ char **check_login_data(char *username, char* password) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -195,22 +204,22 @@ char **get_chatter_data(char *username) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+//        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+//        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -219,8 +228,8 @@ char **get_chatter_data(char *username) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -240,21 +249,21 @@ char **send_new_chat_data(char *username1, char* username2) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+//        pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -263,8 +272,8 @@ char **send_new_chat_data(char *username1, char* username2) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -285,20 +294,22 @@ char **get_chats_data(char *username) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+       //pthread_t thread_id;
+       // pthread_create(&thread_id, NULL, show_error, NULL);
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
+       // pthread_t thread_id;
+        // pthread_create(&thread_id, NULL, show_error, NULL);
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+       // pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -307,8 +318,8 @@ char **get_chats_data(char *username) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+       // pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -329,22 +340,22 @@ char **update_user_info(char *changed_username, char *name, char *surname, char 
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -353,8 +364,8 @@ char **update_user_info(char *changed_username, char *name, char *surname, char 
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -375,22 +386,22 @@ char **update_message_info(int id, char *new_text) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -399,8 +410,8 @@ char **update_message_info(int id, char *new_text) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -419,22 +430,22 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+     //   pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -443,8 +454,8 @@ char **add_new_message(char *username_1, char *username_2, char* text, char* tim
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
@@ -464,22 +475,22 @@ char **delete_message_data(int id) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+      //  pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+       // pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -488,8 +499,8 @@ char **delete_message_data(int id) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
@@ -510,22 +521,22 @@ char **chatter_delete(char *username_1, char *username_2) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+      //  pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -534,8 +545,8 @@ char **chatter_delete(char *username_1, char *username_2) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
@@ -556,22 +567,22 @@ char **get_mess_chat_amount(char *username_1, char *username_2) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+       // pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -580,8 +591,8 @@ char **get_mess_chat_amount(char *username_1, char *username_2) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -601,22 +612,22 @@ char **get_mess_chat_last_id(char *username_1, char *username_2) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -625,8 +636,8 @@ char **get_mess_chat_last_id(char *username_1, char *username_2) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -646,22 +657,22 @@ char **get_mess_chat_last_text(char* id) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -670,14 +681,13 @@ char **get_mess_chat_last_text(char* id) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     return recvBuffer;
 }
-
 
 char **get_chat_messages(char *username_1, char *username_2) {
     if (sockfd == -1) connect_to_server(&sockfd);
@@ -691,22 +701,22 @@ char **get_chat_messages(char *username_1, char *username_2) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     char recvBuffer[DEFAULT_MESSAGE_SIZE];
@@ -716,7 +726,7 @@ char **get_chat_messages(char *username_1, char *username_2) {
         perror("ERROR reading from socket");
         pthread_t thread_id;
 
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -734,8 +744,8 @@ void get_and_save_avatar_to_file(char *username) {
 
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("Error writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         close(sockfd);
         return;
     }
@@ -823,22 +833,22 @@ char **get_user_status(char *username) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //   pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -847,8 +857,8 @@ char **get_user_status(char *username) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");
@@ -869,22 +879,22 @@ char **update_user_status(char *status, char *username) {
 
     if (retval != 0) {
         fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
     if (error != 0) {
         fprintf(stderr, "socket error: %s\n", strerror(error));
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL);
+//        pthread_t thread_id;
+    //    pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     
     if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
         perror("ERROR writing to socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
 
@@ -893,8 +903,8 @@ char **update_user_status(char *status, char *username) {
 
     if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
         perror("ERROR reading from socket");
-        pthread_t thread_id;
-        pthread_create(&thread_id, NULL, show_error, NULL); 
+        //pthread_t thread_id;
+        //pthread_create(&thread_id, NULL, show_error, NULL); 
         sockfd = -1;
     }
     if(sockfd == -1) sprintf(recvBuffer, "1488");

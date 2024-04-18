@@ -52,7 +52,6 @@ void mx_add_message(char **data, int sockfd) {
     snprintf(message_id_str, sizeof(message_id_str), "%" PRId64, (int64_t)message_id);
     if(exit == 0) send(sockfd, message_id_str, strlen(message_id_str), 0);
     else send(sockfd, "-1", strlen("-1"), 0);
-    // send(sockfd, message_id_str, strlen(message_id_str), 0);
 }
 
 void mx_get_message(char **data, int sockfd) {

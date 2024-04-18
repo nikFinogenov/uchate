@@ -167,6 +167,10 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     }
     if (strcmp(username_text, user.username) != 0 || strcmp(name_text, user.name) != 0 || strcmp(surname_text, user.surname) != 0 || strcmp(description_text, user.desc) != 0){
         char **response = update_user_info((char *)username_text, (char *)name_text, (char *)surname_text, (char *)description_text, user.username);
+        if(mx_strcmp(response, "1488") == 0) {
+            g_print("Server ofline\n");
+            return;
+        }
         if (strcmp((char *)username_text, user.username) == 0) {
         } else {
             if(strcmp((char *)response, "Username already exists") == 0) {
@@ -738,7 +742,7 @@ static void display_joke(GtkWidget *widget, gpointer data) {
             GtkWidget *joke_image = gtk_image_new_from_pixbuf(joke_pixbuf);
             g_object_unref(joke_pixbuf);
             gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_image, FALSE, FALSE, 100); 
-            gtk_widget_set_size_request(joke, -1, -1); // set the size of the dialog to the size of the image
+            gtk_widget_set_size_request(joke, -1, -1);
             gtk_widget_show_all(joke_image);
         }
     }
@@ -931,7 +935,6 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
     size_t time_len = strlen(time) + 1;
 
     messages[chatter_id][messages_count[chatter_id]].id = mess_id;
-    // g_print("%d\n", messages[chatter_id][messages_count[chatter_id]].id);
     messages[chatter_id][messages_count[chatter_id]].text = malloc(text_len);
     if (messages[chatter_id][messages_count[chatter_id]].text == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for message text.\n");
@@ -989,17 +992,9 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
         g_print("Server offline\n");
         return;
     }
-    // t_message_s new_mes = {
-    //     .id = m_id,
-    //     .text = mx_strdup(text),
-    //     .time = mx_strdup(time_str),
-    //     .is_user = TRUE
-    // };
 
     if(messages_count[selected_user.index] + 1 < MAX_MESSAGES) {
         add_message(m_id, selected_user.index, text, time_str, true);
-        // messages[selected_user.index][messages_count[selected_user.index]] = new_mes;
-        // messages_count[selected_user.index]++;
         refresh_scrollable_window2(scrollable_window2);
         gtk_widget_show(scrollable_window2);
         chatters[selected_user.index].lastmsg = format_last_msg((char *)text);
@@ -1178,9 +1173,7 @@ static void logout_clicked(GtkWidget *widget, gpointer data){
     stop_chat_checker();
     userdata.button_recognize = false;
     update_user_status("offline", user.username);
-    // clear_all();
     clear_data();
-    // fill_data();
     show_login();
 }
 
@@ -1199,7 +1192,6 @@ void draw_user_window() {
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
-    // gtk_window_set_geometry_hints()
     g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
     gtk_window_maximize(GTK_WINDOW(user_window));
     GtkWidget *hbox_main = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1544,10 +1536,6 @@ void draw_user_window() {
     gtk_box_pack_end(GTK_BOX(chats_box), add_new_chat_when_no_chats, FALSE, FALSE, 5);
 
     if (chatters_count != 0) {
-    // //     gtk_widget_show(add_new_chat_when_no_chats);
-    // //     gtk_widget_hide(scrollable_window);
-    // // } else {
-    //     // gtk_widget_show(scrollable_window);
         gtk_widget_hide(add_new_chat_when_no_chats);
     }
 

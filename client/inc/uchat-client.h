@@ -82,6 +82,7 @@ typedef struct {
     int index; 
 } t_selected_s;
 
+extern GtkWidget *error_poppi_upe;
 extern GtkWidget *signup_window;
 extern GtkWidget *add_new_chat_when_no_chats;
 extern GtkWidget *user_window;
@@ -106,6 +107,7 @@ GdkRGBA not_too_dark_purple;
 GdkRGBA light_purple;
 GdkRGBA vrode_norm_purple;
 GdkRGBA ny_takoy_purple;
+extern bool is_error_shown;
 
 extern gint screen_width;
 extern gint screen_height;
@@ -154,7 +156,6 @@ char **get_chatter_data(char *username);
 char **send_new_chat_data(char *username1, char* username2);
 char **get_chats_data(char *username);
 char **add_new_message(char *username_1, char *username_2, char* text, char* time, char* type);
-char **update_user_info(char *changed_username, char * name, char *surname, char *desc, char *username);
 char **chatter_delete(char *username_1, char *username_2);
 char **delete_message_data(int id);
 char **update_message_info(int id, char *new_text);
@@ -182,7 +183,7 @@ gboolean is_in_format(char* text, char* format);
 void load_chats(char *username);
 void reload_chats(char *username);
 void start_chat_checker(char *username);
-void stop_chat_checker(void);
+int stop_chat_checker(void);
 void load_message(char *username);
 void start_message_checker(char *username);
 void stop_message_checker(void);

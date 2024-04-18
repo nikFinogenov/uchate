@@ -13,6 +13,8 @@ GdkPixbuf *temp_avatar = NULL;
 GtkWidget *scrollable_window = NULL;
 GtkWidget *scrollable_window2 = NULL;
 GtkWidget *add_new_chat_when_no_chats = NULL;
+GtkWidget *error_poppi_upe = NULL;
+bool is_error_shown = false;
 
 char *login_info = "client/client-data/login_info.txt";
 bool remember;

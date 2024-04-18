@@ -37,26 +37,32 @@ int main(int argc, char *argv[]) {
             gtk_widget_destroy(dialog);
         } else {
             char **response = check_login_data(userdata.username, userdata.password);
-            char *token = strtok((char *)response, "\n");
-            user.username = strdup(token);
-            token = strtok(NULL, "\n");
-            user.name = strdup(token);
-            token = strtok(NULL, "\n");
-            user.surname = strdup(token);
-            get_and_save_avatar_to_file(user.username);
-            sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
-            g_print("%s\n", avatar_path);
-            user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
-            remove(avatar_path);
-            free(avatar_path);
-            update_user_status("online", user.username);
-            load_chats(user.username);
-            load_message(user.username);
-            draw_user_window();
-            show_user_window();
-            start_chat_checker(user.username);
-            // pthread_join(chat_checker_thread, NULL);
-            // pthread_join(&chat_checker_thread, NULL);
+            if (strcmp((char *)response, "1") == 0) {
+                g_print("Username or Password is incorrect\n");
+            }
+            else if (strcmp((char *)response, "1488") == 0) {
+                g_print("Server offline\n");
+            }
+            else {
+                char *token = strtok((char *)response, "\n");
+                user.username = strdup(token);
+                token = strtok(NULL, "\n");
+                user.name = strdup(token);
+                token = strtok(NULL, "\n");
+                user.surname = strdup(token);
+                get_and_save_avatar_to_file(user.username);
+                sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, user.username);
+                g_print("%s\n", avatar_path);
+                user.avatar = gdk_pixbuf_new_from_file(avatar_path, NULL);
+                remove(avatar_path);
+                free(avatar_path);
+                update_user_status("online", user.username);
+                load_chats(user.username);
+                load_message(user.username);
+                draw_user_window();
+                show_user_window();
+                start_chat_checker(user.username);
+            }
         }
     } else {
         show_login();
