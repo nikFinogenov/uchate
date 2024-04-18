@@ -1,7 +1,6 @@
 #include "uchat-client.h"
 
 GtkWidget *edit_pop_up;
-pthread_t chat_checker_thread;
 pthread_t message_checker_thread;
 
 typedef struct {
@@ -443,7 +442,9 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
 
             gtk_widget_show_all(chat_box);
             
-            //g_print("%d\n", selected_user.index);
+            // for(int i = 0; i < messages_count[selected_user.index]; i++) {
+            //     g_print("%d) %s\n", i, messages[selected_user.index][i].id);
+            // }
 
             return FALSE;
         }
@@ -784,7 +785,7 @@ int server_chats_quantity(char *username) {
     }
     if (strcmp((char *)response, "1488") == 0) {
         g_print("tut2ya\n");
-        return chatters_count;
+        return -1;
     }
     char **tokens = mx_strsplit((char *)response, '\n');
     return(mx_get_length(tokens));
@@ -866,7 +867,7 @@ void load_message(char *username) {
             // };
             // messages[i][messages_count[i]] = new_message;
             // messages_count[i]++;
-            add_message(id, i, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
+            add_message(mx_atoi(id), i, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
         }
     }
 }
@@ -1060,57 +1061,169 @@ int server_messages_quantity(char *username) {
 
     return total_messages;
 }
+gboolean check_messages_async(gpointer data) {
+    char *username = (char *)data;
+    
+    int server_chats_amount = server_chats_quantity(username);
+    if (server_chats_amount == -1) {
+        // Обработка ошибки получения количества сообщений с сервера
+        return TRUE; // Повторить вызов через некоторое время
+    }
+    if(selected_user.index != -1) {
+            int server_message_amount = mx_atoi(get_mess_chat_amount(username, chatters[selected_user.index].username));
+            int server_message_lastid = mx_atoi(get_mess_chat_last_id(username, chatters[selected_user.index].username));
+            int total_local_messages_amount = 0;
+            for(int i = 0; i < MAX_CHATTERS; i++) {
+                total_local_messages_amount += messages_count[i];
+            }
+            // if(messages_count[selected_user.index] != server_message_amount) {
+            //     g_print("%d - %d\n", messages_count[selected_user.index], server_message_amount);
+            //     // clear_messages();
+            //     // for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
+            //     // if (messages != NULL) {
+            //     //     for (int i = 0; i < MAX_CHATTERS; i++) {
+            //     //         free(messages[i]);
+            //     //         messages[i] = NULL;
+            //     //     }
+            //     //     free(messages);
+            //     //     messages = NULL;
+            //     // }
+            //     // messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
+            //     // for (int i = 0; i < MAX_CHATTERS; i++) {
+            //     //     messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
+            //     //     for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
+            //     // }
+            //     // load_message(username);
+
+            //     //get all mesages where chat id = username1 username2 and message id> local last msg
+            //     //if lastmsg id local < lastmsg id server then load last msg
+            //     //
+            //     refresh_scrollable_window2(scrollable_window2);
+            // }
+                        // g_print("%d\n", messages[i][messages_count[i] - 1].id);
+            // g_print("%d\n", messages[selected_user.index][messages_count[selected_user.index] - 1].id);
+            // 
+            if(server_message_lastid != messages[selected_user.index][messages_count[selected_user.index] - 1].id) {
+                g_print("%d - %d\n", server_message_lastid, messages[selected_user.index][messages_count[selected_user.index] - 1].id);
+                // g_print("equal\n");
+                char **response2 = get_mess_chat_last_text(mx_itoa(server_message_lastid));
+                g_print("%s\n", response2);
+                if(mx_strcmp(response2, "1") == 0) {
+                    g_print("pid1");
+                    return TRUE;
+                }
+                if(mx_strcmp(response2, "1488") == 0) {
+                    g_print("pid2");
+                    return TRUE;
+                }
+                char *token = strtok((char *)response2, "\n");
+                char *new_text = strdup(token);
+                token = strtok(NULL, "\n");
+                char *new_time = strdup(token);
+
+                add_message(server_message_lastid, selected_user.index, new_text, new_time, FALSE);
+                refresh_scrollable_window2(scrollable_window2);
+                // gtk_widget_show(scrollable_window2);
+                chatters[selected_user.index].lastmsg = format_last_msg((char *)new_text);
+            //     refresh_scrollable_window(scrollable_window);
+            //     gtk_widget_show(scrollable_window); 
+            }
+        }
+    
+    // Дальнейшая обработка данных о сообщениях и обновление интерфейса
+
+    return TRUE; // Повторить вызов через некоторое время
+}
 void *chat_checker_thread_func(void *arg) {
     char *username = (char *)arg;
     int server_chats_amount = 0;
     while (1) {
         server_chats_amount = server_chats_quantity(username);
-        // g_print("%d\n", server_chats_amount);
+        if(server_chats_amount == -1) {
+            continue;
+        }
+        
         if (server_chats_amount != chatters_count) {
-            // reload_chats(username);
-            // clear_data();
             clear_chats();
+            chatters_count = 0; 
+            if (chatters != NULL) {
+                free(chatters);
+                chatters = NULL;
+            }
             chatters = malloc(MAX_CHATTERS * sizeof(t_chatter_s));
             for(int i = 0; i < MAX_CHATTERS; i++) {
                 chatters[i].username = NULL;
             }
             load_chats(username);
-            // load_message(username);
             refresh_scrollable_window(scrollable_window);
-            // refresh_scrollable_window2(scrollable_window2);
         }
         if(selected_user.index != -1) {
             int server_message_amount = mx_atoi(get_mess_chat_amount(username, chatters[selected_user.index].username));
-            // g_print("%d\n", server_message_amount);
+            int server_message_lastid = mx_atoi(get_mess_chat_last_id(username, chatters[selected_user.index].username));
             int total_local_messages_amount = 0;
             for(int i = 0; i < MAX_CHATTERS; i++) {
                 total_local_messages_amount += messages_count[i];
             }
-            if(messages_count[selected_user.index] != server_message_amount) {
-                // g_print("%s - %s\n", username, chatters[selected_user.index].username);
-                g_print("%d - %d\n", messages_count[selected_user.index], server_message_amount);
-                clear_messages();
-                messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
-                for (int i = 0; i < MAX_CHATTERS; i++) {
-                    messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
-                    for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
+            // if(messages_count[selected_user.index] != server_message_amount) {
+            //     g_print("%d - %d\n", messages_count[selected_user.index], server_message_amount);
+            //     // clear_messages();
+            //     // for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
+            //     // if (messages != NULL) {
+            //     //     for (int i = 0; i < MAX_CHATTERS; i++) {
+            //     //         free(messages[i]);
+            //     //         messages[i] = NULL;
+            //     //     }
+            //     //     free(messages);
+            //     //     messages = NULL;
+            //     // }
+            //     // messages = malloc(MAX_CHATTERS * sizeof(t_message_s *));
+            //     // for (int i = 0; i < MAX_CHATTERS; i++) {
+            //     //     messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
+            //     //     for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
+            //     // }
+            //     // load_message(username);
+
+            //     //get all mesages where chat id = username1 username2 and message id> local last msg
+            //     //if lastmsg id local < lastmsg id server then load last msg
+            //     //
+            //     refresh_scrollable_window2(scrollable_window2);
+            // }
+                        // g_print("%d\n", messages[i][messages_count[i] - 1].id);
+            // g_print("%d\n", messages[selected_user.index][messages_count[selected_user.index] - 1].id);
+            // 
+            if(server_message_lastid != messages[selected_user.index][messages_count[selected_user.index] - 1].id) {
+                g_print("%d - %d\n", server_message_lastid, messages[selected_user.index][messages_count[selected_user.index] - 1].id);
+                // g_print("equal\n");
+                char **response2 = get_mess_chat_last_text(mx_itoa(server_message_lastid));
+                g_print("%s\n", response2);
+                if(mx_strcmp(response2, "1") == 0) {
+                    g_print("pid1");
+                    continue;
                 }
-                load_message(username);
+                if(mx_strcmp(response2, "1488") == 0) {
+                    g_print("pid2");
+                    continue;
+                }
+                char *token = strtok((char *)response2, "\n");
+                char *new_text = strdup(token);
+                token = strtok(NULL, "\n");
+                char *new_time = strdup(token);
+
+                add_message(server_message_lastid, selected_user.index, new_text, new_time, FALSE);
                 refresh_scrollable_window2(scrollable_window2);
+                // gtk_widget_show(scrollable_window2);
+                chatters[selected_user.index].lastmsg = format_last_msg((char *)new_text);
+            //     refresh_scrollable_window(scrollable_window);
+            //     gtk_widget_show(scrollable_window); 
             }
         }
-        // g_print("end of refresh\n\n");
         sleep(1);
     }
     return NULL;
 }
 
 void start_chat_checker(char *username) {
-    int rc = pthread_create(&chat_checker_thread, NULL, chat_checker_thread_func, (void *)username);
-    if (rc) {
-        g_print("Error creating chat checker thread\n");
-        exit(-1);
-    }
+ g_timeout_add_seconds(1, check_messages_async, username);
 }
 
 void stop_chat_checker(void) {
@@ -1119,5 +1232,12 @@ void stop_chat_checker(void) {
         g_print("Error canceling chat checker thread\n");
         exit(-1);
     }
+    rc = pthread_join(chat_checker_thread, NULL);
+        if (rc) {
+            g_print("Error joining chat checker thread\n");
+            exit(-1);
+        }
+        
+    chat_checker_thread = NULL;
 }
 

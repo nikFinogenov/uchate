@@ -206,25 +206,29 @@ void clear_all(void) {
 }
 
 void clear_chats(void) {
-    for(int i = 0; i < chatters_count; i++) {
-        free(chatters[i].name);
-        free(chatters[i].surname);
-        free(chatters[i].username);
-        free(chatters[i].lastmsg);
-        if (chatters[i].avatar != NULL) gdk_pixbuf_unref(chatters[i].avatar);
+    for(int i = 0; i < MAX_CHATTERS; i++) {
+        if (chatters[i].username != NULL) {
+            free(chatters[i].username);
+        }
     }
     free(chatters);
-    chatters_count = 0;
+    chatters = NULL;
 }
 
-void clear_messages(void){
-    for(int i = 0; i < chatters_count; i++) {
-        free(messages[i]);
+void clear_messages(void) {
+    for (int i = 0; i < MAX_CHATTERS; i++) {
+        if (messages[i] != NULL) {
+            for (int j = 0; j < MAX_MESSAGES; j++) {
+                if (messages[i][j].text != NULL) {
+                    free(messages[i][j].text);
+                }
+            }
+            free(messages[i]);
+            messages[i] = NULL;
+        }
     }
     free(messages);
-    for(int i = 0; i < MAX_CHATTERS; i++) {
-        messages_count[i] = 0;
-    }
+    messages = NULL;
 }
 
 void clear_data(void) {

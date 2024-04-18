@@ -18,6 +18,8 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "/messages/update")) mx_update_message(data, new_socket);
     else if (!mx_strcmp(request, "/messages/delete")) mx_delete_message(data, new_socket);
     else if (!mx_strcmp(request, "/message/amount")) mx_message_amount(data, new_socket);
+    else if (!mx_strcmp(request, "/message/last-id")) mx_message_last_id(data, new_socket);
+    else if (!mx_strcmp(request, "/message/last-text")) mx_get_last_message(data, new_socket);
     //chat-endpoints
     else if (!mx_strcmp(request, "/chat/add")) mx_create_chat(data, new_socket);
     else if (!mx_strcmp(request, "/chat/get")) mx_get_chat(data, new_socket);

@@ -54,7 +54,9 @@ int main(int argc, char *argv[]) {
             load_message(user.username);
             draw_user_window();
             show_user_window();
-            // start_chat_checker(user.username);
+            start_chat_checker(user.username);
+            // pthread_join(chat_checker_thread, NULL);
+            // pthread_join(&chat_checker_thread, NULL);
         }
     } else {
         show_login();

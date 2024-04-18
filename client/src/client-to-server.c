@@ -31,6 +31,7 @@ void *show_error(void) {
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(error_poppi_upe));
 
     GtkWidget *label = gtk_label_new("Connection lost");
+    gtk_widget_override_color(label, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_container_add(GTK_CONTAINER(content_area), label);
 
     GtkWidget *close = gtk_button_new_with_label("Close");
@@ -586,6 +587,97 @@ char **get_mess_chat_amount(char *username_1, char *username_2) {
     if(sockfd == -1) sprintf(recvBuffer, "1488");
     return recvBuffer;
 }
+
+char **get_mess_chat_last_id(char *username_1, char *username_2) {
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    sprintf(sendBuffer, "/message/last-id\n%s\n%s\n", username_1, username_2);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL);
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL);
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    return recvBuffer;
+}
+
+char **get_mess_chat_last_text(char* id) {
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    sprintf(sendBuffer, "/message/last-text\n%s\n", id);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL);
+        sockfd = -1;
+    }
+
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL);
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, show_error, NULL); 
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+    return recvBuffer;
+}
+
 
 char **get_chat_messages(char *username_1, char *username_2) {
     if (sockfd == -1) connect_to_server(&sockfd);

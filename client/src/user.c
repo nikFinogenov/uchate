@@ -931,6 +931,7 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
     size_t time_len = strlen(time) + 1;
 
     messages[chatter_id][messages_count[chatter_id]].id = mess_id;
+    // g_print("%d\n", messages[chatter_id][messages_count[chatter_id]].id);
     messages[chatter_id][messages_count[chatter_id]].text = malloc(text_len);
     if (messages[chatter_id][messages_count[chatter_id]].text == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for message text.\n");
@@ -1198,6 +1199,7 @@ void draw_user_window() {
     GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     user_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(user_window), MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+    // gtk_window_set_geometry_hints()
     g_signal_connect(user_window, "destroy", G_CALLBACK(on_window_destroy), NULL);
     gtk_window_maximize(GTK_WINDOW(user_window));
     GtkWidget *hbox_main = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);

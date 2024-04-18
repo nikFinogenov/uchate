@@ -8,7 +8,7 @@
 #define RED_CVET &(GdkRGBA){255 / 255.0,  0, 0, 1.0}
 #define WHITE_CVET &(GdkRGBA){1, 1, 1, 1.0}
 
-#define MAIN_WINDOW_HEIGHT 900
+#define MAIN_WINDOW_HEIGHT 300
 #define MAIN_WINDOW_WIDTH 500
 
 #define MAX_MESSAGES 1000
@@ -45,6 +45,7 @@
 
 extern const char *jokes[];
 extern GdkPixbuf *temp_avatar;
+pthread_t chat_checker_thread;
 
 typedef struct {
     char *username;
@@ -189,6 +190,8 @@ void clear_message(t_message_s *message);
 int server_chats_quantity(char *username);
 void add_message(int mess_id, int chatter_id, const char* text, const char* time, bool is_user);
 void add_chatter(const char* name, const char* surname, const char* username, const char* lastmsg, GdkPixbuf* avatar);
+char **get_mess_chat_last_id(char *username_1, char *username_2);
+char **get_mess_chat_last_text(char *id);
 
 char* get_random_joke();
 void clear_all(void);

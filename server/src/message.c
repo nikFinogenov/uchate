@@ -68,11 +68,11 @@ void mx_get_message(char **data, int sockfd) {
 
     int offset = 0; 
     while (sqlite3_step(res) == SQLITE_ROW) {
-        int id = sqlite3_column_int(res, 0);
+        const unsigned char *id = sqlite3_column_text(res, 0);
         const unsigned char *text = sqlite3_column_text(res, 2);
         const unsigned char *type = sqlite3_column_text(res, 3);
         const unsigned char *time = sqlite3_column_text(res, 4);
-        offset += sprintf(temp_buff + offset, "%s\n%s\n%s\n%s\n%s\n", mx_itoa(id), mx_itoa(chat_id), text, type, time);
+        offset += sprintf(temp_buff + offset, "%s\n%s\n%s\n%s\n%s\n", id, mx_itoa(chat_id), text, type, time);
     }
 
     int exit = sqlite3_finalize(res);
@@ -86,6 +86,33 @@ void mx_get_message(char **data, int sockfd) {
     } else {
         send(sockfd, temp_buff, offset, 0);
     }
+    sqlite3_close(db);
+}
+
+void mx_get_last_message(char **data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+    memset(sql, 0, 500);
+    char temp_buff[8192];
+    memset(temp_buff, 0, 8192);
+    // int chat_id = get_chat_id(data[1], data[2]);
+    sprintf(sql, "SELECT text, date FROM MESSAGES WHERE id = %d;", mx_atoi(data[1]));
+
+    if (sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK) {
+        int step = sqlite3_step(res);
+        if (step == SQLITE_ROW) {
+            const unsigned char *text = sqlite3_column_text(res, 0);
+            const unsigned char *time = sqlite3_column_text(res, 1);
+            sprintf(temp_buff, "%s\n%s\n", text, time);
+        }
+        sqlite3_finalize(res);
+    } else {
+        strcpy(temp_buff, "1");
+    }
+
+    // logger("Get mess last id", temp_buff, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
 
@@ -197,6 +224,29 @@ void mx_message_amount(char **data, int sockfd) {
     int exit = sqlite3_finalize(res);
     char *st = (exit == 0) ? ST_OK : ST_NEOK;
     logger("Get messages amount", st, "");
+    send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
+
+void mx_message_last_id(char **data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+    memset(sql, 0, 500);
+    char temp_buff[1024];
+    memset(temp_buff, 0, 1024);
+    int chat_id = get_chat_id(data[1], data[2]);
+    sprintf(sql, "SELECT MAX(id) FROM MESSAGES WHERE chat_id = %d;", chat_id);
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+
+    if (sqlite3_step(res) == SQLITE_ROW) {
+        int count = sqlite3_column_int(res, 0);
+        sprintf(temp_buff, "%s\n", mx_itoa(count));
+    }
+
+    int exit = sqlite3_finalize(res);
+    char *st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Last message id", st, "");
     send(sockfd, temp_buff, strlen(temp_buff), 0);
     sqlite3_close(db);
 }
