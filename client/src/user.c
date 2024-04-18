@@ -167,7 +167,7 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     }
     if (strcmp(username_text, user.username) != 0 || strcmp(name_text, user.name) != 0 || strcmp(surname_text, user.surname) != 0 || strcmp(description_text, user.desc) != 0){
         char **response = update_user_info((char *)username_text, (char *)name_text, (char *)surname_text, (char *)description_text, user.username);
-        if(mx_strcmp(response, "1488") == 0) {
+        if(mx_strcmp((char *)response, "1488") == 0) {
             g_print("Server ofline\n");
             return;
         }
@@ -985,7 +985,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     int m_id = mx_atoi((char *)add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
     
     if(m_id == -1) {
-        g_print("Ne poluchilos\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
     if(m_id == -1488) {
@@ -1223,7 +1223,7 @@ void draw_user_window() {
     GtkWidget *nbox1, *nbox2, *nbox3;
     GtkWidget *help_lable = gtk_label_new("Stickers Help Manual");
     gtk_widget_override_color(help_lable, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
-    gtk_label_set_justify(GTK_LABEL(help_lable), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(help_lable), GTK_JUSTIFY_CENTER);
     GtkWidget *help_f = gtk_label_new("In order to use stickers you need a McOk Bronze subscription or higher");
     gtk_widget_override_color(help_f, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     GtkWidget *help_sad = gtk_label_new(":sad");
@@ -1332,9 +1332,9 @@ void draw_user_window() {
     GtkWidget *sbutton = gtk_button_new_with_label("Donate");
     GtkWidget *tbutton = gtk_button_new_with_label("Subscription");
 
-    gtk_widget_set_size_request(fbutton, 300, NULL);
-    gtk_widget_set_size_request(sbutton, 300, NULL);
-    gtk_widget_set_size_request(tbutton, 300, NULL);
+    gtk_widget_set_size_request(fbutton, 300, -1);
+    gtk_widget_set_size_request(sbutton, 300, -1);
+    gtk_widget_set_size_request(tbutton, 300, -1);
 
     gtk_widget_set_name(fimage, "fimg_in_settings");
     gtk_widget_set_name(simage, "simg_in_settings");

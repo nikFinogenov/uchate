@@ -86,7 +86,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
     update_user_status("online", user.username);
 
     gtk_widget_hide(login_window);
-    g_print("%d\n", server_chats_quantity(user.username));
+    g_print("Chats quantity: %d\n", server_chats_quantity(user.username));
     load_chats(user.username);
     load_message(user.username);
     draw_user_window();
