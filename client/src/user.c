@@ -1096,6 +1096,112 @@ void show_user_window() {
     gtk_widget_show_all(user_window);
 }
 
+static void on_clicked_image (GtkWidget *widget, gpointer data){ 
+        GtkWidget *settings_f = gtk_dialog_new_with_buttons("Chatter Profile", GTK_WINDOW(user_window),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
+    gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
+    gtk_widget_override_background_color(settings_f, GTK_STATE_FLAG_NORMAL, &dark_purple);
+    gtk_widget_override_color(settings_f, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
+    PangoFontDescription *font_desc = pango_font_description_new();
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
+    PangoFontDescription *desc_desc = pango_font_description_new();
+    pango_font_description_set_size(desc_desc, 16 * PANGO_SCALE);
+    
+    GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 10);
+    gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(settings_f))), grid);
+    
+    GdkPixbuf *avatar;
+    avatar = chatters[selected_user.index].avatar;
+    GtkWidget *drawing_area = gtk_drawing_area_new();
+    GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(avatar, 256, 256, GDK_INTERP_BILINEAR);
+
+    gtk_widget_set_size_request(drawing_area, 256, 256);
+    g_signal_connect(drawing_area, "draw", G_CALLBACK(on_draw_event), scaled_pixbuf);
+    gtk_widget_set_margin_top(drawing_area, 5);
+    gtk_widget_set_margin_bottom(drawing_area, 5);
+    gtk_widget_set_valign(drawing_area, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(drawing_area, GTK_ALIGN_CENTER);
+
+
+    GtkWidget *username = gtk_label_new(chatters[selected_user.index].username);
+    
+    GtkWidget *name_surname = gtk_label_new(g_strdup_printf("%s %s", chatters[selected_user.index].name, chatters[selected_user.index].surname));
+    
+    //Get Description
+    char **response = get_user_desc(chatters[selected_user.index].username);
+    char *tok = strtok((char *)response, "\n");
+    char *description = strdup(tok);
+    GtkWidget *desc;
+    if(strcmp(response, "1") == 0 || strcmp(description, "") == 0){
+        desc = gtk_label_new("Description is empty");
+    }
+    else {
+        wrap_text(description);
+        desc = gtk_label_new(description);
+    }
+    
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_f));
+
+    //gtk_box_pack_start(GTK_BOX(content_area), desc, FALSE, FALSE, 0);
+
+    GtkWidget *username_data = gtk_label_new(chatters[selected_user.index].username);
+    GtkWidget *name_surname_data = gtk_label_new(g_strdup_printf("%s %s", chatters[selected_user.index].name, chatters[selected_user.index].surname));
+
+    GtkWidget *avatar_label = gtk_label_new("Avatar:");
+    GtkWidget *username_label = gtk_label_new("Username:");
+    gtk_label_set_xalign(GTK_LABEL(username_label), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(username_data), 0.0);
+    GtkWidget *name_surname_label = gtk_label_new("Name & Surname:");
+    gtk_label_set_xalign(GTK_LABEL(name_surname_label), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(name_surname_data), 0.0);
+    GtkWidget *desc_label = gtk_label_new("Description:");
+    gtk_label_set_xalign(GTK_LABEL(desc_label), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(desc), 0.0);
+    
+    gtk_widget_override_font(avatar_label, font_desc);
+    gtk_widget_override_font(username_data, font_desc);
+    gtk_widget_override_font(name_surname_data, font_desc);
+    gtk_widget_override_font(username_label, font_desc);
+    gtk_widget_override_font(name_surname_label, font_desc);
+    gtk_widget_override_font(desc_label, font_desc);
+    gtk_widget_override_font(desc, desc_desc);
+    // Create a horizontal box to contain left and right boxes
+    GtkWidget *horizontal_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_container_set_border_width(GTK_CONTAINER(horizontal_box), 10);
+    gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(settings_f))), horizontal_box);
+
+    // Create a vertical box for the left side
+    GtkWidget *left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    gtk_container_set_border_width(GTK_CONTAINER(left_box), 10);
+    gtk_box_pack_start(GTK_BOX(horizontal_box), left_box, TRUE, TRUE, 0); // Add left box to horizontal box
+
+    // Create a vertical box for the right side
+    GtkWidget *right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    gtk_container_set_border_width(GTK_CONTAINER(right_box), 10);
+    gtk_box_pack_start(GTK_BOX(horizontal_box), right_box, TRUE, TRUE, 0); // Add right box to horizontal box
+
+    // Add widgets to the left box
+    gtk_box_pack_start(GTK_BOX(left_box), avatar_label, FALSE, FALSE, 0); // Avatar label
+    gtk_box_pack_start(GTK_BOX(left_box), drawing_area, FALSE, FALSE, 0); // Avatar drawing area
+
+    // Add widgets to the right box
+    gtk_box_pack_start(GTK_BOX(right_box), username_label, FALSE, FALSE, 0); // Username label
+    gtk_box_pack_start(GTK_BOX(right_box), username_data, FALSE, FALSE, 0); // Username value
+    gtk_box_pack_start(GTK_BOX(right_box), name_surname_label, FALSE, FALSE, 0); // Name & Surname label
+    gtk_box_pack_start(GTK_BOX(right_box), name_surname_data, FALSE, FALSE, 0); // Name & Surname value
+    gtk_box_pack_start(GTK_BOX(right_box), desc_label, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(right_box), desc, FALSE, FALSE, 0);
+    gtk_widget_show_all(settings_f);
+
+    g_signal_connect_swapped(settings_f, "response", G_CALLBACK(gtk_widget_destroy), settings_f);
+}
+
+
+
+
 void draw_user_info_box(GtkWidget *user_info_box) {
     GdkPixbuf *avatar_for_chat;
     GdkPixbuf *pixbuf;
@@ -1115,14 +1221,19 @@ void draw_user_info_box(GtkWidget *user_info_box) {
         free(avatar_path);
     }
     
+    GtkContainer *image_container = gtk_event_box_new();
+    
     GtkWidget *image = gtk_drawing_area_new();
-    gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    int w = (pixbuf == NULL) ? 10 : gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf));
-    int h = (pixbuf == NULL) ? 10 : gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf));
-    gtk_widget_set_size_request(GTK_WIDGET(image), w, h);
-    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
-    gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
+    gtk_widget_set_halign(GTK_WIDGET(image_container), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(image_container), GTK_ALIGN_CENTER);
+    
+    int w = (prev_pixbuf == NULL) ? 10 : gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf));
+    int h = (prev_pixbuf == NULL) ? 10 : gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf));
+    gtk_widget_set_size_request(GTK_WIDGET(image_container), w, h);
+    gtk_container_add(image_container, image);
+    g_signal_connect(G_OBJECT(image_container), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
+    gtk_box_pack_start(GTK_BOX(user_info_box), image_container, FALSE, FALSE, 15);
+    g_signal_connect(G_OBJECT(image_container), "button-press-event", G_CALLBACK(on_clicked_image), selected_user.index);
 
     GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
     gtk_widget_set_name(name_label, "chatter-name");

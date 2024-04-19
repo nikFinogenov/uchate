@@ -992,3 +992,41 @@ char **get_reload_status( char *username1, char *username2) {
     if(sockfd == -1) sprintf(recvBuffer, "500");
     return recvBuffer;
 }
+
+char **get_user_desc(char *user) {
+    if (sockfd == -1) connect_to_server(&sockfd);
+    
+    char sendBuffer[1024];
+    bzero(sendBuffer, 1024);
+    sprintf(sendBuffer, "/user/get-desc\n%s\n", user);
+    
+    int error = 0;
+    socklen_t len = sizeof (error);
+    int retval = getsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &error, &len);
+
+    if (retval != 0) {
+        fprintf(stderr, "error getting socket error code: %s\n", strerror(retval));
+        sockfd = -1;
+    }
+    if (error != 0) {
+        fprintf(stderr, "socket error: %s\n", strerror(error));
+        sockfd = -1;
+    }
+    
+    if (send(sockfd, sendBuffer, strlen(sendBuffer), 0) < 0) {
+        perror("ERROR writing to socket");
+        sockfd = -1;
+    }
+
+    char recvBuffer[DEFAULT_MESSAGE_SIZE];
+    bzero(recvBuffer, DEFAULT_MESSAGE_SIZE);
+
+    if (recv(sockfd, recvBuffer, DEFAULT_MESSAGE_SIZE, 0) == 0) {
+        perror("ERROR reading from socket");
+        sockfd = -1;
+    }
+    if(sockfd == -1) sprintf(recvBuffer, "1488");
+
+    return recvBuffer;
+}
+

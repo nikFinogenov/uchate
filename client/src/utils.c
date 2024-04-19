@@ -285,6 +285,7 @@ static GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_f
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
     prev_pixbuf = resize_img(prev_pixbuf, 64, 64);
     set_widget_height(box, 70);
+    
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
