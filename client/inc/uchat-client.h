@@ -26,7 +26,6 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <netinet/in.h>
-#include <sqlite3.h>
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>

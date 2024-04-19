@@ -646,11 +646,11 @@ static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *support1 = gtk_label_new(NULL);
     GtkWidget *support2 = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(razrab1), "<a href='https://github.com/nikFinogenov'>Nikita Finogenov</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytriy Dolhii</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytro Dolhii</a>");
     gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>Andrew Yakimov</a>");
     gtk_label_set_markup(GTK_LABEL(razrab4), "<a href='https://github.com/kitska'>Maksym Bratash</a>");
     gtk_label_set_markup(GTK_LABEL(support1), "<a href='https://steamcommunity.com/profiles/76561199022185683'>Vladislav Champion Chubukin</a>");
-    gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmytriy Erter Zuckerbergovich</a>");
+    gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmitriy Erter Avdeev</a>");
     GtkWidget *razrab_label = gtk_label_new("The application was developed by");
     gtk_widget_override_color(razrab_label, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label, font_desc);
