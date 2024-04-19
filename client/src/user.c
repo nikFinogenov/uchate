@@ -167,7 +167,7 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     }
     if (strcmp(username_text, user.username) != 0 || strcmp(name_text, user.name) != 0 || strcmp(surname_text, user.surname) != 0 || strcmp(description_text, user.desc) != 0){
         char **response = update_user_info((char *)username_text, (char *)name_text, (char *)surname_text, (char *)description_text, user.username);
-        if(mx_strcmp((char *)response, "1488") == 0) {
+        if(mx_strcmp((char *)response, "500") == 0) {
             g_print("Server ofline\n");
             return;
         }
@@ -835,7 +835,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         display_error_message("User couldn't be found", 0);
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
+    if (strcmp((char *)response, "500") == 0) {
         display_error_message("Server offline", 0);
         return;
     }
@@ -854,7 +854,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
             display_error_message("Chat already exists", 0);
             return;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
+        if (strcmp((char *)response2, "500") == 0) {
             display_error_message("Server offline", 0);
             return;
         }
@@ -933,9 +933,9 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
 
     size_t text_len = strlen(text) + 1;
     size_t time_len = strlen(time) + 1;
-
     messages[chatter_id][messages_count[chatter_id]].id = mess_id;
     messages[chatter_id][messages_count[chatter_id]].text = malloc(text_len);
+
     if (messages[chatter_id][messages_count[chatter_id]].text == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for message text.\n");
         return;
@@ -950,6 +950,7 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
     strcpy(messages[chatter_id][messages_count[chatter_id]].time, time);
 
     messages[chatter_id][messages_count[chatter_id]].is_user = is_user;
+
 
     messages_count[chatter_id]++;
 }
@@ -988,7 +989,7 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
         g_print("Sadly, ended with error:(\n");
         return;
     }
-    if(m_id == -1488) {
+    if(m_id == -500) {
         g_print("Server offline\n");
         return;
     }
@@ -1107,6 +1108,7 @@ void draw_user_info_box(GtkWidget *user_info_box) {
         get_and_save_avatar_to_file(chatters[selected_user.index].username);
         sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, chatters[selected_user.index].username);
         avatar_for_chat = gdk_pixbuf_new_from_file(avatar_path, NULL);
+        chatters[selected_user.index].avatar = gdk_pixbuf_copy(avatar_for_chat);
         pixbuf = gdk_pixbuf_scale_simple(avatar_for_chat, 64, 64, GDK_INTERP_BILINEAR);
         prev_pixbuf = gdk_pixbuf_copy(pixbuf);
         remove(avatar_path);
@@ -1174,6 +1176,7 @@ static void logout_clicked(GtkWidget *widget, gpointer data){
     userdata.button_recognize = false;
     update_user_status("offline", user.username);
     clear_data();
+    fill_data();
     show_login();
 }
 

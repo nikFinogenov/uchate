@@ -52,7 +52,7 @@ static void login_button_clicked(GtkWidget *widget, gpointer data) {
         display_error_message("Username or Password is incorrect");
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
+    if (strcmp((char *)response, "500") == 0) {
         display_error_message("Server offline");
         return;
     }

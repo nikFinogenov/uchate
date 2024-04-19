@@ -193,6 +193,8 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
 void add_chatter(const char* name, const char* surname, const char* username, const char* lastmsg, GdkPixbuf* avatar);
 char **get_mess_chat_last_id(char *username_1, char *username_2);
 char **get_mess_chat_last_text(char *id);
+char **update_reload_status(char *status, char *username1, char *username2);
+char **get_reload_status(char *username1, char *username2);
 
 char* get_random_joke();
 void clear_all(void);

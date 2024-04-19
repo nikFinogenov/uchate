@@ -24,6 +24,8 @@ static void handle_request(char* request, char** data, int new_socket) {
     else if (!mx_strcmp(request, "/chat/add")) mx_create_chat(data, new_socket);
     else if (!mx_strcmp(request, "/chat/get")) mx_get_chat(data, new_socket);
     else if (!mx_strcmp(request, "/chat/delete")) mx_delete_chat(data, new_socket);
+    else if (!mx_strcmp(request, "/chat/get-status")) mx_get_reload_status(data, new_socket);
+    else if (!mx_strcmp(request, "/chat/update-status")) mx_update_reload_status(data, new_socket);
 }
 
 static void *handle_client(void *data) {

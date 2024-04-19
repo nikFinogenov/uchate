@@ -52,7 +52,48 @@ void mx_get_chat(char **data, int sockfd) {
     sqlite3_close(db);
 }
 
+void mx_update_reload_status(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    char sql[500];
+    memset(sql, 0, sizeof(sql));
+    char response[DEFAULT_MESSAGE_SIZE];
+    char *errmsg;
+    memset(sql, 0, sizeof(sql));
+    int chat_id = get_chat_id(data[2], data[3]);
+    sprintf(sql, "UPDATE CHATS SET reload='%s' WHERE id=%d;",data[1], chat_id);   
+    int exit = sqlite3_exec(db, sql, NULL, 0, &errmsg);
+    char* st = (exit == SQLITE_OK) ? ST_OK : ST_NEOK;
+    logger("Update reload", st, errmsg);
+    sqlite3_close(db);
+    if (exit == SQLITE_OK) 
+        sprintf(response, "0");
+    else 
+        sprintf(response, "1");
+    send(sockfd, response, strlen(response), 0);
+}
 
+void mx_get_reload_status(char** data, int sockfd) {
+    sqlite3 *db = open_db();
+    sqlite3_stmt *res;
+    char sql[500];
+
+    memset(sql, 0, 500);
+    char temp_buff[DEFAULT_MESSAGE_SIZE];
+    memset(temp_buff, 0, DEFAULT_MESSAGE_SIZE);
+    int chat_id = get_chat_id(data[1], data[2]);
+    sprintf(sql, "SELECT reload FROM CHATS WHERE id = %d;",chat_id); 
+    sqlite3_prepare_v2(db, sql, -1, &res, 0);
+    while (sqlite3_step(res) == SQLITE_ROW) {
+        const unsigned char *status = sqlite3_column_text(res, 0);
+        sprintf(temp_buff, "%s\n", status);
+    }
+    int exit = sqlite3_finalize(res);
+    char* st = (exit == 0) ? ST_OK : ST_NEOK;
+    logger("Get chat status", st, "");
+    if(mx_strlen(temp_buff) == 0) send(sockfd, "false", strlen("false"), 0);
+    else send(sockfd, temp_buff, strlen(temp_buff), 0);
+    sqlite3_close(db);
+}
 
 void mx_update_chat(char **data) {
     sqlite3 *db = open_db();

@@ -236,6 +236,10 @@ void clear_messages(void) {
 void clear_data(void) {
     clear_selected(&selected_user);
     for(int i = 0; i < chatters_count; i++) {
+        for(int j = 0; j < messages_count[i]; j++) {
+            free(messages[i][j].text);
+            free(messages[i][j].time);
+        }
         free(messages[i]);
     }
     free(messages);
