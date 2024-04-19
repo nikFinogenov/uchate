@@ -1130,12 +1130,11 @@ static void on_clicked_image (GtkWidget *widget, gpointer data){
     
     GtkWidget *name_surname = gtk_label_new(g_strdup_printf("%s %s", chatters[selected_user.index].name, chatters[selected_user.index].surname));
     
-    //Get Description
     char **response = get_user_desc(chatters[selected_user.index].username);
     char *tok = strtok((char *)response, "\n");
     char *description = strdup(tok);
     GtkWidget *desc;
-    if(strcmp(response, "1") == 0 || strcmp(description, "") == 0){
+    if(strcmp(response, "1") == 0 || strcmp(description, " ") == 0){
         desc = gtk_label_new("Description is empty");
     }
     else {
@@ -1145,19 +1144,21 @@ static void on_clicked_image (GtkWidget *widget, gpointer data){
     
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_f));
 
-    //gtk_box_pack_start(GTK_BOX(content_area), desc, FALSE, FALSE, 0);
-
     GtkWidget *username_data = gtk_label_new(chatters[selected_user.index].username);
     GtkWidget *name_surname_data = gtk_label_new(g_strdup_printf("%s %s", chatters[selected_user.index].name, chatters[selected_user.index].surname));
 
     GtkWidget *avatar_label = gtk_label_new("Avatar:");
+    gtk_widget_set_name(avatar_label, "myButton");
     GtkWidget *username_label = gtk_label_new("Username:");
+    gtk_widget_set_name(username_label, "myButton");
     gtk_label_set_xalign(GTK_LABEL(username_label), 0.0);
     gtk_label_set_xalign(GTK_LABEL(username_data), 0.0);
     GtkWidget *name_surname_label = gtk_label_new("Name & Surname:");
+    gtk_widget_set_name(name_surname_label, "myButton");
     gtk_label_set_xalign(GTK_LABEL(name_surname_label), 0.0);
     gtk_label_set_xalign(GTK_LABEL(name_surname_data), 0.0);
     GtkWidget *desc_label = gtk_label_new("Description:");
+    gtk_widget_set_name(desc_label, "myButton");
     gtk_label_set_xalign(GTK_LABEL(desc_label), 0.0);
     gtk_label_set_xalign(GTK_LABEL(desc), 0.0);
     
@@ -1168,30 +1169,26 @@ static void on_clicked_image (GtkWidget *widget, gpointer data){
     gtk_widget_override_font(name_surname_label, font_desc);
     gtk_widget_override_font(desc_label, font_desc);
     gtk_widget_override_font(desc, desc_desc);
-    // Create a horizontal box to contain left and right boxes
+
     GtkWidget *horizontal_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_container_set_border_width(GTK_CONTAINER(horizontal_box), 10);
     gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(settings_f))), horizontal_box);
 
-    // Create a vertical box for the left side
     GtkWidget *left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_container_set_border_width(GTK_CONTAINER(left_box), 10);
-    gtk_box_pack_start(GTK_BOX(horizontal_box), left_box, TRUE, TRUE, 0); // Add left box to horizontal box
+    gtk_box_pack_start(GTK_BOX(horizontal_box), left_box, TRUE, TRUE, 0);
 
-    // Create a vertical box for the right side
     GtkWidget *right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_container_set_border_width(GTK_CONTAINER(right_box), 10);
-    gtk_box_pack_start(GTK_BOX(horizontal_box), right_box, TRUE, TRUE, 0); // Add right box to horizontal box
+    gtk_box_pack_start(GTK_BOX(horizontal_box), right_box, TRUE, TRUE, 0);
 
-    // Add widgets to the left box
-    gtk_box_pack_start(GTK_BOX(left_box), avatar_label, FALSE, FALSE, 0); // Avatar label
-    gtk_box_pack_start(GTK_BOX(left_box), drawing_area, FALSE, FALSE, 0); // Avatar drawing area
+    gtk_box_pack_start(GTK_BOX(left_box), avatar_label, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(left_box), drawing_area, FALSE, FALSE, 0);
 
-    // Add widgets to the right box
-    gtk_box_pack_start(GTK_BOX(right_box), username_label, FALSE, FALSE, 0); // Username label
-    gtk_box_pack_start(GTK_BOX(right_box), username_data, FALSE, FALSE, 0); // Username value
-    gtk_box_pack_start(GTK_BOX(right_box), name_surname_label, FALSE, FALSE, 0); // Name & Surname label
-    gtk_box_pack_start(GTK_BOX(right_box), name_surname_data, FALSE, FALSE, 0); // Name & Surname value
+    gtk_box_pack_start(GTK_BOX(right_box), username_label, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), username_data, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), name_surname_label, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), name_surname_data, FALSE, FALSE, 0); 
     gtk_box_pack_start(GTK_BOX(right_box), desc_label, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(right_box), desc, FALSE, FALSE, 0);
     gtk_widget_show_all(settings_f);
