@@ -440,7 +440,6 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
 char* get_random_joke() {
     srand(time(NULL));
     int random_index = rand() % 30;
-
     return strdup(jokes[random_index]);
 }
 

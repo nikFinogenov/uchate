@@ -112,6 +112,7 @@ GdkRGBA light_purple;
 GdkRGBA vrode_norm_purple;
 GdkRGBA ny_takoy_purple;
 extern bool is_error_shown;
+extern bool ded_is_shown;
 
 extern gint screen_width;
 extern gint screen_height;

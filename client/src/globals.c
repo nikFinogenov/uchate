@@ -15,6 +15,7 @@ GtkWidget *scrollable_window2 = NULL;
 GtkWidget *add_new_chat_when_no_chats = NULL;
 GtkWidget *error_poppi_upe = NULL;
 bool is_error_shown = false;
+bool ded_is_shown = false;
 
 char *login_info = "client/client-data/login_info.txt";
 bool remember;
@@ -45,35 +46,35 @@ t_user_data_s userdata = {
 
 const char *jokes[] = {
     "Why don't skeletons fight each other? They don't have the guts!",
-    "Why couldn't the bicycle stand up by itself? Because it was two-tired!",
+    "Чому програмісти не люблять грати в шахи? \nТому що в них завжди бувають проблеми з коронами!",
     "Why did the scarecrow win an award? Because he was outstanding in his field!",
-    "What do you call fake spaghetti? An impasta!",
-    "Why did the math book look sad? Because it had too many problems.",
+    "Які у програмістів найпопулярніші танці? Вони називаються 'алгоритмічні кроки'!",
+    "Якщо б програмісти були фруктами, то якими б вони були? \nНу, звісно, були б персиками - з завжди відкритою оболонкою!",
     "What did one wall say to the other wall? I'll meet you at the corner!",
     "Why did the tomato turn red? Because it saw the salad dressing!",
-    "What do you get when you cross a snowman with a vampire? Frostbite!",
+    "Чому програмістам подобається літо? Бо там можна повертатися на берег, де всі їх помилки затоплені!",
     "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
     "How does a penguin build its house? Igloos it together!",
-    "What did the janitor say when he jumped out of the closet? Supplies!",
-    "Why don't scientists trust atoms? Because they make up everything!",
+    "Яка відмінність між програмістами та дітьми? Діти ростуть, а програмісти збільшуються у своєму коді!",
+    "Чому програміст завжди щасливий на роботі? Бо він весь час має доступ до клавіші Esc!",
     "What did the fish say when it hit the wall? Dam!",
-    "Why did the coffee file a police report? It got mugged!",
+     "Якщо ваш програміст говорить, що він завершив усі роботи, \nви можете бути впевнені - це не правда. Він просто зараз видає вам останній баг!",
     "Why was the belt arrested? For holding up a pair of pants!",
-    "What did one hat say to the other? You stay here, I'll go on ahead!",
+    "Чому програміст завжди такий втомлений? Бо він усю ніч марить \nпро ефективний сон, але йому постійно сниться дивні помилки!",
     "Why don't skeletons fight each other? They don't have the guts!",
-    "What do you call a bear with no teeth? A gummy bear!",
+    "Що зробить програміст, який вийде з-під столу? Скоріш за все, він перезавантажиться!",
     "What did one ocean say to the other ocean? Nothing, they just waved!",
-    "Why did the scarecrow win an award? Because he was outstanding in his field!",
+    "Якщо ваш програміст говорить, що він дуже багато працює,\nпитайте його, чи він працює під Windows чи під графіком!",
     "What's orange and sounds like a parrot? A carrot!",
     "Why did the bicycle fall over? Because it was two-tired!",
-    "What did one snowman say to the other snowman? Do you smell carrots?",
+    "Як програміст вибирає свій одяг? Він перевіряє, чи його рубашка має підтримку CSS!",
     "Why did the tomato turn red? Because it saw the salad dressing!",
-    "Why did the golfer bring two pairs of pants? In case he got a hole in one!",
+    "Чому програмістам так подобається зима? \nТому що там їм не треба перейматися виходом на вулицю - вони просто засинають індексацію!",
     "How do you make holy water? You boil the hell out of it!",
-    "Why don't eggs tell jokes? Because they'd crack each other up!",
+    "Що спільного між програмістом і кавою? Вони обидва бажають\nвам чудового дня, але перш ніж це зробити, вони мусять спочатку завантажитися!",
     "What do you call a fake noodle? An impasta!",
-    "Why did the math book look sad? Because it had too many problems.",
-    "What do you call a can opener that doesn't work? A can't opener!"
+    "Як програміст може посварити? Він просто залишить коментар у вашому коді!",
+    "Чому програмісти називають своїх колег по ім'ях? Бо вони завжди прагнуть до ясності у своєму коді!"
 };
 
 bool is_chatters_empty(void) {

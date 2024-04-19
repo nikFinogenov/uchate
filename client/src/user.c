@@ -725,16 +725,21 @@ static void display_joke(GtkWidget *widget, gpointer data) {
 
     gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
     gtk_widget_override_background_color(joke, GTK_STATE_FLAG_NORMAL, &black);
-    gint random_number = g_random_int_range(1, 3);
+    gint random_number = g_random_int_range(1, 5);
 
-    if (random_number == 1) {
+    if (random_number == 1 || random_number == 2 || random_number == 3) {
         GtkWidget *joke_text = gtk_label_new(get_random_joke());
         gtk_widget_override_color(joke_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
         gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
         gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
         gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
     } else {
-        int index = g_random_int_range(1, 31);
+        int index;
+        if(ded_is_shown == false) {
+            index = 15;
+            ded_is_shown = true;
+        }
+        else index = g_random_int_range(1, 31);
         char path[50];
         sprintf(path, "client/jokes/%d.png", index);
         GdkPixbuf *joke_pixbuf = gdk_pixbuf_new_from_file(path, NULL);
