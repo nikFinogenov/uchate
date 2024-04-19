@@ -167,7 +167,7 @@ static void on_confirm_button_clicked(GtkButton *button, gpointer data) {
     }
     if (strcmp(username_text, user.username) != 0 || strcmp(name_text, user.name) != 0 || strcmp(surname_text, user.surname) != 0 || strcmp(description_text, user.desc) != 0){
         char **response = update_user_info((char *)username_text, (char *)name_text, (char *)surname_text, (char *)description_text, user.username);
-        if(mx_strcmp(response, "1488") == 0) {
+        if(mx_strcmp((char *)response, "500") == 0) {
             g_print("Server ofline\n");
             return;
         }
@@ -531,7 +531,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *bronze_title = gtk_label_new("2.50€/month");
     gtk_widget_override_color(bronze_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *bronze_text = gtk_label_new("Pros:\nplus money for us :)\n Cons:\nminus money for you :(");
+    GtkWidget *bronze_text = gtk_label_new("Pros:\nplus money for us :) :) :) \n Cons:\nminus money for you :(");
     gtk_widget_override_color(bronze_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_bbox2), bronze_title);
@@ -540,7 +540,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *silver_title = gtk_label_new("5.00€/month");
     gtk_widget_override_color(silver_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(silver_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *silver_text = gtk_label_new("Pros:\nImage sending, more stickers, language changing, etc.\n Cons:\nYou will lost ~5€ every month ^^");
+    GtkWidget *silver_text = gtk_label_new("Pros:\nStickers, styles, languages\n Cons:\nLosing ~5€ every month ^^");
     gtk_widget_override_color(silver_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_sbox2), silver_title);
@@ -549,7 +549,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *gold_title = gtk_label_new("10.00€/month");
     gtk_widget_override_color(gold_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(gold_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *gold_text = gtk_label_new("Pros:\nNothing, you just lost your money:)\n Cons:\nAbsolutly no minuses (V)0.o(v)");
+    GtkWidget *gold_text = gtk_label_new("Pros:\nYou just lost your money:) \n Cons:\nI see no minuses (V)0.o(v)");
     gtk_widget_override_color(gold_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_gbox2), gold_title);
@@ -646,11 +646,11 @@ static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *support1 = gtk_label_new(NULL);
     GtkWidget *support2 = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(razrab1), "<a href='https://github.com/nikFinogenov'>Nikita Finogenov</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytriy DOLHII</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>Gandon Andrew Yakimov</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytro Dolhii</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>Andrew Yakimov</a>");
     gtk_label_set_markup(GTK_LABEL(razrab4), "<a href='https://github.com/kitska'>Maksym Bratash</a>");
     gtk_label_set_markup(GTK_LABEL(support1), "<a href='https://steamcommunity.com/profiles/76561199022185683'>Vladislav Champion Chubukin</a>");
-    gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmytriy Erter Zuckerbergovich</a>");
+    gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmitriy Erter Avdeev</a>");
     GtkWidget *razrab_label = gtk_label_new("The application was developed by");
     gtk_widget_override_color(razrab_label, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label, font_desc);
@@ -658,7 +658,7 @@ static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *razrab_label2 = gtk_label_new("Big Thanks for Supporting");
     gtk_widget_override_color(razrab_label2, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label2, font_desc);
-    GtkWidget *razrab_label3 = gtk_label_new("Kon4eliga");
+    GtkWidget *razrab_label3 = gtk_label_new("He did something");
     gtk_widget_override_color(razrab_label3, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label3, font_desc);
 
@@ -725,16 +725,21 @@ static void display_joke(GtkWidget *widget, gpointer data) {
 
     gtk_window_set_default_size(GTK_WINDOW(joke), 50, 50);
     gtk_widget_override_background_color(joke, GTK_STATE_FLAG_NORMAL, &black);
-    gint random_number = g_random_int_range(1, 3);
+    gint random_number = g_random_int_range(1, 5);
 
-    if (random_number == 1) {
+    if (random_number == 1 || random_number == 2 || random_number == 3) {
         GtkWidget *joke_text = gtk_label_new(get_random_joke());
         gtk_widget_override_color(joke_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
         gtk_label_set_xalign(GTK_LABEL(joke_text), 0.5); 
         gtk_label_set_yalign(GTK_LABEL(joke_text), 0.5);
         gtk_box_pack_start(GTK_BOX(gtk_bin_get_child(GTK_BIN(joke))), joke_text, FALSE, FALSE, 100); 
     } else {
-        int index = g_random_int_range(1, 31);
+        int index;
+        if(ded_is_shown == false) {
+            index = 15;
+            ded_is_shown = true;
+        }
+        else index = g_random_int_range(1, 31);
         char path[50];
         sprintf(path, "client/jokes/%d.png", index);
         GdkPixbuf *joke_pixbuf = gdk_pixbuf_new_from_file(path, NULL);
@@ -835,7 +840,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
         display_error_message("User couldn't be found", 0);
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
+    if (strcmp((char *)response, "500") == 0) {
         display_error_message("Server offline", 0);
         return;
     }
@@ -854,7 +859,7 @@ static void search_user(GtkWidget *widget, gpointer user_data) {
             display_error_message("Chat already exists", 0);
             return;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
+        if (strcmp((char *)response2, "500") == 0) {
             display_error_message("Server offline", 0);
             return;
         }
@@ -933,9 +938,9 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
 
     size_t text_len = strlen(text) + 1;
     size_t time_len = strlen(time) + 1;
-
     messages[chatter_id][messages_count[chatter_id]].id = mess_id;
     messages[chatter_id][messages_count[chatter_id]].text = malloc(text_len);
+
     if (messages[chatter_id][messages_count[chatter_id]].text == NULL) {
         fprintf(stderr, "Error: Memory allocation failed for message text.\n");
         return;
@@ -950,6 +955,7 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
     strcpy(messages[chatter_id][messages_count[chatter_id]].time, time);
 
     messages[chatter_id][messages_count[chatter_id]].is_user = is_user;
+
 
     messages_count[chatter_id]++;
 }
@@ -985,10 +991,10 @@ static void add_message_button_clicked(GtkWidget *widget, gpointer user_data) {
     int m_id = mx_atoi((char *)add_new_message(user.username, chatters[selected_user.index].username, text, time_str, user.username));
     
     if(m_id == -1) {
-        g_print("Ne poluchilos\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if(m_id == -1488) {
+    if(m_id == -500) {
         g_print("Server offline\n");
         return;
     }
@@ -1095,6 +1101,109 @@ void show_user_window() {
     gtk_widget_show_all(user_window);
 }
 
+static void on_clicked_image (GtkWidget *widget, gpointer data){ 
+        GtkWidget *settings_f = gtk_dialog_new_with_buttons("Chatter Profile", GTK_WINDOW(user_window),
+                                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                    NULL, GTK_RESPONSE_NONE, NULL);
+    gtk_window_set_default_size(GTK_WINDOW(settings_f), 600, 400);
+    gtk_widget_override_background_color(settings_f, GTK_STATE_FLAG_NORMAL, &dark_purple);
+    gtk_widget_override_color(settings_f, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
+    PangoFontDescription *font_desc = pango_font_description_new();
+    pango_font_description_set_size(font_desc, 20 * PANGO_SCALE);
+    PangoFontDescription *desc_desc = pango_font_description_new();
+    pango_font_description_set_size(desc_desc, 16 * PANGO_SCALE);
+    
+    GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 10);
+    gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(settings_f))), grid);
+    
+    GdkPixbuf *avatar;
+    avatar = chatters[selected_user.index].avatar;
+    GtkWidget *drawing_area = gtk_drawing_area_new();
+    GdkPixbuf *scaled_pixbuf = gdk_pixbuf_scale_simple(avatar, 256, 256, GDK_INTERP_BILINEAR);
+
+    gtk_widget_set_size_request(drawing_area, 256, 256);
+    g_signal_connect(drawing_area, "draw", G_CALLBACK(on_draw_event), scaled_pixbuf);
+    gtk_widget_set_margin_top(drawing_area, 5);
+    gtk_widget_set_margin_bottom(drawing_area, 5);
+    gtk_widget_set_valign(drawing_area, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(drawing_area, GTK_ALIGN_CENTER);
+
+
+    GtkWidget *username = gtk_label_new(chatters[selected_user.index].username);
+    
+    GtkWidget *name_surname = gtk_label_new(g_strdup_printf("%s %s", chatters[selected_user.index].name, chatters[selected_user.index].surname));
+    
+    char **response = get_user_desc(chatters[selected_user.index].username);
+    char *tok = strtok((char *)response, "\n");
+    char *description = strdup(tok);
+    GtkWidget *desc;
+    if(strcmp(response, "1") == 0 || strcmp(description, " ") == 0){
+        desc = gtk_label_new("Description is empty");
+    }
+    else {
+        wrap_text(description);
+        desc = gtk_label_new(description);
+    }
+    
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(settings_f));
+
+    GtkWidget *username_data = gtk_label_new(chatters[selected_user.index].username);
+    GtkWidget *name_surname_data = gtk_label_new(g_strdup_printf("%s %s", chatters[selected_user.index].name, chatters[selected_user.index].surname));
+
+    GtkWidget *avatar_label = gtk_label_new("Avatar:");
+    gtk_widget_set_name(avatar_label, "myButton");
+    GtkWidget *username_label = gtk_label_new("Username:");
+    gtk_widget_set_name(username_label, "myButton");
+    gtk_label_set_xalign(GTK_LABEL(username_label), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(username_data), 0.0);
+    GtkWidget *name_surname_label = gtk_label_new("Name & Surname:");
+    gtk_widget_set_name(name_surname_label, "myButton");
+    gtk_label_set_xalign(GTK_LABEL(name_surname_label), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(name_surname_data), 0.0);
+    GtkWidget *desc_label = gtk_label_new("Description:");
+    gtk_widget_set_name(desc_label, "myButton");
+    gtk_label_set_xalign(GTK_LABEL(desc_label), 0.0);
+    gtk_label_set_xalign(GTK_LABEL(desc), 0.0);
+    
+    gtk_widget_override_font(avatar_label, font_desc);
+    gtk_widget_override_font(username_data, font_desc);
+    gtk_widget_override_font(name_surname_data, font_desc);
+    gtk_widget_override_font(username_label, font_desc);
+    gtk_widget_override_font(name_surname_label, font_desc);
+    gtk_widget_override_font(desc_label, font_desc);
+    gtk_widget_override_font(desc, desc_desc);
+
+    GtkWidget *horizontal_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_container_set_border_width(GTK_CONTAINER(horizontal_box), 10);
+    gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(settings_f))), horizontal_box);
+
+    GtkWidget *left_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    gtk_container_set_border_width(GTK_CONTAINER(left_box), 10);
+    gtk_box_pack_start(GTK_BOX(horizontal_box), left_box, TRUE, TRUE, 0);
+
+    GtkWidget *right_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    gtk_container_set_border_width(GTK_CONTAINER(right_box), 10);
+    gtk_box_pack_start(GTK_BOX(horizontal_box), right_box, TRUE, TRUE, 0);
+
+    gtk_box_pack_start(GTK_BOX(left_box), avatar_label, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(left_box), drawing_area, FALSE, FALSE, 0);
+
+    gtk_box_pack_start(GTK_BOX(right_box), username_label, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), username_data, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), name_surname_label, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), name_surname_data, FALSE, FALSE, 0); 
+    gtk_box_pack_start(GTK_BOX(right_box), desc_label, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(right_box), desc, FALSE, FALSE, 0);
+    gtk_widget_show_all(settings_f);
+
+    g_signal_connect_swapped(settings_f, "response", G_CALLBACK(gtk_widget_destroy), settings_f);
+}
+
+
+
+
 void draw_user_info_box(GtkWidget *user_info_box) {
     GdkPixbuf *avatar_for_chat;
     GdkPixbuf *pixbuf;
@@ -1107,20 +1216,26 @@ void draw_user_info_box(GtkWidget *user_info_box) {
         get_and_save_avatar_to_file(chatters[selected_user.index].username);
         sprintf(avatar_path, "%s%s_avatar.png", AVATAR_FOLDER, chatters[selected_user.index].username);
         avatar_for_chat = gdk_pixbuf_new_from_file(avatar_path, NULL);
+        chatters[selected_user.index].avatar = gdk_pixbuf_copy(avatar_for_chat);
         pixbuf = gdk_pixbuf_scale_simple(avatar_for_chat, 64, 64, GDK_INTERP_BILINEAR);
         prev_pixbuf = gdk_pixbuf_copy(pixbuf);
         remove(avatar_path);
         free(avatar_path);
     }
     
+    GtkContainer *image_container = gtk_event_box_new();
+    
     GtkWidget *image = gtk_drawing_area_new();
-    gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
-    int w = (pixbuf == NULL) ? 10 : gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf));
-    int h = (pixbuf == NULL) ? 10 : gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf));
-    gtk_widget_set_size_request(GTK_WIDGET(image), w, h);
-    g_signal_connect(G_OBJECT(image), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
-    gtk_box_pack_start(GTK_BOX(user_info_box), image, FALSE, FALSE, 15);
+    gtk_widget_set_halign(GTK_WIDGET(image_container), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(image_container), GTK_ALIGN_CENTER);
+    
+    int w = (prev_pixbuf == NULL) ? 10 : gdk_pixbuf_get_width(GDK_PIXBUF(prev_pixbuf));
+    int h = (prev_pixbuf == NULL) ? 10 : gdk_pixbuf_get_height(GDK_PIXBUF(prev_pixbuf));
+    gtk_widget_set_size_request(GTK_WIDGET(image_container), w, h);
+    gtk_container_add(image_container, image);
+    g_signal_connect(G_OBJECT(image_container), "draw", G_CALLBACK(draw_image_for_chat_box), prev_pixbuf);
+    gtk_box_pack_start(GTK_BOX(user_info_box), image_container, FALSE, FALSE, 15);
+    g_signal_connect(G_OBJECT(image_container), "button-press-event", G_CALLBACK(on_clicked_image), selected_user.index);
 
     GtkWidget *name_label = gtk_label_new((chatters == NULL || selected_user.index == -1) ? " " : chatters[selected_user.index].name);
     gtk_widget_set_name(name_label, "chatter-name");
@@ -1174,6 +1289,7 @@ static void logout_clicked(GtkWidget *widget, gpointer data){
     userdata.button_recognize = false;
     update_user_status("offline", user.username);
     clear_data();
+    fill_data();
     show_login();
 }
 
@@ -1223,7 +1339,7 @@ void draw_user_window() {
     GtkWidget *nbox1, *nbox2, *nbox3;
     GtkWidget *help_lable = gtk_label_new("Stickers Help Manual");
     gtk_widget_override_color(help_lable, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
-    gtk_label_set_justify(GTK_LABEL(help_lable), GTK_ALIGN_CENTER);
+    gtk_label_set_justify(GTK_LABEL(help_lable), GTK_JUSTIFY_CENTER);
     GtkWidget *help_f = gtk_label_new("In order to use stickers you need a McOk Bronze subscription or higher");
     gtk_widget_override_color(help_f, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     GtkWidget *help_sad = gtk_label_new(":sad");
@@ -1332,9 +1448,9 @@ void draw_user_window() {
     GtkWidget *sbutton = gtk_button_new_with_label("Donate");
     GtkWidget *tbutton = gtk_button_new_with_label("Subscription");
 
-    gtk_widget_set_size_request(fbutton, 300, NULL);
-    gtk_widget_set_size_request(sbutton, 300, NULL);
-    gtk_widget_set_size_request(tbutton, 300, NULL);
+    gtk_widget_set_size_request(fbutton, 300, -1);
+    gtk_widget_set_size_request(sbutton, 300, -1);
+    gtk_widget_set_size_request(tbutton, 300, -1);
 
     gtk_widget_set_name(fimage, "fimg_in_settings");
     gtk_widget_set_name(simage, "simg_in_settings");

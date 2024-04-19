@@ -32,10 +32,10 @@ static void delete_message(GtkWidget *widget, gpointer data) {
     }
     char** response = delete_message_data(messages[selected_user.index][index].id);
     if(mx_strcmp((char *)response, "1") == 0) {
-        g_print("ne poluchilos\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if(mx_strcmp((char *)response, "1488") == 0) {
+    if(mx_strcmp((char *)response, "500") == 0) {
         g_print("Server offline\n");
         return;
     }
@@ -50,6 +50,7 @@ static void delete_message(GtkWidget *widget, gpointer data) {
     memset(&messages[selected_user.index][messages_count[selected_user.index]], 0, sizeof(t_message_s));
 
     refresh_scrollable_window2(scrollable_window2);
+    update_reload_status("true", user.username, chatters[selected_user.index].username); 
 }
 
 static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) {
@@ -65,14 +66,13 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
         return;
     }
     wrap_text(parsed_edit);
-    g_print("message wrapped-> ");
     char** response = update_message_info(messages[selected_user.index][data->index_of_msg].id, parsed_edit);
     if(mx_strcmp((char *)response, "1") == 0) {
-        g_print("ne poluchilos\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if(mx_strcmp((char *)response, "1488") == 0) {
-        g_print("Server offline");
+    if(mx_strcmp((char *)response, "500") == 0) {
+        g_print("Server offline\n");
         return;
     }
     
@@ -80,12 +80,11 @@ static void edit_message_button_clicked (GtkWidget *widget, gpointer user_data) 
     else messages[selected_user.index][data->index_of_msg].text = mx_strdup(parsed_edit);
     gtk_widget_destroy(edit_pop_up);
     refresh_scrollable_window2(scrollable_window2);
+    update_reload_status("true", user.username, chatters[selected_user.index].username);  
 }
 
 static void edit_message(GtkWidget *widget, gpointer data) {
     int index = GPOINTER_TO_INT(data);
-    g_print("total gays: %d\n", messages_count[selected_user.index]);
-    g_print("gay4 is here-> %d\n", index);
 
     if (index < 0 || index >= messages_count[selected_user.index]) {
        
@@ -133,18 +132,16 @@ static void edit_message(GtkWidget *widget, gpointer data) {
 
 static void delete_chatter(GtkWidget *widget, gpointer data) {
     int index = GPOINTER_TO_INT(data);
-    g_print("Nomer - (%d) v okno;\n", index);
-    g_print("total pediks: %d\n", chatters_count);
     if (index < 0 || index >= chatters_count) {
         return;
     }
 
     char **response = chatter_delete(user.username, chatters[index].username);
     if(mx_strcmp((char *)response, "1") == 0) {
-        g_print("ne poluchilos\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if(mx_strcmp((char *)response, "1488") == 0) {
+    if(mx_strcmp((char *)response, "500") == 0) {
         g_print("Server offline\n");
         return;
     }
@@ -182,7 +179,7 @@ static void delete_chatter(GtkWidget *widget, gpointer data) {
 
     if (strcmp((char *)response, "1") == 0) {
         g_print("There was a problem deleting a user...\n");
-    } else g_print("O, nihuya, pracue\n");
+    } else g_print("pracue\n");
     
     refresh_scrollable_window(scrollable_window);
     if(chatters_count == 0) {
@@ -288,6 +285,7 @@ static GtkWidget *create_user_box(char* tag, char* last_msg, char* input_image_f
     GdkPixbuf *prev_pixbuf = gdk_pixbuf_copy(pixbuf);
     prev_pixbuf = resize_img(prev_pixbuf, 64, 64);
     set_widget_height(box, 70);
+    
     GtkWidget *image = gtk_drawing_area_new();
     gtk_widget_set_halign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(image), GTK_ALIGN_CENTER);
@@ -442,7 +440,6 @@ gboolean user_box_clicked(GtkWidget *widget, GdkEventButton *event, gpointer use
 char* get_random_joke() {
     srand(time(NULL));
     int random_index = rand() % 30;
-
     return strdup(jokes[random_index]);
 }
 
@@ -766,11 +763,11 @@ void parse_txt_buffer(const char *buffer, t_user_data_s *userdata) {
 int server_chats_quantity(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("tutya\n");
+        g_print("Sadly, ended with error:(\n");
         return chatters_count;
     }
-    if (strcmp((char *)response, "1488") == 0) {
-        g_print("tut2ya\n");
+    if (strcmp((char *)response, "500") == 0) {
+        g_print("Server offline\n");
         return -1;
     }
     char **tokens = mx_strsplit((char *)response, '\n');
@@ -780,10 +777,10 @@ int server_chats_quantity(char *username) {
 void load_chats(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("Ne poluchilos\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
+    if (strcmp((char *)response, "500") == 0) {
         g_print("Server offline\n");
         return;
     }
@@ -791,11 +788,11 @@ void load_chats(char *username) {
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chatter_data(tokens[i]);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("%s couldn't be found1\n", tokens[i]);
+            g_print("couldn't be found1\n");
             return;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
-            g_print("Server offline\n", tokens[i]);
+        if (strcmp((char *)response2, "500") == 0) {
+            g_print("Server offline\n");
             return;
         }
         char *token2 = strtok((char *)response2, "\n");
@@ -811,22 +808,22 @@ void load_chats(char *username) {
 void load_message(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("tut\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
-        g_print("tut2\n");
+    if (strcmp((char *)response, "500") == 0) {
+        g_print("Server offline\n");
         return;
     }
     char **tokens = mx_strsplit((char *)response, '\n');
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chat_messages(user.username, tokens[i]);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("Ne poluchilos\n", tokens[i]);
+            g_print("Sadly, ended with error:(\n");
             return;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
-            g_print("Server offline\n", tokens[i]);
+        if (strcmp((char *)response2, "500") == 0) {
+            g_print("Server offline\n");
             return;
         }
         if (strcmp((char *)response2, "0") == 0) {
@@ -835,26 +832,26 @@ void load_message(char *username) {
         }
         char **tokens2 = mx_strsplit((char *)response2, '\n');
         int mess_count_local = mx_get_length(tokens2) / 5;
-        char *token2 = strtok((char *)response2, "\n");
         for(int j = 0; j < mess_count_local; j++) {
-            char *id = tokens2[i * 5];
-            char *chat_id = tokens2[i * 5 + 1];
-            char *text = tokens2[i * 5 + 2];
-            char *type = tokens2[i * 5 + 3];
-            char *time = tokens2[i * 5 + 4];
+            char *id = tokens2[j * 5];
+            char *chat_id = tokens2[j * 5 + 1];
+            char *text = tokens2[j * 5 + 2];
+            char *type = tokens2[j * 5 + 3];
+            char *time = tokens2[j * 5 + 4];
             add_message(mx_atoi(id), i, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
         }
+        chatters[i].lastmsg = mx_strdup(messages[i][mess_count_local - 1].text);
     }
 }
 
 void load_chatter_message(char *chattername) {
         char **response2 = get_chat_messages(user.username, chattername);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("Ne poluchilos\n", chattername);
+            g_print("Sadly, ended with error:(\n");
             return;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
-            g_print("Server offline\n", chattername);
+        if (strcmp((char *)response2, "500") == 0) {
+            g_print("Server offline\n");
             return;
         }
         if (strcmp((char *)response2, "0") == 0) {
@@ -873,18 +870,18 @@ void load_chatter_message(char *chattername) {
             char *type = tokens2[j];
             j++;
             char *time = tokens2[j];
-            add_message(id, selected_user.index, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
+            add_message(mx_atoi(id), selected_user.index, text, time, (mx_strcmp(user.username, type) == 0) ? true : false);
         }
 }
 
 void reload_chats(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("tut\n");
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
-        g_print("tut2\n");
+    if (strcmp((char *)response, "500") == 0) {
+        g_print("Server offline\n");
         return;
     }
     for (int i = 0; i < chatters_count; i++) {
@@ -904,11 +901,11 @@ void reload_chats(char *username) {
     for(int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_chatter_data(tokens[i]);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("%s couldn't be found2\n", tokens[i]);
+            g_print("Sadly, ended with error:(\n");
             return;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
+        if (strcmp((char *)response2, "500") == 0) {
+            g_print("Server offline\n");
             return;
         }
         char *token2 = strtok((char *)response2, "\n");
@@ -940,14 +937,13 @@ void reload_chats(char *username) {
 void reload_messages(char *username) {
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("%s ne sud'ba2\n", username);
+        g_print("Sadly, ended with error:(\n");
         return;
     }
-    if (strcmp((char *)response, "1488") == 0) {
+    if (strcmp((char *)response, "500") == 0) {
         g_print("Server offline\n");
         return;
     }
-    g_print("%s\n", response);
     for (int i = 0; i < MAX_CHATTERS; ++i) {
         for(int j = 0; j < messages_count[i]; j++) clear_message(&messages[i][j]);
     }
@@ -966,11 +962,11 @@ void reload_messages(char *username) {
 
         char **response2 = get_chat_messages(username, tokens[i]);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("%s couldn't be found3\n", tokens[i]);
+            g_print("Sadly, ended with error:(\n");
             continue;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
+        if (strcmp((char *)response2, "500") == 0) {
+            g_print("Server offline\n");
             return;
         }
 
@@ -978,7 +974,6 @@ void reload_messages(char *username) {
         int mess_count_ahuet = mx_get_length(tokens2) / 5;
 
         char *token2 = strtok((char *)response2, "\n");
-
 
         for (int j = 0; j < mess_count_ahuet; j++) {
             char *id = token2;
@@ -1012,10 +1007,10 @@ int server_messages_quantity(char *username) {
     }
     char **response = get_chats_data(username);
     if (strcmp((char *)response, "1") == 0) {
-        g_print("%s ne sud'ba2\n", username);
+        g_print("Sadly, ended with error:(\n");
         return total_local_messages_amount;
     }
-    if (strcmp((char *)response, "1488") == 0) {
+    if (strcmp((char *)response, "500") == 0) {
         g_print("Server offline\n");
         return total_local_messages_amount;
     }
@@ -1024,11 +1019,11 @@ int server_messages_quantity(char *username) {
     for (int i = 0; i < mx_get_length(tokens); i++) {
         char **response2 = get_mess_chat_amount(username, tokens[i]);
         if (strcmp((char *)response2, "1") == 0) {
-            g_print("%s couldn't be found3\n", tokens[i]);
+            g_print("Sadly, ended with error:(\n");
             return total_local_messages_amount;
         }
-        if (strcmp((char *)response2, "1488") == 0) {
-            g_print("%s ne sud'ba\n", tokens[i]);
+        if (strcmp((char *)response2, "500") == 0) {
+            g_print("Server offline\n");
             return total_local_messages_amount;
         }
         total_messages += mx_atoi((char *)response2);
@@ -1059,21 +1054,57 @@ gboolean check_messages_async(gpointer data) {
             refresh_scrollable_window(scrollable_window);
     }
     if(selected_user.index != -1) {
-            int server_message_amount = mx_atoi(get_mess_chat_amount(username, chatters[selected_user.index].username));
-            int server_message_lastid = mx_atoi(get_mess_chat_last_id(username, chatters[selected_user.index].username));
+            char **reload_response = get_reload_status(user.username, chatters[selected_user.index].username);
+            char *tok = strtok((char *)reload_response, "\n");
+            char *reload = mx_strdup(tok);
+            int server_message_amount = mx_atoi((char *)get_mess_chat_amount(username, chatters[selected_user.index].username));
+            int server_message_lastid = mx_atoi((char *)get_mess_chat_last_id(username, chatters[selected_user.index].username));
             int total_local_messages_amount = 0;
             for(int i = 0; i < MAX_CHATTERS; i++) {
                 total_local_messages_amount += messages_count[i];
             }
+            if(mx_strcmp(reload, "true") == 0) {
+                for(int i = 0; i < chatters_count; i++) {
+                    for(int j = 0; j < messages_count[i]; j++) {
+                        free(messages[i][j].text);
+                        free(messages[i][j].time);
+                    }
+                    free(messages[i]);
+                }
+                free(messages);
+                messages = NULL;
+                messages = malloc(MAX_CHATTERS * sizeof(t_message_s*));
+                if (messages == NULL) {
+                    fprintf(stderr, "Error: Memory allocation failed for messages array.\n");
+                    exit(EXIT_FAILURE);
+                }
+                for(int i = 0; i < MAX_CHATTERS; i++) {
+                    messages[i] = malloc(MAX_MESSAGES * sizeof(t_message_s));
+                    if (messages[i] == NULL) {
+                        fprintf(stderr, "Error: Memory allocation failed for messages.\n");
+                        exit(EXIT_FAILURE);
+                    }
+                    for(int j = 0; j < MAX_MESSAGES; j++) messages[i][j].text = NULL;
+                }
+                for(int i = 0; i < MAX_CHATTERS; i++) messages_count[i] = 0;
+                load_message(username);
+
+                refresh_scrollable_window2(scrollable_window2);
+                // if() {
+                    chatters[selected_user.index].lastmsg = format_last_msg((char *)messages[selected_user.index][messages_count[selected_user.index] - 1].text);
+                    refresh_scrollable_window(scrollable_window);
+                // }
+                update_reload_status("false", username, chatters[selected_user.index].username); 
+            }
             if(server_message_lastid != 0 && server_message_lastid != messages[selected_user.index][messages_count[selected_user.index] - 1].id) {
                 g_print("%d - %d\n", server_message_lastid, messages[selected_user.index][messages_count[selected_user.index] - 1].id);
                 char **response2 = get_mess_chat_last_text(mx_itoa(server_message_lastid));
-                if(mx_strcmp(response2, "1") == 0) {
-                    g_print("pid1");
+                if(mx_strcmp((char *)response2, "1") == 0) {
+                    g_print("Sadly, ended with error:(\n");
                     return TRUE;
                 }
-                if(mx_strcmp(response2, "1488") == 0) {
-                    g_print("pid2");
+                if(mx_strcmp((char *)response2, "500") == 0) {
+                    g_print("Server offline\n");
                     return TRUE;
                 }
                 char *token = strtok((char *)response2, "\n");
@@ -1091,7 +1122,7 @@ gboolean check_messages_async(gpointer data) {
     return TRUE;
 }
 
-bool *chat_checker_thread_func(void *arg) {
+bool chat_checker_thread_func(void *arg) {
     char *username = (char *)arg;
     int server_chats_amount = 0;
     while (1) {
@@ -1115,21 +1146,20 @@ bool *chat_checker_thread_func(void *arg) {
             refresh_scrollable_window(scrollable_window);
         }
         if(selected_user.index != -1) {
-            int server_message_amount = mx_atoi(get_mess_chat_amount(username, chatters[selected_user.index].username));
-            int server_message_lastid = mx_atoi(get_mess_chat_last_id(username, chatters[selected_user.index].username));
+            int server_message_amount = mx_atoi((char *)get_mess_chat_amount(username, chatters[selected_user.index].username));
+            int server_message_lastid = mx_atoi((char *)get_mess_chat_last_id(username, chatters[selected_user.index].username));
             int total_local_messages_amount = 0;
             for(int i = 0; i < MAX_CHATTERS; i++) {
                 total_local_messages_amount += messages_count[i];
             }
             if(server_message_lastid != messages[selected_user.index][messages_count[selected_user.index] - 1].id) {
                 char **response2 = get_mess_chat_last_text(mx_itoa(server_message_lastid));
-                g_print("%s\n", response2);
-                if(mx_strcmp(response2, "1") == 0) {
-                    g_print("pid1");
+                if(mx_strcmp((char *)response2, "1") == 0) {
+                    g_print("Sadly, ended with error:(\n");
                     continue;
                 }
-                if(mx_strcmp(response2, "1488") == 0) {
-                    g_print("pid2");
+                if(mx_strcmp((char *)response2, "500") == 0) {
+                    g_print("Server offline\n");
                     continue;
                 } 
                 char *token = strtok((char *)response2, "\n");

@@ -42,7 +42,7 @@ void db_init(void) {
     // logger("Init table \"Users\"", st, err_msg);
 
     sql = "CREATE TABLE IF NOT EXISTS CHATS(id INTEGER PRIMARY KEY AUTOINCREMENT, \
-        user1_id INTEGER NOT NULL, user2_id INTEGER NOT NULL);";
+        user1_id INTEGER NOT NULL, user2_id INTEGER NOT NULL, reload TEXT);";
     exit = sqlite3_exec(db, sql, NULL, 0, &err_msg);
     st = (exit == 0) ? ST_OK : ST_NEOK;
     // logger("Init table \"Chats\"", st, err_msg);

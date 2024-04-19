@@ -26,7 +26,6 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <netinet/in.h>
-#include <sqlite3.h>
 #include <signal.h> 
 #include <time.h>
 #include <limits.h>
@@ -71,6 +70,10 @@ typedef struct {
 } t_chatter_s;
 
 typedef struct {
+    char *desc;
+} t_chatter_desc;
+
+typedef struct {
     int id;
     char* text;
     char* time;
@@ -108,6 +111,7 @@ GdkRGBA light_purple;
 GdkRGBA vrode_norm_purple;
 GdkRGBA ny_takoy_purple;
 extern bool is_error_shown;
+extern bool ded_is_shown;
 
 extern gint screen_width;
 extern gint screen_height;
@@ -167,6 +171,7 @@ void get_and_save_avatar_to_file(char *username);
 void update_avatar(char *path, char *username);
 char **update_user_status(char *status, char *username);
 char **get_user_status(char *username);
+char **get_user_desc(char *user);
 
 
 void fill_data(void);
@@ -193,6 +198,8 @@ void add_message(int mess_id, int chatter_id, const char* text, const char* time
 void add_chatter(const char* name, const char* surname, const char* username, const char* lastmsg, GdkPixbuf* avatar);
 char **get_mess_chat_last_id(char *username_1, char *username_2);
 char **get_mess_chat_last_text(char *id);
+char **update_reload_status(char *status, char *username1, char *username2);
+char **get_reload_status(char *username1, char *username2);
 
 char* get_random_joke();
 void clear_all(void);

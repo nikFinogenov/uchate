@@ -1,6 +1,8 @@
 NAME = uchat
-FLAGS = `pkg-config --cflags gtk+-3.0` #-Wall -Wextra -Werror -Wpedantic -std=c99 
-DFLAGS = -Wno-deprecated-declarations #-Wno-unused-command-line-argument -Wno-unused-variable -Wno-unused-function -Wno-unused-parameter -fno-omit-frame-pointer
+FLAGS = `pkg-config --cflags gtk+-3.0`
+DFLAGS = -Wno-deprecated-declarations -Wno-unused-command-line-argument \
+-Wno-unused-variable -Wno-unused-function -Wno-unused-parameter \
+-fno-omit-frame-pointer -Wno-unused-comparison -Wno-return-type
 SRCD = src
 INCD = inc
 OBJD = obj
@@ -26,7 +28,7 @@ all: install
 install: $(NAME)
 
 $(NAME): $(OBJS)
-	@clang -lsqlite3 -lpthread `pkg-config --libs gtk+-3.0` $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
+	@clang -lpthread `pkg-config --libs gtk+-3.0` $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)
 	@printf "$(CLEAR)$@\t   $(GREENB)created$(NORMAL)\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS) | $(OBJD)

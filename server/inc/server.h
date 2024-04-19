@@ -46,11 +46,14 @@ void mx_get_user_avatar(char** data, int sockfd);
 void mx_update_avatar(char** data, int sockfd);
 void mx_get_user_status(char** data, int sockfd);
 void mx_update_user_status(char** data, int sockfd);
+void mx_get_user_desc(char** data, int sockfd);
 
 bool mx_check_user(char **data);
 void mx_check_room(char **data, int sockfd);
 void mx_check_messages(char **data, int sockfd);
 void mx_load_messages(char **data, int sockfd);
+void mx_update_reload_status(char** data, int sockfd);
+void mx_get_reload_status(char** data, int sockfd);
 void mx_delete_user(char **data);
 void mx_get_users_arr(char **data, int sockfd);
 void mx_send_room_data(char **data, int sockfd);

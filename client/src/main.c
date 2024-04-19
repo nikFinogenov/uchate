@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
             if (strcmp((char *)response, "1") == 0) {
                 g_print("Username or Password is incorrect\n");
             }
-            else if (strcmp((char *)response, "1488") == 0) {
+            else if (strcmp((char *)response, "500") == 0) {
                 g_print("Server offline\n");
             }
             else {
