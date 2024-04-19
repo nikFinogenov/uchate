@@ -531,7 +531,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *bronze_title = gtk_label_new("2.50€/month");
     gtk_widget_override_color(bronze_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(bronze_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *bronze_text = gtk_label_new("Pros:\nplus money for us :)\n Cons:\nminus money for you :(");
+    GtkWidget *bronze_text = gtk_label_new("Pros:\nplus money for us :) :) :) \n Cons:\nminus money for you :(");
     gtk_widget_override_color(bronze_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(bronze_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_bbox2), bronze_title);
@@ -540,7 +540,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *silver_title = gtk_label_new("5.00€/month");
     gtk_widget_override_color(silver_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(silver_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *silver_text = gtk_label_new("Pros:\nImage sending, more stickers, language changing, etc.\n Cons:\nYou will lost ~5€ every month ^^");
+    GtkWidget *silver_text = gtk_label_new("Pros:\nStickers, styles, languages\n Cons:\nLosing ~5€ every month ^^");
     gtk_widget_override_color(silver_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(silver_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_sbox2), silver_title);
@@ -549,7 +549,7 @@ static void minus_dengi(GtkWidget *widget, gpointer data){
     GtkWidget *gold_title = gtk_label_new("10.00€/month");
     gtk_widget_override_color(gold_title, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(gold_title), GTK_JUSTIFY_CENTER);
-    GtkWidget *gold_text = gtk_label_new("Pros:\nNothing, you just lost your money:)\n Cons:\nAbsolutly no minuses (V)0.o(v)");
+    GtkWidget *gold_text = gtk_label_new("Pros:\nYou just lost your money:) \n Cons:\nI see no minuses (V)0.o(v)");
     gtk_widget_override_color(gold_text, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_label_set_justify(GTK_LABEL(gold_text), GTK_JUSTIFY_LEFT);
     gtk_container_add(GTK_CONTAINER(sub_sub_gbox2), gold_title);
@@ -646,8 +646,8 @@ static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *support1 = gtk_label_new(NULL);
     GtkWidget *support2 = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(razrab1), "<a href='https://github.com/nikFinogenov'>Nikita Finogenov</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytriy DOLHII</a>");
-    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>Gandon Andrew Yakimov</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab2), "<a href='https://github.com/DMYTRO-DOLHII'>Dmytriy Dolhii</a>");
+    gtk_label_set_markup(GTK_LABEL(razrab3), "<a href='https://github.com/WoCCeR'>Andrew Yakimov</a>");
     gtk_label_set_markup(GTK_LABEL(razrab4), "<a href='https://github.com/kitska'>Maksym Bratash</a>");
     gtk_label_set_markup(GTK_LABEL(support1), "<a href='https://steamcommunity.com/profiles/76561199022185683'>Vladislav Champion Chubukin</a>");
     gtk_label_set_markup(GTK_LABEL(support2), "<a href='https://github.com/torvalds'>Dmytriy Erter Zuckerbergovich</a>");
@@ -658,7 +658,7 @@ static void devs_window(GtkWidget *widget, gpointer data){
     GtkWidget *razrab_label2 = gtk_label_new("Big Thanks for Supporting");
     gtk_widget_override_color(razrab_label2, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label2, font_desc);
-    GtkWidget *razrab_label3 = gtk_label_new("Kon4eliga");
+    GtkWidget *razrab_label3 = gtk_label_new("He did something");
     gtk_widget_override_color(razrab_label3, GTK_STATE_FLAG_NORMAL, WHITE_CVET);
     gtk_widget_override_font(razrab_label3, font_desc);
 
