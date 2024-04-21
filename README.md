@@ -12,7 +12,7 @@ make
 
 ## Usage
 
-After compiling the project you will see two files, run the 'uchat_server' with port as argument first, than run 'uchat' with ip and port as an arguments, port must be the same as server started with.
+After compiling the project you will see two files, run the `uchat_server` with port as an argument first, than run `uchat` with ip and port as an arguments, port must be the same as the server started with.
 
 ```bash
 ./uchat_server 7777
