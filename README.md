@@ -4,7 +4,8 @@ Uchat is a messaging application developed in C using GTK+3 and SQLite3. It allo
 
 ## Installation
 
-To run the project, make sure that `make` and `clang` are installed on your system. Then, simply call `make` in the terminal to compile the project.
+To run the project, make sure that `make`, `clang`, and `sqlite3` are installed on your system. Then, simply call `make` in the terminal to compile the project.
+
 ```bash
 make
 ```
