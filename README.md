@@ -9,13 +9,6 @@ To run the project, make sure that `make` and `clang` are installed on your syst
 make
 ```
 
-> [!WARNING] 
-> Libraries are preinstalled, they were compiled for MacOS, so it will run ONLY on MacOS. Development was on different OS's, so for Linux based systems you should:
-> - edit [server/inc/server.h](server/inc/server.h): comment preinstalled ssl and sqlite3 libraries and uncomment system analogues of them
-> - edit [server/Makefile](server/Makefile): add flags `-lsqlite3`,  `-lssl`, `-lcrypto` to compilation proccess, and also remove paths of preinstalled libraries.
-> So your compilation should look like this:\
-> `@clang -lpthread -lssl -lcrypto -lsqlite3 $(FLAGS) $(DFLAGS) $(OBJS) $(LMXA) -o ../$(NAME)`
-
 ## Usage
 
 After compiling the project you will see two files, run the 'uchat_server' with port as argument first, than run 'uchat' with ip and port as an arguments, port must be the same as server started with.
