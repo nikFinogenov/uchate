@@ -1,6 +1,5 @@
 NAME  = uchat_server
-FLAGS = -std=c99 
-#-Wall -Wextra -Werror -Wpedantic
+FLAGS = -std=c99 #-Wall -Wextra -Werror -Wpedantic
 DFLAGS= -Wno-unused-command-line-argument -Wno-unused-variable \
     -Wno-unused-function -Wno-unused-parameter \
     -fno-omit-frame-pointer -Wno-return-stack-address -Wno-incompatible-pointer-types

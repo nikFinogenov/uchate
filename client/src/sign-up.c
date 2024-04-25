@@ -128,6 +128,8 @@ void draw_singup() {
 
     gtk_widget_set_halign(link_hbox, GTK_ALIGN_CENTER);
     g_signal_connect(log_link, "activate-link", G_CALLBACK(go_to_login), NULL);
+    gtk_box_pack_start(GTK_BOX(link_hbox), login_link, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(link_hbox), log_link, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(signup_vbox), link_hbox, FALSE, FALSE, 0);
 
     GtkWidget *first_name_entry_signup = gtk_entry_new();
